@@ -16,6 +16,7 @@ public class BaseCreature {
     private int evasion;
     private Random randomCalc;
 
+
     public BaseCreature(double health, double attack, double movementSpeed, Vector2 position, int evasion){
         this.maxHealth = health;
         this.attack = attack;
