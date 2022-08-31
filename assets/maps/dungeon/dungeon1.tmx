@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-up" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#353540" nextlayerid="3" nextobjectid="1">
  <tileset firstgid="1" name="dungeon" tilewidth="16" tileheight="16" tilecount="280" columns="14">
-  <image source="../assets/tilesets/dungeon/dungeon.png" width="224" height="320"/>
+  <image source="../../tilesets/dungeon/dungeon.png" width="224" height="320"/>
   <tile id="23">
    <properties>
     <property name="Collision" type="bool" value="true"/>
@@ -407,11 +407,6 @@
     <property name="Collision" type="bool" value="true"/>
    </properties>
   </tile>
-  <wangsets>
-   <wangset name="Unnamed Set" type="corner" tile="-1">
-    <wangcolor name="" color="#ff0000" tile="-1" probability="1"/>
-   </wangset>
-  </wangsets>
  </tileset>
  <layer id="1" name="Base" width="30" height="20">
   <data encoding="csv">
