@@ -1,4 +1,4 @@
-package com.g16.feyrune;
+package com.g16.feyrune.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,8 +7,9 @@ import com.badlogic.gdx.InputAdapter;
 public class Movement {
 
     // currentDirection goes between -1 and 1
-    public int currentXDirection = 0;
-    public int currentYDirection = 0;
+    private int currentXDirection = 0;
+
+    private int currentYDirection = 0;
 
     public void Initialize(){
         Gdx.input.setInputProcessor(new InputAdapter(){
@@ -48,5 +49,12 @@ public class Movement {
                 return true;
             }
         });
+    }
+    public int getCurrentXDirection() {
+        return currentXDirection;
+    }
+
+    public int getCurrentYDirection() {
+        return currentYDirection;
     }
 }
