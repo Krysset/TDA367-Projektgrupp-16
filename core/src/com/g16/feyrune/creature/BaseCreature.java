@@ -7,15 +7,13 @@ public class BaseCreature {
     private double health;
     private double damage;
     private double movementSpeed;
-    private boolean aggressive;
 
     private Vector2 position;
 
-    public BaseCreature(double health, double damage, double movementSpeed, boolean aggressive, Vector2 position){
+    public BaseCreature(double health, double damage, double movementSpeed, Vector2 position){
         this.health = health;
         this.damage = damage;
         this.movementSpeed = movementSpeed;
-        this.aggressive = aggressive;
         this.position = position;
     }
 
