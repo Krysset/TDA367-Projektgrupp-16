@@ -21,6 +21,7 @@
         }
     },
     "last.imagePath": "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest",
+    "map.fixedSize": false,
     "map.height": 64,
     "map.lastUsedFormat": "tmx",
     "map.width": 64,
@@ -30,8 +31,8 @@
     ],
     "project": "testmap.tiled-project",
     "recentFiles": [
-        "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest/forest.tsx",
-        "untitled.tmx"
+        "untitled.tmx",
+        "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest/forest.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.useTransparentColor": true
