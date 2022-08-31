@@ -33,7 +33,7 @@ public class Movement {
         }
     }
 
-    public void getInput(){
+    public void Initialize(){
         Gdx.input.setInputProcessor(new InputAdapter(){
             @Override
             public boolean keyDown(int keycode) {
