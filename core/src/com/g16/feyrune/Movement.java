@@ -5,66 +5,45 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 
 public class Movement {
-   public enum XDirection {
-        LEFT,RIGHT,NONE;
-    }
-    public enum YDirection {
-        UP,DOWN,NONE;
-    }
 
-    public XDirection currentXDirection = XDirection.NONE;
-    public YDirection currentYDirection = YDirection.NONE;
+    // currentDirection goes between -1 and 1
+    public int currentXDirection = 0;
+    public int currentYDirection = 0;
 
-    public void setCurrentXDirection(XDirection direction) {
-        if (currentXDirection == XDirection.NONE || currentXDirection == direction){
-            currentXDirection = direction;
-        }
-        else {
-            currentXDirection = XDirection.NONE;
-        }
-    }
-
-    public void setCurrentYDirection(YDirection direction) {
-        if (currentYDirection == YDirection.NONE || currentYDirection == direction){
-            currentYDirection = direction;
-        }
-        else {
-            currentYDirection = YDirection.NONE;
-        }
-    }
-
-    public void getInput(){
+    public void Initialize(){
         Gdx.input.setInputProcessor(new InputAdapter(){
             @Override
             public boolean keyDown(int keycode) {
-                switch (keycode){
-                    case Input.Keys.A:
-                        setCurrentXDirection(XDirection.LEFT);
-                        break;
-                    case Input.Keys.W:
-                        setCurrentYDirection(YDirection.UP);
-                        break;
-                    case Input.Keys.D:
-                        setCurrentXDirection(XDirection.RIGHT);
-                        break;
-                    case Input.Keys.S:
-                        setCurrentYDirection(YDirection.DOWN);
-                        break;
+                if (keycode == Input.Keys.A){
+                    currentXDirection += -1;
                 }
+                if (keycode == Input.Keys.D){
+                    currentXDirection += 1;
+                }
+                if (keycode == Input.Keys.W){
+                    currentYDirection += -1;
+                }
+                if (keycode == Input.Keys.S){
+                    currentYDirection += 1;
+                }
+                currentXDirection = Math.max(Math.min(currentXDirection,1),-1);
+                currentYDirection = Math.max(Math.min(currentYDirection,1),-1);
                 return true;
             }
 
             @Override
             public boolean keyUp(int keycode) {
-                switch (keycode){
-                    case Input.Keys.A:
-                    case Input.Keys.D:
-                        setCurrentXDirection(XDirection.NONE);
-                        break;
-                    case Input.Keys.W:
-                    case Input.Keys.S:
-                        setCurrentYDirection(YDirection.NONE);
-                        break;
+                if (keycode == Input.Keys.A){
+                    currentXDirection += 1;
+                }
+                if (keycode == Input.Keys.D){
+                    currentXDirection += -1;
+                }
+                if (keycode == Input.Keys.W){
+                    currentYDirection += 1;
+                }
+                if (keycode == Input.Keys.S){
+                    currentYDirection += -1;
                 }
                 return true;
             }
