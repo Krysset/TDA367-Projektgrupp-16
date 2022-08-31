@@ -1,0 +1,38 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "untitled.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest/forest.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "untitled.tmx": {
+            "scale": 1.044,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 781.1302681992337,
+                "y": 894.6360153256705
+            }
+        }
+    },
+    "last.imagePath": "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest",
+    "map.height": 64,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 64,
+    "openFiles": [
+        "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest/forest.tsx",
+        "untitled.tmx"
+    ],
+    "project": "testmap.tiled-project",
+    "recentFiles": [
+        "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest/forest.tsx",
+        "untitled.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.useTransparentColor": true
+}
