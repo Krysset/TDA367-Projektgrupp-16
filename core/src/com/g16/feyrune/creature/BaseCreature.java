@@ -15,6 +15,7 @@ public class BaseCreature {
     public BaseCreature(double health, double attack, double movementSpeed, Vector2 position){
         this.maxHealth = health;
         this.attack = attack;
+
         this.movementSpeed = movementSpeed;
         this.position = position;
         this.health = this.maxHealth;
