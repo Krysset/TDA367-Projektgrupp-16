@@ -3,21 +3,34 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "untitled.tmx",
+    "activeFile": "test3.tmx",
     "expandedProjectPaths": [
+        "."
     ],
     "fileStates": {
         "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest/forest.tsx": {
-            "scaleInDock": 2,
+            "scaleInDock": 0.5,
             "scaleInEditor": 1
         },
         "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest/forestDecoration0.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 2,
             "scaleInEditor": 5.5
+        },
+        "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest/path.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "path.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "test3.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 156,
+                "y": 48
+            }
         },
         "testWithLayers.tmx": {
             "scale": 0.75,
@@ -45,14 +58,18 @@
     "map.width": 64,
     "openFiles": [
         "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest/forest.tsx",
-        "untitled.tmx"
+        "test3.tmx",
+        "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest/path.tsx",
+        "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest/forestDecoration0.tsx"
     ],
     "project": "testmap.tiled-project",
     "recentFiles": [
-        "testWithLayers.tmx",
         "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest/forest.tsx",
-        "path.tsx",
         "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest/forestDecoration0.tsx",
+        "/home/x183/git/TDA367-Projektgrupp-16-/assets/tilesets/forest/path.tsx",
+        "test3.tmx",
+        "testWithLayers.tmx",
+        "path.tsx",
         "untitled.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
