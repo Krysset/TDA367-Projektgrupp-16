@@ -8,17 +8,14 @@ public class BaseCreature {
     //Stats variables
     private double maxHealth;
     private double health;
-    private double damage;
+    private double attack;
     private double movementSpeed;
-    private boolean aggressive;
-
     private Vector2 position;
 
-    public BaseCreature(double health, double damage, double movementSpeed, boolean aggressive, Vector2 position){
+    public BaseCreature(double health, double attack, double movementSpeed, Vector2 position){
         this.maxHealth = health;
-        this.damage = damage;
+        this.attack = attack;
         this.movementSpeed = movementSpeed;
-        this.aggressive = aggressive;
         this.position = position;
         this.health = this.maxHealth;
     }
