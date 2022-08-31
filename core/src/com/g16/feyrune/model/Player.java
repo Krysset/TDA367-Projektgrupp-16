@@ -6,7 +6,6 @@ public class Player {
     private String name;
     private int posX;
     private int posY;
-
     private Texture texture;
 
     public Player(String name, int posX, int posY) {
