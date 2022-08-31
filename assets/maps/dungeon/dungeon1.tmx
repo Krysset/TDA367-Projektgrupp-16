@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-up" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#353540" nextlayerid="3" nextobjectid="1">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#353540" nextlayerid="3" nextobjectid="1">
  <tileset firstgid="1" name="dungeon" tilewidth="16" tileheight="16" tilecount="280" columns="14">
   <image source="../../tilesets/dungeon/dungeon.png" width="224" height="320"/>
   <tile id="23">
@@ -408,7 +408,7 @@
    </properties>
   </tile>
  </tileset>
- <layer id="1" name="Base" width="30" height="20">
+ <layer id="1" name="Base" width="30" height="20" visible="0">
   <data encoding="csv">
 230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,
 230,198,199,199,199,201,230,198,199,199,199,199,199,199,199,199,199,199,199,199,199,199,199,201,0,0,0,0,0,230,
