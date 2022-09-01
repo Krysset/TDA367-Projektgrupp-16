@@ -7,11 +7,13 @@ import static java.lang.Math.max;
 public class Attack {
     private int accuracy;
     private int power;
+    private String name;
 
 
-    public Attack(int accuracy, int power){
+    public Attack(int accuracy, int power, String name){
         this.accuracy = accuracy;
         this.power = power;
+        this.name = name;
     }
     private double calculateDamage(double attack){
         double trueDamage=max(0, attack*power);
@@ -23,5 +25,8 @@ public class Attack {
     }
     public int getAccuracy(){
         return accuracy;
+    }
+    public String getName(){
+        return name;
     }
 }

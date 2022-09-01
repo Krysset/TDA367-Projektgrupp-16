@@ -40,8 +40,8 @@ public class combatHandler {
      * @return if attack is successful: true, if it misses false
      */
     private static boolean evasiveManoeuvre(BaseCreature defender, Attack attack){
-        boolean evasion = defender.getEvasion()<randomCheck.nextInt(0,100);
-        boolean accuracy = attack.getAccuracy()>randomCheck.nextInt(0,100);
+        boolean evasion = defender.getEvasion()<randomCheck.nextInt(100);
+        boolean accuracy = attack.getAccuracy()>randomCheck.nextInt(100);
         boolean hit= evasion && accuracy;
         return hit;
     }
