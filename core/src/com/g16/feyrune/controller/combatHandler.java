@@ -1,4 +1,4 @@
-package com.g16.feyrune.model;
+package com.g16.feyrune.controller;
 
 import com.g16.feyrune.action.Attack;
 import com.g16.feyrune.creature.BaseCreature;
