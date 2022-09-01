@@ -14,14 +14,14 @@ import java.util.ArrayList;
 /**
  * This class handle all operations related to the parsing of map files.
  */
-
 public class MapParser {
     /**
      * This method parses a map filed (produced by Tiled).
      *
      * @param filePath The file path of the map you want to parse.
+     * @return A {@link Map} object containing the parsed map.
      */
-    public static void parseMapFile(String filePath) {
+    public static Map parseMapFile(String filePath) {
         Document doc = readXMLDocument(filePath);
 
         Pair<Integer, Integer> mapSize = getMapSize(doc);
@@ -32,17 +32,25 @@ public class MapParser {
 
         boolean[][] collisionMap = createCollisionMap(collisionList, mapSize);
 
-        for (boolean[] collisionX : collisionMap) {
-            for (boolean isCollision : collisionX) {
-                if (isCollision) {
-                    System.out.print("1 ");
-                } else {
-                    System.out.print("0 ");
-                }
+        return generateTileMap(collisionMap);
+    }
+
+    /**
+     * This method generates a Tile map from a collision map.
+     *
+     * @param collisionMap The collision map.
+     * @return A {@link Map} based on the collision map.
+     */
+    private static Map generateTileMap(boolean[][] collisionMap) {
+        Tile[][] tiles = new Tile[collisionMap.length][collisionMap[0].length];
+
+        for (int i = 0; i < collisionMap.length; i++) {
+            for (int j = 0; j < collisionMap[0].length; j++) {
+                tiles[i][j] = new Tile(collisionMap[i][j], false);
             }
-            System.out.println();
         }
 
+        return new Map(tiles);
     }
 
     /**
@@ -189,4 +197,4 @@ public class MapParser {
             throw new RuntimeException(e);
         }
     }
-};
+}
