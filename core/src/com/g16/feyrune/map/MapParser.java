@@ -15,6 +15,9 @@ import java.util.ArrayList;
 /**
  * This class handle all operations related to the parsing of map files.
  */
+
+
+
 public class MapParser {
     /**
      * This method parses a map filed (produced by Tiled).
@@ -23,12 +26,14 @@ public class MapParser {
      *
      * @return Matrix of tile data.
      */
+
     public static void parseMapFile(String filePath) {
         // Most of the information writing this parser was gotten from this tutorial:
         // https://mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/
 
         // Create a new document builder factory.
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
 
         try {
             // Safely parse XML file.
@@ -66,7 +71,7 @@ public class MapParser {
 
                         if (tileNodeChildChild.getAttributes() != null) {
                             if (tileNodeChildChild.getAttributes().getNamedItem("name").getNodeValue().equals("Collision")) {
-                                collisionIds.add(id);
+                                collisionIds.add(id+1);
                             }
                         }
                     }
@@ -92,12 +97,13 @@ public class MapParser {
                     }
                 }
             }
+            boolean[][] xArray = new boolean[height][width];
 
-            boolean[][] xArray = new boolean[width][height];
-
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
-                    xArray[i][j] = collisionList[(i + 1) * j];
+            int c = 0;
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
+                    xArray[i][j] = collisionList[c];
+                    c++;
                 }
             }
 
@@ -113,6 +119,7 @@ public class MapParser {
                 }
                 System.out.println();
             }
+
 
         } catch(Exception e) {
             e.printStackTrace();
