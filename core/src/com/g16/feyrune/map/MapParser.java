@@ -1,5 +1,6 @@
 package com.g16.feyrune.map;
 
+import com.badlogic.gdx.utils.Array;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -9,6 +10,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * This class handle all operations related to the parsing of map files.
@@ -41,7 +43,13 @@ public class MapParser {
             // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
             doc.getDocumentElement().normalize();
 
+            Node mapNode = doc.getElementsByTagName("map").item(0);
+            int width = Integer.parseInt(mapNode.getAttributes().getNamedItem("width").getNodeValue());
+            int height = Integer.parseInt(mapNode.getAttributes().getNamedItem("height").getNodeValue());
+
             NodeList tileNodes = doc.getElementsByTagName("tile");
+
+            ArrayList collisionIds = new ArrayList<Integer>();
 
             for (int i = 0; i < tileNodes.getLength(); i++) {
                 Node tileNode = tileNodes.item(i);
@@ -58,11 +66,52 @@ public class MapParser {
 
                         if (tileNodeChildChild.getAttributes() != null) {
                             if (tileNodeChildChild.getAttributes().getNamedItem("name").getNodeValue().equals("Collision")) {
-                                System.out.println("Collision found at tile " + id);
+                                collisionIds.add(id);
                             }
                         }
                     }
                 }
+            }
+
+            NodeList layerNodes = doc.getElementsByTagName("layer");
+
+            boolean[] collisionList = new boolean[width * height];
+
+            for (int i = 0; i < layerNodes.getLength(); i++) {
+                NodeList dataNodes = layerNodes.item(i).getChildNodes();
+
+                for (int j = 0; j < dataNodes.getLength(); j++) {
+                    Node dataNode = dataNodes.item(j);
+                    if (dataNode.getNodeName().equals("data")) {
+                        String[] tileIds = dataNode.getTextContent().split(",");
+                        for (int k = 0; k < tileIds.length; k++ ) {
+                            if (collisionIds.contains(Integer.parseInt(tileIds[k].replaceAll("\\s+","")))) {
+                                collisionList[k] = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            boolean[][] xArray = new boolean[width][height];
+
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                    xArray[i][j] = collisionList[(i + 1) * j];
+                }
+            }
+
+            System.out.println(xArray.length);
+
+            for (boolean[] collisionX : xArray) {
+                for (boolean isCollision : collisionX) {
+                    if (isCollision) {
+                        System.out.print("1 ");
+                    } else {
+                        System.out.print("0 ");
+                    }
+                }
+                System.out.println();
             }
 
         } catch(Exception e) {

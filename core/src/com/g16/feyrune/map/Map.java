@@ -9,6 +9,8 @@ public class Map {
 
     private Map(Tile[][] tiles) {
         this.tiles = tiles;
+        this.width = tiles.length;
+        this.height = tiles[0].length;
     }
 
     public static Map getGlobalMap() {
