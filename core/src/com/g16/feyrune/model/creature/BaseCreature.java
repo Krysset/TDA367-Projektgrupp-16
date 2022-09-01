@@ -1,4 +1,4 @@
-package com.g16.feyrune.creature;
+package com.g16.feyrune.model.creature;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -8,28 +8,23 @@ public class BaseCreature {
     //Stats variables
     private double maxHealth;
     private double health;
-    private double attack;
+    private double baseAttack;
     private double movementSpeed;
     private int evasion;
-    private Vector2 position;
 
-    public BaseCreature(double health, double attack, double movementSpeed, Vector2 position, int evasion){
+    public BaseCreature(double health, double attack, double movementSpeed, int evasion){
         this.maxHealth = health;
-        this.attack = attack;
+        this.baseAttack = attack;
         this.evasion = evasion;
         this.movementSpeed = movementSpeed;
-        this.position = position;
         this.health = this.maxHealth;
     }
 
-    public void spawn(){
-
-    }
     private void die(){
 
     }
     public double getAttack(){
-        return attack;
+        return baseAttack;
     }
 
     public int getEvasion(){
