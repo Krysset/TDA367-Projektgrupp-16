@@ -1,4 +1,4 @@
-package com.g16.feyrune.action;
+package com.g16.feyrune.model.action;
 
 import java.util.Random;
 

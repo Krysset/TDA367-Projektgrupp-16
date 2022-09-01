@@ -1,6 +1,6 @@
-package com.g16.feyrune.controller;
+package com.g16.feyrune.model.handler;
 
-import com.g16.feyrune.action.Attack;
+import com.g16.feyrune.model.action.Attack;
 import com.g16.feyrune.creature.BaseCreature;
 
 import java.util.Random;
