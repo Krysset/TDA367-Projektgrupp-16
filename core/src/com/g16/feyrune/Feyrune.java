@@ -4,19 +4,15 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.g16.feyrune.interfaces.Observer;
-import com.g16.feyrune.view.scenes.BattleScene;
 
 public class Feyrune extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 
-	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
-
 	}
 
 	@Override
