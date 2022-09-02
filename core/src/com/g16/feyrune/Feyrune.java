@@ -27,7 +27,6 @@ public class Feyrune extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		Helu[] h ={new Helu(), new Helu()};
-		System.out.println("hej");
 		battleScene = new BattleScene(800, 600, h);
 
 	}

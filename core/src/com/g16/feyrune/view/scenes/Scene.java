@@ -20,7 +20,6 @@ public class Scene implements Screen {
 
     public Scene( int viewWidth, int viewHeight, Stage uiStage, Stage objectStage, Stage terrainStage) {
 
-        Gdx.input.setInputProcessor(uiStage);
         this.viewWidth = viewWidth;
         this.viewHeight = viewHeight;
         paused = false;
