@@ -1,26 +1,31 @@
-package com.g16.feyrune.view;
+package com.g16.feyrune.view.scenes;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 
 public class Scene implements Screen {
-    protected Game game;
-    protected Stage mainStage;
+    protected Stage terrainStage;
+    protected Stage objectStage;
     protected Stage uiStage;
-    public final int viewWidth;
-    public final int viewHeight;
+    protected int viewWidth;
+    protected int viewHeight;
     protected boolean paused;
 
-    public Scene(Game game, int viewWidth, int viewHeight) {
-        this.game = game;
+    public Scene( int viewWidth, int viewHeight, Stage uiStage, Stage objectStage, Stage terrainStage) {
         this.viewWidth = viewWidth;
         this.viewHeight = viewHeight;
         paused = false;
-        mainStage = new Stage(new FitViewport(viewWidth, viewHeight));
-        uiStage = new Stage(new FitViewport(viewWidth, viewHeight));
+        this.uiStage = uiStage;
+        this.objectStage = objectStage;
+        this.terrainStage = terrainStage;
+
+        FitViewport viewport = new FitViewport(viewWidth, viewHeight);
+
+        this.uiStage.setViewport(viewport);
+        this.objectStage.setViewport(viewport);
+        this.terrainStage.setViewport(viewport);
     }
 
     private void update(float dt){
@@ -36,11 +41,13 @@ public class Scene implements Screen {
     public void render(float dt){
         uiStage.act(dt);
         if (!paused) {
-            mainStage.act(dt);
+            objectStage.act(dt);
+            terrainStage.act(dt);
             update(dt);
         }
-        mainStage.draw();
+        objectStage.draw();
         uiStage.draw();
+        terrainStage.draw();
     }
 
     @Override
