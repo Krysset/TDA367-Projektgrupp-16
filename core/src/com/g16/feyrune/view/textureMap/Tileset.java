@@ -1,23 +1,25 @@
 package com.g16.feyrune.view.textureMap;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Tileset {
-    // TODO: Figure out if texture or textureregion should be used
+    private TextureRegion textureRegion;
     private int firstgid, tileWidth, tileHeight, tileCount, columns;
     private String name;
 
-    public Tileset(Texture texture, String name, int firstgid, int tileWidth, int tileHeight, int tileCount, int columns) {
+    public Tileset(String imgSource, String name, int firstgid, int tileWidth, int tileHeight, int tileCount, int columns) {
         this.name = name;
         this.firstgid = firstgid;
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
         this.tileCount = tileCount;
         this.columns = columns;
+        // TODO: Load textureregion or texture
     }
 
     public void unloadContent() {
-        // TODO: Unload future tileset content
+        textureRegion.getTexture().dispose();
     }
 
     public int getFirstgid() {
