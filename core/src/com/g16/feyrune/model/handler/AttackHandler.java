@@ -5,7 +5,7 @@ import com.g16.feyrune.model.creature.BaseCreature;
 
 import java.util.Random;
 
-public class combatHandler {
+public class AttackHandler {
 
     private static final Random randomCheck=new Random();
 
