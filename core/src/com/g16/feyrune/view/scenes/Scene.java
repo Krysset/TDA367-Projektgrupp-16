@@ -1,7 +1,12 @@
 package com.g16.feyrune.view.scenes;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 
@@ -14,18 +19,14 @@ public class Scene implements Screen {
     protected boolean paused;
 
     public Scene( int viewWidth, int viewHeight, Stage uiStage, Stage objectStage, Stage terrainStage) {
+
+        Gdx.input.setInputProcessor(uiStage);
         this.viewWidth = viewWidth;
         this.viewHeight = viewHeight;
         paused = false;
         this.uiStage = uiStage;
         this.objectStage = objectStage;
         this.terrainStage = terrainStage;
-
-        FitViewport viewport = new FitViewport(viewWidth, viewHeight);
-
-        this.uiStage.setViewport(viewport);
-        this.objectStage.setViewport(viewport);
-        this.terrainStage.setViewport(viewport);
     }
 
     private void update(float dt){
@@ -46,8 +47,8 @@ public class Scene implements Screen {
             update(dt);
         }
         objectStage.draw();
-        uiStage.draw();
         terrainStage.draw();
+        uiStage.draw();
     }
 
     @Override
