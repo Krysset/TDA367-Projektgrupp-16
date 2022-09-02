@@ -1,6 +1,7 @@
 package com.g16.feyrune.model.creature;
 
 import com.badlogic.gdx.math.Vector2;
+import com.g16.feyrune.model.action.Attack;
 
 import static java.lang.Math.min;
 
@@ -11,13 +12,15 @@ public class BaseCreature {
     private double baseAttack;
     private double movementSpeed;
     private int evasion;
+    private Attack[] attacks;
 
-    public BaseCreature(double health, double attack, double movementSpeed, int evasion){
+    public BaseCreature(double health, double attack, double movementSpeed, int evasion, Attack[] attacks){
         this.maxHealth = health;
         this.baseAttack = attack;
         this.evasion = evasion;
         this.movementSpeed = movementSpeed;
         this.health = this.maxHealth;
+        this.attacks = attacks;
     }
 
     private void die(){
