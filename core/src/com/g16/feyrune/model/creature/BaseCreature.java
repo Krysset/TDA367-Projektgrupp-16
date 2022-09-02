@@ -14,7 +14,7 @@ public class BaseCreature {
     private int evasion;
     private Attack[] attacks;
 
-    public BaseCreature(double health, double attack, double movementSpeed, int evasion, Attack[] attacks){
+    public BaseCreature(double health, double attack, double speed, int evasion, Attack[] attacks){
         this.maxHealth = health;
         this.baseAttack = attack;
         this.evasion = evasion;
