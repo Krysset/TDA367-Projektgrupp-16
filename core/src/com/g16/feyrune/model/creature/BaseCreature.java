@@ -10,7 +10,7 @@ public class BaseCreature {
     private double maxHealth;
     private double health;
     private double baseAttack;
-    private double movementSpeed;
+    private double speed;
     private int evasion;
     private Attack[] attacks;
 
@@ -18,7 +18,7 @@ public class BaseCreature {
         this.maxHealth = health;
         this.baseAttack = attack;
         this.evasion = evasion;
-        this.movementSpeed = movementSpeed;
+        this.speed = speed;
         this.health = this.maxHealth;
         this.attacks = attacks;
     }
@@ -33,6 +33,8 @@ public class BaseCreature {
     public int getEvasion(){
         return evasion;
     }
+
+    public double getSpeed() {return speed; }
 
     private void setHealth(double newHealth){
         if (newHealth <= 0.0d){
