@@ -28,6 +28,10 @@ public class Map {
         System.out.println(sb);
     }
 
+    public Tile getTile(int xPos, int yPos){
+        return tiles[xPos][yPos];
+    }
+
     public static Map getGlobalMap() {
         if (globalMap == null) {
             globalMap = MapParser.parseMapFile("assets/maps/dungeon/dungeon1.tmx");
