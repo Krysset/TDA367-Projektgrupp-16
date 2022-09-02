@@ -16,7 +16,7 @@ public class Tileset {
         this.columns = columns;
     }
 
-    public void UnloadContent() {
+    public void unloadContent() {
         // TODO: Unload future tileset content
     }
 
