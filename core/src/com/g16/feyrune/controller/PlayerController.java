@@ -25,6 +25,10 @@ public class PlayerController {
         int newY = player.getPosY() + dirY;
         for (int i = 0; i < 3; i++){
             if(!IsNewPosCollision(newX,newY)){
+                if(IsCorner(player.getPosX(), player.getPosY(), dirX,dirY)){
+                    newX = player.getPosX();
+                    newY = player.getPosY();
+                }
                 break;
             }
             switch (i){
@@ -39,8 +43,18 @@ public class PlayerController {
                     newY = player.getPosY();
             }
         }
-        player.move(inputHandler.getCurrentXDirection(),inputHandler.getCurrentYDirection());
+        player.move(newX - player.getPosX(),newY - player.getPosY());
         lastMoved = elapsedMS;
+    }
+
+    private boolean IsCorner(int posX, int posY, int dirX, int dirY){
+        if (dirX != 0 && dirY != 0){
+            if (IsNewPosCollision(posX + dirX, posY) &&
+                    IsNewPosCollision(posX, posY + dirY )){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean IsNewPosCollision(int newX, int newY){
