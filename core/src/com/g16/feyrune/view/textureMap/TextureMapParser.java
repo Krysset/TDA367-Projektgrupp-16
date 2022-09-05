@@ -11,6 +11,7 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,26 +33,25 @@ public class TextureMapParser {
 
     private static List<Tileset> generateTilesetList(Document doc) {
         ArrayList<Tileset> tilesets = new ArrayList<>();
-
+        TilesetFactory factory = new TilesetFactory();
         NodeList tilesetNodeList = doc.getElementsByTagName("tileset");
         for (int i = 0; i < tilesetNodeList.getLength(); i++) {
 
-            String name, imgSource, firstGid, tileWidth, tileHeight, tileCount, columns;
             NamedNodeMap attributes = tilesetNodeList.item(i).getAttributes();
             for (int j = 0; j < attributes.getLength(); j++) {
                 switch (attributes.item(j).getNodeName()) {
                     case "firstgid":
-                        firstGid = attributes.item(i).getNodeValue();
+                        factory.setFirstGid(attributes.item(i).getNodeValue());
                     case "name":
-                        name = attributes.item(i).getNodeValue();
+                        factory.setName(attributes.item(i).getNodeValue());
                     case "tilewidth":
-                        tileWidth = attributes.item(i).getNodeValue();
+                        factory.setTileWidth(attributes.item(i).getNodeValue());
                     case "tileheight":
-                        tileHeight = attributes.item(i).getNodeValue();
+                        factory.setTileHeight(attributes.item(i).getNodeValue());
                     case "tilecount":
-                        tileCount = attributes.item(i).getNodeValue();
+                        factory.setTileCount(attributes.item(i).getNodeValue());
                     case "columns":
-                        columns = attributes.item(i).getNodeValue();
+                        factory.setColumns(attributes.item(i).getNodeValue());
                     default:
                         System.out.println("Unknown tileset attribute found while parsing: " + attributes.item(i).getNodeValue());
                 }
@@ -59,10 +59,14 @@ public class TextureMapParser {
             NamedNodeMap childAttributes = tilesetNodeList.item(i).getFirstChild().getAttributes();
             for (int j = 0; j < childAttributes.getLength(); j++) {
                 if (childAttributes.item(j).getNodeName().equals("source")) {
-                    imgSource = childAttributes.item(j).getNodeValue();
+                    try {
+                        factory.setImgSource(childAttributes.item(j).getNodeValue());
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Invalid img path for tileset " + i + "th");
+                    }
                 }
             }
-            tilesets.add(new Tileset(imgSource, name, firstGid, tileWidth, tileHeight, tileCount, columns));
+            tilesets.add(factory.createTileset());
         }
         return tilesets;
     }
