@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 
-public class Movement {
+public class PlayerInputHandler {
 
     // currentDirection goes between -1 and 1
     private int currentXDirection = 0;
