@@ -1,4 +1,4 @@
-package com.g16.feyrune.map;
+package com.g16.feyrune.model.map;
 
 public class Tile {
     private final boolean collision;
