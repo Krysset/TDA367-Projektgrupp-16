@@ -1,6 +1,8 @@
 package com.g16.feyrune.view.components;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -28,14 +30,14 @@ public class Button extends Actor {
         this.observers = observers;
         this.action = action;
         createTextureRegionDrawable();
-        createButton();
         connectButton();
     }
 
     private void createTextureRegionDrawable(){
-        Texture buttonTexture = new Texture(this.image);
+        Texture buttonTexture = new Texture("components/cool.png");
         TextureRegion buttonRegion = new TextureRegion(buttonTexture);
         td = new TextureRegionDrawable(buttonRegion);
+        createButton();
     }
 
     private void createButton(){
@@ -44,14 +46,25 @@ public class Button extends Actor {
     }
 
     private void connectButton(){
-        button.addListener(new EventListener(){
+        button.addListener(new ClickListener(){
             @Override
-            public boolean handle(Event event) {
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Button clicked");
                 for(Observer o : observers){
                     o.update(action);
                 }
-                return false;
             }
         });
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        button.draw(batch, parentAlpha);
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        button.act(delta);
     }
 }

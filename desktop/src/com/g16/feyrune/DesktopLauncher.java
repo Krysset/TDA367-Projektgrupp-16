@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("Feyrune");
+		config.setWindowSizeLimits(1600, 900, 1600, 900);
 		new Lwjgl3Application(new Feyrune(), config);
 	}
 }
