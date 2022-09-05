@@ -1,6 +1,4 @@
-package com.g16.feyrune.map;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+package com.g16.feyrune.model.map;
 
 public class Map {
     private static Map globalMap;
