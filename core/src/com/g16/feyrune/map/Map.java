@@ -1,5 +1,6 @@
 package com.g16.feyrune.map;
 
+import com.g16.feyrune.model.Parser.Parser;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Map {
@@ -9,7 +10,7 @@ public class Map {
     private final int width;
     private final int height;
 
-    protected Map(Tile[][] tiles) {
+    public Map(Tile[][] tiles) {
         this.tiles = tiles;
         this.width = tiles.length;
         this.height = tiles[0].length;
@@ -34,7 +35,7 @@ public class Map {
 
     public static Map getGlobalMap() {
         if (globalMap == null) {
-            globalMap = MapParser.parseMapFile("assets/maps/dungeon/dungeon1.tmx");
+            globalMap = Parser.parseMapFile("assets/maps/dungeon/dungeon1.tmx");
         }
         return globalMap;
     }
