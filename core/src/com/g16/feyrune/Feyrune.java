@@ -15,7 +15,7 @@ public class Feyrune extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		bs= new BattleScene(1600,900,null);
+		bs= new BattleScene(1366,768,null);
 		img = new Texture("badlogic.jpg");
 	}
 

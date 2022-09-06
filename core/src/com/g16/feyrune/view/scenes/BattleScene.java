@@ -19,42 +19,38 @@ public class BattleScene extends Scene{
     public BattleScene(int viewWidth, int viewHeight, Observer[] observers) {
         super(viewWidth, viewHeight, new Stage(new FitViewport(viewWidth,viewHeight)), new Stage(new FitViewport(viewWidth,viewHeight)), new Stage(new FitViewport(viewWidth,viewHeight)));
         this.observers = observers;
-        createUiStage();
-        createObjectStage();
-        createTerrainStage();
+        createuiStage();
+        createobjectStage();
+        createterrainStage();
         Gdx.input.setInputProcessor(uiStage);
-        ImageButton butt= new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("components/cool.png"))));
-        butt.setPosition(400,400);
-        butt.addListener(new ClickListener(){
+    }
+
+    private void createuiStage() {
+        test[] t = {new test()};
+        ImageButton bu = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("components/cool.png"))));
+        bu.setPosition(400,400);
+        bu.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Button clicked");
-            }
+                }
         });
-        uiStage.addActor(butt);
-    }
+        uiStage.addActor(bu);
 
-    private void createUiStage(){
-        test[] t= new test[1];
-        for(int i=1;i<5;i++){
-        Button b=new Button(new Vector2(100*i,100),"components/cool.png",t,"knapp"+i);
-        uiStage.addActor(b);
-
+        for(int i=1; i<6; i++){
+            Button b = new Button(new Vector2(100*i,200),"components/cool.png", t,"button"+i );
+            uiStage.addActor(b);
         }
+    }
+    private void createobjectStage(){
 
-        Button b=new Button(new Vector2(100,600),"components/cool.png",t,"knapp tre");
-        uiStage.addActor(b);
     }
-    private void createObjectStage(){
-        // Load sprites and different objects
-    }
-    private void createTerrainStage(){
-        // Load the background
-    }
+    private void createterrainStage(){
 
+    }
     public class test implements Observer{
         @Override
-        public void update(String action){
+        public void update(String action) {
             System.out.println(action);
         }
     }
