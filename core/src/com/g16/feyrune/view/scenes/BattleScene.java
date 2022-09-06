@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.g16.feyrune.interfaces.Observer;
 import com.g16.feyrune.view.components.Button;
+import com.g16.feyrune.view.components.FancyLabel;
 
 public class BattleScene extends Scene{
 
@@ -41,6 +42,8 @@ public class BattleScene extends Scene{
             Button b = new Button(new Vector2(100*i,200),"components/cool.png", t,"button"+i );
             uiStage.addActor(b);
         }
+        FancyLabel fl=new FancyLabel(new Vector2(600,600),"Hello","components/cool.png",100,100);
+        uiStage.addActor(fl);
     }
     private void createobjectStage(){
 
