@@ -1,8 +1,8 @@
 package com.g16.feyrune.model.Parser;
 
+import com.g16.feyrune.Util.Pair;
 import com.g16.feyrune.map.Map;
 import com.g16.feyrune.map.Tile;
-import com.sun.tools.javac.util.Pair;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * This class handle all operations related to the parsing of map files.
  */
-public class Parser {
+public class MapParser {
     /**
      * This method parses a map filed (produced by Tiled).
      *
@@ -31,13 +31,15 @@ public class Parser {
         ArrayList<Integer> collisionIds = parseCollisionIds(doc);
         ArrayList<Integer> gIds = parseGIdList(doc);
 
-        int[] collisionList = generateCollitionIdList(doc, collisionIds, mapSize, true);
-        int[] gIdList = generateCollitionIdList(doc, gIds, mapSize, false);
+        int[][] collisionList = generateCollitionIdList(doc, collisionIds, mapSize, true);
+        int[][] gIdList = generateCollitionIdList(doc, gIds, mapSize, false);
 
-        int[][] collisionMap = createIdMapFromList(collisionList, mapSize);
-        int[][] gIdMap = createIdMapFromList(gIdList, mapSize);
+        int[][][] collisionMap = createIdMapFromList(collisionList, mapSize);
+        int[][][] gIdMap = createIdMapFromList(gIdList, mapSize);
 
-        return generateTileMap(collisionMap, gIdMap);
+        Map map = generateTileMap(collisionMap, gIdMap);
+
+        return map;
     }
 
     /**
@@ -46,15 +48,21 @@ public class Parser {
      * @param collisionMap The collision map.
      * @return A {@link Map} based on the collision map.
      */
-    private static Map generateTileMap(int[][] collisionMap, int[][] idMap) {
+    private static Map generateTileMap(int[][][] collisionMap, int[][][] idMap) {
         Tile[][] tiles = new Tile[collisionMap.length][collisionMap[0].length];
 
         for (int i = 0; i < collisionMap.length; i++) {
             for (int j = 0; j < collisionMap[0].length; j++) {
-                tiles[i][j] = new Tile(idMap[i][j], collisionMap[i][j] == 1, false);
+                boolean collision = false;
+                for (int k = 0; k < collisionMap[i][j].length; k++){
+                    if(collisionMap[i][j][k] == 1){
+                        collision = true;
+                        break;
+                    }
+                }
+                tiles[i][j] = new Tile(idMap[i][j], collision, false);
             }
         }
-
         return new Map(tiles);
     }
 
@@ -65,8 +73,8 @@ public class Parser {
      * @param mapSize The size of the map.
      * @return The XML document.
      */
-    private static int[][] createIdMapFromList(int[] collisionList, Pair<Integer, Integer> mapSize) {
-        int[][] collisionMap = new int[mapSize.snd][mapSize.fst];
+    private static int[][][] createIdMapFromList(int[][] collisionList, Pair<Integer, Integer> mapSize) {
+        int[][][] collisionMap = new int[mapSize.snd][mapSize.fst][collisionList[0].length];
 
         int c = 0;
         for (int i = 0; i < mapSize.snd; i++) {
@@ -87,11 +95,11 @@ public class Parser {
      * @param mapSize The size of the map.
      * @return A list of whether a tile has collision or not.
      */
-    private static int[] generateCollitionIdList(Document doc, ArrayList<Integer> gIds, Pair<Integer, Integer> mapSize, boolean printBinary) {
+    private static int[][] generateCollitionIdList(Document doc, ArrayList<Integer> gIds, Pair<Integer, Integer> mapSize, boolean printBinary) {
         // Get all the layer nodes, as collisions could exist on multiple layers.
         NodeList layerNodes = doc.getElementsByTagName("layer");
 
-        int[] collisionList = new int[mapSize.fst * mapSize.snd];
+        int[][] collisionList = new int[mapSize.fst * mapSize.snd][layerNodes.getLength()];
         for (int i = 0; i < layerNodes.getLength(); i++) {
 
             NodeList childNodes = layerNodes.item(i).getChildNodes();
@@ -101,13 +109,12 @@ public class Parser {
                 if (dataNode.getNodeName().equals("data")) {
                     // Parse the CSV data.
                     String[] tileIds = dataNode.getTextContent().split(",");
-
                     for (int k = 0; k < tileIds.length; k++) {
                         // Prevents crashing because of whitespace or newlines when parsing integer.
                         tileIds[k] = tileIds[k].replaceAll("\\s+", "");
                         int tileId = Integer.parseInt(tileIds[k]);
                         if (gIds.contains(tileId)) {
-                            collisionList[k] = printBinary ? 1 : tileId;
+                            collisionList[k][i] = printBinary ? 1 : tileId;
                         }
                     }
                 }

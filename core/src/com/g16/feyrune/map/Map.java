@@ -1,7 +1,6 @@
 package com.g16.feyrune.map;
 
-import com.g16.feyrune.model.Parser.Parser;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import com.g16.feyrune.model.Parser.MapParser;
 
 public class Map {
     private static Map globalMap;
@@ -35,9 +34,20 @@ public class Map {
 
     public static Map getGlobalMap() {
         if (globalMap == null) {
-            globalMap = Parser.parseMapFile("assets/maps/dungeon/dungeon1.tmx");
+            globalMap = MapParser.parseMapFile("assets/maps/dungeon/dungeon1.tmx");
         }
         return globalMap;
     }
 
+    @Override
+    public String toString() {
+        String prt = "";
+        for (Tile[] tileArr : tiles) {
+            for (Tile tile : tileArr) {
+                prt += ", " + tile.toString();
+            }
+            prt += "\n";
+        }
+        return prt;
+    }
 }
