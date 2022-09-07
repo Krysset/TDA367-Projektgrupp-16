@@ -1,6 +1,6 @@
 package com.g16.feyrune.controller;
 
-import com.g16.feyrune.map.Map;
+import com.g16.feyrune.model.Parser.map.Map;
 import com.g16.feyrune.model.Player;
 
 public class PlayerController {

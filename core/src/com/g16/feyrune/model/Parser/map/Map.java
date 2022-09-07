@@ -1,6 +1,4 @@
-package com.g16.feyrune.map;
-
-import com.g16.feyrune.model.Parser.MapParser;
+package com.g16.feyrune.model.Parser.map;
 
 public class Map {
     private static Map globalMap;
@@ -9,7 +7,7 @@ public class Map {
     private final int width;
     private final int height;
 
-    public Map(Tile[][] tiles) {
+    protected Map(Tile[][] tiles) {
         this.tiles = tiles;
         this.width = tiles.length;
         this.height = tiles[0].length;

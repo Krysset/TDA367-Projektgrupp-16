@@ -1,8 +1,8 @@
-package com.g16.feyrune.model.Parser;
+package com.g16.feyrune.model.Parser.map;
 
 import com.g16.feyrune.Util.Pair;
-import com.g16.feyrune.map.Map;
-import com.g16.feyrune.map.Tile;
+import com.g16.feyrune.model.Parser.map.Map;
+import com.g16.feyrune.model.Parser.map.Tile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
