@@ -4,9 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Tileset {
-    private TextureRegion textureRegion;
-    private int firstgid, tileWidth, tileHeight, tileCount, columns;
-    private String name;
+    private TextureRegion[][] textureRegion;
+    private final int firstgid, tileWidth, tileHeight, tileCount, columns;
+    private final String name;
 
     public Tileset(String imgSource, String name, int firstgid, int tileWidth, int tileHeight, int tileCount, int columns) {
         this.name = name;
@@ -15,11 +15,19 @@ public class Tileset {
         this.tileHeight = tileHeight;
         this.tileCount = tileCount;
         this.columns = columns;
-        // TODO: Load textureregion or texture
+        textureRegion = TextureRegion.split(new Texture(imgSource), tileWidth, tileHeight);
     }
 
     public void unloadContent() {
-        textureRegion.getTexture().dispose();
+        // textureRegion.getTexture().dispose();
+    }
+
+    public TextureRegion getTexture(int gid) {
+        int newGid = gid-firstgid;
+        if (newGid < 0) {
+            throw new RuntimeException("Invalid gid for tileset");
+        }
+        return textureRegion[newGid / columns][newGid % columns];
     }
 
     public int getFirstgid() {
