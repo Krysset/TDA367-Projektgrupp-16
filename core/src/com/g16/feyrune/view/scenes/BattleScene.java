@@ -27,7 +27,6 @@ public class BattleScene extends Scene{
     }
 
     private void createuiStage() {
-        test[] t = {new test()};
         ImageButton bu = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("components/cool.png"))));
         bu.setPosition(400,400);
         bu.addListener(new ClickListener(){
@@ -39,7 +38,7 @@ public class BattleScene extends Scene{
         uiStage.addActor(bu);
 
         for(int i=1; i<6; i++){
-            Button b = new Button(new Vector2(100*i,200),"components/cool.png", t,"button"+i );
+            Button b = new Button(new Vector2(100*i,200),"components/cool.png", observers,"button"+i );
             uiStage.addActor(b);
         }
         FancyLabel fl=new FancyLabel(new Vector2(600,600),"Hello","components/cool.png",100,100);
@@ -51,10 +50,5 @@ public class BattleScene extends Scene{
     private void createterrainStage(){
 
     }
-    public class test implements Observer{
-        @Override
-        public void update(String action) {
-            System.out.println(action);
-        }
-    }
+
 }
