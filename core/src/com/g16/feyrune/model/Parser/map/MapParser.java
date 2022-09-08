@@ -49,7 +49,7 @@ public class MapParser {
      * @return A {@link Map} based on the collision map.
      */
     private static Map generateTileMap(int[][][] collisionMap, int[][][] idMap) {
-        Tile[][] tiles = new Tile[collisionMap.length][collisionMap[0].length];
+        Tile[][] tiles = new Tile[collisionMap[0].length][collisionMap.length];
 
         for (int i = 0; i < collisionMap.length; i++) {
             for (int j = 0; j < collisionMap[0].length; j++) {
@@ -60,7 +60,7 @@ public class MapParser {
                         break;
                     }
                 }
-                tiles[i][j] = new Tile(idMap[i][j], collision, false);
+                tiles[j][i] = new Tile(idMap[i][j], collision, false);
             }
         }
         return new Map(tiles);
@@ -77,7 +77,7 @@ public class MapParser {
         int[][][] collisionMap = new int[mapSize.snd][mapSize.fst][collisionList[0].length];
 
         int c = 0;
-        for (int i = 0; i < mapSize.snd; i++) {
+        for (int i = mapSize.snd - 1; i >= 0; i--) {
             for (int j = 0; j < mapSize.fst; j++) {
                 collisionMap[i][j] = collisionList[c];
                 c++;

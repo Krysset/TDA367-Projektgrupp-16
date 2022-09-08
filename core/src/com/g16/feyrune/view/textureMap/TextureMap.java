@@ -32,6 +32,11 @@ public class TextureMap {
             tileset.unloadContent();
         }
     }
+
+    public List<Tileset> getTilesets() {
+        return tilesets;
+    }
+
     public Color getBackgroundColor() {
         return bgColor;
     }
