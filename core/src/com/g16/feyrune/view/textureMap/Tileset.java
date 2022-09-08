@@ -15,7 +15,8 @@ public class Tileset {
         this.tileHeight = tileHeight;
         this.tileCount = tileCount;
         this.columns = columns;
-        textureRegion = TextureRegion.split(new Texture(imgSource), tileWidth, tileHeight);
+        Texture texture = new Texture(imgSource);
+        textureRegion = TextureRegion.split(texture, tileWidth, tileHeight);
     }
 
     public void unloadContent() {
