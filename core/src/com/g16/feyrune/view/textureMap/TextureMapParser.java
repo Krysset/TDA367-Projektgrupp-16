@@ -79,40 +79,17 @@ public class TextureMapParser {
 
     private static List<Tileset> generateTilesetList(Document doc) {
         ArrayList<Tileset> tilesets = new ArrayList<>();
-        TilesetFactory factory = new TilesetFactory();
         NodeList tilesetNodeList = doc.getElementsByTagName("tileset");
         for (int i = 0; i < tilesetNodeList.getLength(); i++) {
-
             NamedNodeMap attributes = tilesetNodeList.item(i).getAttributes();
-            for (int j = 0; j < attributes.getLength(); j++) {
-                switch (attributes.item(j).getNodeName()) {
-                    case "firstgid":
-                        factory.setFirstGid(attributes.item(i).getNodeValue());
-                    case "name":
-                        factory.setName(attributes.item(i).getNodeValue());
-                    case "tilewidth":
-                        factory.setTileWidth(attributes.item(i).getNodeValue());
-                    case "tileheight":
-                        factory.setTileHeight(attributes.item(i).getNodeValue());
-                    case "tilecount":
-                        factory.setTileCount(attributes.item(i).getNodeValue());
-                    case "columns":
-                        factory.setColumns(attributes.item(i).getNodeValue());
-                    default:
-                        System.out.println("Unknown tileset attribute found while parsing: " + attributes.item(i).getNodeValue());
-                }
-            }
-            NamedNodeMap childAttributes = tilesetNodeList.item(i).getFirstChild().getAttributes();
-            for (int j = 0; j < childAttributes.getLength(); j++) {
-                if (childAttributes.item(j).getNodeName().equals("source")) {
-                    try {
-                        factory.setImgSource(childAttributes.item(j).getNodeValue());
-                    } catch (FileNotFoundException e) {
-                        System.out.println("Invalid img path for tileset " + i + "th");
-                    }
-                }
-            }
-            tilesets.add(factory.createTileset());
+            String name = attributes.getNamedItem("name").getNodeValue();
+            int firstGid = Integer.parseInt(attributes.getNamedItem("firstgid").getNodeValue());
+            int tileWidth = Integer.parseInt(attributes.getNamedItem("tilewidth").getNodeValue());
+            int tileHeight = Integer.parseInt(attributes.getNamedItem("tileheight").getNodeValue());
+            int tileCount = Integer.parseInt(attributes.getNamedItem("tilecount").getNodeValue());
+            int columns = Integer.parseInt(attributes.getNamedItem("columns").getNodeValue());
+            String imgSource = tilesetNodeList.item(0).getAttributes().getNamedItem("source").getNodeValue();
+            tilesets.add(new Tileset(imgSource, name, firstGid, tileWidth, tileHeight, tileCount, columns));
         }
         return tilesets;
     }
