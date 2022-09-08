@@ -3,6 +3,7 @@ package com.g16.feyrune.view.textureMap;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +31,10 @@ public class TextureMap {
     public void addLayer(TextureLayer layer) {
         layers.add(layer);
     }
-    public void addTile(String layerName, TextureTile tile, int pos) {
+    public void addTile(String layerName, int gid, Point pos) {
         for(TextureLayer layer : layers) {
             if(layer.getName() == layerName) {
-                layer.setTile(pos, tile);
+                layer.addTile(pos, gid);
             }
         }
     }
