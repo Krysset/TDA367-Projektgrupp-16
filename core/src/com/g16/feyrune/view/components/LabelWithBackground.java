@@ -8,9 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.Align;
 
-public class FancyLabel extends Actor {
+public class LabelWithBackground extends Actor {
 
     private String imageString;
     private Image image;
@@ -18,7 +17,7 @@ public class FancyLabel extends Actor {
     private Label label;
 
     private String text;
-    public FancyLabel(Vector2 position, String text, String backgroundImage, int width, int height) {
+    public LabelWithBackground(Vector2 position, String text, String backgroundImage, int width, int height) {
         this.imageString = backgroundImage;
         this.text = text;
         style= new Label.LabelStyle();
