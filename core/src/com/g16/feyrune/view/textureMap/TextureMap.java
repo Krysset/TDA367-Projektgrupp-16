@@ -18,8 +18,8 @@ public class TextureMap {
         this.mapHeight = mapHeight;
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
-        layers = new ArrayList<TextureLayer>();
-        tilesets = new ArrayList<Tileset>();
+        layers = new ArrayList<>();
+        tilesets = new ArrayList<>();
     }
     public void draw(SpriteBatch spriteBatch) {
         for (TextureLayer layer : layers) {
