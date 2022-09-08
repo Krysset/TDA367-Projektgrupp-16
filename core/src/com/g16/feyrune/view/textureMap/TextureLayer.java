@@ -2,20 +2,20 @@ package com.g16.feyrune.view.textureMap;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.awt.*;
+import java.util.HashMap;
+
 public class TextureLayer {
-    private TextureTile[][] textureTileMap;
+    private HashMap<Point, Integer> textureTileMap;
     private String name;
-    private int mapWidth, mapHeight, tileWidth, tileHeight;
+    private int mapWidth, mapHeight;
     private float layer;
 
-    public TextureLayer(String name, int mapWidth, int mapHeight, int tileWidth, int tileHeight, float layer) {
+    public TextureLayer(String name, int mapWidth, int mapHeight) {
         this.mapWidth = mapWidth;
         this.mapHeight = mapHeight;
-        this.tileWidth = tileWidth;
-        this.tileHeight = tileHeight;
-        this.layer = layer;
         this.name = name;
-        textureTileMap = new TextureTile[mapWidth][mapHeight];
+        textureTileMap = new HashMap<>();
     }
 
     public void draw(SpriteBatch batch) {
@@ -24,6 +24,10 @@ public class TextureLayer {
                 // TODO: draw tiles with batch
             }
         }
+    }
+
+    public void addTile(Point coordinate, int gid) {
+        textureTileMap.put(new Point(coordinate.x, coordinate.y), gid);
     }
 
     public String getName() {
