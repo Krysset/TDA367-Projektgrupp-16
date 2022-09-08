@@ -45,8 +45,8 @@ public class Scene implements Screen {
             terrainStage.act(dt);
             update(dt);
         }
-        objectStage.draw();
         terrainStage.draw();
+        objectStage.draw();
         uiStage.draw();
     }
 
