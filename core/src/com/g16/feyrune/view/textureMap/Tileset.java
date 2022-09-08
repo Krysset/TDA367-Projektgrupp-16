@@ -24,7 +24,7 @@ public class Tileset {
         // textureRegion.getTexture().dispose();
     }
 
-    public TextureRegion getTexture(int gid) {
+    public TextureRegion getTextureRegion(int gid) {
         int newGid = gid-firstgid;
         if (newGid < 0 || newGid >= tileCount) {
             throw new RuntimeException("Invalid gid for tileset");
