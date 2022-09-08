@@ -88,7 +88,10 @@ public class TextureMapParser {
             int tileHeight = Integer.parseInt(attributes.getNamedItem("tileheight").getNodeValue());
             int tileCount = Integer.parseInt(attributes.getNamedItem("tilecount").getNodeValue());
             int columns = Integer.parseInt(attributes.getNamedItem("columns").getNodeValue());
-            String imgSource = tilesetNodeList.item(0).getAttributes().getNamedItem("source").getNodeValue();
+            Node imageNode = tilesetNodeList.item(i).getChildNodes().item(1);
+            String imgSource = imageNode.getAttributes().getNamedItem("source").getNodeValue();
+            // Adjusts source path to not be relative
+            imgSource = "assets" + imgSource.substring(5);
             tilesets.add(new Tileset(imgSource, name, firstGid, tileWidth, tileHeight, tileCount, columns));
         }
         return tilesets;
