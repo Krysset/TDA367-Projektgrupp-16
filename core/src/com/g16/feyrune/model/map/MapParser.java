@@ -1,4 +1,4 @@
-package com.g16.feyrune.map;
+package com.g16.feyrune.model.map;
 
 import com.sun.tools.javac.util.Pair;
 import org.w3c.dom.Document;

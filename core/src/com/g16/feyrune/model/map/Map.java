@@ -1,6 +1,4 @@
-package com.g16.feyrune.map;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+package com.g16.feyrune.model.map;
 
 public class Map {
     private static Map globalMap;
@@ -26,6 +24,10 @@ public class Map {
         }
 
         System.out.println(sb);
+    }
+
+    public Tile getTile(int xPos, int yPos){
+        return tiles[xPos][yPos];
     }
 
     public static Map getGlobalMap() {
