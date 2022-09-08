@@ -35,8 +35,7 @@ public class TextureMapParser {
         }
         List<Tileset> tilesets = generateTilesetList(doc);
         List<TextureLayer> layers = generateLayerList(doc);
-        TextureMap textureMap = new TextureMap(width, height, tileWidth, tileHeight, color);
-        return textureMap;
+        return new TextureMap(width, height, tileWidth, tileHeight, color);
     }
 
     private static List<TextureLayer> generateLayerList(Document doc) {
