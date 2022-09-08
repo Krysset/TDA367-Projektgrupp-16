@@ -39,10 +39,4 @@ public class TextureLayer {
     public String getName() {
         return name;
     }
-
-    public void setTile(int pos, TextureTile tile) {
-        int x = pos % mapWidth;
-        int y = pos / mapWidth;
-        // TODO: set x,y to tile
-    }
 }
