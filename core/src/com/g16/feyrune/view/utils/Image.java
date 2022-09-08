@@ -7,7 +7,17 @@ import com.badlogic.gdx.graphics.Texture;
 public class Image {
 
     /**
-     * Resizes the given texture to the given scalers using a nearest neighbor algorithm.
+     * Resizes the given texture to the given scaler using a nearest neighbour algorithm.
+     * @param texture The texture to resize.
+     * @param scaleXY The scale factor.
+     * @return The resized texture.
+     */
+    public static Texture resize(Texture texture, float scaleXY) {
+        return resize(texture, scaleXY, scaleXY);
+    }
+
+    /**
+     * Resizes the given texture to the given scalers using a nearest neighbour algorithm.
      * @param texture The texture to resize.
      * @param scaleX The scale factor in the x axis.
      * @param scaleY The scale factor in the y axis.
