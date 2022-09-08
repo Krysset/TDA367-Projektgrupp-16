@@ -17,8 +17,9 @@ public class AnimationUtils {
         // left, going across first. The Animation constructor requires a 1D array.
         TextureRegion[] frames = new TextureRegion[sizeX * sizeY];
         int index = 0;
-        for (int i = 0; i < sizeX; i++) {
-            for (int j = 0; j < sizeY; j++) {
+
+        for (int i = 0; i < sizeY; i++) {
+            for (int j = 0; j < sizeX; j++) {
                 frames[index++] = tmp[i][j];
             }
         }
