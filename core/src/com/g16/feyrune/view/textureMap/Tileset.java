@@ -25,7 +25,7 @@ public class Tileset {
 
     public TextureRegion getTexture(int gid) {
         int newGid = gid-firstgid;
-        if (newGid < 0) {
+        if (newGid < 0 || newGid >= tileCount) {
             throw new RuntimeException("Invalid gid for tileset");
         }
         return textureRegion[newGid / columns][newGid % columns];
