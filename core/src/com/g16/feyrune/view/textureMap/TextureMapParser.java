@@ -63,13 +63,13 @@ public class TextureMapParser {
                     // Parse the CSV data.
                     String[] tileIds = dataNode.getTextContent().split(",");
 
-                    for (int k = 0; k < tileIds.length; k++) {
+                    for (int k = layerWidth * layerHeight - 1; k >= 0; k--) {
                         // Prevents crashing because of whitespace or newlines when parsing integer.
                         tileIds[k] = tileIds[k].replaceAll("\\s+", "");
                         int tileId = Integer.parseInt(tileIds[k]);
                         // If gid is zero, there is no texture for the tile
                         if (tileId != 0) {
-                            Point coordinate = new Point(k/layerWidth, k%layerHeight);
+                            Point coordinate = new Point(k%layerWidth, layerHeight - k/layerHeight);
                             layer.addTile(coordinate, tileId);
                         }
 
