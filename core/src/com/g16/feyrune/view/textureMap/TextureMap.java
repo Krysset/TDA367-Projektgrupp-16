@@ -23,7 +23,7 @@ public class TextureMap {
     }
     public void draw(SpriteBatch spriteBatch) {
         for (TextureLayer layer : layers) {
-            layer.draw(spriteBatch);
+            layer.draw(spriteBatch, tilesets);
         }
     }
 

@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TextureLayer {
     private HashMap<Point, Integer> textureTileMap;
@@ -18,11 +20,15 @@ public class TextureLayer {
         textureTileMap = new HashMap<>();
     }
 
-    public void draw(SpriteBatch batch) {
-        for (int x = 0; x < mapWidth; x++) {
-            for (int y = 0; y < mapHeight; y++) {
-                // TODO: draw tiles with batch
+    public void draw(SpriteBatch batch, List<Tileset> tilesets) {
+        for (Map.Entry<Point, Integer> entry : textureTileMap.entrySet()) {
+            Point coordinate = entry.getKey();
+            int gid = entry.getValue();
+            int tilesetIndex = 0;
+            while(gid < tilesets.get(tilesetIndex).getFirstgid()) {
+                tilesetIndex++;
             }
+            batch.draw(tilesets.get(tilesetIndex).getTexture(gid),coordinate.x, coordinate.y);
         }
     }
 
