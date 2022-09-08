@@ -35,7 +35,7 @@ public class TextureMapParser {
         }
         List<Tileset> tilesets = generateTilesetList(doc);
         List<TextureLayer> layers = generateLayerList(doc);
-        return new TextureMap(width, height, tileWidth, tileHeight, color);
+        return new TextureMap(width, height, tileWidth, tileHeight, color, tilesets, layers);
     }
 
     private static List<TextureLayer> generateLayerList(Document doc) {
@@ -67,8 +67,12 @@ public class TextureMapParser {
                         // Prevents crashing because of whitespace or newlines when parsing integer.
                         tileIds[k] = tileIds[k].replaceAll("\\s+", "");
                         int tileId = Integer.parseInt(tileIds[k]);
-                        Point coordinate = new Point(k/layerWidth, k%layerHeight);
-                        layer.addTile(coordinate, tileId);
+                        // If gid is zero, there is no texture for the tile
+                        if (tileId != 0) {
+                            Point coordinate = new Point(k/layerWidth, k%layerHeight);
+                            layer.addTile(coordinate, tileId);
+                        }
+
                     }
                 }
             }

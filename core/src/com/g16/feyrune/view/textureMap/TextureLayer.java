@@ -1,6 +1,7 @@
 package com.g16.feyrune.view.textureMap;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -28,7 +29,9 @@ public class TextureLayer {
             while(gid < tilesets.get(tilesetIndex).getFirstgid()) {
                 tilesetIndex++;
             }
-            batch.draw(tilesets.get(tilesetIndex).getTexture(gid),coordinate.x, coordinate.y);
+            Tileset tileset = tilesets.get(tilesetIndex);
+            TextureRegion region = tileset.getTextureRegion(gid);
+            batch.draw(region, coordinate.x * tileset.getTileWidth(), coordinate.y * tileset.getTileHeight());
         }
     }
 

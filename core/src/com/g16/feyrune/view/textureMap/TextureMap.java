@@ -13,29 +13,18 @@ public class TextureMap {
     private List<TextureLayer> layers;
     private List<Tileset> tilesets;
 
-    public TextureMap(int mapWidth, int mapHeight, int tileWidth, int tileHeight, Color backgroundColor) {
+    public TextureMap(int mapWidth, int mapHeight, int tileWidth, int tileHeight, Color backgroundColor, List<Tileset> tilesets, List<TextureLayer> layers) {
         this.bgColor = backgroundColor;
         this.mapWidth = mapWidth;
         this.mapHeight = mapHeight;
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
-        layers = new ArrayList<>();
-        tilesets = new ArrayList<>();
+        this.tilesets = tilesets;
+        this.layers = layers;
     }
     public void draw(SpriteBatch spriteBatch) {
         for (TextureLayer layer : layers) {
             layer.draw(spriteBatch, tilesets);
-        }
-    }
-
-    public void addLayer(TextureLayer layer) {
-        layers.add(layer);
-    }
-    public void addTile(String layerName, int gid, Point pos) {
-        for(TextureLayer layer : layers) {
-            if(layer.getName() == layerName) {
-                layer.addTile(pos, gid);
-            }
         }
     }
     public void unloadContent() {
