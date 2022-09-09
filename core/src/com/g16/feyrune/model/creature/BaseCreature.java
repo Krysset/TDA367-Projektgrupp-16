@@ -8,9 +8,9 @@ import static java.lang.Math.min;
 
 public class BaseCreature {
     //Stats variables
-    private double maxHealth;
+    private final double maxHealth;
     private double health;
-    private double baseAttack;
+    private final double baseAttack;
     private double speed;
     private int evasion;
     private Attack[] attacks;
