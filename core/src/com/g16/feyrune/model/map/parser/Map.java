@@ -1,4 +1,4 @@
-package com.g16.feyrune.model.Parser.map;
+package com.g16.feyrune.model.map.parser;
 
 public class Map {
     private static Map globalMap;
