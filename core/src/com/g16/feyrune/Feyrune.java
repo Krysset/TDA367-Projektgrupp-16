@@ -4,7 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.g16.feyrune.model.Parser.map.Map;
+import com.g16.feyrune.model.map.parser.Map;
 import com.g16.feyrune.view.textureMap.MapDrawer;
 import com.g16.feyrune.view.textureMap.TextureMap;
 import com.g16.feyrune.view.textureMap.TextureMapParser;

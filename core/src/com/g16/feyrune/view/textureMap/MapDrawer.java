@@ -2,10 +2,9 @@ package com.g16.feyrune.view.textureMap;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.g16.feyrune.model.Parser.map.Map;
-import com.g16.feyrune.model.Parser.map.Tile;
+import com.g16.feyrune.model.map.parser.Map;
+import com.g16.feyrune.model.map.parser.Tile;
 
-import java.awt.*;
 import java.util.List;
 
 
