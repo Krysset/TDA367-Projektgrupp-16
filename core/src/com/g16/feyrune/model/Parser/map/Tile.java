@@ -11,6 +11,18 @@ public class Tile {
         this.canEncounter = canEncounter;
     }
 
+    public boolean isCollision() {
+        return collision;
+    }
+
+    public boolean isCanEncounter() {
+        return canEncounter;
+    }
+
+    public int[] getgIds() {
+        return gIds;
+    }
+
     public boolean hasCollision() {
         return collision;
     }

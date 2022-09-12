@@ -13,6 +13,14 @@ public class Map {
         this.height = tiles[0].length;
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     public void print() {
         StringBuilder sb = new StringBuilder();
         sb.append("Map (").append(width).append(", ").append(height).append("):\n");

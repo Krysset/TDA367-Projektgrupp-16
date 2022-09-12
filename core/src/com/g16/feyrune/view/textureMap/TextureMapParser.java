@@ -1,0 +1,129 @@
+package com.g16.feyrune.view.textureMap;
+
+import com.badlogic.gdx.graphics.Color;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TextureMapParser {
+    public static TextureMap parseMapFile(String filePath) {
+        Document doc = readXMLDocument(filePath);
+
+        Node mapNode = doc.getElementsByTagName("map").item(0);
+        int width = Integer.parseInt(mapNode.getAttributes().getNamedItem("width").getNodeValue());
+        int height = Integer.parseInt(mapNode.getAttributes().getNamedItem("height").getNodeValue());
+        int tileWidth = Integer.parseInt(mapNode.getAttributes().getNamedItem("tilewidth").getNodeValue());
+        int tileHeight = Integer.parseInt(mapNode.getAttributes().getNamedItem("tileheight").getNodeValue());
+        Color color;
+        Node bgColorAttr = mapNode.getAttributes().getNamedItem("backgroundcolor");
+        if (bgColorAttr != null) {
+            String nodeVal = bgColorAttr.getNodeValue();
+            // nodeVal is currently formatted #0123456 and Color.valueOf() might not expect a #
+            color = new Color(Color.valueOf(nodeVal));
+        } else {
+            color = Color.CYAN;
+        }
+        List<Tileset> tilesets = generateTilesetList(doc);
+        List<TextureLayer> layers = generateLayerList(doc);
+        return new TextureMap(width, height, tileWidth, tileHeight, color, tilesets, layers);
+    }
+
+    private static List<TextureLayer> generateLayerList(Document doc) {
+        ArrayList<TextureLayer> layers = new ArrayList<>();
+        NodeList layerNodeList = doc.getElementsByTagName("layer");
+        for (int i = 0; i < layerNodeList.getLength(); i++) {
+            Node currentLayerNode = layerNodeList.item(i);
+            // Layer node vars
+            String layerName;
+            int layerWidth, layerHeight;
+            // Get layer node vars
+            NamedNodeMap layerAttributes = currentLayerNode.getAttributes();
+            layerName = layerAttributes.getNamedItem("name").getNodeValue();
+            layerWidth = Integer.parseInt(layerAttributes.getNamedItem("width").getNodeValue());
+            layerHeight = Integer.parseInt(layerAttributes.getNamedItem("height").getNodeValue());
+            // Init layer
+            TextureLayer layer = new TextureLayer(layerName, layerWidth, layerHeight);
+
+            // Get gids and coords of layer
+            NodeList layerChildNode = currentLayerNode.getChildNodes();
+            for (int j = 0; j < layerChildNode.getLength(); j++) {
+                Node dataNode = layerChildNode.item(j);
+
+                if (dataNode.getNodeName().equals("data")) {
+                    // Parse the CSV data.
+                    String[] tileIds = dataNode.getTextContent().split(",");
+
+                    for (int k = layerWidth * layerHeight - 1; k >= 0; k--) {
+                        // Prevents crashing because of whitespace or newlines when parsing integer.
+                        tileIds[k] = tileIds[k].replaceAll("\\s+", "");
+                        int tileId = Integer.parseInt(tileIds[k]);
+                        // If gid is zero, there is no texture for the tile
+                        if (tileId != 0) {
+                            Point coordinate = new Point(k%layerWidth, layerHeight - k/layerHeight);
+                            layer.addTile(coordinate, tileId);
+                        }
+
+                    }
+                }
+            }
+            layers.add(layer);
+        }
+        return layers;
+    }
+
+    private static List<Tileset> generateTilesetList(Document doc) {
+        ArrayList<Tileset> tilesets = new ArrayList<>();
+        NodeList tilesetNodeList = doc.getElementsByTagName("tileset");
+        for (int i = 0; i < tilesetNodeList.getLength(); i++) {
+            NamedNodeMap attributes = tilesetNodeList.item(i).getAttributes();
+            String name = attributes.getNamedItem("name").getNodeValue();
+            int firstGid = Integer.parseInt(attributes.getNamedItem("firstgid").getNodeValue());
+            int tileWidth = Integer.parseInt(attributes.getNamedItem("tilewidth").getNodeValue());
+            int tileHeight = Integer.parseInt(attributes.getNamedItem("tileheight").getNodeValue());
+            int tileCount = Integer.parseInt(attributes.getNamedItem("tilecount").getNodeValue());
+            int columns = Integer.parseInt(attributes.getNamedItem("columns").getNodeValue());
+            Node imageNode = tilesetNodeList.item(i).getChildNodes().item(1);
+            String imgSource = imageNode.getAttributes().getNamedItem("source").getNodeValue();
+            // Adjusts source path to not be relative
+            imgSource = "assets" + imgSource.substring(5);
+            tilesets.add(new Tileset(imgSource, name, firstGid, tileWidth, tileHeight, tileCount, columns));
+        }
+        return tilesets;
+    }
+
+    private static Document readXMLDocument(String filePath) {
+        // Most of the information writing this parser was gotten from this tutorial:
+        // https://mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/
+
+        // Create a new document builder factory.
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+        try {
+            // Safely parse XML file.
+            dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+
+            DocumentBuilder db = dbf.newDocumentBuilder();
+
+            Document doc = db.parse(new File(filePath));
+
+            // Normalizes the document tree for better parsing.
+            // More info:
+            // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+            doc.getDocumentElement().normalize();
+
+            return doc;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
