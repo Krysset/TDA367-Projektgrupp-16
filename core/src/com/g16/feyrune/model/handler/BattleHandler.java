@@ -61,9 +61,9 @@ public class BattleHandler {
         while(!running){
             Attack playerMove = choosemove();
             Attack enemyMove = null; //random move
-            AttackHandler.handleAttack(order[loop%2],order[(loop+1)%2],getMove(order[loop%2]));
-            loop=(loop+1)%2;
-           /*
+          //  AttackHandler.handleAttack(order[loop%2],order[(loop+1)%2],getMove(order[loop%2]));
+          //  loop=(loop+1)%2;
+
             if (fastest.getFriend()){
                 AttackHandler.handleAttack(fastest,slowest,playerMove);
                 if (!running){break;}
@@ -74,7 +74,7 @@ public class BattleHandler {
                 AttackHandler.handleAttack(fastest,slowest,enemyMove);
                 if (!running){break;}
                 AttackHandler.handleAttack(slowest,fastest,playerMove);
-            }*/
+            }
 
 
         }
