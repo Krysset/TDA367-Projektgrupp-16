@@ -38,6 +38,7 @@ public class MovementHandler {
 
         adjustDirectionForCollision();
         player.move(dirX, dirY);
+        resetDirection();
     }
 
     /**
@@ -59,6 +60,11 @@ public class MovementHandler {
         if (isNewPositionCollision(playerX, playerY + dirY)) {
             dirY = 0;
         }
+    }
+
+    private void resetDirection() {
+        dirX = 0;
+        dirY = 0;
     }
 
     private boolean isNewPositionCollision(int x, int y) {
