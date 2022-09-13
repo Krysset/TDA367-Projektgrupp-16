@@ -1,8 +1,6 @@
 package com.g16.feyrune.model.creature;
 
-import com.badlogic.gdx.math.Vector2;
-import com.g16.feyrune.model.action.Attack;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.g16.feyrune.model.action.BaseAttack;
 
 import static java.lang.Math.min;
 
@@ -13,17 +11,17 @@ public class BaseCreature {
     private final double baseAttack;
     private double speed;
     private int evasion;
-    private Attack[] attacks;
-    private boolean friend;
+    private BaseAttack[] baseAttacks;
+    private boolean isFriend;
 
-    public BaseCreature(double health, double attack, double speed, int evasion, Attack[] attacks){
+    public BaseCreature(double health, double attack, double speed, int evasion, BaseAttack[] baseAttacks){
         this.maxHealth = health;
         this.baseAttack = attack;
         this.evasion = evasion;
         this.speed = speed;
         this.health = this.maxHealth;
-        this.attacks = attacks;
-        this.friend = false;
+        this.baseAttacks = baseAttacks;
+        this.isFriend = false;
     }
 
     private void die(){
@@ -46,10 +44,10 @@ public class BaseCreature {
         health = min(newHealth, maxHealth);
     }
     public void setFriend(boolean friend){
-        this.friend = friend;
+        this.isFriend = friend;
     }
-    public boolean getFriend(){
-        return friend;
+    public boolean isFriend(){
+        return isFriend;
     }
 
     public void damageMonster(double damage){
