@@ -21,10 +21,10 @@ public class MapPlayerInputProcessor implements InputProcessor {
             movementHandler.increaseXDirection();
         }
         if (keycode == Input.Keys.W){
-            movementHandler.decreaseYDirection();
+            movementHandler.increaseYDirection();
         }
         if (keycode == Input.Keys.S){
-            movementHandler.increaseYDirection();
+            movementHandler.decreaseYDirection();
         }
         return true;
     }
