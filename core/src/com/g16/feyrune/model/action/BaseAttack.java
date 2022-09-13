@@ -1,16 +1,14 @@
 package com.g16.feyrune.model.action;
 
-import java.util.Random;
-
 import static java.lang.Math.max;
 
-public class Attack {
+public class BaseAttack {
     private int accuracy;
     private int power;
     private String name;
 
 
-    public Attack(int accuracy, int power, String name){
+    public BaseAttack(int accuracy, int power, String name){
         this.accuracy = accuracy;
         this.power = power;
         this.name = name;

@@ -15,10 +15,6 @@ public class Tile {
         return collision;
     }
 
-    public boolean isCanEncounter() {
-        return canEncounter;
-    }
-
     public int[] getgIds() {
         return gIds;
     }
