@@ -8,15 +8,15 @@ public class BaseCreature {
     //Stats variables
     private final double maxHealth;
     private double health;
-    private double strength;
-    private double speed;
+    private int strength;
+    private int speed;
     private int evasion;
     private BaseAttack[] baseAttacks;
     private boolean isFriend;
 
-    public BaseCreature(double health, double attack, double speed, int evasion, BaseAttack[] baseAttacks){
+    public BaseCreature(double health, int strength, int speed, int evasion, BaseAttack[] baseAttacks){
         this.maxHealth = health;
-        this.strength = attack;
+        this.strength = strength;
         this.evasion = evasion;
         this.speed = speed;
         this.health = this.maxHealth;
