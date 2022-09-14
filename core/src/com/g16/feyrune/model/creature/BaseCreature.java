@@ -8,7 +8,7 @@ public class BaseCreature {
     //Stats variables
     private final double maxHealth;
     private double health;
-    private final double baseAttack;
+    private double strength;
     private double speed;
     private int evasion;
     private BaseAttack[] baseAttacks;
@@ -16,7 +16,7 @@ public class BaseCreature {
 
     public BaseCreature(double health, double attack, double speed, int evasion, BaseAttack[] baseAttacks){
         this.maxHealth = health;
-        this.baseAttack = attack;
+        this.strength = attack;
         this.evasion = evasion;
         this.speed = speed;
         this.health = this.maxHealth;
@@ -27,8 +27,8 @@ public class BaseCreature {
     private void die(){
 
     }
-    public double getAttack(){
-        return baseAttack;
+    public BaseAttack[] getAttacks(){
+        return baseAttacks;
     }
 
     public int getEvasion(){
