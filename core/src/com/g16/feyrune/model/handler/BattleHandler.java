@@ -23,10 +23,9 @@ public class BattleHandler {
      * @param enemy:  the enemy monster
      */
     public void startBattle(BaseCreature friend, BaseCreature enemy) {
-        turnOrder = new ArrayList<BaseCreature>();
         this.friend = friend;
         this.enemy = enemy;
-        generateNewAttackOrder();
+        generateNewAttackOrder(0,0);
         combatIsActive = true;
 
     }
@@ -34,9 +33,10 @@ public class BattleHandler {
     /**
      * Generates a new turn order for the battle
      */
-    private void generateNewAttackOrder() {
-        friendSpeed = 0;
-        enemySpeed = 0;
+    private void generateNewAttackOrder(int friendSpeed, int enemySpeed) {
+        friendSpeed = friendSpeed;
+        enemySpeed = enemySpeed;
+        turnOrder = new ArrayList<BaseCreature>();
         generateAttackOrder();
 
     }
