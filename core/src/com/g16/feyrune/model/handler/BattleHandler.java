@@ -34,8 +34,8 @@ public class BattleHandler {
      * Generates a new turn order for the battle
      */
     private void generateNewAttackOrder(int friendSpeed, int enemySpeed) {
-        friendSpeed = friendSpeed;
-        enemySpeed = enemySpeed;
+        this.friendSpeed = friendSpeed;
+        this.enemySpeed = enemySpeed;
         turnOrder = new ArrayList<BaseCreature>();
         generateAttackOrder();
 
