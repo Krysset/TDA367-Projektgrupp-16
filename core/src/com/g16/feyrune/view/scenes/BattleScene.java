@@ -44,11 +44,7 @@ public class BattleScene extends Scene{
         LabelWithBackground fl=new LabelWithBackground(new Vector2(600,600),"Hello","components/cool.png",100,100);
         uiStage.addActor(fl);
     }
-    private void createobjectStage(){
-
-    }
-    private void createterrainStage(){
-
-    }
+    private void createobjectStage(){}
+    private void createterrainStage(){}
 
 }

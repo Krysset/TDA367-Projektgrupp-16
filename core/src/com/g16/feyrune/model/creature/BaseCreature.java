@@ -30,6 +30,9 @@ public class BaseCreature {
     public BaseAttack[] getAttacks(){
         return baseAttacks;
     }
+    public double getStrength(){
+        return strength;
+    }
 
     public int getEvasion(){
         return evasion;
