@@ -1,6 +1,5 @@
 package com.g16.feyrune.model.handler;
 
-import com.g16.feyrune.Util.Pair;
 import com.g16.feyrune.model.action.BaseAttack;
 import com.g16.feyrune.model.creature.BaseCreature;
 
@@ -63,7 +62,7 @@ public class BattleHandler {
     /**
      * For now, the exact same as EnemyAttack, when implementing player input this should be redone.
      */
-    private void friendChooseAttack() {
+    private void friendHandleAttack() {
         BaseAttack[] attacks = friend.getAttacks();
         int attackIndex = (int) (Math.random() * attacks.length);
         BaseAttack currentAttack = attacks[attackIndex];
@@ -73,7 +72,7 @@ public class BattleHandler {
     /**
      * Chooses an attack for the enemy
      */
-    private void enemyChooseAttack() {
+    private void enemyHandleAttack() {
         BaseAttack[] enemyAttacks = enemy.getAttacks();
         int attackIndex = (int) (Math.random() * enemyAttacks.length);
         BaseAttack currentAttack = enemyAttacks[attackIndex];
@@ -83,10 +82,10 @@ public class BattleHandler {
     /**
      * Controls which creature should attack and makes them choose one
      */
-    private void chooseAttack() {
+    private void handleAttack() {
         BaseCreature currentMonster = turnOrder.remove(0);
-        if (currentMonster.isFriend()) friendChooseAttack();
-        else enemyChooseAttack();
+        if (currentMonster.isFriend()) friendHandleAttack();
+        else enemyHandleAttack();
         generateAttackOrder();
     }
 
@@ -106,7 +105,7 @@ public class BattleHandler {
      */
     private void battleLoop() {
         while (combatIsActive) {
-            chooseAttack();
+            handleAttack();
         }
     }
 
