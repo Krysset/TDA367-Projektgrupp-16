@@ -1,5 +1,5 @@
 package com.g16.feyrune.interfaces;
 
-public interface Observer {
+public interface IObserver {
     public void update();
 }
