@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.g16.feyrune.controller.MapPlayerInputProcessor;
 import com.g16.feyrune.model.Player;
+import com.g16.feyrune.model.TimeService;
 import com.g16.feyrune.model.map.MovementHandler;
 import com.g16.feyrune.model.map.parser.Map;
 import com.g16.feyrune.view.player.PlayerRenderer;
@@ -27,6 +28,7 @@ public class Feyrune extends ApplicationAdapter {
 	MovementHandler movementHandler;
 	@Override
 	public void create () {
+		TimeService.initialize();
 		batch = new SpriteBatch();
 		textureMap = TextureMapParser.parseMapFile("assets/maps/dungeon/dungeon1.tmx");
 		map = Map.getGlobalMap();
