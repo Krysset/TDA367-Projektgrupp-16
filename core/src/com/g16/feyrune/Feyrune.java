@@ -10,7 +10,6 @@ import com.g16.feyrune.model.Player;
 import com.g16.feyrune.model.map.MovementHandler;
 import com.g16.feyrune.model.map.parser.Map;
 import com.g16.feyrune.view.player.PlayerRenderer;
-import com.g16.feyrune.view.textureMap.MapDrawer;
 import com.g16.feyrune.view.textureMap.TextureMap;
 import com.g16.feyrune.view.textureMap.TextureMapParser;
 
@@ -49,7 +48,6 @@ public class Feyrune extends ApplicationAdapter {
 		batch.setProjectionMatrix(camera.combined);
 		ScreenUtils.clear(textureMap.getBackgroundColor());
 		batch.begin();
-//		MapDrawer.drawMap(batch, map, textureMap.getTilesets());
 		textureMap.draw(batch);
 		playerRenderer.draw(batch);
 		batch.end();

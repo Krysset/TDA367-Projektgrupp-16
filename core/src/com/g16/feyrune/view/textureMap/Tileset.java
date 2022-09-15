@@ -19,11 +19,6 @@ public class Tileset {
         textureRegion = TextureRegion.split(texture, tileWidth, tileHeight);
     }
 
-    public void unloadContent() {
-        // TODO: Implement content unload
-        // textureRegion.getTexture().dispose();
-    }
-
     public TextureRegion getTextureRegion(int gid) {
         int newGid = gid-firstgid;
         if (newGid < 0 || newGid >= tileCount) {
@@ -36,20 +31,8 @@ public class Tileset {
         return firstgid;
     }
 
-    public int getTileWidth() {
-        return tileWidth;
-    }
-
-    public int getTileHeight() {
-        return tileHeight;
-    }
-
     public int getTileCount() {
         return tileCount;
-    }
-
-    public int getColumns() {
-        return columns;
     }
 
     public String getName() {

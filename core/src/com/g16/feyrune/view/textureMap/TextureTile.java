@@ -7,15 +7,15 @@ import java.awt.*;
 import java.util.HashMap;
 
 public class TextureTile {
+    // Is an array of gIds because the first index of the array represents the first layer,
+    // the second index represents the second layer, and so on.
     private int[] gIds;
-    private HashMap<Integer, TextureRegion> gIdToTextureMap;
 
-    public TextureTile(int[] gIds, HashMap<Integer, TextureRegion> gIdToTextureMap) {
+    public TextureTile(int[] gIds) {
         this.gIds = gIds;
-        this.gIdToTextureMap = gIdToTextureMap;
     }
 
-    protected void draw(Batch batch, Point coordinates) {
+    protected void draw(Batch batch, Point coordinates, HashMap<Integer, TextureRegion> gIdToTextureMap) {
         for (int gId : gIds) {
             if (gId != 0) {
                 batch.draw(gIdToTextureMap.get(gId), coordinates.x, coordinates.y);

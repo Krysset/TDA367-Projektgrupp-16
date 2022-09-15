@@ -22,25 +22,16 @@ public class TextureMap {
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
         this.gIdToTextureMap = generateGIdToTextureMap(tilesets);
-        this.textureTiles = generateTextureTiles(tileGIdMap);
+        this.textureTiles = generateTextureTilesFromGIdMap(tileGIdMap);
 
     }
     public void draw(SpriteBatch spriteBatch) {
         for(int i = 0; i < textureTiles[0].length; i++) {
             for(int j = 0; j < textureTiles.length; j++) {
-                textureTiles[j][i].draw(spriteBatch, new Point(i * tileWidth, j * tileHeight));
+                textureTiles[j][i].draw(spriteBatch, new Point(i * tileWidth, j * tileHeight), gIdToTextureMap);
             }
         }
     }
-//    public void unloadContent() {
-//        for(Tileset tileset : tilesets) {
-//            tileset.unloadContent();
-//        }
-//    }
-//
-//    public List<Tileset> getTilesets() {
-//        return tilesets;
-//    }
 
     public Color getBackgroundColor() {
         return bgColor;
@@ -49,11 +40,11 @@ public class TextureMap {
     public int getTileSize() {
         return tileWidth;
     }
-    private TextureTile[][] generateTextureTiles(int[][][] tileGIdMap) {
+    private TextureTile[][] generateTextureTilesFromGIdMap(int[][][] tileGIdMap) {
             TextureTile[][] texTiles = new TextureTile[mapHeight][mapWidth];
             for (int i = 0; i < mapHeight; i++) {
                 for (int j = 0; j < mapWidth; j++) {
-                    texTiles[i][j] = new TextureTile(tileGIdMap[i][j], gIdToTextureMap);
+                    texTiles[i][j] = new TextureTile(tileGIdMap[i][j]);
                 }
             }
             return texTiles;

@@ -12,6 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextureMapParser {
+    /**
+     * Parses a texture map from a tmx file.
+     * @param filePath The path to the tmx file.
+     * @return A TextureMap object.
+     */
     public static TextureMap parseMapFile(String filePath) {
         Document doc = Parser.readXMLDocument(filePath);
 
@@ -62,16 +67,28 @@ public class TextureMapParser {
         return doc.getElementsByTagName("map").item(0);
     }
 
+    /**
+     * Generates a list of gIds for every tile in the map, with the first number in the list being
+     * the gId of the first layer on the tile.
+     * @param doc The document to parse.
+     * @param mapSize The size of the map.
+     * @return A list of lists of gIds.
+     */
     private static int[][] generateGIdList(Document doc, Pair<Integer, Integer> mapSize) {
-        // Get all the layer nodes, as collisions could exist on multiple layers.
+        // Get all the layer nodes
         NodeList layerNodes = doc.getElementsByTagName("layer");
 
         int[][] gIdList = new int[mapSize.fst * mapSize.snd][layerNodes.getLength()];
+        // For loops are required for each child node, because shadow nodes do *apparently* exist
+        // and they are not always in the same order.
         for (int i = 0; i < layerNodes.getLength(); i++) {
 
             NodeList childNodes = layerNodes.item(i).getChildNodes();
             for (int j = 0; j < childNodes.getLength(); j++) {
                 Node dataNode = childNodes.item(j);
+
+                // This checks that it is not a shadow node for the last one,
+                // if any previously were a shadow node it would not get here even
                 if (dataNode.getNodeName().equals("data")) {
                     // Parse the CSV data.
                     String[] tileIds = dataNode.getTextContent().split(",");
@@ -89,11 +106,11 @@ public class TextureMapParser {
     }
 
     /**
-     * This method creates a collision map from a collision list, and a map size.
+     * This method converts a list of lists of gIds into a 3D array of gIds.
      *
-     * @param gIdList A list of whether a tile has collision or not.
+     * @param gIdList A list of lists of gIds for every tile.
      * @param mapSize The size of the map.
-     * @return The XML document.
+     * @return A 3D array of gIds.
      */
     private static int[][][] createIdMapFromList(int[][] gIdList, Pair<Integer, Integer> mapSize) {
         int[][][] gIdMap = new int[mapSize.snd][mapSize.fst][gIdList[0].length];
@@ -131,7 +148,7 @@ public class TextureMapParser {
 
             Node imageNode = tilesetNodeList.item(i).getChildNodes().item(1);
             String imgSource = imageNode.getAttributes().getNamedItem("source").getNodeValue();
-            imgSource = relativeToAbsolute(imgSource);
+            imgSource = relativeToAbsoluteAssets(imgSource);
 
             tilesets.add(new Tileset(imgSource, name, firstGid, tileWidth, tileHeight, tileCount, columns));
         }
@@ -143,7 +160,7 @@ public class TextureMapParser {
      * @param relativePath The relative path to convert.
      * @return The absolute path.
      */
-    private static String relativeToAbsolute(String relativePath) {
+    private static String relativeToAbsoluteAssets(String relativePath) {
         return "assets" + relativePath.substring(5);
     }
 }
