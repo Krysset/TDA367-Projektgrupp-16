@@ -9,17 +9,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.g16.feyrune.interfaces.Observer;
+import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.view.components.Button;
 import com.g16.feyrune.view.components.LabelWithBackground;
 
 public class BattleScene extends Scene{
 
-    private Observer[] observers;
+    private IObserver[] IObservers;
 
-    public BattleScene(int viewWidth, int viewHeight, Observer[] observers) {
+    public BattleScene(int viewWidth, int viewHeight, IObserver[] IObservers) {
         super(viewWidth, viewHeight, new Stage(new FitViewport(viewWidth,viewHeight)), new Stage(new FitViewport(viewWidth,viewHeight)), new Stage(new FitViewport(viewWidth,viewHeight)));
-        this.observers = observers;
+        this.IObservers = IObservers;
         createuiStage();
         createobjectStage();
         createterrainStage();
@@ -38,7 +38,7 @@ public class BattleScene extends Scene{
         uiStage.addActor(bu);
 
         for(int i=1; i<6; i++){
-            Button b = new Button(new Vector2(100*i,200),"components/cool.png", observers,"button"+i );
+            Button b = new Button(new Vector2(100*i,200),"components/cool.png", IObservers,"button"+i );
             uiStage.addActor(b);
         }
         LabelWithBackground fl=new LabelWithBackground(new Vector2(600,600),"Hello","components/cool.png",100,100);

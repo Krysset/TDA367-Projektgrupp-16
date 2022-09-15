@@ -19,7 +19,6 @@ public class Scene implements Screen {
     protected boolean paused;
 
     public Scene( int viewWidth, int viewHeight, Stage uiStage, Stage objectStage, Stage terrainStage) {
-
         this.viewWidth = viewWidth;
         this.viewHeight = viewHeight;
         paused = false;

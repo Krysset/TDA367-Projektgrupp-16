@@ -1,29 +1,55 @@
 package com.g16.feyrune.view.textureMap;
 
 import com.badlogic.gdx.graphics.Color;
+import com.g16.feyrune.Util.Pair;
+import com.g16.feyrune.Util.Parser;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TextureMapParser {
+    /**
+     * Parses a texture map from a tmx file.
+     * @param filePath The path to the tmx file.
+     * @return A TextureMap object.
+     */
     public static TextureMap parseMapFile(String filePath) {
-        Document doc = readXMLDocument(filePath);
+        Document doc = Parser.readXMLDocument(filePath);
 
-        Node mapNode = doc.getElementsByTagName("map").item(0);
+        Pair<Integer, Integer> mapSize = parseMapSize(doc);
+        Pair<Integer, Integer> tileSize = parseTileSize(doc);
+
+        List<Tileset> tilesets = generateTilesetList(doc);
+
+        int[][] gIdList = generateGIdList(doc, mapSize);
+        int[][][] gIdMap = createIdMapFromList(gIdList, mapSize);
+
+        Color bgColor = parseMapBackgroundColor(doc);
+
+        return new TextureMap(mapSize.fst, mapSize.snd, tileSize.fst, tileSize.snd, bgColor, tilesets, gIdMap);
+    }
+
+    private static Pair<Integer, Integer> parseMapSize(Document doc) {
+        Node mapNode = getMapNode(doc);
         int width = Integer.parseInt(mapNode.getAttributes().getNamedItem("width").getNodeValue());
         int height = Integer.parseInt(mapNode.getAttributes().getNamedItem("height").getNodeValue());
-        int tileWidth = Integer.parseInt(mapNode.getAttributes().getNamedItem("tilewidth").getNodeValue());
-        int tileHeight = Integer.parseInt(mapNode.getAttributes().getNamedItem("tileheight").getNodeValue());
+        return new Pair<>(width, height);
+    }
+
+    private static Pair<Integer, Integer> parseTileSize(Document doc) {
+        Node mapNode = getMapNode(doc);
+        int width = Integer.parseInt(mapNode.getAttributes().getNamedItem("tilewidth").getNodeValue());
+        int height = Integer.parseInt(mapNode.getAttributes().getNamedItem("tileheight").getNodeValue());
+        return new Pair<>(width, height);
+    }
+
+    private static Color parseMapBackgroundColor(Document doc) {
+        Node mapNode = getMapNode(doc);
+
         Color color;
         Node bgColorAttr = mapNode.getAttributes().getNamedItem("backgroundcolor");
         if (bgColorAttr != null) {
@@ -33,97 +59,108 @@ public class TextureMapParser {
         } else {
             color = Color.CYAN;
         }
-        List<Tileset> tilesets = generateTilesetList(doc);
-        List<TextureLayer> layers = generateLayerList(doc);
-        return new TextureMap(width, height, tileWidth, tileHeight, color, tilesets, layers);
+
+        return color;
     }
 
-    private static List<TextureLayer> generateLayerList(Document doc) {
-        ArrayList<TextureLayer> layers = new ArrayList<>();
-        NodeList layerNodeList = doc.getElementsByTagName("layer");
-        for (int i = 0; i < layerNodeList.getLength(); i++) {
-            Node currentLayerNode = layerNodeList.item(i);
-            // Layer node vars
-            String layerName;
-            int layerWidth, layerHeight;
-            // Get layer node vars
-            NamedNodeMap layerAttributes = currentLayerNode.getAttributes();
-            layerName = layerAttributes.getNamedItem("name").getNodeValue();
-            layerWidth = Integer.parseInt(layerAttributes.getNamedItem("width").getNodeValue());
-            layerHeight = Integer.parseInt(layerAttributes.getNamedItem("height").getNodeValue());
-            // Init layer
-            TextureLayer layer = new TextureLayer(layerName, layerWidth, layerHeight);
+    private static Node getMapNode(Document doc) {
+        return doc.getElementsByTagName("map").item(0);
+    }
 
-            // Get gids and coords of layer
-            NodeList layerChildNode = currentLayerNode.getChildNodes();
-            for (int j = 0; j < layerChildNode.getLength(); j++) {
-                Node dataNode = layerChildNode.item(j);
+    /**
+     * Generates a list of gIds for every tile in the map, with the first number in the list being
+     * the gId of the first layer on the tile.
+     * @param doc The document to parse.
+     * @param mapSize The size of the map.
+     * @return A list of lists of gIds.
+     */
+    private static int[][] generateGIdList(Document doc, Pair<Integer, Integer> mapSize) {
+        // Get all the layer nodes
+        NodeList layerNodes = doc.getElementsByTagName("layer");
 
+        int[][] gIdList = new int[mapSize.fst * mapSize.snd][layerNodes.getLength()];
+        // For loops are required for each child node, because shadow nodes do *apparently* exist
+        // and they are not always in the same order.
+        for (int i = 0; i < layerNodes.getLength(); i++) {
+
+            NodeList childNodes = layerNodes.item(i).getChildNodes();
+            for (int j = 0; j < childNodes.getLength(); j++) {
+                Node dataNode = childNodes.item(j);
+
+                // This checks that it is not a shadow node for the last one,
+                // if any previously were a shadow node it would not get here even
                 if (dataNode.getNodeName().equals("data")) {
                     // Parse the CSV data.
                     String[] tileIds = dataNode.getTextContent().split(",");
-
-                    for (int k = layerWidth * layerHeight - 1; k >= 0; k--) {
+                    for (int k = 0; k < tileIds.length; k++) {
                         // Prevents crashing because of whitespace or newlines when parsing integer.
                         tileIds[k] = tileIds[k].replaceAll("\\s+", "");
                         int tileId = Integer.parseInt(tileIds[k]);
-                        // If gid is zero, there is no texture for the tile
-                        if (tileId != 0) {
-                            Point coordinate = new Point(k%layerWidth, layerHeight - k/layerHeight);
-                            layer.addTile(coordinate, tileId);
-                        }
-
+                        gIdList[k][i] = tileId;
                     }
                 }
             }
-            layers.add(layer);
         }
-        return layers;
+
+        return gIdList;
     }
 
+    /**
+     * This method converts a list of lists of gIds into a 3D array of gIds.
+     *
+     * @param gIdList A list of lists of gIds for every tile.
+     * @param mapSize The size of the map.
+     * @return A 3D array of gIds.
+     */
+    private static int[][][] createIdMapFromList(int[][] gIdList, Pair<Integer, Integer> mapSize) {
+        int[][][] gIdMap = new int[mapSize.snd][mapSize.fst][gIdList[0].length];
+
+        int c = 0;
+        for (int i = mapSize.snd - 1; i >= 0; i--) {
+            for (int j = 0; j < mapSize.fst; j++) {
+                gIdMap[i][j] = gIdList[c];
+                c++;
+            }
+        }
+
+        return gIdMap;
+    }
+
+    /**
+     * Generates a list of tilesets from the given document.
+     *
+     * @param doc The document to generate the tilesets from.
+     * @return A list of tilesets.
+     */
     private static List<Tileset> generateTilesetList(Document doc) {
         ArrayList<Tileset> tilesets = new ArrayList<>();
+
         NodeList tilesetNodeList = doc.getElementsByTagName("tileset");
         for (int i = 0; i < tilesetNodeList.getLength(); i++) {
             NamedNodeMap attributes = tilesetNodeList.item(i).getAttributes();
+
             String name = attributes.getNamedItem("name").getNodeValue();
             int firstGid = Integer.parseInt(attributes.getNamedItem("firstgid").getNodeValue());
             int tileWidth = Integer.parseInt(attributes.getNamedItem("tilewidth").getNodeValue());
             int tileHeight = Integer.parseInt(attributes.getNamedItem("tileheight").getNodeValue());
             int tileCount = Integer.parseInt(attributes.getNamedItem("tilecount").getNodeValue());
             int columns = Integer.parseInt(attributes.getNamedItem("columns").getNodeValue());
+
             Node imageNode = tilesetNodeList.item(i).getChildNodes().item(1);
             String imgSource = imageNode.getAttributes().getNamedItem("source").getNodeValue();
-            // Adjusts source path to not be relative
-            imgSource = "assets" + imgSource.substring(5);
+            imgSource = relativeToAbsoluteAssets(imgSource);
+
             tilesets.add(new Tileset(imgSource, name, firstGid, tileWidth, tileHeight, tileCount, columns));
         }
         return tilesets;
     }
 
-    private static Document readXMLDocument(String filePath) {
-        // Most of the information writing this parser was gotten from this tutorial:
-        // https://mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/
-
-        // Create a new document builder factory.
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-
-        try {
-            // Safely parse XML file.
-            dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-
-            DocumentBuilder db = dbf.newDocumentBuilder();
-
-            Document doc = db.parse(new File(filePath));
-
-            // Normalizes the document tree for better parsing.
-            // More info:
-            // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-            doc.getDocumentElement().normalize();
-
-            return doc;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    /**
+     * Converts a relative path to an absolute path beginning in the assets folder.
+     * @param relativePath The relative path to convert.
+     * @return The absolute path.
+     */
+    private static String relativeToAbsoluteAssets(String relativePath) {
+        return "assets" + relativePath.substring(5);
     }
 }

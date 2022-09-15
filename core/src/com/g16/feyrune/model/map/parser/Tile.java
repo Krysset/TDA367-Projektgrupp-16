@@ -15,7 +15,7 @@ public class Tile {
         return collision;
     }
 
-    public int[] getgIds() {
+    public int[] getGIds() {
         return gIds;
     }
 

@@ -5,10 +5,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.g16.feyrune.interfaces.Observer;
+import com.g16.feyrune.interfaces.IObserver;
 
 public class Button extends ImageButton {
 
@@ -16,16 +15,16 @@ public class Button extends ImageButton {
     private Vector2 position;
     private TextureRegionDrawable td;
     private ImageButton button;
-    private Observer[] observers;
+    private IObserver[] IObservers;
     private String action;
-    public Button(Vector2 position, String image, Observer[] observers, String action){
-        this(new TextureRegionDrawable(new TextureRegion(new Texture(image))), position, image, observers, action);
+    public Button(Vector2 position, String image, IObserver[] IObservers, String action){
+        this(new TextureRegionDrawable(new TextureRegion(new Texture(image))), position, image, IObservers, action);
     }
-    private Button(TextureRegionDrawable d, Vector2 position, String image, Observer[] observers, String action){
+    private Button(TextureRegionDrawable d, Vector2 position, String image, IObserver[] IObservers, String action){
         super(d);
         this.image = image;
         this.position = position;
-        this.observers = observers;
+        this.IObservers = IObservers;
         this.action = action;
         connectButton();
     }
@@ -34,8 +33,8 @@ public class Button extends ImageButton {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Button clicked");
-                for(Observer o : observers){
-                    o.update(action);
+                for(IObserver o : IObservers){
+                    o.update();
                 }
             }
         });
