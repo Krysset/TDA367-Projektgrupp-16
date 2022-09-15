@@ -2,6 +2,7 @@ package com.g16.feyrune.view.components;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -34,7 +35,7 @@ public class LabelWithBackground extends Actor {
 
 
     @Override
-    public void draw(com.badlogic.gdx.graphics.g2d.Batch batch, float parentAlpha) {
+    public void draw(Batch batch, float parentAlpha) {
         image.draw(batch, parentAlpha);
         label.draw(batch,parentAlpha);
     }

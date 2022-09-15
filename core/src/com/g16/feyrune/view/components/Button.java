@@ -35,7 +35,7 @@ public class Button extends ImageButton {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Button clicked");
                 for(Observer o : observers){
-                    o.update(action);
+                    o.update();
                 }
             }
         });
