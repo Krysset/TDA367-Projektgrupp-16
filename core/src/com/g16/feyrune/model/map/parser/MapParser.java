@@ -1,6 +1,7 @@
 package com.g16.feyrune.model.map.parser;
 
 import com.g16.feyrune.Util.Pair;
+import com.g16.feyrune.Util.Parser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -22,7 +23,7 @@ public class MapParser {
      * @return A {@link Map} object containing the parsed map.
      */
     public static Map parseMapFile(String filePath) {
-        Document doc = readXMLDocument(filePath);
+        Document doc = Parser.readXMLDocument(filePath);
 
         Pair<Integer, Integer> mapSize = getMapSize(doc);
 
@@ -188,37 +189,5 @@ public class MapParser {
         int width = Integer.parseInt(mapNode.getAttributes().getNamedItem("width").getNodeValue());
         int height = Integer.parseInt(mapNode.getAttributes().getNamedItem("height").getNodeValue());
         return new Pair<>(width, height);
-    }
-
-    /**
-     * This method reads the XML document.
-     *
-     * @param filePath The file path of the XML document you want to parse.
-     * @return The {@link Document} containing the XML data.
-     */
-    private static Document readXMLDocument(String filePath) {
-        // Most of the information writing this parser was gotten from this tutorial:
-        // https://mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/
-
-        // Create a new document builder factory.
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-
-        try {
-            // Safely parse XML file.
-            dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-
-            DocumentBuilder db = dbf.newDocumentBuilder();
-
-            Document doc = db.parse(new File(filePath));
-
-            // Normalizes the document tree for better parsing.
-            // More info:
-            // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-            doc.getDocumentElement().normalize();
-
-            return doc;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }

@@ -3,7 +3,6 @@ package com.g16.feyrune;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.g16.feyrune.controller.MapPlayerInputProcessor;
@@ -43,12 +42,15 @@ public class Feyrune extends ApplicationAdapter {
 		movementHandler.executeMovement();
 		// Render prep
 		// Tile size is 16, should be be getters though, +8 (half of tile size) to center camera
-		camera.position.set(player.getPosX() * 16 + 8, player.getPosY() * 16 + 8, 0);
+		int tileCameraAdjustment = (textureMap.getTileSize() / 2);
+		camera.position.set(player.getPosX() * textureMap.getTileSize() + tileCameraAdjustment,
+				player.getPosY() * textureMap.getTileSize() + tileCameraAdjustment, 0);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		ScreenUtils.clear(textureMap.getBackgroundColor());
 		batch.begin();
-		MapDrawer.drawMap(batch, map, textureMap.getTilesets());
+//		MapDrawer.drawMap(batch, map, textureMap.getTilesets());
+		textureMap.draw(batch);
 		playerRenderer.draw(batch);
 		batch.end();
 	}
