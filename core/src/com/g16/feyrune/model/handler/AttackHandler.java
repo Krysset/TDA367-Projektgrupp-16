@@ -29,7 +29,7 @@ public class AttackHandler {
      * @return damage dealt to the defender (only calculates, doesn't deal it)
      */
     private static double calculateDamage(BaseCreature attacker, BaseAttack baseAttack){
-        double damage = attacker.getAttack() * baseAttack.getPower();
+        double damage = attacker.getStrength() * baseAttack.getPower();
         return damage;
     }
 
