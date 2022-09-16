@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class MovementHandler {
     private Player player;
-    private long moveFrequency = 250;
+    private long moveFrequency = 500;
     private long lastMoved = 0;
     private int dirX = 0;
     private int dirY = 0;

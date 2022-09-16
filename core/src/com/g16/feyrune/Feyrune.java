@@ -45,7 +45,7 @@ public class Feyrune extends ApplicationAdapter {
 		movementHandler.executeMovement();
 		// Render prep
 		// Tile size is 16, should be be getters though, +8 (half of tile size) to center camera
-		camera.position.set(player.getPosX() * 16 + 8, player.getPosY() * 16 + 8, 0);
+		camera.position.set(playerRenderer.getRenderPos().x * 16 + 8, playerRenderer.getRenderPos().y * 16 + 8, 0);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		ScreenUtils.clear(textureMap.getBackgroundColor());
