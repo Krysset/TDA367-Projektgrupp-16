@@ -27,6 +27,11 @@
     <property name="Collision" type="bool" value="true"/>
    </properties>
   </tile>
+  <tile id="30">
+   <properties>
+    <property name="Collision" type="bool" value="true"/>
+   </properties>
+  </tile>
   <tile id="31">
    <properties>
     <property name="Collision" type="bool" value="true"/>
@@ -162,6 +167,11 @@
     <property name="Collision" type="bool" value="true"/>
    </properties>
   </tile>
+  <tile id="72">
+   <properties>
+    <property name="Collision" type="bool" value="true"/>
+   </properties>
+  </tile>
   <tile id="73">
    <properties>
     <property name="Collision" type="bool" value="true"/>
@@ -229,12 +239,12 @@
   </tile>
   <tile id="90">
    <properties>
-    <property name="Collision" type="bool" value="false"/>
+    <property name="Collision" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="91">
    <properties>
-    <property name="Collision" type="bool" value="false"/>
+    <property name="Collision" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="99">
