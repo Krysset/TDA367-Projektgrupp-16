@@ -47,16 +47,19 @@ public class PlayerRenderer {
         stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
         Animation<TextureRegion> animation = animate(currentAnimation);
         animation.setPlayMode(Animation.PlayMode.LOOP);
+
+        calculateContinuousPosition(); //Calculate the viewed position (playerPos) using Vector2.larp
+        pickAnimation();
+        batch.draw(animation.getKeyFrame(stateTime), playerPos.x * 16, playerPos.y * 16);
+    }
+
+    private void calculateContinuousPosition(){
         if ((playerPos.x != player.getPosX() || playerPos.y != player.getPosY()) || alpha >= 1){
             newPlayerPos = new Vector2(player.getPosX(),player.getPosY());
             alpha = calculateAlpha();
             playerPos.lerp(newPlayerPos, alpha);
         }
         else {alpha = 0; currentTime = 0;}
-        pickAnimation();
-        System.out.println(alpha);
-        batch.draw(animation.getKeyFrame(stateTime), playerPos.x * 16, playerPos.y * 16);
-        //batch.draw(animation.getKeyFrame(stateTime), player.getPosX() * 16, player.getPosY() * 16);
     }
 
     private void pickAnimation(){
