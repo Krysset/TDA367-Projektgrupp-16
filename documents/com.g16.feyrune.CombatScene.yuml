@@ -1,0 +1,7 @@
+// {type:class}
+
+[Combat] -.-> [note:Player Package]
+[Combat] ^-.-> [<<IScene>>]
+[Combat] <>-> [EncounterHandler]
+[Combat] -> [GameLoop]
+[GameLoop] -.-> [ICreature]

@@ -1,0 +1,11 @@
+// {type:class}
+
+[OverworldScene] ++-> [Map | +getGlobalMap():Map; +getTiles:Tiles;]
+[OverworldScene] ^-.- [<<IScene>>]
+[Map] -.-> [MapParser]
+[MapParser] -.-> [Map]
+[Map] ++1-n> [Tile | isColition() : boolean]
+[OverworldScene] -> [note:Player Package {bg:wheat}]
+[OverworldScene] -> [EncounterHandler|+getEncounter(): EncounterObject;]
+[EncounterHandler] -> [CreatureFactory]
+[CreatureFactory] ++-> [ICreature]

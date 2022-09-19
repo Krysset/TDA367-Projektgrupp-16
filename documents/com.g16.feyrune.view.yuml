@@ -1,0 +1,8 @@
+// {type:class}
+[View] -> [OverworldRenderer]
+[View] -> [CombatRenderer]
+
+[note: View package{bg:wheat}]
+[OverworldRenderer] -> [TextureMapParser]
+
+[OverworldRenderer] -> [PlayerRenderer]

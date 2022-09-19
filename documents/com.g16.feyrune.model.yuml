@@ -1,0 +1,6 @@
+// {type:class}
+
+[Model] ++-> [OverworldScene]
+[Model] ++-> [CombatScene]
+
+[Model] -.-> [Player]

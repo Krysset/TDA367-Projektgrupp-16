@@ -1,0 +1,16 @@
+// {type:package}
+[Feyrune] -> [View]
+[Feyrune] -> [Model]
+[Feyrune] -> [Controller]
+[Controller] -> [Model]
+[View] -> [Model]
+
+// Exempel
+// Composition
+// [Exempel]++->[Exempel1]
+// Aggregation
+// [Exempel]<>->[Exempel2]
+// Weak dependency
+// [Exempel]-.->[Exempel3]
+// With text
+// [Exempel]++s-1..2>[Exempel4]
