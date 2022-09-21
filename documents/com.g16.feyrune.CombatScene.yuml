@@ -1,7 +1,8 @@
 // {type:class}
 
-[Combat] -.-> [note:Player Package]
-[Combat] ^-.-> [<<IScene>>]
-[Combat] <>-> [EncounterHandler]
-[Combat] -> [GameLoop]
-[GameLoop] -.-> [ICreature]
+[Combat] -.-> [note:Player Package{bg:wheat}]
+[Combat] ++-> [EnemyCreature|+chooseMove():Move;+takeDamage():void;+isDead():bool;-createNewMoveUsingPower(Move):Move]
+[EnemyCreature] <-.- [note: This handles AI {bg:white}]
+[EnemyCreature] <>-> [<<ICreature>>| +getMoves():List<Move>; +getHp():int; +getSpeed():int; +getPower():int;+takeDamage(int):void]
+[Combat] ++-> [PlayerCreature]
+[PlayerCreature] <>-> [<<ICreature>>]

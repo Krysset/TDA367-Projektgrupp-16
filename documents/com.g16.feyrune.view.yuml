@@ -1,8 +1,5 @@
 // {type:class}
-[View] -> [OverworldRenderer]
-[View] -> [CombatRenderer]
+[View | +update():void; +render():void; -changeScene(ModelState):void] -> [OverworldScene]
+[View] -> [CombatScene]
 
 [note: View package{bg:wheat}]
-[OverworldRenderer] -> [TextureMapParser]
-
-[OverworldRenderer] -> [PlayerRenderer]
