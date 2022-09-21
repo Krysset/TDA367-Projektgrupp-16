@@ -1,9 +1,0 @@
-// {type:class}
-[CombatScene] ++-> [UIRenderer]
-[CombatScene] ++-> [GraphicsRenderer]
-
-[UIRenderer] ++-> [ChoiceRenderer]
-[UIRenderer] ++1-2> [HealthBox]
-[ChoiceRenderer] ++1-4> [ChoiceButton]
-
-[GraphicsRenderer] ++1-n> [CreatureRenderer]

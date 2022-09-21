@@ -1,5 +1,5 @@
 // {type:class}
-[Controller | +update():void;-changeInput(ModelState):void;] -.-^ [<<IObserver>>]
+[Controller | +Controller(Model);+update():void;-changeInput(ModelState):void;] -.-^ [<<IObserver>>]
 [Controller] -.-> [<<enumeration>> ModelState | COMBAT; WORLD]
 [Controller] <>-> [Model]
 [Controller] -> [MapPlayerInputProcessor]

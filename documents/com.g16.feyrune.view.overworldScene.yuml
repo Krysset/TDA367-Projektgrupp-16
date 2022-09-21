@@ -1,0 +1,8 @@
+// {type:class}
+
+[OverworldScene|+OverworldScene(Player)] -> [TextureMap]
+[OverworldScene] -> [PlayerRenderer|+PlayerRenderer(Player)]
+[TextureMap] -.->  [TextureMapParser]
+[TextureMapParser] -.-> [TextureMap]
+[TextureMap] -.-> [Tileset]
+[TextureMap] ++1-n> [TextureTile]
