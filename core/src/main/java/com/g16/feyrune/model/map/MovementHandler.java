@@ -48,7 +48,6 @@ public class MovementHandler {
         if (dirX == 0 && dirY == 0) return;
         if(!hasTimeSinceLastMovedPassed()) return;
         Point dir = adjustDirectionForCollision();
-        System.out.println(":)");
         player.move(dir.x, dir.y);
         //resetDirection();
     }
