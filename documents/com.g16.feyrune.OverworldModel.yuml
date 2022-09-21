@@ -1,0 +1,11 @@
+// {type:class}
+[OverworldModel|+OverworldModel(Player)] -.-> [MovementHandler|+calculateMovement(Pair<int,int>,Pair<int,int>,Map):Pair<int,int>]
+[OverworldModel] ++-> [Map | +getGlobalMap():Map; +getTiles:Tiles;]
+[Map] -.-> [MapParser]
+[MapParser] -.-> [Map]
+[Map] ++1-n> [Tile | isColition():boolean]
+[OverworldModel] -> [EncounterHandler|+getEncounter():Encounter;]
+[EncounterHandler] -.-> [CreatureFactory | +createCreature():ICreature]
+[CreatureFactory] -.-> [<<ICreature>> | +getMoves():List<Move>; +getHp():int; +getSpeed():int; +getPower():int;+takeDamage(int):void]
+[EncounterHandler] -.-> [Encounter | +getEnenyCreature():ICreature]
+[Encounter]<>-> [<<ICreature>>]

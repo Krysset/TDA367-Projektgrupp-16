@@ -1,0 +1,9 @@
+// {type:class}
+
+[Model |-currentModelState:ModelState| +initialize():void;+registerNewObserver(IObserver):void;+getCurrentModelState():ModelState;-update():void;] ++-> [OverworldModel | +isEncounter():bool; +getEncounter():Encounter{bg:blue}]
+[Model] -.-> [Player | +getCoordinates():Pair<int,int>; +move(int,int):void]
+[Model] ++-> [CombatModel | -startCombatLoop(Encounter):void {bg:blue}]
+[Model] -.-> [<<enumeration>> ModelState | COMBAT; WORLD]
+
+[CombatModel] -.-> [Player]
+[OverworldModel] -.-> [Player]

@@ -1,0 +1,10 @@
+// {type:class}
+[Controller | +Controller(Model);+update():void;-changeInput(ModelState):void;] -.-^ [<<IObserver>>]
+[Controller] -.-> [<<enumeration>> ModelState | COMBAT; WORLD]
+[Controller] <>-> [Model]
+[Controller] -> [MapPlayerInputProcessor]
+[Controller] -> [CombatInputProcessor]
+[MapPlayerInputProcessor] -.-^ [<<IInput>> | +setInputProcessor():void]
+[CombatInputProcessor] -.-^ [<<IInput>>]
+[MapPlayerInputProcessor] -.-^ [<<InputProcessor>>]
+[CombatInputProcessor] -.-^ [<<InputProcessor>>]

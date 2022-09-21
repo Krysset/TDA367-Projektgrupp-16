@@ -1,0 +1,7 @@
+// {type:class}
+[View |+View(Model);+update():void;+render():void;-changeScene(ModelState):void] -> [OverworldScene{bg:blue}]
+[View] -> [CombatScene{bg:blue}]
+[View] <>-> [Model {bg:blue}]
+
+
+//[note: View package{bg:wheat}]
