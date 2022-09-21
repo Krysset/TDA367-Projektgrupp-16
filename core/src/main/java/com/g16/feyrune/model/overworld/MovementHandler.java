@@ -1,11 +1,7 @@
-package com.g16.feyrune.model.map;
+package com.g16.feyrune.model.overworld;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.TimeUtils;
-import com.g16.feyrune.Util.Pair;
-import com.g16.feyrune.model.Player;
 import com.g16.feyrune.model.TimeService;
-import com.g16.feyrune.model.map.parser.Map;
+import com.g16.feyrune.model.overworld.map.Map;
 
 import java.awt.*;
 

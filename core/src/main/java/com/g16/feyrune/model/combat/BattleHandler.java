@@ -1,6 +1,7 @@
-package com.g16.feyrune.model.handler;
+package com.g16.feyrune.model.combat;
 
 import com.g16.feyrune.model.action.BaseAttack;
+import com.g16.feyrune.model.combat.AttackHandler;
 import com.g16.feyrune.model.creature.BaseCreature;
 
 import java.util.ArrayList;

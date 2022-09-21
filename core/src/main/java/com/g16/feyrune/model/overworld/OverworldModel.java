@@ -1,7 +1,6 @@
 package com.g16.feyrune.model.overworld;
 
 import com.g16.feyrune.model.Player;
-import com.g16.feyrune.model.map.MovementHandler;
 
 public class OverworldModel {
     private Player player;

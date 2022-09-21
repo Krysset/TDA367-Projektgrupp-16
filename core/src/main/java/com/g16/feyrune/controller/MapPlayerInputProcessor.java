@@ -2,7 +2,7 @@ package com.g16.feyrune.controller;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.g16.feyrune.model.map.MovementHandler;
+import com.g16.feyrune.model.overworld.MovementHandler;
 
 public class MapPlayerInputProcessor implements InputProcessor {
     private MovementHandler movementHandler;

@@ -39,7 +39,7 @@ public class PlayerRenderer {
         idleLeftAnimation = AnimationUtils.getAnimationFrames(texture, 8, 6, 4, 4);
         currentAnimation = walkRightAnimation;
         this.player = player;
-        playerPos = new Vector2(player.getPosX(), player.getPosY());
+        playerPos = new Vector2(player.getCoordinates().x, player.getCoordinates().y);
         newPlayerPos = playerPos;
     }
 
@@ -54,8 +54,8 @@ public class PlayerRenderer {
     }
 
     private void calculateContinuousPosition(){
-        if ((playerPos.x != player.getPosX() || playerPos.y != player.getPosY()) || alpha >= 1){
-            newPlayerPos = new Vector2(player.getPosX(),player.getPosY());
+        if ((playerPos.x != player.getCoordinates().x || playerPos.y != player.getCoordinates().y) || alpha >= 1){
+            newPlayerPos = new Vector2(player.getCoordinates().x,player.getCoordinates().y);
             alpha = calculateAlpha();
             playerPos.lerp(newPlayerPos, alpha);
         }
