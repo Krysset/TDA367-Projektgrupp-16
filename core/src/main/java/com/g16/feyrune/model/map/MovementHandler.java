@@ -10,15 +10,10 @@ import com.g16.feyrune.model.map.parser.Map;
 import java.awt.*;
 
 public class MovementHandler {
-    private Player player;
     private long moveFrequency = 500;
     private long lastMoved = 0;
     private int dirX = 0;
     private int dirY = 0;
-
-    public MovementHandler(Player player) {
-        this.player = player;
-    }
 
     public void decreaseXDirection(){
         dirX -= 1;
@@ -44,32 +39,31 @@ public class MovementHandler {
     /**
      * Executes a movement update, based on the current direction.
      */
-    public void executeMovement() {
-        if (dirX == 0 && dirY == 0) return;
-        if(!hasTimeSinceLastMovedPassed()) return;
-        Point dir = adjustDirectionForCollision();
-        player.move(dir.x, dir.y);
-        //resetDirection();
+    public Point calculateMovement(Point coordinates, Map map) {
+        if (dirX == 0 && dirY == 0) return coordinates;
+        if(!hasTimeSinceLastMovedPassed()) return coordinates;
+        Point dir = adjustDirectionForCollision(coordinates, map);
+        return dir;
     }
 
     /**
      * Adjust the x and y direction values to avoid collision.
      */
-    private Point adjustDirectionForCollision() {
-        int playerX = player.getPosX();
-        int playerY = player.getPosY();
+    private Point adjustDirectionForCollision(Point coordinates, Map map) {
+        int playerX = coordinates.x;
+        int playerY = coordinates.y;
         Point dir = new Point(dirX,dirY);
 
-        if (isNewPositionCollision(playerX + dir.x, playerY + dir.y)) {
+        if (isNewPositionCollision(playerX + dir.x, playerY + dir.y, map)) {
             dir.x = 0;
             dir.y = 0;
             return dir;
         }
 
-        if (isNewPositionCollision(playerX + dir.x, playerY)) {
+        if (isNewPositionCollision(playerX + dir.x, playerY, map)) {
             dir.x = 0;
         }
-        if (isNewPositionCollision(playerX, playerY + dir.y)) {
+        if (isNewPositionCollision(playerX, playerY + dir.y, map)) {
             dir.y = 0;
         }
         return dir;
@@ -89,7 +83,7 @@ public class MovementHandler {
         dirY = 0;
     }
 
-    private boolean isNewPositionCollision(int x, int y) {
-        return Map.getGlobalMap().getTile(x, y).isCollision();
+    private boolean isNewPositionCollision(int x, int y, Map map) {
+        return map.getTile(x, y).isCollision();
     }
 }
