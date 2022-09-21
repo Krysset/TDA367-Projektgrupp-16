@@ -31,8 +31,19 @@ public class MapPlayerInputProcessor implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
-        return false;
-    }
+        if (keycode == Input.Keys.A){
+            movementHandler.increaseXDirection();
+        }
+        if (keycode == Input.Keys.D){
+            movementHandler.decreaseXDirection();
+        }
+        if (keycode == Input.Keys.W){
+            movementHandler.decreaseYDirection();
+        }
+        if (keycode == Input.Keys.S){
+            movementHandler.increaseYDirection();
+        }
+        return true;    }
 
     @Override
     public boolean keyTyped(char character) {
