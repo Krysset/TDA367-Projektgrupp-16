@@ -1,4 +1,4 @@
-package com.g16.feyrune.model;
+package com.g16.feyrune.model.player;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.g16.feyrune.interfaces.ICreature;

@@ -4,7 +4,7 @@ import com.g16.feyrune.interfaces.ICombatAction;
 import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.model.action.BaseAttack;
-import com.g16.feyrune.model.combat.actions.IMove;
+import com.g16.feyrune.interfaces.IMove;
 
 import java.util.List;
 
@@ -28,33 +28,33 @@ public class EnemyCreature implements ICombatCreature {
         creature.takeDamage(damage);
     }
 
-    public boolean isDead() {
-        return creature.getHP() <= 0;
-    }
-
     // Should be renamed to something more appropriate
     private IMove createNewMoveUsingPower(IMove move) {
         return new BaseAttack(move.getAttackAccuracy(), move.getAttackPower() + creature.getPower(), move.getAttackName());
     }
 
-
     @Override
     public List<IMove> getMoves() {
-        return null;
+        return creature.getMoves();
     }
 
     @Override
     public double getHP() {
-        return 0;
+        return creature.getHP();
     }
 
     @Override
     public int getSpeed() {
-        return 0;
+        return creature.getSpeed();
     }
 
     @Override
     public int getPower() {
-        return 0;
+        return creature.getPower();
+    }
+
+    @Override
+    public boolean isDead() {
+        return creature.isDead();
     }
 }

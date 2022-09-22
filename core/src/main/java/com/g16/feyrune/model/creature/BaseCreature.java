@@ -1,10 +1,16 @@
 package com.g16.feyrune.model.creature;
 
+import com.g16.feyrune.interfaces.ICreature;
+import com.g16.feyrune.interfaces.IMove;
 import com.g16.feyrune.model.action.BaseAttack;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Math.min;
 
-public class BaseCreature {
+public class BaseCreature implements ICreature {
     //Stats variables
     private final double maxHealth;
     private double health;
@@ -27,18 +33,6 @@ public class BaseCreature {
     private void die(){
 
     }
-    public BaseAttack[] getAttacks(){
-        return baseAttacks;
-    }
-    public double getStrength(){
-        return strength;
-    }
-
-    public int getEvasion(){
-        return evasion;
-    }
-
-    public double getSpeed() {return speed; }
 
     private void setHealth(double newHealth){
         if (newHealth <= 0.0d){
@@ -46,17 +40,45 @@ public class BaseCreature {
         }
         health = min(newHealth, maxHealth);
     }
-    public void setFriend(boolean friend){
-        this.isFriend = friend;
-    }
-    public boolean isFriend(){
-        return isFriend;
-    }
 
     public void damageMonster(double damage){
         setHealth(health-damage);
     }
     public void healMonster(double heal){
         setHealth(heal+health);
+    }
+
+    @Override
+    public List<IMove> getMoves() {
+        ArrayList<IMove> moves = new ArrayList<>();
+        IMove baseAttack = new BaseAttack(speed,power,"TEMP"); //TODO: THIS IS TEMPORARY, PLZ FIX LATER :)
+        moves.add(baseAttack);
+        return moves;
+    }
+
+    @Override
+    public double getHP() {
+        return health;
+    }
+
+    @Override
+    public int getPower() {
+        return power;
+    }
+
+    @Override
+    public void takeDamage(int damage) {
+        int newHealth = Math.max(0, health - damage);
+        health = newHealth;
+    }
+
+    @Override
+    public boolean isDead() {
+        return health <= 0;
+    }
+
+    @Override
+    public int getSpeed() {
+        return speed;
     }
 }

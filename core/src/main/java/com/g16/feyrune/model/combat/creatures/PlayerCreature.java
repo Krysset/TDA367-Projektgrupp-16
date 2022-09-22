@@ -2,10 +2,9 @@ package com.g16.feyrune.model.combat.creatures;
 
 import com.g16.feyrune.interfaces.ICombatAction;
 import com.g16.feyrune.interfaces.ICombatCreature;
-import com.g16.feyrune.interfaces.ICombatSelector;
 import com.g16.feyrune.interfaces.ICreature;
-import com.g16.feyrune.model.action.BaseAttack;
-import com.g16.feyrune.model.combat.actions.IMove;
+import com.g16.feyrune.interfaces.IMove;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
@@ -18,22 +17,23 @@ public class PlayerCreature implements ICombatCreature {
 
     @Override
     public List<IMove> getMoves() {
-        return null;
+        return creature.getMoves();
     }
 
 
     @Override
     public double getHP() {
-        return 0;
+        return creature.getHP();
     }
 
+    @Override
     public int getSpeed() {
         return creature.getSpeed();
     }
 
     @Override
     public ICombatAction selectAction(ICombatCreature actor, ICombatCreature target) {
-        return null;
+        throw new NotImplementedException(); //TODO: NOT IMPLEMENTED
     }
 
     @Override

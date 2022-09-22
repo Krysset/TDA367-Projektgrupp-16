@@ -1,6 +1,6 @@
 package com.g16.feyrune.model.action;
 
-import com.g16.feyrune.model.combat.actions.IMove;
+import com.g16.feyrune.interfaces.IMove;
 
 import static java.lang.Math.max;
 

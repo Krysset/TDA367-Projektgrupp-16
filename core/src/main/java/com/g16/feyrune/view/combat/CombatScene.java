@@ -1,7 +1,7 @@
 package com.g16.feyrune.view.combat;
 
 import com.g16.feyrune.interfaces.IScene;
-import com.g16.feyrune.model.Player;
+import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 
 public class CombatScene implements IScene {

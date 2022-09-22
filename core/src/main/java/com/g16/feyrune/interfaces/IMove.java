@@ -1,4 +1,4 @@
-package com.g16.feyrune.model.combat.actions;
+package com.g16.feyrune.interfaces;
 
 public interface IMove {
     int getAttackPower();

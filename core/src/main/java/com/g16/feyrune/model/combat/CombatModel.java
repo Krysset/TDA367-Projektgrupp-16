@@ -2,7 +2,7 @@ package com.g16.feyrune.model.combat;
 
 import com.g16.feyrune.interfaces.ICombatAction;
 import com.g16.feyrune.interfaces.ICombatCreature;
-import com.g16.feyrune.model.Player;
+import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.combat.creatures.EnemyCreature;
 import com.g16.feyrune.model.combat.creatures.PlayerCreature;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
@@ -38,8 +38,16 @@ public class CombatModel {
             turnOrder.remove(0);
             ICombatCreature target = choiceTarget(actor); // TODO: Replace with choose target
             ICombatAction action = actor.selectAction(actor, target);
-            action.execute(actor, target);
+            boolean actionEndedCombat = action.execute(actor, target);
             generateAttackOrder();
+            if (actionEndedCombat) {
+                break;
+            }
+
+
+            if (combatCreatures.size() == 1) {
+                break;
+            }
         }
     }
 
@@ -53,6 +61,14 @@ public class CombatModel {
             target = combatCreatures.get(i + 1);
         }
         return target;
+    }
+
+    private void removeDeadCreatures() {
+        for (int i = 0; i < combatCreatures.size(); i++) {
+            if (combatCreatures.get(i).isDead()) {
+                combatCreatures.remove(i);
+            }
+        }
     }
 
 

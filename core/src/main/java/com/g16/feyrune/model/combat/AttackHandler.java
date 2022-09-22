@@ -1,7 +1,7 @@
 package com.g16.feyrune.model.combat;
 
 import com.g16.feyrune.interfaces.ICombatCreature;
-import com.g16.feyrune.model.combat.actions.IMove;
+import com.g16.feyrune.interfaces.IMove;
 
 import com.g16.feyrune.Util.Random;
 

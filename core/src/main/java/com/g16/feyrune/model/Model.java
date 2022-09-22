@@ -5,6 +5,7 @@ import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.combat.CombatModel;
 import com.g16.feyrune.model.overworld.MovementHandler;
 import com.g16.feyrune.model.overworld.OverworldModel;
+import com.g16.feyrune.model.player.Player;
 
 import java.awt.*;
 import java.util.ArrayList;

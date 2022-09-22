@@ -1,6 +1,6 @@
 package com.g16.feyrune.model.overworld;
 
-import com.g16.feyrune.model.Player;
+import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.overworld.map.Map;
 
 import java.awt.*;

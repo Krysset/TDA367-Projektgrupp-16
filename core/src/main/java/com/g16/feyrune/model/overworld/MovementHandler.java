@@ -74,11 +74,6 @@ public class MovementHandler {
         return false;
     }
 
-    private void resetDirection() {
-        dirX = 0;
-        dirY = 0;
-    }
-
     private boolean isNewPositionCollision(int x, int y, Map map) {
         return map.getTile(x, y).isCollision();
     }
