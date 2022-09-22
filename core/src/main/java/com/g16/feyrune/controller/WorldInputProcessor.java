@@ -2,15 +2,20 @@ package com.g16.feyrune.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
+import com.g16.feyrune.interfaces.IInput;
 import com.g16.feyrune.model.overworld.MovementHandler;
 
-public class MapPlayerInputProcessor implements InputProcessor {
+public class WorldInputProcessor implements IInput {
     private MovementHandler movementHandler;
 
-    public MapPlayerInputProcessor(MovementHandler movementHandler) {
+    public WorldInputProcessor(MovementHandler movementHandler) {
         super();
         this.movementHandler = movementHandler;
+    }
+
+    @Override
+    public void setAsInputProcessor(){
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override

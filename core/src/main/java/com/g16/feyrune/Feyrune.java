@@ -2,7 +2,6 @@ package com.g16.feyrune;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.g16.feyrune.controller.Controller;
 import com.g16.feyrune.controller.WorldInputProcessor;
