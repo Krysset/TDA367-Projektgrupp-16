@@ -1,62 +1,64 @@
 package com.g16.feyrune.model.creature;
 
-import com.g16.feyrune.model.action.BaseAttack;
+import com.g16.feyrune.interfaces.ICreature;
+import com.g16.feyrune.model.combat.actions.IMove;
 
-import static java.lang.Math.min;
+import java.util.ArrayList;
+import java.util.List;
 
-public class BaseCreature {
-    //Stats variables
+public class BaseCreature implements ICreature {
     private final double maxHealth;
     private double health;
-    private int strength;
+    private int power;
     private int speed;
-    private int evasion;
-    private BaseAttack[] baseAttacks;
-    private boolean isFriend;
+    private ArrayList<IMove> moves;
+    private boolean dead = false;
 
-    public BaseCreature(double health, int strength, int speed, int evasion, BaseAttack[] baseAttacks){
+    public BaseCreature(double health, int power, int speed, ArrayList<IMove> moves){
         this.maxHealth = health;
-        this.strength = strength;
-        this.evasion = evasion;
+        this.power = power;
         this.speed = speed;
         this.health = this.maxHealth;
-        this.baseAttacks = baseAttacks;
-        this.isFriend = false;
+        this.moves = moves;
     }
 
-    private void die(){
-
+    @Override
+    public int getSpeed() {
+        return speed;
     }
-    public BaseAttack[] getAttacks(){
-        return baseAttacks;
-    }
-    public double getStrength(){
-        return strength;
-    }
-
-    public int getEvasion(){
-        return evasion;
+    @Override
+    public List<IMove> getMoves() {
+        return moves;
     }
 
-    public double getSpeed() {return speed; }
+    @Override
+    public double getHP() {
+        return health;
+    }
 
-    private void setHealth(double newHealth){
-        if (newHealth <= 0.0d){
+    @Override
+    public int getPower() {
+        return power;
+    }
+
+    @Override
+    public void takeDamage(int damage) {
+        if (damage < 0) {
+            throw new IllegalArgumentException("Damage cannot be negative");
+        }
+        double newHealth = Math.max(health - damage, 0);
+        if (newHealth == 0.0){
             die();
         }
-        health = min(newHealth, maxHealth);
-    }
-    public void setFriend(boolean friend){
-        this.isFriend = friend;
-    }
-    public boolean isFriend(){
-        return isFriend;
+        health = newHealth;
     }
 
-    public void damageMonster(double damage){
-        setHealth(health-damage);
+    @Override
+    public boolean isDead() {
+        return dead;
     }
-    public void healMonster(double heal){
-        setHealth(heal+health);
+
+    private void die() {
+        this.dead = true;
     }
 }
