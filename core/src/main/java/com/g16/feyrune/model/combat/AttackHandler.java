@@ -1,35 +1,33 @@
 package com.g16.feyrune.model.combat;
 
-import com.g16.feyrune.model.action.BaseAttack;
-import com.g16.feyrune.model.creature.BaseCreature;
+import com.g16.feyrune.interfaces.ICombatCreature;
+import com.g16.feyrune.model.combat.actions.IMove;
 
-import java.util.Random;
+import com.g16.feyrune.Util.Random;
 
 public class AttackHandler {
-
-    private static final Random randomCheck=new Random();
 
     /**
      * Used to make a monster attack another monster
      * @param attacker The monster performing the attack
      * @param defender The monster trying to evade the attack
-     * @param baseAttack The specific attack being used
+     * @param attack The specific attack being used
      */
-    public static void handleAttack(BaseCreature attacker, BaseCreature defender, BaseAttack baseAttack){
-        if (evasiveManoeuvre(defender, baseAttack)){
-            double damage = calculateDamage(attacker, baseAttack);
-            defender.damageMonster(damage);
+    public static void handleAttack(ICombatCreature attacker, ICombatCreature defender, IMove attack){
+        if (evasiveManoeuvre(defender, attack)){
+            int damage = calculateDamage(attacker, attack);
+            defender.takeDamage(damage);
         }
     }
 
     /**
      * Calculates the damage done by an attack
      * @param attacker: creature containing the attack used in the action
-     * @param baseAttack: the attack action used against the defender
+     * @param attack: the attack action used against the defender
      * @return damage dealt to the defender (only calculates, doesn't deal it)
      */
-    private static double calculateDamage(BaseCreature attacker, BaseAttack baseAttack){
-        double damage = attacker.getStrength() * baseAttack.getPower();
+    private static int calculateDamage(ICombatCreature attacker, IMove attack){
+        int damage = attacker.getPower() * attack.getAttackPower();
         return damage;
     }
 
@@ -39,9 +37,9 @@ public class AttackHandler {
      * @param baseAttack: attack to check accuracy on.
      * @return if attack is successful: true, if it misses false
      */
-    private static boolean evasiveManoeuvre(BaseCreature defender, BaseAttack baseAttack){
-        boolean evasion = defender.getEvasion()<randomCheck.nextInt(100);
-        boolean accuracy = baseAttack.getAccuracy()>randomCheck.nextInt(100);
+    private static boolean evasiveManoeuvre(ICombatCreature defender, IMove baseAttack){
+        boolean evasion = defender.getSpeed()< Random.random.nextInt(100);
+        boolean accuracy = baseAttack.getAttackAccuracy()>Random.random.nextInt(100);
         boolean hit= evasion && accuracy;
         return hit;
     }
