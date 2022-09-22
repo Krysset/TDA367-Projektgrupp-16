@@ -9,14 +9,19 @@ import java.util.ArrayList;
 public class Model {
     private ModelState currentModelState;
     private ArrayList<IObserver> observers;
+    private Player player;
 
     public Model() {
         currentModelState = ModelState.WORLD;
-        Player player = new Player("Player", new Point(0, 0)); // Should probably have a method to get the initial player position from the map
+        player = new Player("Player", new Point(0, 0)); // Should probably have a method to get the initial player position from the map
     }
 
     public ModelState getCurrentModelState() {
         return currentModelState;
+    }
+
+    public Player getPlayer(){
+        return player;
     }
 
     public void registerNewObserver(IObserver observer) {
