@@ -31,9 +31,6 @@ public class Feyrune extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		// Update Game
-		// Render prep
-		// Tile size is 16, should be be getters though, +8 (half of tile size) to center camera
 		model.update();
 		view.render();
 	}
