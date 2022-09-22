@@ -1,4 +1,5 @@
 // {type:class}
+// {generate:true}
 
 [OverworldScene|+OverworldScene(Player)] -> [TextureMap]
 [OverworldScene] -> [PlayerRenderer|+PlayerRenderer(Player)]

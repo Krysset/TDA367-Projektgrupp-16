@@ -1,4 +1,5 @@
 // {type:class}
+// {generate:true}
 
 [CombatModel|+CombatModel(Player,Encounter);+combatLoop():void] ++-> [EnemyCreature|+chooseMove():Move;+takeDamage():void;+isDead():bool;-createNewMoveUsingPower(Move):Move]
 [EnemyCreature] <-.- [note: This handles AI {bg:white}]

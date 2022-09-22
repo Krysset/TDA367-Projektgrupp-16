@@ -1,4 +1,5 @@
 // {type:class}
+// {generate:true}
 
 [Model |-currentModelState:ModelState| +initialize():void;+registerNewObserver(IObserver):void;+getCurrentModelState():ModelState;-update():void;] ++-> [OverworldModel | +isEncounter():bool; +getEncounter():Encounter{bg:blue}]
 [Model] -.-> [Player | +getCoordinates():Pair<int,int>; +move(int,int):void]
