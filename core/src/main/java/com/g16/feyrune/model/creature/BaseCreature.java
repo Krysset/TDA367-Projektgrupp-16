@@ -14,15 +14,15 @@ public class BaseCreature implements ICreature {
     //Stats variables
     private final double maxHealth;
     private double health;
-    private int strength;
+    private int power;
     private int speed;
     private int evasion;
     private BaseAttack[] baseAttacks;
     private boolean isFriend;
 
-    public BaseCreature(double health, int strength, int speed, int evasion, BaseAttack[] baseAttacks){
+    public BaseCreature(double health, int power, int speed, int evasion, BaseAttack[] baseAttacks){
         this.maxHealth = health;
-        this.strength = strength;
+        this.power = power;
         this.evasion = evasion;
         this.speed = speed;
         this.health = this.maxHealth;
@@ -51,7 +51,7 @@ public class BaseCreature implements ICreature {
     @Override
     public List<IMove> getMoves() {
         ArrayList<IMove> moves = new ArrayList<>();
-        IMove baseAttack = new BaseAttack(speed,power,"TEMP"); //TODO: THIS IS TEMPORARY, PLZ FIX LATER :)
+        IMove baseAttack = new BaseAttack(speed, power,"TEMP"); //TODO: THIS IS TEMPORARY, PLZ FIX LATER :)
         moves.add(baseAttack);
         return moves;
     }
@@ -68,8 +68,7 @@ public class BaseCreature implements ICreature {
 
     @Override
     public void takeDamage(int damage) {
-        int newHealth = Math.max(0, health - damage);
-        health = newHealth;
+        health = Math.max(0, health - damage);
     }
 
     @Override
