@@ -36,8 +36,8 @@ public class MovementHandler {
      * Executes a movement update, based on the current direction.
      */
     public Point calculateMovement(Point coordinates, Map map) {
-        if (dirX == 0 && dirY == 0) return coordinates;
-        if(!hasTimeSinceLastMovedPassed()) return coordinates;
+        if (dirX == 0 && dirY == 0) return new Point(0,0);
+        if(!hasTimeSinceLastMovedPassed()) return new Point(0,0);
         Point dir = adjustDirectionForCollision(coordinates, map);
         return dir;
     }

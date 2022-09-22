@@ -1,28 +1,40 @@
 package com.g16.feyrune.view;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.g16.feyrune.enums.ModelState;
+import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.interfaces.IScene;
 import com.g16.feyrune.model.Model;
+import com.g16.feyrune.view.combat.CombatScene;
 import com.g16.feyrune.view.overworld.OverworldScene;
 
-public class View {
+import java.util.ArrayList;
+
+public class View implements IObserver {
     private Model model;
-    private ModelState currentState;
     private IScene currentScene;
     private OverworldScene overworldScene;
+    private CombatScene combatScene;
     private SpriteBatch batch;
     private Camera camera;
 
-    public void View(Model model){
+    public View(Model model){
         this.model = model;
-        currentState = model.getCurrentModelState();
+        this.model.registerNewObserver(this);
+        changeScene(model.getCurrentModelState());
+        camera = new OrthographicCamera(180 ,90);
+        batch = new SpriteBatch();
         overworldScene = new OverworldScene(model.getPlayer(),batch,camera);
+        //combatScene = new CombatScene(model.);
+        update(); //TODO: this is also wrong and bad :)
     }
 
     public void update(){
-
+        ModelState currentModelState = model.getCurrentModelState();
+        changeScene(currentModelState);
+        currentScene.update();
     }
 
     public void render(){
