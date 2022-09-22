@@ -1,7 +1,16 @@
 // {type:class}
 
-[Combat|+Combat(Player,Encounter);+combatLoop():void] ++-> [EnemyCreature|+chooseMove():Move;+takeDamage():void;+isDead():bool;-createNewMoveUsingPower(Move):Move]
+[CombatModel|+CombatModel(Player,Encounter);+combatLoop():void] ++-> [EnemyCreature|+chooseMove():Move;+takeDamage():void;+isDead():bool;-createNewMoveUsingPower(Move):Move]
 [EnemyCreature] <-.- [note: This handles AI {bg:white}]
 [EnemyCreature] <>-> [<<ICreature>>| +getMoves():List<Move>; +getHp():int; +getSpeed():int; +getPower():int;+takeDamage(int):void]
-[Combat] ++-> [PlayerCreature]
+[CombatModel] ++-> [PlayerCreature]
 [PlayerCreature] <>-> [<<ICreature>>]
+[<<ICreature>>] <>-> [<<IMove>>]
+[<<ICombatCreature>>] -.-^ [<<ICreature>>]
+[EnemyCreature] -> [<<ICombatAction>>]
+[FleeAction] -.-^ [<<ICombatAction>>]
+[AttackAcktion] -.-^ [<<ICombatAction>>]
+[AttackAcktion] -> [AttackHandler]
+[PlayerCreature] -.-^ [<<ICombatCreature>>]
+[EnemyCreature] -.-^ [<<ICombatCreature>>]
+[<<ICombatCreature>>] -.-> [<<ICombatAction>>]
