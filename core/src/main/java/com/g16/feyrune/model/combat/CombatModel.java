@@ -25,8 +25,8 @@ public class CombatModel {
     }
 
     public void fillCombatCreatureList(Player player, Encounter encounter) {
-        combatCreatures.add(new PlayerCreature(encounter.getEnemyCreature())); // FIX: Should be player.getMonster()
-        combatCreatures.add(new EnemyCreature(encounter.getEnemyCreature()));
+        combatCreatures.add(new PlayerCreature(encounter.getEnemyCreature()[0])); // FIX: Should be player.getMonster()
+        combatCreatures.add(new EnemyCreature(encounter.getEnemyCreature()[0])); //TODO: SHOUD NOT BE INDEXED LIKE THIS
         for (int i = 0; i < combatCreatures.size(); i++) {
             savedCombatCreatureSpeed.add(combatCreatures.get(i).getSpeed());
         }
@@ -38,7 +38,7 @@ public class CombatModel {
             turnOrder.remove(0);
             ICombatCreature target = choiceTarget(actor); // TODO: Replace with choose target
             ICombatAction action = actor.selectAction(actor, target);
-            boolean actionEndedCombat = action.execute(actor, target);
+            boolean actionEndedCombat = action.executeMove(actor, target);
             generateAttackOrder();
             if (actionEndedCombat) {
                 break;

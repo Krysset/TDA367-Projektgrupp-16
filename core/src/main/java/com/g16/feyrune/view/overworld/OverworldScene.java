@@ -33,8 +33,10 @@ public class OverworldScene implements IScene, IObserver {
 
     @Override
     public void render(){
-        // Tile size is 16, should be be getters though, +8 (half of tile size) to center camera
-        camera.position.set(pr.getRenderPos().x * 16 + 8, pr.getRenderPos().y * 16 + 8, 0);
+        camera.position.set(
+                pr.getRenderPos().x * textureMap.getTileSize() + textureMap.getTileSize() / 2,
+                pr.getRenderPos().y * textureMap.getTileSize() + textureMap.getTileSize() / 2,
+                0);
         // Tells camera to recalculate what it sees
         camera.update();
         batch.setProjectionMatrix(camera.combined);

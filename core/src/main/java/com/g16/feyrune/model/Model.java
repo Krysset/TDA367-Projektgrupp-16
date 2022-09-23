@@ -11,24 +11,25 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Model {
-    private ModelState currentModelState;
+    private StateHandler stateHandler;
     private ArrayList<IObserver> observers;
     private Player player;
     private OverworldModel overworldModel;
     private CombatModel combatModel;
 
     public Model() {
-        currentModelState = ModelState.WORLD;
-        player = new Player("Player", new Point(25, 10)); //TODO: Should probably have a method to get the initial player position from the map
+        player = new Player("Player", new Point(20, 5)); //TODO: Should probably have a method to get the initial player position from the map
         this.overworldModel = new OverworldModel(player);
         this.observers = new ArrayList<>();
+        stateHandler = new StateHandler(ModelState.WORLD);
     }
 
-    public void update(){
+    public void update() {
         overworldModel.update();
     }
-    public ModelState getCurrentModelState() {
-        return currentModelState;
+
+    public StateHandler getStateHandler() {
+        return stateHandler;
     }
 
     public Player getPlayer(){
@@ -47,5 +48,12 @@ public class Model {
 
     public MovementHandler getMovementHandler() {
         return overworldModel.getMovementHandler();
+    }
+
+    public void changeState(ModelState newState){
+        stateHandler.changeModelState(newState);
+    }
+    public ModelState getCurrentModelState(){
+        return stateHandler.getModelState();
     }
 }

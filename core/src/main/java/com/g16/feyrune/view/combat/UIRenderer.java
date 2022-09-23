@@ -9,14 +9,12 @@ public class UIRenderer { //TODO: NOT IMPLEMENTED graphics for this object
     public UIRenderer(Encounter encounter, Player player){
         choiceRenderer = new ChoiceRenderer();
 
-        eHealthBar = new HealthBar((int)encounter.getEnemyCreature().getHP());
+        eHealthBar = new HealthBar((int)encounter.getEnemyCreature()[0].getHP());
         fHealthBar = new HealthBar((int)player.getCreature().getHP());
     }
 
     public void render(){
         eHealthBar.render();
         fHealthBar.render();
-
     }
-
 }

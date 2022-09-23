@@ -23,11 +23,13 @@ public class View implements IObserver {
     public View(Model model){
         this.model = model;
         this.model.registerNewObserver(this);
-        changeScene(model.getCurrentModelState());
+
+
         camera = new OrthographicCamera(180 ,90);
         batch = new SpriteBatch();
         overworldScene = new OverworldScene(model.getPlayer(),batch,camera);
-        //combatScene = new CombatScene(model.);
+        combatScene = new CombatScene(camera, batch);
+
         update(); //TODO: this is also wrong and bad :)
     }
 
@@ -50,6 +52,16 @@ public class View implements IObserver {
                 currentScene = combatScene;
                 break;
         }
+    }
+
+    public CombatScene getCombatScene(){
+        return combatScene;
+    }
+
+    private void setOverWorldAsScene(){
+    }
+    private void setCombatAsScene(){
+        //combatScene.renderNewCombat(); //TODO: THIS IS WHERE WE START A NEW COMBAT
     }
 }
 

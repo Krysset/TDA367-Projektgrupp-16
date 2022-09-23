@@ -8,7 +8,7 @@ import com.g16.feyrune.model.combat.AttackHandler;
 public class attackAction implements ICombatAction {
 
     @Override
-    public boolean execute(ICombatCreature actor, ICombatCreature target) {
+    public boolean executeMove(ICombatCreature actor, ICombatCreature target) {
         int moveSelection = Random.random.nextInt(actor.getMoves().size());
         AttackHandler.handleAttack(actor,target,actor.getMoves().get(moveSelection));
         return false;
