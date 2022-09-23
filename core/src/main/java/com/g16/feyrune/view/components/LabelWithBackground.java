@@ -12,12 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 public class LabelWithBackground extends Actor {
-
     private String imageString;
     private Image image;
     private LabelStyle style;
     private Label label;
-
     private String text;
     public LabelWithBackground(Vector2 position, String text, String backgroundImage, int width, int height) {
         this.imageString = backgroundImage;
@@ -30,9 +28,7 @@ public class LabelWithBackground extends Actor {
         image.setSize(width,height);
         label.setPosition(position.x,position.y);
         label.setSize(width,height);
-
     }
-
 
     @Override
     public void draw(Batch batch, float parentAlpha) {

@@ -1,4 +1,6 @@
-package com.g16.feyrune.interfaces;
+package com.g16.feyrune.model.combat.actions;
+
+import com.g16.feyrune.model.combat.creatures.ICombatCreature;
 
 public interface ICombatAction {
     /**

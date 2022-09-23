@@ -1,10 +1,9 @@
 package com.g16.feyrune.model.combat.creatures;
 
-import com.g16.feyrune.interfaces.ICombatAction;
-import com.g16.feyrune.interfaces.ICombatCreature;
-import com.g16.feyrune.interfaces.ICreature;
-import com.g16.feyrune.model.action.BaseAttack;
-import com.g16.feyrune.interfaces.IMove;
+import com.g16.feyrune.model.combat.actions.ICombatAction;
+import com.g16.feyrune.model.creature.ICreature;
+import com.g16.feyrune.model.combat.ability.BaseAttack;
+import com.g16.feyrune.model.combat.ability.IAbility;
 
 import java.util.List;
 
@@ -20,21 +19,21 @@ public class EnemyCreature implements ICombatCreature {
         return null;
     }
 
-    public IMove getMove() {
-        return creature.getMoves().get(0); // Should be random
+    public IAbility getMove() {
+        return creature.getMoves().get(0); // TODO: Should be random
     }
 
     public void takeDamage(int damage) {
         creature.takeDamage(damage);
     }
 
-    // Should be renamed to something more appropriate
-    private IMove createNewMoveUsingPower(IMove move) {
+    // TODO: Should be renamed to something more appropriate
+    private IAbility createNewMoveUsingPower(IAbility move) {
         return new BaseAttack(move.getAttackAccuracy(), move.getAttackPower() + creature.getPower(), move.getAttackName());
     }
 
     @Override
-    public List<IMove> getMoves() {
+    public List<IAbility> getMoves() {
         return creature.getMoves();
     }
 

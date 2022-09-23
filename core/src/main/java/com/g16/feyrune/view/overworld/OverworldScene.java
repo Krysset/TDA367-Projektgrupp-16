@@ -17,7 +17,6 @@ public class OverworldScene implements IScene, IObserver {
     private Camera camera;
     private TextureMap textureMap;
 
-
     public OverworldScene(Player player, SpriteBatch batch, Camera camera){
         this.player = player;
         this.batch = batch;

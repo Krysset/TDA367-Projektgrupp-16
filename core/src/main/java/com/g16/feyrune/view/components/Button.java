@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.g16.feyrune.interfaces.IObserver;
 
 public class Button extends ImageButton {
-
     private String image;
     private Vector2 position;
     private TextureRegionDrawable td;

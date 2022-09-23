@@ -2,7 +2,6 @@ package com.g16.feyrune.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.g16.feyrune.interfaces.IInput;
 import com.g16.feyrune.model.overworld.MovementHandler;
 
 public class WorldInputProcessor implements IInput {

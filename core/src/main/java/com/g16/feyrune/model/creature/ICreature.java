@@ -1,9 +1,11 @@
-package com.g16.feyrune.interfaces;
+package com.g16.feyrune.model.creature;
+
+import com.g16.feyrune.model.combat.ability.IAbility;
 
 import java.util.List;
 
 public interface ICreature {
-    List<IMove> getMoves();
+    List<IAbility> getMoves();
     double getHP();
     int getSpeed();
     int getPower();

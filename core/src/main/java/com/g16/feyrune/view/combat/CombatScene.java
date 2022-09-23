@@ -7,11 +7,10 @@ import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 
 public class CombatScene implements IScene { //TODO: the relation for this object to the controller.
-
-    CombatInputHandler combatInputHandler;
-    Camera camera;
-    SpriteBatch batch;
-    CombatRenderer combatRenderer;
+    private CombatInputHandler combatInputHandler;
+    private Camera camera;
+    private SpriteBatch batch;
+    private CombatRenderer combatRenderer;
     public CombatScene(Camera camera, SpriteBatch batch) {
         combatInputHandler = new CombatInputHandler();
         this.camera = camera;
