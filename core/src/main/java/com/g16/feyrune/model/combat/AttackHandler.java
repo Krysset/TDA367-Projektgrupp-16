@@ -38,8 +38,8 @@ public class AttackHandler {
      * @return if attack is successful: true, if it misses false
      */
     private static boolean evasiveManoeuvre(ICombatCreature defender, IMove baseAttack){
-        boolean evasion = defender.getSpeed()< Random.random.nextInt(100);
-        boolean accuracy = baseAttack.getAttackAccuracy()>Random.random.nextInt(100);
+        boolean evasion = defender.getSpeed()< Random.randomInt(100);
+        boolean accuracy = baseAttack.getAttackAccuracy()>Random.randomInt(100);
         boolean hit= evasion && accuracy;
         return hit;
     }
