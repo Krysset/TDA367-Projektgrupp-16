@@ -9,7 +9,7 @@ public class ChoiceRenderer {
     private Selection currentSelection;
     private ArrayList<ChoiceButton> buttons;
 
-    public ChoiceRenderer(){
+    public ChoiceRenderer(){ //TODO: there should be some logic here to select one of them
         buttons.add(new ChoiceButton());
         buttons.add(new ChoiceButton());
         buttons.add(new ChoiceButton());
@@ -22,7 +22,7 @@ public class ChoiceRenderer {
         }
     }
 
-    public void changeSelection(Direction direction){
+    public void changeSelection(Direction direction){ //TODO: NOT IMPLEMENTED LOGIC, should have some relation to controller..
         switch (direction){
             case UP:
             case DOWN:

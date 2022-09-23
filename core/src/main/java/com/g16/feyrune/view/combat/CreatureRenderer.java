@@ -10,6 +10,6 @@ public class CreatureRenderer {
     }
 
     public void render(){
-
+        //TODO: NOT IMPLEMENTED
     }
 }

@@ -8,5 +8,5 @@ public class EncounterHandler {
 
     public Encounter createEncounter() {
         throw new NotImplementedException();
-    }
+    } //TODO: NOT IMPLEMENTED
 }

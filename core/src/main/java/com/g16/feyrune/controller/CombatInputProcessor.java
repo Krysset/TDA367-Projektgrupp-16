@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.g16.feyrune.interfaces.IInput;
 
+//TODO: NOT IMPLEMENTED.
+
 public class CombatInputProcessor implements IInput {
 
     @Override

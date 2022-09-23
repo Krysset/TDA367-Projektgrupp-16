@@ -4,6 +4,6 @@ public enum Selection {
     FIRST,
     SECOND,
     THIRD,
-    FOURTH;
+    FOURTH
 }
 

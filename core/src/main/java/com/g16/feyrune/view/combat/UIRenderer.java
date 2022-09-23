@@ -3,7 +3,7 @@ package com.g16.feyrune.view.combat;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 
-public class UIRenderer {
+public class UIRenderer { //TODO: NOT IMPLEMENTED graphics for this object
     private HealthBar fHealthBar, eHealthBar;
     private ChoiceRenderer choiceRenderer;
     public UIRenderer(Encounter encounter, Player player){
