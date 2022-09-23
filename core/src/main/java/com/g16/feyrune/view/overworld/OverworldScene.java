@@ -7,8 +7,8 @@ import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.interfaces.IScene;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.view.player.PlayerRenderer;
-import com.g16.feyrune.view.textureMap.TextureMap;
-import com.g16.feyrune.view.textureMap.TextureMapParser;
+import com.g16.feyrune.view.overworld.textureMap.TextureMap;
+import com.g16.feyrune.view.overworld.textureMap.TextureMapParser;
 
 public class OverworldScene implements IScene, IObserver {
     private Player player;
