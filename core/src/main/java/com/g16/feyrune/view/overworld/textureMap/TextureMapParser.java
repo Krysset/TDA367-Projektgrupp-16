@@ -1,13 +1,15 @@
-package com.g16.feyrune.view.textureMap;
+package com.g16.feyrune.view.overworld.textureMap;
 
 import com.badlogic.gdx.graphics.Color;
 import com.g16.feyrune.Util.Pair;
 import com.g16.feyrune.Util.Parser;
+import com.g16.feyrune.view.overworld.textureMap.TextureTile.ITextureTile;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,14 +25,13 @@ public class TextureMapParser {
         Pair<Integer, Integer> mapSize = parseMapSize(doc);
         Pair<Integer, Integer> tileSize = parseTileSize(doc);
 
-        List<Tileset> tilesets = generateTilesetList(doc);
-
-        int[][] gIdList = generateGIdList(doc, mapSize);
-        int[][][] gIdMap = createIdMapFromList(gIdList, mapSize);
-
         Color bgColor = parseMapBackgroundColor(doc);
 
-        return new TextureMap(mapSize.fst, mapSize.snd, tileSize.fst, tileSize.snd, bgColor, tilesets, gIdMap);
+        List<Tileset> tilesets = generateTilesetList(doc);
+
+        List<TextureLayer> layers = generateGIdList(doc, mapSize, tilesets);
+
+        return new TextureMap(mapSize.fst, mapSize.snd, tileSize.fst, tileSize.snd, bgColor, layers);
     }
 
     private static Pair<Integer, Integer> parseMapSize(Document doc) {
@@ -74,15 +75,15 @@ public class TextureMapParser {
      * @param mapSize The size of the map.
      * @return A list of lists of gIds.
      */
-    private static int[][] generateGIdList(Document doc, Pair<Integer, Integer> mapSize) {
+    private static List<TextureLayer> generateGIdList(Document doc, Pair<Integer, Integer> mapSize, List<Tileset> tilesets) {
         // Get all the layer nodes
         NodeList layerNodes = doc.getElementsByTagName("layer");
 
-        int[][] gIdList = new int[mapSize.fst * mapSize.snd][layerNodes.getLength()];
+        List<TextureLayer> layers = new ArrayList<>(5);
         // For loops are required for each child node, because shadow nodes do *apparently* exist
         // and they are not always in the same order.
         for (int i = 0; i < layerNodes.getLength(); i++) {
-
+            TextureLayer layer = new TextureLayer();
             NodeList childNodes = layerNodes.item(i).getChildNodes();
             for (int j = 0; j < childNodes.getLength(); j++) {
                 Node dataNode = childNodes.item(j);
@@ -96,13 +97,26 @@ public class TextureMapParser {
                         // Prevents crashing because of whitespace or newlines when parsing integer.
                         tileIds[k] = tileIds[k].replaceAll("\\s+", "");
                         int tileId = Integer.parseInt(tileIds[k]);
-                        gIdList[k][i] = tileId;
+                        if (tileId != 0) {
+                            layer.addTile(new Point(
+                                    k % mapSize.fst,
+                                    mapSize.snd - (k / mapSize.fst)),
+                                    getTextureTileFromTileset(tileId, tilesets));
+                        }
                     }
                 }
             }
+            layers.add(layer);
         }
+        return layers;
+    }
 
-        return gIdList;
+    private static ITextureTile getTextureTileFromTileset(int gid, List<Tileset> tilesets) {
+        int i = 0;
+        while(gid < tilesets.get(i).getFirstgid()) {
+            i++;
+        }
+        return tilesets.get(i).getTextureTile(gid);
     }
 
     /**

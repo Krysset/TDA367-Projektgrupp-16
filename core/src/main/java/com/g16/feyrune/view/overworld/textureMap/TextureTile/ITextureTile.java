@@ -1,4 +1,4 @@
-package com.g16.feyrune.view.textureMap.TextureTile;
+package com.g16.feyrune.view.overworld.textureMap.TextureTile;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 

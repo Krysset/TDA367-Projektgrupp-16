@@ -1,7 +1,9 @@
-package com.g16.feyrune.view.textureMap;
+package com.g16.feyrune.view.overworld.textureMap;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.g16.feyrune.view.overworld.textureMap.TextureTile.ITextureTile;
+import com.g16.feyrune.view.overworld.textureMap.TextureTile.TextureTile;
 
 public class Tileset {
     private TextureRegion[][] textureRegion;
@@ -19,12 +21,12 @@ public class Tileset {
         textureRegion = TextureRegion.split(texture, tileWidth, tileHeight);
     }
 
-    public TextureRegion getTextureRegion(int gid) {
+    public ITextureTile getTextureTile(int gid) {
         int newGid = gid-firstgid;
         if (newGid < 0 || newGid >= tileCount) {
             throw new RuntimeException("Invalid gid for tileset");
         }
-        return textureRegion[newGid / columns][newGid % columns];
+        return new TextureTile(textureRegion[newGid / columns][newGid % columns]);
     }
 
     public int getFirstgid() {

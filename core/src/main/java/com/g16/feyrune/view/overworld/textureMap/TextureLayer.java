@@ -1,7 +1,7 @@
-package com.g16.feyrune.view.textureMap;
+package com.g16.feyrune.view.overworld.textureMap;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.g16.feyrune.view.textureMap.TextureTile.ITextureTile;
+import com.g16.feyrune.view.overworld.textureMap.TextureTile.ITextureTile;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ public class TextureLayer {
         for (HashMap.Entry<Point, ITextureTile> entry : layer.entrySet()) {
             Point coordinate = entry.getKey();
             ITextureTile tile = entry.getValue();
-            spriteBatch.draw(tile.getTexture(), coordinate.x, coordinate.y);
+            spriteBatch.draw(tile.getTexture(), coordinate.x * 16, coordinate.y * 16);
         }
     }
 

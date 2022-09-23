@@ -1,10 +1,6 @@
-package com.g16.feyrune.view.textureMap.TextureTile;
+package com.g16.feyrune.view.overworld.textureMap.TextureTile;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
-import java.awt.*;
-import java.util.HashMap;
 
 public class TextureTile implements ITextureTile {
     private TextureRegion texture;

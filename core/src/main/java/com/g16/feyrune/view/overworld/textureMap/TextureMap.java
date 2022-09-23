@@ -1,11 +1,8 @@
-package com.g16.feyrune.view.textureMap;
+package com.g16.feyrune.view.overworld.textureMap;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import java.awt.*;
-import java.util.HashMap;
 import java.util.List;
 
 public class TextureMap {
