@@ -15,7 +15,7 @@ public class EncounterHandler {
      * @return
      */
     public Encounter createEncounter(Pair<Integer, Integer>[] monsterList) {
-       ICreature[] iCreatureList = CreatureFactory.createCreatureList(monsterList);
+       ICreature[] iCreatureList = CreatureFactory.createCreatureList(monsterList,1);
         Encounter newEncounter = new Encounter(iCreatureList);
         return newEncounter;
     } //TODO: Implemented statically
