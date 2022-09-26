@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.g16.feyrune.interfaces.IObserver;
-import com.g16.feyrune.interfaces.IScene;
+import com.g16.feyrune.view.IScene;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.view.player.PlayerRenderer;
 import com.g16.feyrune.view.textureMap.TextureMap;
@@ -14,13 +14,11 @@ import com.g16.feyrune.view.textureMap.TextureMapParser;
 public class OverworldScene implements IScene, IObserver {
     private Player player;
     private PlayerRenderer pr;
-    private SpriteBatch batch;
     private Camera camera;
     private TextureMap textureMap;
 
-    public OverworldScene(Player player, SpriteBatch batch) {
+    public OverworldScene(Player player) {
         this.player = player;
-        this.batch = batch;
         this.camera = new OrthographicCamera(180 ,90);
         pr = new PlayerRenderer(player);
         textureMap = TextureMapParser.parseMapFile("assets/maps/dungeon/dungeon1.tmx");
@@ -32,7 +30,7 @@ public class OverworldScene implements IScene, IObserver {
     }
 
     @Override
-    public void render(){
+    public void render(SpriteBatch batch){
         camera.position.set(
                 pr.getRenderPos().x * textureMap.getTileSize() + textureMap.getTileSize() / 2,
                 pr.getRenderPos().y * textureMap.getTileSize() + textureMap.getTileSize() / 2,

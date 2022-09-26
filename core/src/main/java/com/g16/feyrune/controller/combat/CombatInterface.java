@@ -1,14 +1,13 @@
-package com.g16.feyrune.view.combat;
+package com.g16.feyrune.controller.combat;
 
+import com.g16.feyrune.controller.CombatInputHandler;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 import com.g16.feyrune.model.player.Player;
 
-public class CombatRenderer {
-    private GraphicsRenderer graphicsRenderer;
+public class CombatInterface {
     private UIRenderer uiRenderer;
     private CombatInputHandler combatInputHandler;
-    public CombatRenderer(Encounter encounter, Player player) {
-        graphicsRenderer = new GraphicsRenderer(encounter,player);
+    public CombatInterface(Encounter encounter, Player player) {
         uiRenderer =  new UIRenderer(encounter,player);
         combatInputHandler = new CombatInputHandler();
     }

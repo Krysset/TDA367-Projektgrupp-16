@@ -1,4 +1,4 @@
-package com.g16.feyrune.view.combat;
+package com.g16.feyrune.controller.combat;
 
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.overworld.encounter.Encounter;

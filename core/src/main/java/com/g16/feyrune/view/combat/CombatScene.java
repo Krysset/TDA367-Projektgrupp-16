@@ -1,37 +1,30 @@
 package com.g16.feyrune.view.combat;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.g16.feyrune.interfaces.IScene;
+import com.g16.feyrune.controller.combat.CombatInterface;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
+import com.g16.feyrune.view.IScene;
 
-public class CombatScene implements IScene { //TODO: the relation for this object to the controller.
-    private CombatInputHandler combatInputHandler;
-    private Camera camera;
-    private SpriteBatch batch;
-    private CombatRenderer combatRenderer;
-    public CombatScene(Camera camera, SpriteBatch batch) {
-        combatInputHandler = new CombatInputHandler();
-        this.camera = camera;
-        this.batch = batch;
+public class CombatScene implements IScene {
+
+    //TODO: the relation for this object to the controller.
+    private CombatInterface combatRenderer;
+
+    public CombatScene() {
     }
 
     public void renderNewCombat(Encounter encounter, Player player){
-        combatRenderer = new CombatRenderer(encounter, player);
+        combatRenderer = new CombatInterface(encounter, player);
     }
-
-    public CombatInputHandler getCombatInputHandler(){
-        return combatInputHandler;
-    }
-
 
     @Override
     public void update() {
     }
 
     @Override
-    public void render() {//TODO: NOT IMPLEMENTED
+    public void render(SpriteBatch batch) {
+        //TODO: NOT IMPLEMENTED
     }
 }
 
