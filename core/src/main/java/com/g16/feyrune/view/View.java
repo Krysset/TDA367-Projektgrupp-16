@@ -18,17 +18,15 @@ public class View implements IObserver {
     private OverworldScene overworldScene;
     private CombatScene combatScene;
     private SpriteBatch batch;
-    private Camera camera;
 
     public View(Model model){
         this.model = model;
         this.model.registerNewObserver(this);
 
 
-        camera = new OrthographicCamera(180 ,90);
         batch = new SpriteBatch();
-        overworldScene = new OverworldScene(model.getPlayer(),batch,camera);
-        combatScene = new CombatScene(camera, batch);
+        overworldScene = new OverworldScene(model.getPlayer(), batch);
+        combatScene = new CombatScene(batch);
 
         update(); //TODO: this is also wrong and bad :)
     }
