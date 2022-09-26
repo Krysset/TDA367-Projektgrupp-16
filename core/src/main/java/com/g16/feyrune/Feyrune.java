@@ -1,8 +1,10 @@
 package com.g16.feyrune;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.g16.feyrune.controller.Controller;
+import com.g16.feyrune.controller.WorldInputProcessor;
 import com.g16.feyrune.model.Model;
 import com.g16.feyrune.view.View;
 
@@ -17,9 +19,6 @@ public class Feyrune extends ApplicationAdapter {
 		model = new Model();
 		view = new View(model);
 		controller = new Controller(model, view);
-		controller.observerUpdate();
-
-		//Gdx.input.setInputProcessor(new WorldInputProcessor(model.getMovementHandler()));
 	}
 
 	@Override
