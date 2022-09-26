@@ -1,4 +1,4 @@
-package com.g16.feyrune.controller;
+package com.g16.feyrune.controller.combat;
 
 import com.g16.feyrune.controller.enums.Direction;
 import com.g16.feyrune.controller.enums.Selection;
