@@ -1,4 +1,6 @@
 // {type:class}
+// {generate:true}
+
 [CombatScene|+CombatScene(Encounter, Player)] ++-> [UIRenderer|+UIRenderer(Encounter, Player);+render():void]
 [CombatScene] ++-> [GraphicsRenderer|+GraphicsRenderer(Encounter, Player);+render():void]
 

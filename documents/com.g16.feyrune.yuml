@@ -1,4 +1,6 @@
 // {type:class}
+// {generate:true}
+
 [Feyrune] -> [View{bg:blue}]
 [Feyrune] -> [Model{bg:blue}]
 [Feyrune] -> [Controller{bg:blue}]

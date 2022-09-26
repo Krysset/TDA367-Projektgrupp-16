@@ -1,4 +1,6 @@
 // {type:class}
+// {generate:true}
+
 [View |+View(Model);+update():void;+render():void;-changeScene(ModelState):void] -> [OverworldScene{bg:blue}]
 [View] -> [CombatScene{bg:blue}]
 [View] <>-> [Model {bg:blue}]

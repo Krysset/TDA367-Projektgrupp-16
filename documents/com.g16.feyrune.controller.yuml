@@ -1,4 +1,5 @@
 // {type:class}
+// {generate:true}
 [Controller | +Controller(Model);+update():void;-changeInput(ModelState):void;] -.-^ [<<IObserver>>]
 [Controller] -.-> [<<enumeration>> ModelState | COMBAT; WORLD]
 [Controller] <>-> [Model]

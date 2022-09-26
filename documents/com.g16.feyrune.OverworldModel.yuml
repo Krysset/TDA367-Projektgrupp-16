@@ -1,4 +1,6 @@
 // {type:class}
+// {generate:true}
+
 [OverworldModel|+OverworldModel(Player)] -.-> [MovementHandler|+calculateMovement(Pair<int,int>,Pair<int,int>,Map):Pair<int,int>]
 [OverworldModel] ++-> [Map | +getGlobalMap():Map; +getTiles:Tiles;]
 [Map] -.-> [MapParser]
