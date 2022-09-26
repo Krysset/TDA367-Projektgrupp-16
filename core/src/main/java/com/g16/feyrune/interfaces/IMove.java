@@ -1,6 +1,6 @@
-package com.g16.feyrune.model.combat.ability;
+package com.g16.feyrune.interfaces;
 
-public interface IAbility {
+public interface IMove {
     int getAttackPower();
     int getAttackAccuracy();
     String getAttackName();

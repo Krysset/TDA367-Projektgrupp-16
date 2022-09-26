@@ -1,7 +1,7 @@
 package com.g16.feyrune.model.combat;
 
-import com.g16.feyrune.model.combat.actions.ICombatAction;
-import com.g16.feyrune.model.combat.creatures.ICombatCreature;
+import com.g16.feyrune.interfaces.ICombatAction;
+import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.combat.creatures.EnemyCreature;
 import com.g16.feyrune.model.combat.creatures.PlayerCreature;
@@ -43,6 +43,7 @@ public class CombatModel {
             if (actionEndedCombat) {
                 break;
             }
+
 
             if (combatCreatures.size() == 1) {
                 break;

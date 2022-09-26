@@ -6,7 +6,7 @@ import com.g16.feyrune.model.overworld.map.Map;
 import java.awt.*;
 
 public class MovementHandler {
-    private final long moveFrequency = 500;
+    private long moveFrequency = 500;
     private long lastMoved = 0;
     private int dirX = 0;
     private int dirY = 0;
@@ -29,6 +29,7 @@ public class MovementHandler {
     public void increaseYDirection(){
         dirY += 1;
         dirY = Math.min(1,dirY);
+
     }
 
     /**

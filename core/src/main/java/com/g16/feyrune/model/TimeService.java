@@ -4,8 +4,6 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class TimeService {
 
-    // TODO: Might be an unnecessary klass
-
     private static long startTime;
 
     public static void initialize(){

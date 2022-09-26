@@ -1,7 +1,7 @@
 package com.g16.feyrune.model.player;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.g16.feyrune.model.creature.ICreature;
+import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.interfaces.IObserver;
 
 import java.awt.*;
@@ -12,7 +12,7 @@ public class Player {
     private String name;
     private Point coordinates;
     private Texture texture;
-    private ICreature creature; //TODO: this is wrong and temp, should be MonsterParty
+    private ICreature creature; //TODO: this is wrong and temp
     private List<IObserver> observers;
 
     public Player(String name, Point coordinates) {

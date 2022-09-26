@@ -1,4 +1,4 @@
-package com.g16.feyrune.model;
+package com.g16.feyrune.enums;
 
 public enum ModelState {
     COMBAT,
