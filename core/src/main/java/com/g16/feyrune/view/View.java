@@ -58,5 +58,9 @@ public class View implements IObserver {
     private void setCombatAsScene(){
         //combatScene.renderNewCombat(); //TODO: THIS IS WHERE WE START A NEW COMBAT
     }
+
+    public void dispose() {
+        // TODO: dispose of graphical assets
+    }
 }
 
