@@ -15,7 +15,8 @@ public class Controller implements IObserver {
     public Controller(Model model, View view){
         this.model = model;
         this.view = view;
-        combatInputProcessor = new CombatInputProcessor(view.getCombatScene().getCombatInputHandler());
+        // TODO: Fix sus line
+        // combatInputProcessor = new CombatInputProcessor(view.getCombatScene().getCombatInputHandler());
         worldInputProcessor = new WorldInputProcessor(model.getMovementHandler());
         stateHandler = model.getStateHandler();
     }
