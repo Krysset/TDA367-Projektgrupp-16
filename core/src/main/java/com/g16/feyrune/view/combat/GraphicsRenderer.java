@@ -4,7 +4,6 @@ import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 
 public class GraphicsRenderer {
-    // TODO: Does it really need the encounter data?
     private Encounter encounter;
     private Player player;
 

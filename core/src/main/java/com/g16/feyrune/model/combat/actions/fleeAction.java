@@ -1,10 +1,14 @@
 package com.g16.feyrune.model.combat.actions;
 
-import com.g16.feyrune.model.combat.creatures.ICombatCreature;
+import com.g16.feyrune.interfaces.ICombatAction;
+import com.g16.feyrune.interfaces.ICombatCreature;
 
 public class fleeAction implements ICombatAction {
     @Override
     public boolean executeMove(ICombatCreature actor, ICombatCreature target) {
-        return actor.getSpeed() > target.getSpeed();
+        if (actor.getSpeed()> target.getSpeed())
+            return true;
+        else
+            return false;
     }
 }

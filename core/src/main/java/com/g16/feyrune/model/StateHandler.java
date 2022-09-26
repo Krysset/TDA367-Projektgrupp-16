@@ -1,5 +1,7 @@
 package com.g16.feyrune.model;
 
+import com.g16.feyrune.enums.ModelState;
+
 public class StateHandler {
     private ModelState currentModelState;
 
