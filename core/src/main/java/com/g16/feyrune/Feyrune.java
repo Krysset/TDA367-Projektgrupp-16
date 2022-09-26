@@ -19,9 +19,6 @@ public class Feyrune extends ApplicationAdapter {
 		model = new Model();
 		view = new View(model);
 		controller = new Controller(model, view);
-		controller.update();
-
-		//Gdx.input.setInputProcessor(new WorldInputProcessor(model.getMovementHandler()));
 	}
 
 	@Override

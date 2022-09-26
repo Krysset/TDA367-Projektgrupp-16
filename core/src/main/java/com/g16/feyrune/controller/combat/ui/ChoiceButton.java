@@ -1,4 +1,4 @@
-package com.g16.feyrune.controller.combat;
+package com.g16.feyrune.controller.combat.ui;
 
 public class ChoiceButton {
     public void render(boolean isSelected){

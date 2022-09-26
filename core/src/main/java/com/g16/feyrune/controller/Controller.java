@@ -1,7 +1,7 @@
 package com.g16.feyrune.controller;
 
+import com.g16.feyrune.controller.combat.CombatController;
 import com.g16.feyrune.enums.ModelState;
-import com.g16.feyrune.interfaces.IInput;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.Model;
 import com.g16.feyrune.model.StateHandler;
@@ -10,16 +10,19 @@ import com.g16.feyrune.view.View;
 public class Controller implements IObserver {
     private Model model;
     private View view;
-    IInput combatInputProcessor, worldInputProcessor;
+    IInput combatController, worldInputProcessor;
     StateHandler stateHandler;
 
     public Controller(Model model, View view){
         this.model = model;
         this.view = view;
         // TODO: Fix line below
-        // combatInputProcessor = new CombatInputProcessor(view.getCombatScene().getCombatInputHandler());
+        combatController = new CombatController();
+
         worldInputProcessor = new WorldInputProcessor(model.getMovementHandler());
         stateHandler = model.getStateHandler();
+
+        update();
     }
 
     @Override
@@ -34,7 +37,7 @@ public class Controller implements IObserver {
                 worldInputProcessor.setAsInputProcessor();
                 break;
             case COMBAT:
-                combatInputProcessor.setAsInputProcessor();
+                combatController.setAsInputProcessor();
                 break;
         }
     }
