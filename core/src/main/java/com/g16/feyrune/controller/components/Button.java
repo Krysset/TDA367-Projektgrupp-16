@@ -1,4 +1,4 @@
-package com.g16.feyrune.view.components;
+package com.g16.feyrune.controller.components;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

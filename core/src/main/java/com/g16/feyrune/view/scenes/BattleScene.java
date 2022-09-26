@@ -10,8 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.g16.feyrune.interfaces.IObserver;
-import com.g16.feyrune.view.components.Button;
-import com.g16.feyrune.view.components.LabelWithBackground;
+import com.g16.feyrune.controller.components.Button;
+import com.g16.feyrune.controller.components.LabelWithBackground;
 
 public class BattleScene extends Scene{
 
