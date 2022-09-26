@@ -16,9 +16,11 @@ public class CreatureFactory {
         return new BaseCreature(100,75,50,33, baseAttackList);
 
     }
-    public static ICreature[] createCreatureList(Pair<Integer, Integer>[] monsterList){
-        ICreature[] iCreatures = new ICreature[1];
-        iCreatures[0] = createCreature();
+    public static ICreature[] createCreatureList(Pair<Integer, Integer>[] monsterList, int wantedAmount){
+        ICreature[] iCreatures = new ICreature[wantedAmount];
+        for(int i = 0; i < wantedAmount; i++){
+            iCreatures[i] = createCreature();
+        }
         return iCreatures;
     }
 }
