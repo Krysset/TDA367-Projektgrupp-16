@@ -1,8 +1,7 @@
 package com.g16.feyrune.controller.combat;
 
-import com.g16.feyrune.controller.combat.ChoiceButton;
-import com.g16.feyrune.enums.Direction;
-import com.g16.feyrune.enums.Selection;
+import com.g16.feyrune.controller.enums.Direction;
+import com.g16.feyrune.controller.enums.Selection;
 
 import java.util.List;
 
