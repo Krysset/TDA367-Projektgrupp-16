@@ -1,10 +1,6 @@
-package com.g16.feyrune.model.action;
+package com.g16.feyrune.model.combat.ability;
 
-import com.g16.feyrune.interfaces.IMove;
-
-import static java.lang.Math.max;
-
-public class BaseAttack implements IMove {
+public class BaseAttack implements IAbility {
     private int accuracy;
     private int power;
     private String name;
@@ -16,8 +12,7 @@ public class BaseAttack implements IMove {
         this.name = name;
     }
     private double calculateDamage(double attack){
-        double trueDamage=max(0, attack*power);
-        return trueDamage;
+        return Math.max(0, attack*power);
     }
     @Override
     public int getAttackPower(){

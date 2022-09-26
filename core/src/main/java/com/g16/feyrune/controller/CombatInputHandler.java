@@ -1,6 +1,5 @@
-package com.g16.feyrune.view.combat;
+package com.g16.feyrune.controller;
 
-import com.g16.feyrune.controller.CombatInputProcessor;
 import com.g16.feyrune.enums.Direction;
 import com.g16.feyrune.enums.Selection;
 
@@ -14,7 +13,6 @@ public class CombatInputHandler {
         currentSelection = Selection.FIRST;
         initSelectionArray();
         selectionPoint = new Point(0,0);
-
     }
 
     private void initSelectionArray(){

@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class PlayerRenderer {
+    // TODO:
+
     private final Texture texture;
     private final TextureRegion[] walkRightAnimation;
     private final TextureRegion[] walkLeftAnimation;

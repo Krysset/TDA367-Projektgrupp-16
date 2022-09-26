@@ -1,6 +1,5 @@
 package com.g16.feyrune.model;
 
-import com.g16.feyrune.enums.ModelState;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.combat.CombatModel;
 import com.g16.feyrune.model.overworld.MovementHandler;
@@ -9,10 +8,11 @@ import com.g16.feyrune.model.player.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Model {
     private StateHandler stateHandler;
-    private ArrayList<IObserver> observers;
+    private List<IObserver> observers;
     private Player player;
     private OverworldModel overworldModel;
     private CombatModel combatModel;

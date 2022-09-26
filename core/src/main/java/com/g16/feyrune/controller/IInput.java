@@ -1,4 +1,4 @@
-package com.g16.feyrune.interfaces;
+package com.g16.feyrune.controller;
 
 import com.badlogic.gdx.InputProcessor;
 

@@ -1,9 +1,7 @@
 package com.g16.feyrune.model.overworld.encounter;
 
-import com.g16.feyrune.interfaces.ICreature;
+import com.g16.feyrune.model.creature.ICreature;
 import com.g16.feyrune.model.creature.CreatureFactory;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-import com.g16.feyrune.Util.Random;
 import com.g16.feyrune.Util.Pair;
 
 public class EncounterHandler {
