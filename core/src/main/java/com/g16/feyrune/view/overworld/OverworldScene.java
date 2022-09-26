@@ -1,6 +1,7 @@
 package com.g16.feyrune.view.overworld;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.g16.feyrune.interfaces.IObserver;
@@ -17,10 +18,10 @@ public class OverworldScene implements IScene, IObserver {
     private Camera camera;
     private TextureMap textureMap;
 
-    public OverworldScene(Player player, SpriteBatch batch, Camera camera){
+    public OverworldScene(Player player, SpriteBatch batch) {
         this.player = player;
         this.batch = batch;
-        this.camera = camera;
+        this.camera = new OrthographicCamera(180 ,90);
         pr = new PlayerRenderer(player);
         textureMap = TextureMapParser.parseMapFile("assets/maps/dungeon/dungeon1.tmx");
     }
