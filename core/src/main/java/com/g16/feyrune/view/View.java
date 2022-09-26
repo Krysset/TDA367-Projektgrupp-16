@@ -32,7 +32,7 @@ public class View implements IObserver {
     }
 
     public void render(){
-        currentScene.render();
+        currentScene.render(batch);
     }
 
     private void changeScene(ModelState state) {
