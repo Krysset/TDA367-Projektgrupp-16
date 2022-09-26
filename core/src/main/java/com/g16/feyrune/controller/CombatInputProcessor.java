@@ -2,12 +2,7 @@ package com.g16.feyrune.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
-import com.g16.feyrune.enums.Direction;
-import com.g16.feyrune.interfaces.IInput;
-import com.g16.feyrune.view.combat.CombatInputHandler;
-
-//TODO: NOT IMPLEMENTED.
+import com.g16.feyrune.controller.enums.Direction;
 
 public class CombatInputProcessor implements IInput {
     private CombatInputHandler inputHandler;

@@ -1,13 +1,13 @@
-package com.g16.feyrune.view.combat;
+package com.g16.feyrune.controller.combat;
 
-import com.g16.feyrune.enums.Direction;
-import com.g16.feyrune.enums.Selection;
+import com.g16.feyrune.controller.enums.Direction;
+import com.g16.feyrune.controller.enums.Selection;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ChoiceRenderer {
     private Selection currentSelection;
-    private ArrayList<ChoiceButton> buttons;
+    private List<ChoiceButton> buttons;
 
     public ChoiceRenderer(){ //TODO: there should be some logic here to select one of them
         buttons.add(new ChoiceButton());
