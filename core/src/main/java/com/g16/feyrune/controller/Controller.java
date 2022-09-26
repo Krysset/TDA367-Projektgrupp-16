@@ -30,10 +30,12 @@ public class Controller implements IObserver {
     public void changeInput(ModelState state){
         switch (state){
             case WORLD:
+                model.setasInputProcessor();
                 worldInputProcessor.setAsInputProcessor();
                 break;
             case COMBAT:
-                combatInputProcessor.setAsInputProcessor();
+                view.setAsInputProcessor();
+                //combatInputProcessor.setAsInputProcessor();
                 break;
         }
     }

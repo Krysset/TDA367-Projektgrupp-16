@@ -8,7 +8,6 @@ import com.g16.feyrune.model.overworld.encounter.Encounter;
 
 public class CombatScene implements IScene { //TODO: the relation for this object to the controller.
 
-    CombatInputHandler combatInputHandler;
     Camera camera;
     SpriteBatch batch;
     CombatRenderer combatRenderer;
@@ -22,9 +21,6 @@ public class CombatScene implements IScene { //TODO: the relation for this objec
         combatRenderer = new CombatRenderer(encounter, player);
     }
 
-    public CombatInputHandler getCombatInputHandler(){
-        return combatInputHandler;
-    }
 
 
     @Override
