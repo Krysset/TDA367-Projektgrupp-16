@@ -2,6 +2,7 @@ package com.g16.feyrune.view.combat;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.g16.feyrune.controller.CombatInputProcessor;
 import com.g16.feyrune.interfaces.IScene;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
@@ -11,6 +12,7 @@ public class CombatScene implements IScene { //TODO: the relation for this objec
     Camera camera;
     SpriteBatch batch;
     CombatRenderer combatRenderer;
+    CombatInputHandler combatInputHandler;
     public CombatScene(Camera camera, SpriteBatch batch) {
         combatInputHandler = new CombatInputHandler();
         this.camera = camera;
@@ -29,6 +31,10 @@ public class CombatScene implements IScene { //TODO: the relation for this objec
 
     @Override
     public void render() {//TODO: NOT IMPLEMENTED
+    }
+
+    public void setAsInputProcessor(){
+        new CombatInputProcessor(combatInputHandler).setAsInputProcessor();
     }
 }
 

@@ -1,5 +1,6 @@
 package com.g16.feyrune.model.overworld;
 
+import com.g16.feyrune.controller.WorldInputProcessor;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.overworld.map.Map;
 
@@ -27,5 +28,9 @@ public class OverworldModel {
 
     public MovementHandler getMovementHandler() {
         return movementHandler;
+    }
+
+    public void setAsInputProcessor(){
+        new WorldInputProcessor(movementHandler).setAsInputProcessor();
     }
 }

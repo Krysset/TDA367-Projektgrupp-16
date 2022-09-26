@@ -16,8 +16,8 @@ public class Controller implements IObserver {
     public Controller(Model model, View view){
         this.model = model;
         this.view = view;
-        combatInputProcessor = new CombatInputProcessor(view.getCombatScene().getCombatInputHandler());
-        worldInputProcessor = new WorldInputProcessor(model.getMovementHandler());
+        //combatInputProcessor = new CombatInputProcessor(view.getCombatScene().getCombatInputHandler());
+        //worldInputProcessor = new WorldInputProcessor(model.getMovementHandler());
         stateHandler = model.getStateHandler();
     }
 
@@ -30,8 +30,7 @@ public class Controller implements IObserver {
     public void changeInput(ModelState state){
         switch (state){
             case WORLD:
-                model.setasInputProcessor();
-                worldInputProcessor.setAsInputProcessor();
+                model.setAsInputProcessor();
                 break;
             case COMBAT:
                 view.setAsInputProcessor();

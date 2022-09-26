@@ -56,4 +56,8 @@ public class Model {
     public ModelState getCurrentModelState(){
         return stateHandler.getModelState();
     }
+
+    public void setAsInputProcessor(){
+        overworldModel.setAsInputProcessor();
+    }
 }
