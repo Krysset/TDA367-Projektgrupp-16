@@ -1,4 +1,4 @@
-package com.g16.feyrune.controller.components;
+package com.g16.feyrune.view.components;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.g16.feyrune.interfaces.IObserver;
 
 public class Button extends ImageButton {
+
     private String image;
     private Vector2 position;
     private TextureRegionDrawable td;
