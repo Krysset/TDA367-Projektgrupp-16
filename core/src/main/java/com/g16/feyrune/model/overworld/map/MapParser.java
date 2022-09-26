@@ -1,4 +1,4 @@
-package com.g16.feyrune.model.map.parser;
+package com.g16.feyrune.model.overworld.map;
 
 import com.g16.feyrune.Util.Pair;
 import com.g16.feyrune.Util.Parser;
@@ -6,10 +6,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -30,15 +26,11 @@ public class MapParser {
         ArrayList<Integer> collisionIds = parseCollisionIds(doc);
         ArrayList<Integer> gIds = parseGIdList(doc);
 
-        int[][] collisionList = generateCollitionIdList(doc, collisionIds, mapSize, true);
-        int[][] gIdList = generateCollitionIdList(doc, gIds, mapSize, false);
+        int[][] collisionList = generateCollisionIdList(doc, collisionIds, mapSize, true);
 
-        int[][][] collisionMap = createIdMapFromList(collisionList, mapSize);
-        int[][][] gIdMap = createIdMapFromList(gIdList, mapSize);
+        int[][][] collisionMap = createCollisionMap(collisionList, mapSize);
 
-        Map map = generateTileMap(collisionMap, gIdMap);
-
-        return map;
+        return generateTileMap(collisionMap);
     }
 
     /**
@@ -47,7 +39,7 @@ public class MapParser {
      * @param collisionMap The collision map.
      * @return A {@link Map} based on the collision map.
      */
-    private static Map generateTileMap(int[][][] collisionMap, int[][][] idMap) {
+    private static Map generateTileMap(int[][][] collisionMap) {
         Tile[][] tiles = new Tile[collisionMap[0].length][collisionMap.length];
 
         for (int i = 0; i < collisionMap.length; i++) {
@@ -59,7 +51,7 @@ public class MapParser {
                         break;
                     }
                 }
-                tiles[j][i] = new Tile(idMap[i][j], collision, false);
+                tiles[j][i] = new Tile(collision, false);
             }
         }
         return new Map(tiles);
@@ -72,7 +64,7 @@ public class MapParser {
      * @param mapSize The size of the map.
      * @return The XML document.
      */
-    private static int[][][] createIdMapFromList(int[][] collisionList, Pair<Integer, Integer> mapSize) {
+    private static int[][][] createCollisionMap(int[][] collisionList, Pair<Integer, Integer> mapSize) {
         int[][][] collisionMap = new int[mapSize.snd][mapSize.fst][collisionList[0].length];
 
         int c = 0;
@@ -94,7 +86,7 @@ public class MapParser {
      * @param mapSize The size of the map.
      * @return A list of whether a tile has collision or not.
      */
-    private static int[][] generateCollitionIdList(Document doc, ArrayList<Integer> gIds, Pair<Integer, Integer> mapSize, boolean printBinary) {
+    private static int[][] generateCollisionIdList(Document doc, ArrayList<Integer> gIds, Pair<Integer, Integer> mapSize, boolean printBinary) {
         // Get all the layer nodes, as collisions could exist on multiple layers.
         NodeList layerNodes = doc.getElementsByTagName("layer");
 
