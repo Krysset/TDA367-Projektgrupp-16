@@ -12,6 +12,8 @@ public class OverworldModel {
     private EncounterHandler encounterHandler;
     private Map map;
 
+    private boolean inEncounter=false;
+
     public OverworldModel(Player player) {
         this.player = player;
         this.movementHandler = new MovementHandler();
@@ -28,7 +30,16 @@ public class OverworldModel {
         player.move(deltaPos.x, deltaPos.y);
         if (map.tryEncounter(player.getCoordinates())) {
             encounterHandler.createEncounter(map.getTerrainType());
+            System.out.println("Encounter!");
+            inEncounter = true;
         }
+    }
+
+    public boolean isInEncounter(){
+        return inEncounter;
+    }
+    public void endEncounter(){
+        inEncounter=false;
     }
 
 
