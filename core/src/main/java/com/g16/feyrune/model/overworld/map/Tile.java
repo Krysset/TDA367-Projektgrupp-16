@@ -2,7 +2,7 @@ package com.g16.feyrune.model.overworld.map;
 
 public class Tile {
     private final boolean collision;
-    private final boolean canEncounter;
+    private boolean canEncounter;
 
     public Tile(boolean collision, boolean canEncounter) {
         this.collision = collision;
@@ -15,5 +15,8 @@ public class Tile {
 
     public boolean canEncounter() {
         return canEncounter;
+    }
+    public void removeEncounter(){
+        canEncounter = false;
     }
 }

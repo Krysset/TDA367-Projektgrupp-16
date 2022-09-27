@@ -50,8 +50,8 @@ public class BaseCreature implements ICreature {
     @Override
     public List<IAbility> getMoves() {
         ArrayList<IAbility> moves = new ArrayList<>();
-        IAbility baseAttack = new BaseAbility(speed, power,"TEMP"); //TODO: THIS IS TEMPORARY, PLZ FIX LATER :)
-        moves.add(baseAttack);
+        IAbility BaseAbility = new BaseAbility(speed, power,"TEMP"); //TODO: THIS IS TEMPORARY, PLZ FIX LATER :)
+        moves.add(BaseAbility);
         return moves;
     }
 
