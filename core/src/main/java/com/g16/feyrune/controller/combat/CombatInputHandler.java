@@ -38,7 +38,7 @@ public class CombatInputHandler {
                 break;
             case BACK:
         }
-        currentSelection = selectionArray[selectionPoint.x][selectionPoint.y];
+        currentSelection = selectionArray[selectionPoint.y][selectionPoint.x];
     }
     public Selection getCurrentSelection(){
         return currentSelection;
