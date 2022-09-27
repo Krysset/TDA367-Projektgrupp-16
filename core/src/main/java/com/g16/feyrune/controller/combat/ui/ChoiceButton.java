@@ -29,10 +29,10 @@ public class ChoiceButton {
                 Gdx.files.internal("assets/fonts/superAwesomeFont.png"),false);
     }
     public void render(boolean isSelected, Batch batch){
-        //TODO: NOT IMPLEMENTED graphics nor logic for this object
+        //TODO: NOT IMPLEMENTED graphics nor logic for this object;
         if(isSelected) batch.setColor(1,0,0,1);
         batch.draw(texture,pos.x,pos.y,width,height);
-        font.draw(batch,name, pos.x + width/2, pos.y + height/2);
+        font.draw(batch,name, pos.x + width / 4, pos.y + height / 2);
         batch.setColor(1,1,1,1);
     }
 

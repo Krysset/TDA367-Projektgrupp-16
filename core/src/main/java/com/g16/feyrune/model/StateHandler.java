@@ -14,6 +14,7 @@ public class StateHandler {
     }
 
     public ModelState getModelState(){
-        return currentModelState;
+        return ModelState.COMBAT;
+//        return currentModelState;
     }
 }
