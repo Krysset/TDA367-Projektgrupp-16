@@ -26,6 +26,10 @@ public class Model {
 
     public void update() {
         overworldModel.update();
+        if(overworldModel.isInEncounter()){
+            changeState(ModelState.COMBAT);
+            overworldModel.endEncounter();
+        }
     }
 
     public StateHandler getStateHandler() {
