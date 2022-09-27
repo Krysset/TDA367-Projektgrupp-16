@@ -16,6 +16,11 @@ public class CombatController implements ICombatController, IInput {
         choiceDialog = new ChoiceDialog(combatInputHandler); //TODO: Add connection for the batch to controller
     }
 
+    // This is patchwork code to make it work.
+    public void render() {
+        choiceDialog.render();
+    }
+
     @Override
     public void setAsInputProcessor() {
         inputProcessor.setAsInputProcessor();

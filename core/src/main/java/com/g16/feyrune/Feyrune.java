@@ -25,6 +25,7 @@ public class Feyrune extends ApplicationAdapter {
 	public void render () {
 		model.update();
 		view.render();
+		controller.render();
 	}
 	
 	@Override
