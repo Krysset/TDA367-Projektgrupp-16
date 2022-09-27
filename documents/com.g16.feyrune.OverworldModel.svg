@@ -150,8 +150,8 @@
 <polygon fill="none" stroke="#000000" points="730,-62 730,-94 970,-94 970,-62 730,-62"/>
 <text text-anchor="start" x="818.05" y="-75" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">AttackFactory </text>
 <polygon fill="none" stroke="#000000" points="730,-18 730,-62 970,-62 970,-18 730,-18"/>
-<text text-anchor="start" x="760.118" y="-43" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">+createAttack(String, int, int):BaseAttack</text>
-<text text-anchor="start" x="739.83" y="-31" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> +createAttackList(List&lt;String&gt;):List&lt;BaseAttack&gt;</text>
+<text text-anchor="start" x="760.118" y="-43" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">+createAttack(String, int, int):BaseAbility</text>
+<text text-anchor="start" x="739.83" y="-31" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> +createAttackList(List&lt;String&gt;):List&lt;BaseAbility&gt;</text>
 </g>
 <!-- A6&#45;&gt;A9 -->
 <g id="edge11" class="edge">
