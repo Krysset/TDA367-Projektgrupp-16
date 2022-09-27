@@ -3,12 +3,14 @@ package com.g16.feyrune.view;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.g16.feyrune.controller.Controller;
 import com.g16.feyrune.enums.ModelState;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.interfaces.IScene;
 import com.g16.feyrune.model.Model;
 import com.g16.feyrune.view.combat.CombatScene;
 import com.g16.feyrune.view.overworld.OverworldScene;
+import jdk.jfr.internal.tool.PrettyWriter;
 
 import java.util.ArrayList;
 
@@ -39,6 +41,11 @@ public class View implements IObserver {
 
     public void render(){
         currentScene.render();
+    }
+
+
+    public SpriteBatch getBatch(){
+        return batch;
     }
 
     private void changeScene(ModelState state) {
