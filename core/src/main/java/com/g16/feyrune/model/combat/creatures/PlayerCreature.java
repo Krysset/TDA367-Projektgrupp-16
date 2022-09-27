@@ -3,7 +3,7 @@ package com.g16.feyrune.model.combat.creatures;
 import com.g16.feyrune.interfaces.ICombatAction;
 import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.interfaces.ICreature;
-import com.g16.feyrune.interfaces.IMove;
+import com.g16.feyrune.interfaces.IAbility;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class PlayerCreature implements ICombatCreature {
     }
 
     @Override
-    public List<IMove> getMoves() {
+    public List<IAbility> getMoves() {
         return creature.getMoves();
     }
 
