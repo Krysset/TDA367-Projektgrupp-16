@@ -129,29 +129,29 @@
 <!-- A7 -->
 <g id="node8" class="node">
 <title>A7</title>
-<polygon fill="none" stroke="#000000" points="552,-80 552,-112 685,-112 685,-80 552,-80"/>
-<text text-anchor="start" x="584.597" y="-93" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">&lt;&lt;ICreature&gt;&gt; </text>
-<polygon fill="none" stroke="#000000" points="552,0 552,-80 685,-80 685,0 552,0"/>
-<text text-anchor="start" x="561.9595" y="-61" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> +getMoves():List&lt;Move&gt;</text>
-<text text-anchor="start" x="590.8565" y="-49" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> +getHp():int</text>
-<text text-anchor="start" x="582.793" y="-37" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> +getSpeed():int</text>
-<text text-anchor="start" x="583.078" y="-25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> +getPower():int</text>
-<text text-anchor="start" x="568.0745" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">+takeDamage(int):void</text>
+<polygon fill="none" stroke="#000000" points="553,-80 553,-112 686,-112 686,-80 553,-80"/>
+<text text-anchor="start" x="585.597" y="-93" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">&lt;&lt;ICreature&gt;&gt; </text>
+<polygon fill="none" stroke="#000000" points="553,0 553,-80 686,-80 686,0 553,0"/>
+<text text-anchor="start" x="562.9595" y="-61" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> +getMoves():List&lt;Move&gt;</text>
+<text text-anchor="start" x="591.8565" y="-49" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> +getHp():int</text>
+<text text-anchor="start" x="583.793" y="-37" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> +getSpeed():int</text>
+<text text-anchor="start" x="584.078" y="-25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> +getPower():int</text>
+<text text-anchor="start" x="569.0745" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">+takeDamage(int):void</text>
 </g>
 <!-- A6&#45;&gt;A7 -->
 <g id="edge8" class="edge">
 <title>A6&#45;&gt;A7</title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M781.6472,-161.8064C753.9084,-143.8718 721.77,-123.0927 693.356,-104.7215"/>
-<polygon fill="#000000" stroke="#000000" points="684.6664,-99.1033 695.5074,-100.7539 688.8652,-101.8181 693.0641,-104.5328 693.0641,-104.5328 693.0641,-104.5328 688.8652,-101.8181 690.6208,-108.3118 684.6664,-99.1033 684.6664,-99.1033"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M781.9418,-161.8064C754.4432,-143.9501 722.6021,-123.2741 694.402,-104.9624"/>
+<polygon fill="#000000" stroke="#000000" points="685.776,-99.361 696.6137,-101.033 689.9695,-102.0841 694.163,-104.8071 694.163,-104.8071 694.163,-104.8071 689.9695,-102.0841 691.7122,-108.5813 685.776,-99.361 685.776,-99.361"/>
 </g>
 <!-- A9 -->
 <g id="node10" class="node">
 <title>A9</title>
-<polygon fill="none" stroke="#000000" points="730,-62 730,-94 970,-94 970,-62 730,-62"/>
-<text text-anchor="start" x="818.05" y="-75" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">AttackFactory </text>
-<polygon fill="none" stroke="#000000" points="730,-18 730,-62 970,-62 970,-18 730,-18"/>
-<text text-anchor="start" x="760.118" y="-43" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">+createAttack(String, int, int):BaseAbility</text>
-<text text-anchor="start" x="739.83" y="-31" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> +createAttackList(List&lt;String&gt;):List&lt;BaseAbility&gt;</text>
+<polygon fill="none" stroke="#000000" points="731,-62 731,-94 969,-94 969,-62 731,-62"/>
+<text text-anchor="start" x="818.611" y="-75" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">AbilityFactory </text>
+<polygon fill="none" stroke="#000000" points="731,-18 731,-62 969,-62 969,-18 731,-18"/>
+<text text-anchor="start" x="761.24" y="-43" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">+createAbility(String, int, int):BaseAbility</text>
+<text text-anchor="start" x="740.952" y="-31" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> +createAbilityList(List&lt;String&gt;):List&lt;BaseAbility&gt;</text>
 </g>
 <!-- A6&#45;&gt;A9 -->
 <g id="edge11" class="edge">
@@ -162,9 +162,9 @@
 <!-- A8&#45;&gt;A7 -->
 <g id="edge10" class="edge">
 <title>A8&#45;&gt;A7</title>
-<path fill="none" stroke="#000000" d="M598.9484,-161.842C601.1854,-149.4145 603.6686,-135.6189 606.0833,-122.2039"/>
-<polygon fill="none" stroke="#000000" points="598.9181,-162.011 601.7919,-168.6248 596.7922,-173.8212 593.9184,-167.2075 598.9181,-162.011"/>
-<polygon fill="#000000" stroke="#000000" points="607.9113,-112.0486 610.5685,-122.6877 607.0254,-116.9695 606.1396,-121.8904 606.1396,-121.8904 606.1396,-121.8904 607.0254,-116.9695 601.7108,-121.0932 607.9113,-112.0486 607.9113,-112.0486"/>
+<path fill="none" stroke="#000000" d="M599.2428,-161.842C601.5626,-149.4145 604.1378,-135.6189 606.6419,-122.2039"/>
+<polygon fill="none" stroke="#000000" points="599.2087,-162.025 602.0398,-168.6571 597.0067,-173.8212 594.1756,-167.1891 599.2087,-162.025"/>
+<polygon fill="#000000" stroke="#000000" points="608.5376,-112.0486 611.1261,-122.7046 607.6201,-116.9637 606.7025,-121.8788 606.7025,-121.8788 606.7025,-121.8788 607.6201,-116.9637 602.279,-121.053 608.5376,-112.0486 608.5376,-112.0486"/>
 </g>
 </g>
 </svg>

@@ -12,4 +12,4 @@
 [EncounterHandler] -.-> [Encounter | +getEnenyCreature():ICreature]
 [Encounter]<>-> [<<ICreature>>]
 
-[CreatureFactory] -.-> [AttackFactory |+createAttack(String, int, int):BaseAbility; +createAttackList(List<String>):List<BaseAbility>]
+[CreatureFactory] -.-> [AbilityFactory |+createAbility(String, int, int):BaseAbility; +createAbilityList(List<String>):List<BaseAbility>]
