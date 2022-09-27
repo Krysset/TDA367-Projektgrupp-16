@@ -23,7 +23,7 @@ public class Controller implements IObserver {
     }
 
     @Override
-    public void update() {
+    public void observerUpdate() {
         ModelState newState = stateHandler.getModelState();
         changeInput(newState);
     }
