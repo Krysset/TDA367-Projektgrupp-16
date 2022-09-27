@@ -29,7 +29,7 @@ public class Model implements IObserver {
         overworldModel.update();
         if(overworldModel.isInEncounter()){
             changeState(ModelState.COMBAT);
-            overworldModel.endEncounter();
+            notifyObservers();
         }
     }
 
