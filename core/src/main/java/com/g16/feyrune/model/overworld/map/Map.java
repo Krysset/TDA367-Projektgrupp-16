@@ -44,6 +44,9 @@ public class Map {
         }
         return false;
     }
+    public void removeEncounterFromTile(Point tilePos){
+        tiles[tilePos.x][tilePos.y].removeEncounter();
+    }
     public String getTerrainType(){
         return "dungeon";
     }
