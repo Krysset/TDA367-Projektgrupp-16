@@ -1,7 +1,6 @@
 package com.g16.feyrune.model.creature;
 
 import com.g16.feyrune.Util.Random;
-import com.g16.feyrune.interfaces.IAbility;
 import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.model.combat.actions.AbilityFactory;
 import com.g16.feyrune.model.combat.actions.abilities.BaseAbility;
@@ -13,7 +12,7 @@ public class CreatureFactory {
      * @return a new Object of type ICreature
      */
     public static ICreature createCreature(String[] abilities, double health, int power, int speed, int evasion) {
-        BaseAbility[] baseAbilityList = AbilityFactory.createAttackList(abilities);
+        BaseAbility[] baseAbilityList = AbilityFactory.createAbilityList(abilities);
         return new BaseCreature(health,power, speed, evasion, baseAbilityList);
     }
     public static ICreature[] createCreatureList(Pair<String, Integer>[] monsterList, int wantedAmount){
