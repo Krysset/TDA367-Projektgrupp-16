@@ -14,6 +14,7 @@ public class OverworldModel {
         this.player = player;
         this.movementHandler = new MovementHandler();
         this.map = Map.getGlobalMap();
+        player.setPosition(map.getStartPosX(), map.getStartPosY());
     }
 
     public void update(){
