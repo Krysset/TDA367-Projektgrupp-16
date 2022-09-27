@@ -27,6 +27,10 @@ public class Model implements IObserver {
 
     public void update() {
         overworldModel.update();
+        if(overworldModel.isInEncounter()){
+            changeState(ModelState.COMBAT);
+            overworldModel.endEncounter();
+        }
     }
 
     public StateHandler getStateHandler() {
