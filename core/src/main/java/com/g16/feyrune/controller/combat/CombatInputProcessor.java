@@ -32,6 +32,9 @@ public class CombatInputProcessor implements IInput, InputProcessor {
         if (keycode == Input.Keys.S){
             inputHandler.changeSelection(Direction.DOWN);
         }
+        if (keycode == Input.Keys.ENTER){
+            inputHandler.excecuteSelection();
+        }
         return true;
     }
 

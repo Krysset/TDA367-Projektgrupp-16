@@ -1,5 +1,6 @@
 package com.g16.feyrune.controller.combat;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.g16.feyrune.controller.combat.ui.ChoiceDialog;
 import com.g16.feyrune.controller.IInput;
 import com.g16.feyrune.interfaces.ICombatAction;
@@ -17,8 +18,8 @@ public class CombatController implements ICombatController, IInput {
     }
 
     // This is patchwork code to make it work.
-    public void render() {
-        choiceDialog.render();
+    public void render(Batch batch) {
+        choiceDialog.render(batch);
     }
 
     @Override

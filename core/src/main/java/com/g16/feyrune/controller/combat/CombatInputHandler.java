@@ -43,4 +43,8 @@ public class CombatInputHandler {
     public Selection getCurrentSelection(){
         return currentSelection;
     }
+    public void excecuteSelection(){
+        //TODO: notify correct observer with currentSelection
+        System.out.println(currentSelection.toString());
+    }
 }

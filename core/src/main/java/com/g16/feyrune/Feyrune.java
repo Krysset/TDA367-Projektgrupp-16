@@ -9,7 +9,6 @@ import com.g16.feyrune.model.Model;
 import com.g16.feyrune.view.View;
 
 public class Feyrune extends ApplicationAdapter {
-	private SpriteBatch batch;
 	private View view;
 	private Model model;
 	private Controller controller;
@@ -25,11 +24,10 @@ public class Feyrune extends ApplicationAdapter {
 	public void render () {
 		model.update();
 		view.render();
-		controller.render();
+		controller.render(view.getBatch());
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
 	}
 }
