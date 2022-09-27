@@ -40,7 +40,7 @@ public class CreatureFactory {
         }
         return "default";
     }
-    private ICreature createCreatureByName(String name){
+    private static ICreature createCreatureByName(String name){
         switch (name){
             case "SuperAwesomeBaseMonster":
                 return createCreature(new String[] {"SuperAwesomeBaseAttack"}, 100, 75, 50, 33);
