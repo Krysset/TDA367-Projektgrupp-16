@@ -1,16 +1,16 @@
-package com.g16.feyrune.model.action;
+package com.g16.feyrune.model.combat.actions.abilities;
 
-import com.g16.feyrune.interfaces.IMove;
+import com.g16.feyrune.interfaces.IAbility;
 
 import static java.lang.Math.max;
 
-public class BaseAttack implements IMove {
+public class BaseAbility implements IAbility {
     private int accuracy;
     private int power;
     private String name;
 
 
-    public BaseAttack(int accuracy, int power, String name){
+    public BaseAbility(int accuracy, int power, String name){
         this.accuracy = accuracy;
         this.power = power;
         this.name = name;

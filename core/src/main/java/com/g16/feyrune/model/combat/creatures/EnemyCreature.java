@@ -3,8 +3,8 @@ package com.g16.feyrune.model.combat.creatures;
 import com.g16.feyrune.interfaces.ICombatAction;
 import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.interfaces.ICreature;
-import com.g16.feyrune.model.action.BaseAttack;
-import com.g16.feyrune.interfaces.IMove;
+import com.g16.feyrune.model.combat.actions.abilities.BaseAbility;
+import com.g16.feyrune.interfaces.IAbility;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class EnemyCreature implements ICombatCreature {
         return null;
     }
 
-    public IMove getMove() {
+    public IAbility getMove() {
         return creature.getMoves().get(0); // Should be random
     }
 
@@ -29,12 +29,12 @@ public class EnemyCreature implements ICombatCreature {
     }
 
     // Should be renamed to something more appropriate
-    private IMove createNewMoveUsingPower(IMove move) {
-        return new BaseAttack(move.getAttackAccuracy(), move.getAttackPower() + creature.getPower(), move.getAttackName());
+    private IAbility createNewMoveUsingPower(IAbility move) {
+        return new BaseAbility(move.getAttackAccuracy(), move.getAttackPower() + creature.getPower(), move.getAttackName());
     }
 
     @Override
-    public List<IMove> getMoves() {
+    public List<IAbility> getMoves() {
         return creature.getMoves();
     }
 
