@@ -23,6 +23,7 @@ public class OverworldModel {
         this.map = Map.getGlobalMap();
         this.encounterHandler = new EncounterHandler();
         this.observerList = new ArrayList<>();
+        player.setPosition(map.getStartPosX(), map.getStartPosY());
     }
     public void addObserver(IObserver observer){
         observerList.add(observer);
