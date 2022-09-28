@@ -6,6 +6,7 @@ import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.combat.creatures.EnemyCreature;
 import com.g16.feyrune.model.combat.creatures.PlayerCreature;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 
@@ -37,7 +38,7 @@ public class CombatModel {
             ICombatCreature actor = turnOrder.get(0);
             turnOrder.remove(0);
             ICombatCreature target = choiceTarget(actor); // TODO: Replace with choose target
-            ICombatAction action = actor.selectAction(actor, target);
+            ICombatAction action = actor.selectAction(target);
             boolean actionEndedCombat = action.executeMove(actor, target);
             generateAttackOrder();
             if (actionEndedCombat) {
@@ -49,6 +50,17 @@ public class CombatModel {
                 break;
             }
         }
+    }
+
+    // Does not currently work if player has > 1 creature in combat
+    public PlayerCreature getPlayerCreature() {
+        for (ICombatCreature combatCreature : combatCreatures) {
+            if (combatCreature instanceof PlayerCreature) {
+                return (PlayerCreature) combatCreature;
+            }
+        }
+        // If the player monster is not found, something is wrong
+        throw new RuntimeException("Missing PlayerCreature in list of combat creatures");
     }
 
     //TODO: THIS IS BAD CODE NEED TO FIX AT LATER DATE

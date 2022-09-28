@@ -16,7 +16,7 @@ public class EnemyCreature implements ICombatCreature {
     }
 
     @Override
-    public ICombatAction selectAction(ICombatCreature actor, ICombatCreature target) {
+    public ICombatAction selectAction(ICombatCreature target) {
         return null;
     }
 
