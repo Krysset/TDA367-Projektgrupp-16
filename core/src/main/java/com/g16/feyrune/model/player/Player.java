@@ -56,7 +56,7 @@ public class Player {
 
     private void notifyObservers() {
         for (IObserver observer : observers) {
-            observer.update();
+            observer.observerUpdate();
         }
     }
 }

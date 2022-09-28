@@ -28,9 +28,11 @@ public class OverworldScene implements IScene, IObserver {
     }
 
     @Override
-    public void update() {
+    public void observerUpdate() {
 
     }
+    @Override
+    public void update(){}
 
     @Override
     public void render(){

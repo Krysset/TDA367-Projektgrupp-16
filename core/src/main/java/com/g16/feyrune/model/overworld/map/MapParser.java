@@ -2,6 +2,7 @@ package com.g16.feyrune.model.overworld.map;
 
 import com.g16.feyrune.Util.Pair;
 import com.g16.feyrune.Util.Parser;
+import com.g16.feyrune.Util.Random;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -96,7 +97,8 @@ public class MapParser {
                         break;
                     }
                 }
-                tiles[j][i] = new Tile(collision, false);
+                boolean encounter = (Random.randomInt(100)>90)?true:false;
+                tiles[j][i] = new Tile(collision, encounter);
             }
         }
         return new Map(tiles, startPos.x, startPos.y);

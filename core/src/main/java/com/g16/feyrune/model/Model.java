@@ -10,7 +10,7 @@ import com.g16.feyrune.model.player.Player;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Model {
+public class Model implements IObserver {
     private StateHandler stateHandler;
     private ArrayList<IObserver> observers;
     private Player player;
@@ -20,12 +20,18 @@ public class Model {
     public Model() {
         player = new Player("Player", new Point(20, 5)); //TODO: Should probably have a method to get the initial player position from the map
         this.overworldModel = new OverworldModel(player);
+        this.overworldModel.addObserver(this);
         this.observers = new ArrayList<>();
         stateHandler = new StateHandler(ModelState.WORLD);
     }
 
     public void update() {
-        overworldModel.update();
+        if(stateHandler.getModelState() == ModelState.WORLD) {
+            overworldModel.update();
+        }
+        else if(stateHandler.getModelState() == ModelState.COMBAT) {
+            //TODO: Update combat model
+        }
     }
 
     public StateHandler getStateHandler() {
@@ -42,7 +48,7 @@ public class Model {
 
     private void notifyObservers() {
         for (IObserver observer : observers) {
-            observer.update();
+            observer.observerUpdate();
         }
     }
 
@@ -55,5 +61,15 @@ public class Model {
     }
     public ModelState getCurrentModelState(){
         return stateHandler.getModelState();
+    }
+    @Override
+    public void observerUpdate() {
+        if (overworldModel.isInEncounter()){
+            changeState(ModelState.COMBAT);
+            overworldModel.removeEncounterFromPlayerTile();
+        }
+        for(IObserver observer : observers){
+            observer.observerUpdate();
+        }
     }
 }

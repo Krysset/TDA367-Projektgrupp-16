@@ -34,12 +34,12 @@ public class AttackHandler {
     /**
      * Calculates whether the attack accuracy is high enough to hit and whether the defender's evasiveness is high enough to evade it
      * @param defender: monster trying to evade the attack
-     * @param baseAttack: attack to check accuracy on.
+     * @param baseAbility: attack to check accuracy on.
      * @return if attack is successful: true, if it misses false
      */
-    private static boolean evasiveManoeuvre(ICombatCreature defender, IAbility baseAttack){
+    private static boolean evasiveManoeuvre(ICombatCreature defender, IAbility baseAbility){
         boolean evasion = defender.getSpeed()< Random.randomInt(100);
-        boolean accuracy = baseAttack.getAttackAccuracy()>Random.randomInt(100);
+        boolean accuracy = baseAbility.getAttackAccuracy()>Random.randomInt(100);
         boolean hit= evasion && accuracy;
         return hit;
     }
