@@ -3,7 +3,6 @@ package com.g16.feyrune.model;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class TimeService {
-
     private static long startTime;
 
     public static void initialize(){
