@@ -38,7 +38,10 @@ public class Model implements IObserver{
                 break;
             case COMBAT:
                 combatModel.update();
-                if (combatModel.getCombatIsOver()) stateHandler.changeModelState(ModelState.WORLD);
+                if (combatModel.getCombatIsOver()) {
+                    stateHandler.changeModelState(ModelState.WORLD);
+                    notifyObservers();
+                }
                 break;
         }
     }
