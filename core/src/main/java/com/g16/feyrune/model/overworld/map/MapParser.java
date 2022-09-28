@@ -203,18 +203,6 @@ public class MapParser {
         return collisionIds;
     }
 
-    private static ArrayList<Integer> parseGIdList(Document doc){
-        NodeList nodes = doc.getElementsByTagName("tileset");
-        Node node = nodes.item(0);
-        int tileCount = Integer.parseInt(node.getAttributes().getNamedItem("tilecount").getNodeValue());
-
-        ArrayList<Integer> gIds = new ArrayList<>();
-        for(int i = 0; i < tileCount; i++){
-            gIds.add(i);
-        }
-        return gIds;
-    }
-
     /**
      * This method gets the size of the map.
      *
