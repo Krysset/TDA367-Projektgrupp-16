@@ -39,7 +39,8 @@ public class MapParser {
 
     private static Point getMapStartPos(Document doc) {
         Point startPos = new Point();
-        boolean isXSet = false, isYSet = false;
+        boolean isXSet = false;
+        boolean isYSet = false;
         Node mapNode = doc.getElementsByTagName("map").item(0);
         NodeList mapChildNodes = mapNode.getChildNodes();
         // To avoid ghost nodes
@@ -47,8 +48,11 @@ public class MapParser {
             Node currentMapChild = mapChildNodes.item(i);
             if (currentMapChild.getNodeName().equals("properties")) {
                 NodeList propertyNodes = currentMapChild.getChildNodes();
-                for (int j = 0; j < propertyNodes.getLength(); j++) {
+                int j = 0;
+                // Iterate through every property until we set a new x and y value
+                while(!isXSet | !isYSet) {
                     Node propertyNode = propertyNodes.item(j);
+                    // Need to check if it's a property node because of ghost nodes
                     if(propertyNode.getNodeName().equals("property")) {
                         NamedNodeMap nodeAttributes = propertyNode.getAttributes();
                         if (nodeAttributes.getNamedItem("name") != null) {
@@ -60,12 +64,11 @@ public class MapParser {
                                 isYSet = true;
                             }
                         }
-
-                    } else if (isXSet & isYSet) {
-                        break;
                     }
-
+                    j++;
                 }
+            } else if (isXSet & isYSet) {
+                break;
             }
         }
 
