@@ -37,10 +37,10 @@ public class PlayerCreature implements ICombatCreature {
     public ICombatAction selectAction(ICombatCreature target) {
         // There has to be a better way to do this,
         // but currently I just want to get it working.
-        if (combatController == null) {
-            throw new NotImplementedException();
+        if(combatController.hasSelectedAction()) {
+            return combatController.getPlayerActionFromController(this);
         }
-        return combatController.getPlayerActionFromController(this);
+        return null;
     }
 
     @Override

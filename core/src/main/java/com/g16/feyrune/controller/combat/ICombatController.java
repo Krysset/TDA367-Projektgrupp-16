@@ -5,4 +5,5 @@ import com.g16.feyrune.interfaces.ICombatCreature;
 
 public interface ICombatController {
     ICombatAction getPlayerActionFromController(ICombatCreature actingCreature);
+    boolean hasSelectedAction();
 }

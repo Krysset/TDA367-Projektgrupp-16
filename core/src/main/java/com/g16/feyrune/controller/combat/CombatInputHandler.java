@@ -9,6 +9,9 @@ public class CombatInputHandler {
     private Selection currentSelection;
     private final Selection[][] selectionArray = new Selection[2][2];
     private Point selectionPoint;
+    private boolean hasSelectedAction = false;
+    private Selection selectedAction;
+
     public CombatInputHandler(){
         currentSelection = Selection.FIRST;
         initSelectionArray();
@@ -43,8 +46,19 @@ public class CombatInputHandler {
     public Selection getCurrentSelection(){
         return currentSelection;
     }
+
     public void excecuteSelection(){
         //TODO: notify correct observer with currentSelection
-        System.out.println(currentSelection.toString());
+        hasSelectedAction = true;
+        selectedAction = currentSelection;
+    }
+
+    public boolean hasSelectedAction(){
+        return hasSelectedAction;
+    }
+
+    public Selection getChosenAction(){
+        hasSelectedAction = false;
+        return selectedAction;
     }
 }
