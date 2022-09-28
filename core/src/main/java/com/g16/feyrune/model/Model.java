@@ -26,6 +26,12 @@ public class Model implements IObserver {
     }
 
     public void update() {
+        if(stateHandler.getModelState() == ModelState.WORLD) {
+            overworldModel.update();
+        }
+        else if(stateHandler.getModelState() == ModelState.COMBAT) {
+            //TODO: Update combat model
+        }
     }
 
     public StateHandler getStateHandler() {
