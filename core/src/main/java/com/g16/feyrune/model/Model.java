@@ -25,7 +25,7 @@ public class Model {
         player = new Player("Player", new Point(20, 5)); //TODO: Should probably have a method to get the initial player position from the map
         this.overworldModel = new OverworldModel(player);
         this.observers = new ArrayList<>();
-        stateHandler = new StateHandler(ModelState.WORLD);
+        stateHandler = new StateHandler(ModelState.COMBAT);
         this.combatModel = new CombatModel(player, new Encounter(new ICreature[]{CreatureFactory.createCreature()}));
     }
 
@@ -36,6 +36,7 @@ public class Model {
                 break;
             case COMBAT:
                 combatModel.update();
+                if (combatModel.getCombatIsOver()) stateHandler.changeModelState(ModelState.WORLD);
                 break;
         }
     }
