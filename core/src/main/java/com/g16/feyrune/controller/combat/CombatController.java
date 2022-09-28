@@ -4,17 +4,24 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.g16.feyrune.controller.combat.ui.ChoiceDialog;
 import com.g16.feyrune.controller.IInput;
 import com.g16.feyrune.interfaces.ICombatAction;
+import com.g16.feyrune.interfaces.ICombatCreature;
+import com.g16.feyrune.model.Model;
 import com.g16.feyrune.view.View;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class CombatController implements ICombatController, IInput {
     private CombatInputHandler combatInputHandler;
     private CombatInputProcessor inputProcessor;
     private ChoiceDialog choiceDialog;
+    // Takes whole model so that logic can be written to get new player creature each time
+    // the player's creature changes. Could be streamlined later.
+    private Model model;
 
-    public CombatController(View view){
+    public CombatController(View view, Model model){
         combatInputHandler = new CombatInputHandler();
         inputProcessor = new CombatInputProcessor(combatInputHandler);
         choiceDialog = new ChoiceDialog(combatInputHandler); //TODO: Add connection for the batch to controller
+        model.getPlayerCreature().registerCombatController(this);
     }
 
     // This is patchwork code to make it work.
@@ -28,7 +35,11 @@ public class CombatController implements ICombatController, IInput {
     }
 
     @Override
-    public ICombatAction getPlayerActionFromController() {
-        return null;
+    public ICombatAction getPlayerActionFromController(ICombatCreature actingCreature) {
+        throw new NotImplementedException();
+    }
+
+    private void setListenToCurrentPlayerCreature() {
+        model.getPlayerCreature().registerCombatController(this);
     }
 }
