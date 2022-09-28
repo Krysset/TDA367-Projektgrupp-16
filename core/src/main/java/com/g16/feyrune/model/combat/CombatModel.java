@@ -19,6 +19,7 @@ public class CombatModel {
     private ArrayList<ICombatCreature> turnOrder;
     private int speedThreshold = 250;
     private boolean hasSelectedAction = true;
+    private boolean combatIsOver = false;
 
 
     public CombatModel(Player player, Encounter encounter) {
@@ -57,11 +58,6 @@ public class CombatModel {
         if (actionEndedCombat) {
             endCombat();
         }
-
-        //TODO: remove dead creatures
-        if (combatCreatures.size() == 1) {
-            endCombat();
-        }
     }
 
     private String getCurrentActorName(ICombatCreature actor) {
@@ -73,7 +69,11 @@ public class CombatModel {
     }
 
     private void endCombat(){
+        combatIsOver = true;
+    }
 
+    public boolean getCombatIsOver(){
+        return combatIsOver;
     }
 
     public void startCombatLoop() {
