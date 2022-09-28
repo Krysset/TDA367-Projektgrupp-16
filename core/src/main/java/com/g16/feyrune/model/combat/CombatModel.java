@@ -47,7 +47,7 @@ public class CombatModel {
         ICombatCreature target = choiceTarget(actor); // TODO: Replace with choose target
         ICombatAction action = actor.selectAction(target);
 
-        // The player has not selected a action this render pass,
+        // The player has not selected an action this render pass,
         // therefore stop doing the loop this current iteration.
         if (action == null) return;
         turnOrder.remove(0);
@@ -76,11 +76,6 @@ public class CombatModel {
         return combatIsOver;
     }
 
-    public void startCombatLoop() {
-        while(true) {
-
-        }
-    }
 
     // Does not currently work if player has > 1 creature in combat
     public PlayerCreature getPlayerCreature() {

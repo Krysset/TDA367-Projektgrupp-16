@@ -1,7 +1,6 @@
 package com.g16.feyrune.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.g16.feyrune.controller.combat.CombatController;
 import com.g16.feyrune.enums.ModelState;
 import com.g16.feyrune.interfaces.IObserver;
@@ -22,6 +21,7 @@ public class Controller implements IObserver {
         combatController = new CombatController(model);
         worldInputProcessor = new WorldInputProcessor(model.getMovementHandler());
         stateHandler = model.getStateHandler();
+        model.registerNewObserver(this);
 
         update();
     }

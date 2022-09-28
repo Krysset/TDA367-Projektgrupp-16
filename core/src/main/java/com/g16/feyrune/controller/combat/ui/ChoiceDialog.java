@@ -4,13 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.g16.feyrune.controller.combat.CombatInputHandler;
-import com.g16.feyrune.controller.enums.Direction;
 import com.g16.feyrune.controller.enums.Selection;
-import com.g16.feyrune.view.utils.Image;
 
 import java.awt.*;
 import java.util.ArrayList;
