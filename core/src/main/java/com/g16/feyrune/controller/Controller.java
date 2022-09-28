@@ -19,7 +19,7 @@ public class Controller implements IObserver {
         this.model = model;
         this.view = view;
         // TODO: Fix line below
-        combatController = new CombatController(view, model);
+        combatController = new CombatController(model);
         worldInputProcessor = new WorldInputProcessor(model.getMovementHandler());
         stateHandler = model.getStateHandler();
 

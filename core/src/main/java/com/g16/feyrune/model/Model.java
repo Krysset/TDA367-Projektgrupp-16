@@ -1,11 +1,14 @@
 package com.g16.feyrune.model;
 
 import com.g16.feyrune.enums.ModelState;
+import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.combat.CombatModel;
 import com.g16.feyrune.model.combat.creatures.PlayerCreature;
+import com.g16.feyrune.model.creature.CreatureFactory;
 import com.g16.feyrune.model.overworld.MovementHandler;
 import com.g16.feyrune.model.overworld.OverworldModel;
+import com.g16.feyrune.model.overworld.encounter.Encounter;
 import com.g16.feyrune.model.player.Player;
 
 import java.awt.*;
@@ -23,10 +26,18 @@ public class Model {
         this.overworldModel = new OverworldModel(player);
         this.observers = new ArrayList<>();
         stateHandler = new StateHandler(ModelState.WORLD);
+        this.combatModel = new CombatModel(player, new Encounter(new ICreature[]{CreatureFactory.createCreature()}));
     }
 
     public void update() {
-        overworldModel.update();
+        switch (stateHandler.getModelState()){
+            case WORLD:
+                overworldModel.update();
+                break;
+            case COMBAT:
+                combatModel.update();
+                break;
+        }
     }
 
     public StateHandler getStateHandler() {
