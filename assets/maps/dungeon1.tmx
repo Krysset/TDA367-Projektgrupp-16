@@ -6,7 +6,7 @@
   <property name="transporter1" value="assets/maps/plains/plains1.tmx,11,1,6,15"/>
  </properties>
  <tileset firstgid="1" name="dungeon" tilewidth="16" tileheight="16" tilecount="280" columns="14">
-  <image source="../../tilesets/dungeon/dungeon.png" width="224" height="320"/>
+  <image source="../tilesets/dungeon/dungeon.png" width="224" height="320"/>
   <tile id="23">
    <properties>
     <property name="Collision" type="bool" value="true"/>
@@ -449,7 +449,7 @@
   </tile>
  </tileset>
  <tileset firstgid="281" name="dungeonDecoration2" tilewidth="16" tileheight="16" tilecount="448" columns="32">
-  <image source="../../tilesets/dungeon/dungeonDecoration2.png" width="512" height="224"/>
+  <image source="../tilesets/dungeon/dungeonDecoration2.png" width="512" height="224"/>
   <tile id="97">
    <properties>
     <property name="collision" type="bool" value="true"/>

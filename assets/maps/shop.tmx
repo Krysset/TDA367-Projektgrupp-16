@@ -6,7 +6,7 @@
   <property name="transporter1" value="assets/maps/plains/plains1.tmx,6,0,4,21"/>
  </properties>
  <tileset firstgid="1" name="interior" tilewidth="16" tileheight="16" tilecount="285" columns="19">
-  <image source="../../tilesets/village/interior.png" width="304" height="240"/>
+  <image source="../tilesets/village/interior.png" width="304" height="240"/>
   <tile id="20">
    <properties>
     <property name="collision" type="bool" value="true"/>
@@ -714,7 +714,7 @@
   </tile>
  </tileset>
  <tileset firstgid="286" name="interiorDecoration" tilewidth="16" tileheight="16" tilecount="272" columns="16">
-  <image source="../../tilesets/village/interiorDecoration.png" width="256" height="272"/>
+  <image source="../tilesets/village/interiorDecoration.png" width="256" height="272"/>
   <tile id="17">
    <properties>
     <property name="boolean" type="bool" value="true"/>

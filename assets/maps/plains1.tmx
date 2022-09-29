@@ -7,10 +7,10 @@
   <property name="transporter2" value="assets/maps/shop/shop.tmx,4,22,6,1"/>
  </properties>
  <tileset firstgid="1" name="forest_" tilewidth="16" tileheight="16" tilecount="540" columns="15">
-  <image source="../../tilesets/forest/forest_.png" width="240" height="576"/>
+  <image source="../tilesets/forest/forest_.png" width="240" height="576"/>
  </tileset>
  <tileset firstgid="541" name="forestCliff_" tilewidth="16" tileheight="16" tilecount="1098" columns="18">
-  <image source="../../tilesets/forest/forestCliff_.png" width="288" height="976"/>
+  <image source="../tilesets/forest/forestCliff_.png" width="288" height="976"/>
   <tile id="883">
    <properties>
     <property name="collision" type="bool" value="true"/>
@@ -103,7 +103,7 @@
   </tile>
  </tileset>
  <tileset firstgid="1639" name="villageRed" tilewidth="16" tileheight="16" tilecount="675" columns="27">
-  <image source="../../tilesets/village/villageRed.png" width="432" height="400"/>
+  <image source="../tilesets/village/villageRed.png" width="432" height="400"/>
   <tile id="35">
    <properties>
     <property name="collision" type="bool" value="true"/>
@@ -1189,7 +1189,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2235,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2238,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,2238,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
