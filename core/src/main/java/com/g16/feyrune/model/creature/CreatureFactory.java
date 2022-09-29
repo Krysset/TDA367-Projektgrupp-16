@@ -15,6 +15,9 @@ public class CreatureFactory {
         BaseAbility[] baseAbilityList = AbilityFactory.createAbilityList(abilities);
         return new BaseCreature(health,power, speed, evasion, baseAbilityList);
     }
+    public static ICreature createCreature(){
+        return createCreature(new String[]{"Attack"}, 100, 10, 10, 10);
+    }
     public static ICreature[] createCreatureList(Pair<String, Integer>[] monsterList, int wantedAmount){
         ICreature[] iCreatures = new ICreature[wantedAmount];
         for(int i = 0; i < wantedAmount; i++){

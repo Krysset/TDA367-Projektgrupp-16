@@ -26,7 +26,7 @@ public class Model implements IObserver{
         this.overworldModel = new OverworldModel(player);
         this.overworldModel.addObserver(this);
         this.observers = new ArrayList<>();
-        stateHandler = new StateHandler(ModelState.COMBAT);
+        stateHandler = new StateHandler(ModelState.WORLD);
         this.combatModel = new CombatModel(player, new Encounter(new ICreature[]{CreatureFactory.createCreature()}));
 
     }
@@ -64,7 +64,7 @@ public class Model implements IObserver{
 
     private void notifyObservers() {
         for (IObserver observer : observers) {
-            observer.update();
+            observer.observerUpdate();
         }
     }
 

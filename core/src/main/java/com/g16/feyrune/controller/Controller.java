@@ -23,7 +23,7 @@ public class Controller implements IObserver {
         stateHandler = model.getStateHandler();
         model.registerNewObserver(this);
 
-        update();
+        observerUpdate();
     }
 
     @Override
