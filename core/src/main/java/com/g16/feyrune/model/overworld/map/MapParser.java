@@ -27,7 +27,7 @@ public class MapParser {
 
         Pair<Integer, Integer> mapSize = getMapSize(doc);
 
-        Point startPos = getMapStartPos(doc);
+        Pair<Point, Iterable<Transporter>> mapStartPosAndTransporters = getMapStartPos(doc);
 
         List<Integer> collisionIds = parseCollisionIds(doc);
 
@@ -35,13 +35,21 @@ public class MapParser {
 
         int[][][] collisionMap = createCollisionMap(collisionList, mapSize);
 
-        return generateTileMap(collisionMap, startPos);
+        return generateTileMap(collisionMap, mapStartPosAndTransporters.getFst(), mapStartPosAndTransporters.getSnd());
     }
 
-    private static Point getMapStartPos(Document doc) {
+    /**
+     * This method gets properties of the map.
+     *
+     * @param doc The document containing the map file.
+     * @return A {@link Pair} containing the start position and an iterable of transporters on the map.
+     */
+    private static Pair<Point, Iterable<Transporter>> getMapStartPos(Document doc) {
         Point startPos = new Point();
+        List<Transporter> transporters = new ArrayList<>();
         boolean isXSet = false;
         boolean isYSet = false;
+
         Node mapNode = doc.getElementsByTagName("map").item(0);
         NodeList mapChildNodes = mapNode.getChildNodes();
         // To avoid ghost nodes
@@ -49,34 +57,45 @@ public class MapParser {
             Node currentMapChild = mapChildNodes.item(i);
             if (currentMapChild.getNodeName().equals("properties")) {
                 NodeList propertyNodes = currentMapChild.getChildNodes();
-                int j = 0;
                 // Iterate through every property until we set a new x and y value
-                while(!isXSet | !isYSet) {
+                for(int j = 0; j < propertyNodes.getLength(); j++) {
                     Node propertyNode = propertyNodes.item(j);
                     // Need to check if it's a property node because of ghost nodes
                     if(propertyNode.getNodeName().equals("property")) {
                         NamedNodeMap nodeAttributes = propertyNode.getAttributes();
                         if (nodeAttributes.getNamedItem("name") != null) {
-                            if (nodeAttributes.getNamedItem("name").getNodeValue().equals("startx")) {
+                            String nodeName = nodeAttributes.getNamedItem("name").getNodeValue();
+
+                            if (nodeName.equals("startx")) {
                                 startPos.x = Integer.parseInt(nodeAttributes.getNamedItem("value").getNodeValue());
                                 isXSet = true;
-                            } else if (nodeAttributes.getNamedItem("name").getNodeValue().equals("starty")) {
+                            } else if (nodeName.equals("starty")) {
                                 startPos.y = Integer.parseInt(nodeAttributes.getNamedItem("value").getNodeValue());
                                 isYSet = true;
+                            } else if(nodeName.startsWith("transporter")) {
+                                // Looks like this in the map file:
+                                // <property name="transporter1" value="assets/maps/map1.tmx,1,1,2,2"/>
+                                String[] split = nodeName.split(",");
+
+                                String mapAssetPath = split[0];
+                                int fromX = Integer.parseInt(split[1]);
+                                int fromY = Integer.parseInt(split[2]);
+                                int toX = Integer.parseInt(split[3]);
+                                int toY = Integer.parseInt(split[4]);
+
+                                Transporter transporter = new Transporter(mapAssetPath, new Point(fromX, fromY), new Point(toX, toY));
+                                transporters.add(transporter);
                             }
                         }
                     }
-                    j++;
                 }
-            } else if (isXSet & isYSet) {
-                break;
             }
         }
 
         if (!isXSet & !isYSet) {
             throw new RuntimeException("Startposition for map not found");
         }
-        return startPos;
+        return new Pair<>(startPos, (Iterable<Transporter>) transporters);
     }
 
     /**
@@ -85,7 +104,7 @@ public class MapParser {
      * @param collisionMap The collision map.
      * @return A {@link Map} based on the collision map.
      */
-    private static Map generateTileMap(int[][][] collisionMap, Point startPos) {
+    private static Map generateTileMap(int[][][] collisionMap, Point startPos, Iterable<Transporter> transporters) {
         Tile[][] tiles = new Tile[collisionMap[0].length][collisionMap.length];
 
         for (int i = 0; i < collisionMap.length; i++) {
@@ -97,11 +116,26 @@ public class MapParser {
                         break;
                     }
                 }
-                boolean encounter = (Random.randomInt(100)>50)?true:false;
+                boolean encounter = (Random.randomInt(100)>90) ? true : false;
                 tiles[j][i] = new Tile(collision, encounter);
             }
         }
+
+        addTransportersToTiles(tiles, transporters);
+
         return new Map(tiles, startPos.x, startPos.y);
+    }
+
+    /**
+     * This method adds transporters to the tiles. Modifies in place.
+     *
+     * @param tiles The tiles.
+     * @param transporters The transporters.
+     */
+    private static void addTransportersToTiles(Tile[][] tiles, Iterable<Transporter> transporters) {
+        for(Transporter transporter : transporters) {
+            tiles[transporter.getFromX()][transporter.getFromY()].setTransporter(transporter);
+        }
     }
 
     /**
