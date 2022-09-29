@@ -75,7 +75,7 @@ public class MapParser {
                             } else if(nodeName.startsWith("transporter")) {
                                 // Looks like this in the map file:
                                 // <property name="transporter1" value="assets/maps/map1.tmx,1,1,2,2"/>
-                                String[] split = nodeName.split(",");
+                                String[] split = nodeAttributes.getNamedItem("value").getNodeValue().split(",");
 
                                 String mapAssetPath = split[0];
                                 int fromX = Integer.parseInt(split[1]);
@@ -116,7 +116,8 @@ public class MapParser {
                         break;
                     }
                 }
-                boolean encounter = (Random.randomInt(100)>90) ? true : false;
+//                boolean encounter = (Random.randomInt(100)>90) ? true : false;
+                boolean encounter = false;
                 tiles[j][i] = new Tile(collision, encounter);
             }
         }

@@ -1,5 +1,7 @@
 package com.g16.feyrune.model.overworld.map;
 
+import java.awt.*;
+
 public class Tile {
     private final boolean collision;
     private boolean canEncounter;
@@ -28,5 +30,13 @@ public class Tile {
     }
     protected void setTransporter(Transporter transporter) {
         this.transporter = transporter;
+    }
+
+    protected Point getTransportCoordinates(){
+        return transporter.getTransitionTo();
+    }
+
+    protected String getTransportMapAssetPath(){
+        return transporter.getMapAssetPath();
     }
 }

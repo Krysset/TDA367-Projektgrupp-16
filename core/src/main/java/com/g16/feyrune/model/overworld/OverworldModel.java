@@ -37,13 +37,19 @@ public class OverworldModel {
     public void movePlayer() {
         Point deltaPos = movementHandler.calculateMovement(player.getCoordinates(), map);
         player.move(deltaPos.x, deltaPos.y);
-        if (isInEncounter()) {
+        if (reachedTransporter()) {
+            map.useTransporter(player.getCoordinates());
+            player.setPosition(map.getStartPosX(), map.getStartPosY());
+        } else if (isInEncounter()) {
             movementHandler.resetMovement();
             encounterHandler.createEncounter(map.getTerrainType());
             notifyObservers();
         }
     }
 
+    public boolean reachedTransporter() {
+        return map.hasTransporter(player.getCoordinates());
+    }
     public boolean isInEncounter(){
         return map.tryEncounter(player.getCoordinates());
     }
