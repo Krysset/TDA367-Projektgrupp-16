@@ -10,15 +10,15 @@ public class Map {
     private final Tile[][] tiles;
     private final int width;
     private final int height;
-    private final int startPosX;
-    private final int startPosY;
+    private static int startPosX;
+    private static int startPosY;
 
     protected Map(Tile[][] tiles, int startPosX, int startPosY) {
         this.tiles = tiles;
         this.width = tiles.length;
         this.height = tiles[0].length;
-        this.startPosX = startPosX;
-        this.startPosY = startPosY;
+        Map.startPosX = startPosX;
+        Map.startPosY = startPosY;
     }
 
     public int getWidth() {
@@ -65,5 +65,16 @@ public class Map {
 
     public int getStartPosY() {
         return startPosY;
+    }
+
+    public boolean hasTransporter(Point playerPos){
+        return getTile(playerPos).hasTransporter();
+    }
+    public void useTransporter(Point playerCoordinates) {
+        Point transportCoordinates = getTile(playerCoordinates).getTransportCoordinates();
+        String mapAssetPath = getTile(playerCoordinates).getTransportMapAssetPath();
+        globalMap = MapParser.parseMapFile(mapAssetPath);
+        startPosX = transportCoordinates.x;
+        startPosY = transportCoordinates.y;
     }
 }
