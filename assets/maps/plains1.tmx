@@ -5,6 +5,7 @@
   <property name="starty" type="int" value="10"/>
   <property name="transporter1" value="assets/maps/dungeon1.tmx,6,16,11,2"/>
   <property name="transporter2" value="assets/maps/shop.tmx,4,22,6,1"/>
+  <property name="transporter3" value="assets/maps/villagehouse.tmx,16,23,9,1"/>
  </properties>
  <tileset firstgid="1" name="forest_" tilewidth="16" tileheight="16" tilecount="540" columns="15">
   <image source="../tilesets/forest/forest_.png" width="240" height="576"/>
@@ -1109,6 +1110,9 @@
     <property name="collision" type="bool" value="true"/>
    </properties>
   </tile>
+ </tileset>
+ <tileset firstgid="2314" name="interior" tilewidth="16" tileheight="16" tilecount="285" columns="19">
+  <image source="../tilesets/village/interior.png" width="304" height="240"/>
  </tileset>
  <layer id="2" name="Terrain" width="30" height="30">
   <data encoding="csv">
