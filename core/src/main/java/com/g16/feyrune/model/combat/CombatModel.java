@@ -1,11 +1,14 @@
 package com.g16.feyrune.model.combat;
 
+import com.g16.feyrune.controller.combat.ICombatController;
 import com.g16.feyrune.interfaces.ICombatAction;
 import com.g16.feyrune.interfaces.ICombatCreature;
+import com.g16.feyrune.model.creature.CreatureFactory;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.combat.creatures.EnemyCreature;
 import com.g16.feyrune.model.combat.creatures.PlayerCreature;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 
@@ -15,40 +18,77 @@ public class CombatModel {
     private ArrayList<Integer> savedCombatCreatureSpeed;
     private ArrayList<ICombatCreature> turnOrder;
     private int speedThreshold = 250;
+    private boolean hasSelectedAction = true;
+    private boolean combatIsOver = false;
 
-
+    public CombatModel(){
+        player=null;
+        combatCreatures=null;
+    }
     public CombatModel(Player player, Encounter encounter) {
         this.player = player;
         combatCreatures = new ArrayList<>();
+        savedCombatCreatureSpeed = new ArrayList<>();
         fillCombatCreatureList(player, encounter);
         generateNewAttackOrder();
     }
 
     public void fillCombatCreatureList(Player player, Encounter encounter) {
-        combatCreatures.add(new PlayerCreature(encounter.getEnemyCreature()[0])); // FIX: Should be player.getMonster()
+        combatCreatures.add(new PlayerCreature(CreatureFactory.createCreature())); // FIX: Should be player.getMonster()
         combatCreatures.add(new EnemyCreature(encounter.getEnemyCreature()[0])); //TODO: SHOUD NOT BE INDEXED LIKE THIS
         for (int i = 0; i < combatCreatures.size(); i++) {
             savedCombatCreatureSpeed.add(combatCreatures.get(i).getSpeed());
         }
     }
 
-    public void startCombatLoop() {
-        while(true) {
-            ICombatCreature actor = turnOrder.get(0);
-            turnOrder.remove(0);
-            ICombatCreature target = choiceTarget(actor); // TODO: Replace with choose target
-            ICombatAction action = actor.selectAction(actor, target);
-            boolean actionEndedCombat = action.executeMove(actor, target);
-            generateAttackOrder();
-            if (actionEndedCombat) {
-                break;
-            }
+    public void update(){
+        combatLoop();
+    }
+
+    public void combatLoop(){
+        ICombatCreature actor = turnOrder.get(0);
+        ICombatCreature target = choiceTarget(actor); // TODO: Replace with choose target
+        ICombatAction action = actor.selectAction(target);
+
+        // The player has not selected an action this render pass,
+        // therefore stop doing the loop this current iteration.
+        if (action == null) return;
+        turnOrder.remove(0);
+        System.out.println(getCurrentActorName(actor) + " attacked");
+        System.out.println(combatCreatures.get(0).getHP() + " " + combatCreatures.get(1).getHP());
+        boolean actionEndedCombat = action.executeMove(actor, target);
+        generateAttackOrder();
+        if (actionEndedCombat) {
+            endCombat();
+        }
+    }
+
+    private String getCurrentActorName(ICombatCreature actor) {
+        if (actor instanceof PlayerCreature) {
+            return "Player";
+        } else {
+            return "Enemy";
+        }
+    }
+
+    private void endCombat(){
+        combatIsOver = true;
+    }
+
+    public boolean getCombatIsOver(){
+        return combatIsOver;
+    }
 
 
-            if (combatCreatures.size() == 1) {
-                break;
+    // Does not currently work if player has > 1 creature in combat
+    public PlayerCreature getPlayerCreature() {
+        for (ICombatCreature combatCreature : combatCreatures) {
+            if (combatCreature instanceof PlayerCreature) {
+                return (PlayerCreature) combatCreature;
             }
         }
+        // If the player monster is not found, something is wrong
+        throw new RuntimeException("Missing PlayerCreature in list of combat creatures");
     }
 
     //TODO: THIS IS BAD CODE NEED TO FIX AT LATER DATE
