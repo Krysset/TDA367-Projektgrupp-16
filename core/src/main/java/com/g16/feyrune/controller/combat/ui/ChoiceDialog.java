@@ -1,6 +1,8 @@
 package com.g16.feyrune.controller.combat.ui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -18,11 +20,14 @@ public class ChoiceDialog {
     private Texture texture;
     private float width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight()/4;
     private Point pos = new Point(0-(int)width/2,0-(int)height*3/2);
+    private Camera camera;
     private CombatInputHandler inputHandler;
     private BitmapFont font;
 
     public ChoiceDialog(CombatInputHandler inputHandler){ //TODO: Everything from here is coded to work, not look good :)
         this.inputHandler = inputHandler;
+        this.camera = new OrthographicCamera(width,height*3);
+
 
         font = new BitmapFont(Gdx.files.internal("assets/fonts/superAwesomeFont.fnt"),
                 Gdx.files.internal("assets/fonts/superAwesomeFont.png"),false);
@@ -41,7 +46,8 @@ public class ChoiceDialog {
     }
 
     public void render(Batch batch){
-        batch.draw(texture,0,0,width,height);
+        batch.setProjectionMatrix(camera.projection);
+        batch.draw(texture,pos.x,pos.y,width,height);
         for (ChoiceButton button : buttons) {
             button.render(inputHandler.getCurrentSelection() == button.getButtonSelection(), batch);
         }
