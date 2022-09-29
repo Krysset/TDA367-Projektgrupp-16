@@ -4,10 +4,13 @@ import com.g16.feyrune.Util.Pair;
 import com.g16.feyrune.Util.Parser;
 import com.g16.feyrune.Util.Random;
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class handle all operations related to the parsing of map files.
@@ -24,14 +27,56 @@ public class MapParser {
 
         Pair<Integer, Integer> mapSize = getMapSize(doc);
 
-        ArrayList<Integer> collisionIds = parseCollisionIds(doc);
-        ArrayList<Integer> gIds = parseGIdList(doc);
+        Point startPos = getMapStartPos(doc);
+
+        List<Integer> collisionIds = parseCollisionIds(doc);
 
         int[][] collisionList = generateCollisionIdList(doc, collisionIds, mapSize, true);
 
         int[][][] collisionMap = createCollisionMap(collisionList, mapSize);
 
-        return generateTileMap(collisionMap);
+        return generateTileMap(collisionMap, startPos);
+    }
+
+    private static Point getMapStartPos(Document doc) {
+        Point startPos = new Point();
+        boolean isXSet = false;
+        boolean isYSet = false;
+        Node mapNode = doc.getElementsByTagName("map").item(0);
+        NodeList mapChildNodes = mapNode.getChildNodes();
+        // To avoid ghost nodes
+        for (int i = 0; i < mapChildNodes.getLength(); i++) {
+            Node currentMapChild = mapChildNodes.item(i);
+            if (currentMapChild.getNodeName().equals("properties")) {
+                NodeList propertyNodes = currentMapChild.getChildNodes();
+                int j = 0;
+                // Iterate through every property until we set a new x and y value
+                while(!isXSet | !isYSet) {
+                    Node propertyNode = propertyNodes.item(j);
+                    // Need to check if it's a property node because of ghost nodes
+                    if(propertyNode.getNodeName().equals("property")) {
+                        NamedNodeMap nodeAttributes = propertyNode.getAttributes();
+                        if (nodeAttributes.getNamedItem("name") != null) {
+                            if (nodeAttributes.getNamedItem("name").getNodeValue().equals("startx")) {
+                                startPos.x = Integer.parseInt(nodeAttributes.getNamedItem("value").getNodeValue());
+                                isXSet = true;
+                            } else if (nodeAttributes.getNamedItem("name").getNodeValue().equals("starty")) {
+                                startPos.y = Integer.parseInt(nodeAttributes.getNamedItem("value").getNodeValue());
+                                isYSet = true;
+                            }
+                        }
+                    }
+                    j++;
+                }
+            } else if (isXSet & isYSet) {
+                break;
+            }
+        }
+
+        if (!isXSet & !isYSet) {
+            throw new RuntimeException("Startposition for map not found");
+        }
+        return startPos;
     }
 
     /**
@@ -40,7 +85,7 @@ public class MapParser {
      * @param collisionMap The collision map.
      * @return A {@link Map} based on the collision map.
      */
-    private static Map generateTileMap(int[][][] collisionMap) {
+    private static Map generateTileMap(int[][][] collisionMap, Point startPos) {
         Tile[][] tiles = new Tile[collisionMap[0].length][collisionMap.length];
 
         for (int i = 0; i < collisionMap.length; i++) {
@@ -56,7 +101,7 @@ public class MapParser {
                 tiles[j][i] = new Tile(collision, encounter);
             }
         }
-        return new Map(tiles);
+        return new Map(tiles, startPos.x, startPos.y);
     }
 
     /**
@@ -88,7 +133,7 @@ public class MapParser {
      * @param mapSize The size of the map.
      * @return A list of whether a tile has collision or not.
      */
-    private static int[][] generateCollisionIdList(Document doc, ArrayList<Integer> gIds, Pair<Integer, Integer> mapSize, boolean printBinary) {
+    private static int[][] generateCollisionIdList(Document doc, List<Integer> gIds, Pair<Integer, Integer> mapSize, boolean printBinary) {
         // Get all the layer nodes, as collisions could exist on multiple layers.
         NodeList layerNodes = doc.getElementsByTagName("layer");
 
@@ -158,18 +203,6 @@ public class MapParser {
         }
 
         return collisionIds;
-    }
-
-    private static ArrayList<Integer> parseGIdList(Document doc){
-        NodeList nodes = doc.getElementsByTagName("tileset");
-        Node node = nodes.item(0);
-        int tileCount = Integer.parseInt(node.getAttributes().getNamedItem("tilecount").getNodeValue());
-
-        ArrayList<Integer> gIds = new ArrayList<>();
-        for(int i = 0; i < tileCount; i++){
-            gIds.add(i);
-        }
-        return gIds;
     }
 
     /**

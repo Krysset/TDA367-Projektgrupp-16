@@ -5,7 +5,6 @@ import com.g16.feyrune.enums.ModelState;
 public class StateHandler {
     private ModelState currentModelState;
 
-
     public StateHandler(ModelState currentModelState){
         this.currentModelState = currentModelState;
     }
