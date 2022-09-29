@@ -41,6 +41,10 @@ public class MovementHandler {
         Point dir = adjustDirectionForCollision(coordinates, map);
         return dir;
     }
+    public void resetMovement(){
+        dirX = 0;
+        dirY = 0;
+    }
 
     /**
      * Adjust the x and y direction values to avoid collision.

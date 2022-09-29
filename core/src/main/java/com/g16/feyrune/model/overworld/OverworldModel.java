@@ -38,6 +38,7 @@ public class OverworldModel {
         Point deltaPos = movementHandler.calculateMovement(player.getCoordinates(), map);
         player.move(deltaPos.x, deltaPos.y);
         if (isInEncounter()) {
+            movementHandler.resetMovement();
             encounterHandler.createEncounter(map.getTerrainType());
             notifyObservers();
         }
