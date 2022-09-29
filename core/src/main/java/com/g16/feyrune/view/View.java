@@ -45,6 +45,7 @@ public class View implements IObserver {
     }
 
     private void changeScene(ModelState state) {
+
         switch (state){
             case WORLD:
                 currentScene = overworldScene;

@@ -16,8 +16,8 @@ public class ChoiceDialog {
     private List<ChoiceButton> buttons;
     private String spritePath = "assets/ui/choiceDialog.png";
     private Texture texture;
-    private float width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight() / 4;
-    private Point pos = new Point(0,0);
+    private float width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
+    private Point pos = new Point(0-(int)width/2,0-(int)height*3/2);
     private CombatInputHandler inputHandler;
     private BitmapFont font;
 

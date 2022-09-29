@@ -28,7 +28,6 @@ public class Model implements IObserver{
         this.observers = new ArrayList<>();
         stateHandler = new StateHandler(ModelState.WORLD);
         this.combatModel = new CombatModel(player, new Encounter(new ICreature[]{CreatureFactory.createCreature()}));
-
     }
 
     public void update() {
