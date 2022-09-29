@@ -20,6 +20,11 @@ public class CombatInputProcessor implements IInput, InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.A){
             inputHandler.changeSelection(Direction.LEFT);
         }
@@ -36,11 +41,6 @@ public class CombatInputProcessor implements IInput, InputProcessor {
             inputHandler.excecuteSelection();
         }
         return true;
-    }
-
-    @Override
-    public boolean keyDown(int keycode) {
-        return false;
     }
 
     @Override
