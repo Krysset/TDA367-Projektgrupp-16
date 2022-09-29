@@ -16,7 +16,7 @@ public class ChoiceDialog {
     private List<ChoiceButton> buttons;
     private String spritePath = "assets/ui/choiceDialog.png";
     private Texture texture;
-    private float width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
+    private float width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight()/4;
     private Point pos = new Point(0-(int)width/2,0-(int)height*3/2);
     private CombatInputHandler inputHandler;
     private BitmapFont font;
@@ -30,10 +30,14 @@ public class ChoiceDialog {
         texture = new Texture(Gdx.files.internal(spritePath));
 
         buttons = new ArrayList<>();
-        buttons.add(new ChoiceButton("Attack", Selection.FIRST, new Vector2(pos.x, (pos.y + height/2)),width/2,height/2, font));
-        buttons.add(new ChoiceButton("Monsters", Selection.SECOND, new Vector2((int)(pos.x + width/2), (pos.y + height/2)),width/2,height/2, font));
-        buttons.add(new ChoiceButton("Items", Selection.THIRD, new Vector2(pos.x, pos.y),width/2,height/2, font));
-        buttons.add(new ChoiceButton("Flee", Selection.FOURTH, new Vector2((pos.x + width/2), pos.y),width/2,height/2, font));
+        int bWidth=(int)width/2;
+        int midWidth = pos.x+bWidth;
+        int bHeight = (int)height/2;
+        int midHeight = pos.y+bHeight;
+        buttons.add(new ChoiceButton("Attack",  Selection.FIRST,    new Vector2(pos.x,      midHeight), bWidth,bHeight, font));
+        buttons.add(new ChoiceButton("Monsters",Selection.SECOND,   new Vector2(midWidth,   midHeight), bWidth,bHeight, font));
+        buttons.add(new ChoiceButton("Items",   Selection.THIRD,    new Vector2(pos.x,      pos.y),     bWidth,bHeight, font));
+        buttons.add(new ChoiceButton("Flee",    Selection.FOURTH,   new Vector2(midWidth,   pos.y),     bWidth,bHeight, font));
     }
 
     public void render(Batch batch){
