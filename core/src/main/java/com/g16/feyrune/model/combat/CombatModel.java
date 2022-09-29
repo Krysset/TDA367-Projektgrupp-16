@@ -20,6 +20,7 @@ public class CombatModel {
     private int speedThreshold = 250;
     private boolean hasSelectedAction = true;
     private boolean combatIsOver = false;
+    private Encounter encounter;
 
 
     public CombatModel(Player player, Encounter encounter) {
@@ -28,14 +29,19 @@ public class CombatModel {
         savedCombatCreatureSpeed = new ArrayList<>();
         fillCombatCreatureList(player, encounter);
         generateNewAttackOrder();
+        this.encounter = encounter;
     }
 
     public void fillCombatCreatureList(Player player, Encounter encounter) {
-        combatCreatures.add(new PlayerCreature(CreatureFactory.createCreature())); // FIX: Should be player.getMonster()
+        combatCreatures.add(new PlayerCreature(player.getCreature())); // FIX: Should be player.getMonster()
         combatCreatures.add(new EnemyCreature(encounter.getEnemyCreature()[0])); //TODO: SHOUD NOT BE INDEXED LIKE THIS
         for (int i = 0; i < combatCreatures.size(); i++) {
             savedCombatCreatureSpeed.add(combatCreatures.get(i).getSpeed());
         }
+    }
+
+    public ArrayList<ICombatCreature> getCombatCreatures() {
+        return combatCreatures;
     }
 
     public void update(){
@@ -76,6 +82,10 @@ public class CombatModel {
         return combatIsOver;
     }
 
+    public Encounter getEncounter(){
+        return encounter;
+    }
+
 
     // Does not currently work if player has > 1 creature in combat
     public PlayerCreature getPlayerCreature() {
@@ -92,10 +102,10 @@ public class CombatModel {
     private ICombatCreature choiceTarget(ICombatCreature actor){
         int i = combatCreatures.indexOf(actor);
         ICombatCreature target;
-        if (i == combatCreatures.size() - 1) {
-            target = combatCreatures.get(i);
+        if (i == 0) {
+            target = combatCreatures.get(1);
         } else {
-            target = combatCreatures.get(i + 1);
+            target = combatCreatures.get(0);
         }
         return target;
     }

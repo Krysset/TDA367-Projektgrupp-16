@@ -10,7 +10,7 @@ public class attackAction implements ICombatAction {
     @Override
     public boolean executeMove(ICombatCreature actor, ICombatCreature target) {
         int moveSelection = Random.randomInt(actor.getMoves().size());
-        AttackHandler.handleAttack(actor,target,actor.getMoves().get(moveSelection));
+        AttackHandler.handleAttack(actor,target,actor.getMoves().get(0));
         return target.getHP() <= 0;
     }
 }

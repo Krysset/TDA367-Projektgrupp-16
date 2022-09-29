@@ -28,6 +28,7 @@ public class AttackHandler {
      */
     private static int calculateDamage(ICombatCreature attacker, IAbility attack){
         int damage = attacker.getPower() * attack.getAttackPower();
+        int power = attacker.getPower(), atkPower = attack.getAttackPower();
         return damage;
     }
 

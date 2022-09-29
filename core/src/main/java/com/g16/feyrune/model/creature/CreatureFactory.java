@@ -11,8 +11,8 @@ public class CreatureFactory {
      */
     public static ICreature createCreature() {
         BaseAbility[] baseAbilityList = new BaseAbility[1];
-        baseAbilityList[0] = new BaseAbility(100,100,"SuperAwesomeBaseAttack");
-        return new BaseCreature(100,75,50,33, baseAbilityList);
+        baseAbilityList[0] = new BaseAbility(70,100,"SuperAwesomeBaseAttack");
+        return new BaseCreature(500,10,50,35, baseAbilityList);
 
     }
     public static ICreature[] createCreatureList(Pair<Integer, Integer>[] monsterList){

@@ -3,6 +3,7 @@ package com.g16.feyrune.model.player;
 import com.badlogic.gdx.graphics.Texture;
 import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.interfaces.IObserver;
+import com.g16.feyrune.model.creature.CreatureFactory;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Player {
         this.coordinates = coordinates;
         texture = new Texture("assets/hero/humanmale/humanMale.png");
         this.observers = new ArrayList<>();
+        creature = CreatureFactory.createCreature();
     }
 
     public void move(int deltaX, int deltaY) {

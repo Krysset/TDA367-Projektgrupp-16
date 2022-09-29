@@ -1,6 +1,7 @@
 package com.g16.feyrune.model;
 
 import com.g16.feyrune.enums.ModelState;
+import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.combat.CombatModel;
@@ -54,6 +55,14 @@ public class Model {
 
     public PlayerCreature getPlayerCreature() {
         return combatModel.getPlayerCreature();
+    }
+
+    public Encounter getEncounter(){
+        return combatModel.getEncounter();
+    }
+
+    public ArrayList<ICombatCreature> getCombatCreatures() {
+        return combatModel.getCombatCreatures();
     }
 
     public void registerNewObserver(IObserver observer) {

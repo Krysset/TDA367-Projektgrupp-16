@@ -7,6 +7,17 @@ import com.badlogic.gdx.graphics.Texture;
 public class Image {
 
     /**
+     * Creates a copy of a texture that takes its size into considerition.
+     * @param texture The texture to copy
+     * @return
+     */
+    public static Texture copy(Texture texture){
+        String path = texture.toString();
+        Texture newTexture = new Texture(Gdx.files.internal(texture.toString()));
+        return resize(newTexture, newTexture.getWidth()/texture.getWidth(), newTexture.getHeight()/texture.getHeight());
+    }
+
+    /**
      * Resizes the given texture to the given scaler using a nearest neighbour algorithm.
      * @param texture The texture to resize.
      * @param scaleXY The scale factor.

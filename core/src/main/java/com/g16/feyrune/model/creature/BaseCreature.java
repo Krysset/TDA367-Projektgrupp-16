@@ -72,7 +72,7 @@ public class BaseCreature implements ICreature {
 
     @Override
     public boolean isDead() {
-        return health <= 0;
+        return health == 0;
     }
 
     @Override

@@ -36,6 +36,9 @@ public class View implements IObserver {
     public void update(){
         ModelState currentModelState = model.getCurrentModelState();
         changeScene(currentModelState);
+        if(currentModelState == ModelState.COMBAT){
+            combatScene.renderNewCombat(model.getEncounter(), model.getPlayer(), model.getCombatCreatures());
+        }
         currentScene.update();
     }
 

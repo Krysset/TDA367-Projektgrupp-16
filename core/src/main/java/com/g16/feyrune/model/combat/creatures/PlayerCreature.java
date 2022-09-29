@@ -45,12 +45,12 @@ public class PlayerCreature implements ICombatCreature {
 
     @Override
     public int getPower() {
-        return 0;
+        return creature.getPower();
     }
 
     @Override
     public void takeDamage(int damage) {
-
+        creature.takeDamage(damage);
     }
 
     @Override
