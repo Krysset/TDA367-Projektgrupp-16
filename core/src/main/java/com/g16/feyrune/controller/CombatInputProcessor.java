@@ -1,12 +1,12 @@
-package com.g16.feyrune.controller.combat;
+package com.g16.feyrune.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
+import com.g16.feyrune.controller.combat.CombatInputHandler;
 import com.g16.feyrune.controller.enums.Direction;
-import com.g16.feyrune.controller.IInput;
+import com.g16.feyrune.interfaces.IInput;
 
-public class CombatInputProcessor implements IInput, InputProcessor {
+public class CombatInputProcessor implements IInput {
     private CombatInputHandler inputHandler;
 
     public CombatInputProcessor(CombatInputHandler inputHandler){
@@ -31,9 +31,6 @@ public class CombatInputProcessor implements IInput, InputProcessor {
         }
         if (keycode == Input.Keys.S){
             inputHandler.changeSelection(Direction.DOWN);
-        }
-        if (keycode == Input.Keys.ENTER){
-            inputHandler.excecuteSelection();
         }
         return true;
     }
