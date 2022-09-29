@@ -21,7 +21,10 @@ public class CombatModel {
     private boolean hasSelectedAction = true;
     private boolean combatIsOver = false;
 
-
+    public CombatModel(){
+        player=null;
+        combatCreatures=null;
+    }
     public CombatModel(Player player, Encounter encounter) {
         this.player = player;
         combatCreatures = new ArrayList<>();
