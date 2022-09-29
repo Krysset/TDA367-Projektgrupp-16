@@ -1,6 +1,5 @@
 package com.g16.feyrune.model.combat.creatures;
 
-import com.g16.feyrune.controller.combat.ICombatController;
 import com.g16.feyrune.interfaces.ICombatAction;
 import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.interfaces.ICreature;
@@ -11,7 +10,6 @@ import java.util.List;
 
 public class PlayerCreature implements ICombatCreature {
     private ICreature creature;
-    private ICombatController combatController;
 
     public PlayerCreature(ICreature creature) {
         this.creature = creature;
@@ -34,13 +32,8 @@ public class PlayerCreature implements ICombatCreature {
     }
 
     @Override
-    public ICombatAction selectAction(ICombatCreature target) {
-        // There has to be a better way to do this,
-        // but currently I just want to get it working.
-        if(combatController.hasSelectedAction()) {
-            return combatController.getPlayerActionFromController(this);
-        }
-        return null;
+    public ICombatAction selectAction(ICombatCreature actor, ICombatCreature target) {
+        throw new NotImplementedException(); //TODO: NOT IMPLEMENTED
     }
 
     @Override
@@ -56,10 +49,6 @@ public class PlayerCreature implements ICombatCreature {
     @Override
     public boolean isDead() {
         return false;
-    }
-
-    public void registerCombatController(ICombatController combatController) {
-        this.combatController = combatController;
     }
 
 }

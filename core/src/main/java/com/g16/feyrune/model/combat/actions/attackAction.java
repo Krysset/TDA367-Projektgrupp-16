@@ -11,6 +11,6 @@ public class attackAction implements ICombatAction {
     public boolean executeMove(ICombatCreature actor, ICombatCreature target) {
         int moveSelection = Random.randomInt(actor.getMoves().size());
         AttackHandler.handleAttack(actor,target,actor.getMoves().get(moveSelection));
-        return target.getHP() <= 0;
+        return false;
     }
 }

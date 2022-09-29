@@ -15,9 +15,6 @@ public class CreatureFactory {
         BaseAbility[] baseAbilityList = AbilityFactory.createAbilityList(abilities);
         return new BaseCreature(health,power, speed, evasion, baseAbilityList);
     }
-    public static ICreature createCreature(){
-        return createCreature(new String[]{"Attack"}, 100, 10, 10, 10);
-    }
     public static ICreature[] createCreatureList(Pair<String, Integer>[] monsterList, int wantedAmount){
         ICreature[] iCreatures = new ICreature[wantedAmount];
         for(int i = 0; i < wantedAmount; i++){
@@ -45,11 +42,11 @@ public class CreatureFactory {
     private static ICreature createCreatureByName(String name){
         switch (name){
             case "SuperAwesomeBaseMonster":
-                return createCreature(new String[]{"SuperAwesomeBaseAbility"}, 100, 100, 10, 10);
+                return createCreature(new String[]{"SuperAwesomeBaseAbility"}, 100, 100, 100, 100);
             case "SuperBadBaseMonster":
-                return createCreature(new String[]{"SuperBadBaseAbility"}, 100, 100, 25, 1);
+                return createCreature(new String[]{"SuperBadBaseAbility"}, 100, 100, 100, 100);
             default:
-                return createCreature(new String[]{"SuperBasicBaseAbility"}, 100, 100, 1, 1);
+                return createCreature(new String[]{"SuperBasicBaseAbility"}, 100, 100, 100, 100);
         }
     }
 }
