@@ -24,7 +24,7 @@ public class OverworldScene implements IScene, IObserver {
         this.batch = batch;
         this.camera = new OrthographicCamera(180 ,90);
         pr = new PlayerRenderer(player);
-        textureMap = TextureMapParser.parseMapFile("assets/maps/dungeon/dungeon1.tmx");
+        textureMap = TextureMapParser.parseMapFile("assets/maps/plains1.tmx");
     }
 
     @Override

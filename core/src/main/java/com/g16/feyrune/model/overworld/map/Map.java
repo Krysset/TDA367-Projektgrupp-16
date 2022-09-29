@@ -42,7 +42,7 @@ public class Map {
             // "assets/maps/plains1.tmx"
             // "assets/maps/shop.tmx"
             // "assets/maps/villagehouse.tmx"
-            globalMap = MapParser.parseMapFile("assets/maps/dungeon1.tmx");
+            globalMap = MapParser.parseMapFile("assets/maps/plains1.tmx");
         }
         return globalMap;
     }
