@@ -3,6 +3,7 @@
  <properties>
   <property name="startx" type="int" value="6"/>
   <property name="starty" type="int" value="1"/>
+  <property name="transporter1" value="assets/maps/plains/plains1.tmx,6,0,4,21"/>
  </properties>
  <tileset firstgid="1" name="interior" tilewidth="16" tileheight="16" tilecount="285" columns="19">
   <image source="../../tilesets/village/interior.png" width="304" height="240"/>
