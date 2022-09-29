@@ -45,6 +45,7 @@ public class Controller implements IObserver {
                 worldInputProcessor.setAsInputProcessor();
                 break;
             case COMBAT:
+                combatController = new CombatController(model);
                 combatController.setAsInputProcessor();
                 break;
         }

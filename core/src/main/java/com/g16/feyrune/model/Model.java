@@ -80,6 +80,7 @@ public class Model implements IObserver{
     @Override
     public void observerUpdate() {
         if (overworldModel.isInEncounter()){
+            combatModel = new CombatModel(player, overworldModel.getEncounter());
             changeState(ModelState.COMBAT);
             overworldModel.removeEncounterFromPlayerTile();
         }

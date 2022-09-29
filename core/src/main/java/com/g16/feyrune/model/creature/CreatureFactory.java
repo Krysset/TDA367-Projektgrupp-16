@@ -45,11 +45,11 @@ public class CreatureFactory {
     private static ICreature createCreatureByName(String name){
         switch (name){
             case "SuperAwesomeBaseMonster":
-                return createCreature(new String[]{"SuperAwesomeBaseAbility"}, 100, 100, 100, 100);
+                return createCreature(new String[]{"SuperAwesomeBaseAbility"}, 100, 100, 10, 10);
             case "SuperBadBaseMonster":
-                return createCreature(new String[]{"SuperBadBaseAbility"}, 100, 100, 100, 100);
+                return createCreature(new String[]{"SuperBadBaseAbility"}, 100, 100, 25, 1);
             default:
-                return createCreature(new String[]{"SuperBasicBaseAbility"}, 100, 100, 100, 100);
+                return createCreature(new String[]{"SuperBasicBaseAbility"}, 100, 100, 1, 1);
         }
     }
 }

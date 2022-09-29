@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.interfaces.IScene;
+import com.g16.feyrune.model.overworld.encounter.Encounter;
+import com.g16.feyrune.model.overworld.encounter.EncounterHandler;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.view.player.PlayerRenderer;
 import com.g16.feyrune.view.textureMap.TextureMap;
@@ -49,5 +51,6 @@ public class OverworldScene implements IScene, IObserver {
         pr.draw(batch);
         batch.end();
     }
+
 
 }
