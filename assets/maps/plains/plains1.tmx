@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="1">
+ <properties>
+  <property name="startx" type="int" value="13"/>
+  <property name="starty" type="int" value="10"/>
+ </properties>
  <tileset firstgid="1" name="forest_" tilewidth="16" tileheight="16" tilecount="540" columns="15">
   <image source="../../tilesets/forest/forest_.png" width="240" height="576"/>
  </tileset>
