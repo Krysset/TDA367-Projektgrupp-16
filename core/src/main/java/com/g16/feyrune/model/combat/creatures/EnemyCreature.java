@@ -5,7 +5,6 @@ import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.model.combat.actions.abilities.BaseAbility;
 import com.g16.feyrune.interfaces.IAbility;
-import com.g16.feyrune.model.combat.actions.attackAction;
 
 import java.util.List;
 
@@ -17,8 +16,8 @@ public class EnemyCreature implements ICombatCreature {
     }
 
     @Override
-    public ICombatAction selectAction(ICombatCreature target) {
-        return new attackAction();
+    public ICombatAction selectAction(ICombatCreature actor, ICombatCreature target) {
+        return null;
     }
 
     public IAbility getMove() {

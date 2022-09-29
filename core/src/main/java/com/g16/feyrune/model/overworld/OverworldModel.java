@@ -1,7 +1,6 @@
 package com.g16.feyrune.model.overworld;
 
 import com.g16.feyrune.interfaces.IObserver;
-import com.g16.feyrune.model.overworld.encounter.Encounter;
 import com.g16.feyrune.model.overworld.encounter.EncounterHandler;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.overworld.map.Map;
@@ -59,8 +58,5 @@ public class OverworldModel {
         for (IObserver observer : observerList) {
             observer.observerUpdate();
         }
-    }
-    public Encounter getEncounter(){
-        return encounterHandler.createEncounter("dungeon");
     }
 }
