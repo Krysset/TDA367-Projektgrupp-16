@@ -38,10 +38,11 @@ public class Map {
 
     public static Map getGlobalMap() {
         if (globalMap == null) {
-            // "assets/maps/dungeon/dungeon1.tmx"
-            // "assets/maps/plains/plains1.tmx"
-            // "assets/maps/shop/shop.tmx"
-            globalMap = MapParser.parseMapFile("assets/maps/dungeon/dungeon1.tmx");
+            // "assets/maps/dungeon1.tmx"
+            // "assets/maps/plains1.tmx"
+            // "assets/maps/shop.tmx"
+            // "assets/maps/villagehouse.tmx"
+            globalMap = MapParser.parseMapFile("assets/maps/dungeon1.tmx");
         }
         return globalMap;
     }
