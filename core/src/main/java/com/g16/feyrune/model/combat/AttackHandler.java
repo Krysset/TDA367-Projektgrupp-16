@@ -15,7 +15,7 @@ public class AttackHandler {
      */
     public static void handleAttack(ICombatCreature attacker, ICombatCreature defender, IAbility attack){
         if (evasiveManoeuvre(defender, attack)){
-            int damage = calculateDamage(attacker, attack);
+            int damage = calculateDamage(attacker, defender, attack);
             defender.takeDamage(damage);
         }
     }
@@ -26,8 +26,8 @@ public class AttackHandler {
      * @param attack: the attack action used against the defender
      * @return damage dealt to the defender (only calculates, doesn't deal it)
      */
-    private static int calculateDamage(ICombatCreature attacker, IAbility attack){
-        int damage = attacker.getPower() * attack.getAttackPower();
+    private static int calculateDamage(ICombatCreature attacker,ICombatCreature defender, IAbility attack){
+        int damage = (int) ((double)(attacker.getPower() * ((double)attack.getAttackPower()/100))/defender.getDefense());
         return damage;
     }
 

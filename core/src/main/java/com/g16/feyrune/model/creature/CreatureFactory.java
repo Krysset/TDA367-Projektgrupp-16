@@ -1,19 +1,23 @@
 package com.g16.feyrune.model.creature;
 
 import com.g16.feyrune.Util.Random;
+import com.g16.feyrune.interfaces.IAbility;
 import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.model.combat.actions.AbilityFactory;
 import com.g16.feyrune.model.combat.actions.abilities.BaseAbility;
 import com.g16.feyrune.Util.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreatureFactory {
     /**
      *
      * @return a new Object of type ICreature
      */
-    public static ICreature createCreature(String[] abilities, double health, int power, int speed, int evasion) {
-        BaseAbility[] baseAbilityList = AbilityFactory.createAbilityList(abilities);
-        return new BaseCreature(health,power, speed, evasion, baseAbilityList);
+    public static ICreature createCreature(String[] abilities, double health, int power, int speed, int defense) {
+        List<IAbility> baseAbilityList = AbilityFactory.createAbilityList(abilities);
+        return new BaseCreature(health,power, speed, defense, baseAbilityList);
     }
     public static ICreature createCreature(){
         return createCreature(new String[]{"Attack"}, 100, 10, 10, 10);
@@ -45,11 +49,15 @@ public class CreatureFactory {
     private static ICreature createCreatureByName(String name){
         switch (name){
             case "SuperAwesomeBaseMonster":
-                return createCreature(new String[]{"SuperAwesomeBaseAbility"}, 100, 100, 10, 10);
+                return createCreature(new String[]{"SuperAwesomeBaseAbility"}, 250, 90, 10, 4);
             case "SuperBadBaseMonster":
-                return createCreature(new String[]{"SuperBadBaseAbility"}, 100, 100, 25, 1);
+                return createCreature(new String[]{"SuperBadBaseAbility"}, 50, 25, 25, 1);
+            case "ogre":
+                return createCreature(new String[]{"TankyTankAbility"}, 500, 10, 10, 4);
+            case "dragon":
+                return createCreature(new String[]{"StrongBoyAbility"}, 100, 90, 10, 4);
             default:
-                return createCreature(new String[]{"SuperBasicBaseAbility"}, 100, 100, 1, 1);
+                return createCreature(new String[]{"SuperBasicBaseAbility"}, 100, 50, 1, 1);
         }
     }
 }

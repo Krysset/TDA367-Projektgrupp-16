@@ -53,6 +53,9 @@ public class EnemyCreature implements ICombatCreature {
     public int getPower() {
         return creature.getPower();
     }
+    public int getDefense() {
+        return creature.getDefense();
+    }
 
     @Override
     public boolean isDead() {
