@@ -33,7 +33,7 @@ public class Model implements IObserver{
         this.combatModel = new CombatModel(player, new Encounter(new ICreature[]{CreatureFactory.createCreature()}));
     }
 
-    public void update() {
+    public void update() { //TODO: use stare pattern
         switch (stateHandler.getModelState()){
             case WORLD:
                 overworldModel.update();
@@ -48,6 +48,8 @@ public class Model implements IObserver{
         }
     }
 
+    public CombatModel getCombatModel(){return combatModel;}
+    public  Encounter getEncounter() {return overworldModel.getEncounter();}
     public StateHandler getStateHandler() {
         return stateHandler;
     }
