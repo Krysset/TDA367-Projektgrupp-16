@@ -23,7 +23,7 @@ public class View implements IObserver {
 
 
         batch = new SpriteBatch();
-        overworldScene = new OverworldScene(model.getPlayer(), batch);
+        overworldScene = new OverworldScene(model.getPlayer(), model.getMapManager(), batch);
         combatScene = new CombatScene(batch);
 
         observerUpdate(); //TODO: this is also wrong and bad :)

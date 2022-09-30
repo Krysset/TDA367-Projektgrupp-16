@@ -10,7 +10,9 @@ import com.g16.feyrune.model.overworld.MovementHandler;
 import com.g16.feyrune.model.overworld.OverworldModel;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 import com.g16.feyrune.model.overworld.map.IMapObserver;
+import com.g16.feyrune.model.overworld.map.MapManager;
 import com.g16.feyrune.model.player.Player;
+import com.g16.feyrune.view.overworld.textureMap.TextureMapManager;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -52,6 +54,10 @@ public class Model implements IObserver{
 
     public Player getPlayer(){
         return player;
+    }
+
+    public MapManager getMapManager() {
+        return overworldModel.getMapManager();
     }
 
     public PlayerCreature getPlayerCreature() {
