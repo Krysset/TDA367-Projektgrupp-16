@@ -7,9 +7,8 @@ import com.g16.feyrune.controller.enums.Selection;
 import com.g16.feyrune.interfaces.ICombatAction;
 import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.model.Model;
-import com.g16.feyrune.model.combat.actions.attackAction;
-import com.g16.feyrune.view.View;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import com.g16.feyrune.model.combat.actions.AttackAction;
+import com.g16.feyrune.model.combat.actions.FleeAction;
 
 public class CombatController implements ICombatController, IInput {
     private CombatInputHandler combatInputHandler;
@@ -18,8 +17,6 @@ public class CombatController implements ICombatController, IInput {
     // Takes whole model so that logic can be written to get new player creature each time
     // the player's creature changes. Could be streamlined later.
     private Model model;
-
-    private boolean hasSelectedAction;
 
     public CombatController(Model model){
         this.model = model;
@@ -44,7 +41,9 @@ public class CombatController implements ICombatController, IInput {
         Selection selection = combatInputHandler.getChosenAction();
         switch (selection) {
             case FIRST:
-                return new attackAction();
+                return new AttackAction();
+            case FOURTH:
+                return new FleeAction();
             default:
                 return null;
         }
