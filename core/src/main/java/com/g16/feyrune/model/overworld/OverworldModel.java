@@ -7,6 +7,7 @@ import com.g16.feyrune.model.overworld.map.IMapObserver;
 import com.g16.feyrune.model.overworld.map.MapManager;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.overworld.map.Map;
+import com.g16.feyrune.view.overworld.textureMap.TextureMapManager;
 
 import java.awt.*;
 import java.lang.reflect.Array;
@@ -18,7 +19,6 @@ public class OverworldModel {
     private EncounterHandler encounterHandler;
     private ArrayList<IObserver> observerList;
     private MapManager mapManager;
-
 
     public OverworldModel(Player player) {
         this.player = player;
@@ -72,5 +72,8 @@ public class OverworldModel {
         return encounterHandler.createEncounter("dungeon");
     }
 
+    public MapManager getMapManager(){
+        return mapManager;
+    }
 
 }

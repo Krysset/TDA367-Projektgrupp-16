@@ -4,16 +4,11 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.interfaces.IScene;
-import com.g16.feyrune.model.Model;
-import com.g16.feyrune.model.overworld.encounter.Encounter;
-import com.g16.feyrune.model.overworld.encounter.EncounterHandler;
+import com.g16.feyrune.model.overworld.map.MapManager;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.view.player.PlayerRenderer;
-import com.g16.feyrune.view.textureMap.TextureMap;
-import com.g16.feyrune.view.textureMap.TextureMapManager;
-import com.g16.feyrune.view.textureMap.TextureMapParser;
+import com.g16.feyrune.view.overworld.textureMap.TextureMapManager;
 
 public class OverworldScene implements IScene {
     private PlayerRenderer pr;
@@ -22,9 +17,9 @@ public class OverworldScene implements IScene {
     private TextureMapManager map;
 
 
-    public OverworldScene(Player player, SpriteBatch batch){
+    public OverworldScene(Player player, MapManager mapManager, SpriteBatch batch){
         this.batch = batch;
-        this.map = new TextureMapManager();
+        this.map = new TextureMapManager(mapManager);
         this.camera = new OrthographicCamera(180 ,90);
         pr = new PlayerRenderer(player);
     }
