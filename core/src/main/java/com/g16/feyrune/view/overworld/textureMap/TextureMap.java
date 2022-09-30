@@ -1,4 +1,4 @@
-package com.g16.feyrune.view.textureMap;
+package com.g16.feyrune.view.overworld.textureMap;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,10 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class TextureMap {
-    private int mapWidth, mapHeight, tileWidth, tileHeight;
-    private Color bgColor;
-    private TextureTile textureTiles[][];
-    private HashMap<Integer, TextureRegion> gIdToTextureMap;
+    private final int mapWidth, mapHeight, tileWidth, tileHeight;
+    private final Color bgColor;
+    private final TextureTile[][] textureTiles;
+    private final HashMap<Integer, TextureRegion> gIdToTextureMap;
 
     public TextureMap(int mapWidth, int mapHeight, int tileWidth, int tileHeight, Color backgroundColor,
                       List<Tileset> tilesets, int[][][] tileGIdMap) {
@@ -25,19 +25,20 @@ public class TextureMap {
         this.textureTiles = generateTextureTilesFromGIdMap(tileGIdMap);
 
     }
-    public void draw(SpriteBatch spriteBatch) {
+
+    protected void render(SpriteBatch batch) {
         for(int i = 0; i < textureTiles[0].length; i++) {
             for(int j = 0; j < textureTiles.length; j++) {
-                textureTiles[j][i].draw(spriteBatch, new Point(i * tileWidth, j * tileHeight), gIdToTextureMap);
+                textureTiles[j][i].draw(batch, new Point(i * tileWidth, j * tileHeight), gIdToTextureMap);
             }
         }
     }
 
-    public Color getBackgroundColor() {
-        return bgColor;
+    protected Color getBgColor() {
+        return new Color(bgColor);
     }
 
-    public int getTileSize() {
+    protected int getTileSize() {
         return tileWidth;
     }
     private TextureTile[][] generateTextureTilesFromGIdMap(int[][][] tileGIdMap) {
@@ -59,5 +60,4 @@ public class TextureMap {
         }
         return gIdToTextureMap;
     }
-
 }
