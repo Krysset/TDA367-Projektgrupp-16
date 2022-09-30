@@ -3,6 +3,8 @@ package com.g16.feyrune.model.overworld.map;
 import com.g16.feyrune.model.player.Player;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Map {
     private static Map globalMap;
@@ -12,6 +14,11 @@ public class Map {
     private final int height;
     private static int startPosX;
     private static int startPosY;
+    private static List<IMapObserver> observers;
+
+    {
+        observers = new ArrayList<>();
+    }
 
     protected Map(Tile[][] tiles, int startPosX, int startPosY) {
         this.tiles = tiles;
@@ -43,6 +50,7 @@ public class Map {
             // "assets/maps/shop.tmx"
             // "assets/maps/villagehouse.tmx"
             globalMap = MapParser.parseMapFile("assets/maps/plains1.tmx");
+            notifyMapObservers("assets/maps/plains1.tmx");
         }
         return globalMap;
     }
@@ -76,5 +84,15 @@ public class Map {
         globalMap = MapParser.parseMapFile(mapAssetPath);
         startPosX = transportCoordinates.x;
         startPosY = transportCoordinates.y;
+        notifyMapObservers(mapAssetPath);
+    }
+    public static void notifyMapObservers(String mapAssetPath){
+        for (IMapObserver observer : observers) {
+            observer.updateMap(mapAssetPath);
+        }
+    }
+
+    public static void subscribe(IMapObserver observer){
+        observers.add(observer);
     }
 }

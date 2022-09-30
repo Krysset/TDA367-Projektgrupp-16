@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.interfaces.IScene;
+import com.g16.feyrune.model.Model;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 import com.g16.feyrune.model.overworld.encounter.EncounterHandler;
 import com.g16.feyrune.model.player.Player;
@@ -13,41 +14,33 @@ import com.g16.feyrune.view.player.PlayerRenderer;
 import com.g16.feyrune.view.textureMap.TextureMap;
 import com.g16.feyrune.view.textureMap.TextureMapParser;
 
-public class OverworldScene implements IScene, IObserver {
-    private Player player;
+public class OverworldScene implements IScene {
     private PlayerRenderer pr;
     private SpriteBatch batch;
     private Camera camera;
-    private TextureMap textureMap;
 
 
     public OverworldScene(Player player, SpriteBatch batch){
-        this.player = player;
         this.batch = batch;
         this.camera = new OrthographicCamera(180 ,90);
         pr = new PlayerRenderer(player);
-        textureMap = TextureMapParser.parseMapFile("assets/maps/plains1.tmx");
     }
 
-    @Override
-    public void observerUpdate() {
-
-    }
     @Override
     public void update(){}
 
     @Override
     public void render(){
         camera.position.set(
-                pr.getRenderPos().x * textureMap.getTileSize() + textureMap.getTileSize() / 2,
-                pr.getRenderPos().y * textureMap.getTileSize() + textureMap.getTileSize() / 2,
+                pr.getRenderPos().x * TextureMap.getTileSize() + TextureMap.getTileSize() / 2,
+                pr.getRenderPos().y * TextureMap.getTileSize() + TextureMap.getTileSize() / 2,
                 0);
         // Tells camera to recalculate what it sees
         camera.update();
         batch.setProjectionMatrix(camera.combined);
-        ScreenUtils.clear(textureMap.getBackgroundColor());
+        ScreenUtils.clear(TextureMap.getBgColor());
         batch.begin();
-        textureMap.draw(batch);
+        TextureMap.render(batch);
         pr.draw(batch);
         batch.end();
     }
