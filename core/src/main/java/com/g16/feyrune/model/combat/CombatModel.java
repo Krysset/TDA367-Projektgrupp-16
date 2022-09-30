@@ -2,6 +2,7 @@ package com.g16.feyrune.model.combat;
 
 import com.g16.feyrune.interfaces.ICombatAction;
 import com.g16.feyrune.interfaces.ICombatCreature;
+import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.model.creature.CreatureFactory;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.combat.creatures.EnemyCreature;
@@ -15,8 +16,7 @@ public class CombatModel {
     private final ArrayList<ICombatCreature> combatCreatures;
     private ArrayList<Integer> savedCombatCreatureSpeed;
     private ArrayList<ICombatCreature> turnOrder;
-    private int speedThreshold = 250;
-    private boolean hasSelectedAction = true;
+    private final int speedThreshold = 250;
     private boolean combatIsOver = false;
 
 
@@ -31,8 +31,8 @@ public class CombatModel {
     public void fillCombatCreatureList(Player player, Encounter encounter) {
         combatCreatures.add(new PlayerCreature(CreatureFactory.createCreature())); // FIX: Should be player.getMonster()
         combatCreatures.add(new EnemyCreature(encounter.getEnemyCreature()[0])); //TODO: SHOUD NOT BE INDEXED LIKE THIS
-        for (int i = 0; i < combatCreatures.size(); i++) {
-            savedCombatCreatureSpeed.add(combatCreatures.get(i).getSpeed());
+        for (ICombatCreature combatCreature : combatCreatures) {
+            savedCombatCreatureSpeed.add(combatCreature.getSpeed());
         }
     }
 
@@ -42,15 +42,16 @@ public class CombatModel {
 
     public void combatLoop(){
         ICombatCreature actor = turnOrder.get(0);
-        ICombatCreature target = choiceTarget(actor); // TODO: Replace with choose target
+        ICombatCreature target = choiceTarget(actor); // TODO: Replace with choose actor.chooseTarget
         ICombatAction action = actor.selectAction(target);
 
         // The player has not selected an action this render pass,
         // therefore stop doing the loop this current iteration.
         if (action == null) return;
         turnOrder.remove(0);
-        System.out.println(getCurrentActorName(actor) + " attacked");
-        System.out.println("Creature 1: "+combatCreatures.get(0).getHP() + " Creature 2: " + combatCreatures.get(1).getHP());
+        System.out.println(getCurrentActorName(actor) + " attacked" + getCurrentActorName(target));
+        System.out.println(getCurrentActorName(actor) + " has " + actor.getHP() + " health left");
+        System.out.println(getCurrentActorName(target) + " has " + target.getHP() + " health left");
         boolean actionEndedCombat = action.executeMove(actor, target);
         generateAttackOrder();
         if (actionEndedCombat) {
@@ -91,7 +92,7 @@ public class CombatModel {
         int i = combatCreatures.indexOf(actor);
         ICombatCreature target;
         if (i == combatCreatures.size() - 1) {
-            target = combatCreatures.get(i);
+            target = combatCreatures.get(0);
         } else {
             target = combatCreatures.get(i + 1);
         }

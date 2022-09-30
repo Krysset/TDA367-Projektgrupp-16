@@ -21,7 +21,6 @@ public class View implements IObserver {
         this.model = model;
         this.model.registerNewObserver(this);
 
-
         batch = new SpriteBatch();
         overworldScene = new OverworldScene(model.getPlayer(), model.getMapManager(), batch);
         combatScene = new CombatScene(batch);
@@ -45,7 +44,6 @@ public class View implements IObserver {
     }
 
     private void changeScene(ModelState state) {
-
         switch (state){
             case WORLD:
                 currentScene = overworldScene;
