@@ -7,6 +7,7 @@ public interface ICreature {
     double getHP();
     int getSpeed();
     int getPower();
+    int getDefense();
     void takeDamage(int damage);
     boolean isDead();
 }

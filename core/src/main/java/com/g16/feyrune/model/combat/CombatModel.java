@@ -19,10 +19,7 @@ public class CombatModel {
     private boolean hasSelectedAction = true;
     private boolean combatIsOver = false;
 
-    public CombatModel(){
-        player=null;
-        combatCreatures=null;
-    }
+
     public CombatModel(Player player, Encounter encounter) {
         this.player = player;
         combatCreatures = new ArrayList<>();
@@ -53,7 +50,7 @@ public class CombatModel {
         if (action == null) return;
         turnOrder.remove(0);
         System.out.println(getCurrentActorName(actor) + " attacked");
-        System.out.println(combatCreatures.get(0).getHP() + " " + combatCreatures.get(1).getHP());
+        System.out.println("Creature 1: "+combatCreatures.get(0).getHP() + " Creature 2: " + combatCreatures.get(1).getHP());
         boolean actionEndedCombat = action.executeMove(actor, target);
         generateAttackOrder();
         if (actionEndedCombat) {

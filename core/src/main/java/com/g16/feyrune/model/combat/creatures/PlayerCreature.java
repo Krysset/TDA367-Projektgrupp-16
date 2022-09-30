@@ -32,6 +32,9 @@ public class PlayerCreature implements ICombatCreature {
     public int getSpeed() {
         return creature.getSpeed();
     }
+    public int getDefense() {
+        return creature.getDefense();
+    }
 
     @Override
     public ICombatAction selectAction(ICombatCreature target) {
