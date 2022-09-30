@@ -116,7 +116,7 @@ public class MapParser {
                         break;
                     }
                 }
-                boolean encounter = Random.randomInt(100) > 10;
+                boolean encounter = Random.randomInt(100) > 90;
                 tiles[j][i] = new Tile(collision, encounter);
             }
         }
