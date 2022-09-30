@@ -80,6 +80,7 @@ public class Model implements IObserver{
 
     public void changeState(ModelState newState){
         stateHandler.changeModelState(newState);
+        notifyObservers();
     }
     public ModelState getCurrentModelState(){
         return stateHandler.getModelState();
@@ -90,9 +91,6 @@ public class Model implements IObserver{
             combatModel = new CombatModel(player, overworldModel.getEncounter());
             changeState(ModelState.COMBAT);
             overworldModel.removeEncounterFromPlayerTile();
-        }
-        for(IObserver observer : observers){
-            observer.observerUpdate();
         }
     }
 }

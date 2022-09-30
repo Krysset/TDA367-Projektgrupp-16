@@ -10,7 +10,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.List;
 
 public class PlayerCreature implements ICombatCreature {
-    private ICreature creature;
+    private final ICreature creature;
     private ICombatController combatController;
 
     public PlayerCreature(ICreature creature) {
@@ -48,17 +48,17 @@ public class PlayerCreature implements ICombatCreature {
 
     @Override
     public int getPower() {
-        return 0;
+        return creature.getPower();
     }
 
     @Override
     public void takeDamage(int damage) {
-
+        creature.takeDamage(damage);
     }
 
     @Override
     public boolean isDead() {
-        return false;
+        return creature.isDead();
     }
 
     public void registerCombatController(ICombatController combatController) {
