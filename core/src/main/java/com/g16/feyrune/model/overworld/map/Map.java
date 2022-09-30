@@ -7,92 +7,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Map {
-    private static Map globalMap;
-
     private final Tile[][] tiles;
     private final int width;
     private final int height;
-    private static int startPosX;
-    private static int startPosY;
-    private static List<IMapObserver> observers;
-
-    {
-        observers = new ArrayList<>();
-    }
+    private int startPosX;
+    private int startPosY;
 
     protected Map(Tile[][] tiles, int startPosX, int startPosY) {
         this.tiles = tiles;
         this.width = tiles.length;
         this.height = tiles[0].length;
-        Map.startPosX = startPosX;
-        Map.startPosY = startPosY;
+        this.startPosX = startPosX;
+        this.startPosY = startPosY;
     }
 
-    public int getWidth() {
+    protected int getWidth() {
         return width;
     }
 
-    public int getHeight() {
+    protected int getHeight() {
         return height;
     }
 
-    public Tile getTile(int xPos, int yPos){
+    protected Tile getTile(int xPos, int yPos){
         return tiles[xPos][yPos];
     }
-    public Tile getTile(Point point){
+    protected Tile getTile(Point point){
         return getTile(point.x, point.y);
     }
-
-    public static Map getGlobalMap() {
-        if (globalMap == null) {
-            // "assets/maps/dungeon1.tmx"
-            // "assets/maps/plains1.tmx"
-            // "assets/maps/shop.tmx"
-            // "assets/maps/villagehouse.tmx"
-            globalMap = MapParser.parseMapFile("assets/maps/plains1.tmx");
-            notifyMapObservers("assets/maps/plains1.tmx");
-        }
-        return globalMap;
-    }
-    public boolean tryEncounter(Point playerPos){
+    protected boolean tryEncounter(Point playerPos){
         if (getTile(playerPos).canEncounter()){
             return true;
         }
         return false;
     }
-    public void removeEncounterFromTile(Point tilePos){
+    protected void removeEncounterFromTile(Point tilePos){
         tiles[tilePos.x][tilePos.y].removeEncounter();
     }
-    public String getTerrainType(){
+    protected String getTerrainType(){
         return "dungeon";
     }
 
-    public int getStartPosX() {
+    protected int getStartPosX() {
         return startPosX;
     }
 
-    public int getStartPosY() {
+    protected int getStartPosY() {
         return startPosY;
     }
 
-    public boolean hasTransporter(Point playerPos){
+    protected boolean hasTransporter(Point playerPos){
         return getTile(playerPos).hasTransporter();
     }
-    public void useTransporter(Point playerCoordinates) {
-        Point transportCoordinates = getTile(playerCoordinates).getTransportCoordinates();
-        String mapAssetPath = getTile(playerCoordinates).getTransportMapAssetPath();
-        globalMap = MapParser.parseMapFile(mapAssetPath);
-        startPosX = transportCoordinates.x;
-        startPosY = transportCoordinates.y;
-        notifyMapObservers(mapAssetPath);
+    protected Point getTransportCoordinates(Point transportCoordinates) {
+        return getTile(transportCoordinates).getTransportCoordinates();
     }
-    public static void notifyMapObservers(String mapAssetPath){
-        for (IMapObserver observer : observers) {
-            observer.updateMap(mapAssetPath);
-        }
+    protected String getTransportMapAssetPath(Point transportCoordinates) {
+        return getTile(transportCoordinates).getTransportMapAssetPath();
     }
-
-    public static void subscribe(IMapObserver observer){
-        observers.add(observer);
+    protected boolean isCollision(int x, int y) {
+        return getTile(x, y).isCollision();
+    }
+    protected void setStartPos(Point newStartPos) {
+        startPosX = newStartPos.x;
+        startPosY = newStartPos.y;
     }
 }

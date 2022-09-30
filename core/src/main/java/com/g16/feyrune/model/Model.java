@@ -46,10 +46,6 @@ public class Model implements IObserver{
         }
     }
 
-    public void subscribeToMap(IMapObserver observer) {
-        overworldModel.subscribeToMap(observer);
-    }
-
     public StateHandler getStateHandler() {
         return stateHandler;
     }

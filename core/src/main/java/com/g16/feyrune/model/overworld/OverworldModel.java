@@ -4,6 +4,7 @@ import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 import com.g16.feyrune.model.overworld.encounter.EncounterHandler;
 import com.g16.feyrune.model.overworld.map.IMapObserver;
+import com.g16.feyrune.model.overworld.map.MapManager;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.overworld.map.Map;
 
@@ -16,6 +17,7 @@ public class OverworldModel {
     private MovementHandler movementHandler;
     private EncounterHandler encounterHandler;
     private ArrayList<IObserver> observerList;
+    private MapManager mapManager;
 
 
     public OverworldModel(Player player) {
@@ -23,7 +25,8 @@ public class OverworldModel {
         this.movementHandler = new MovementHandler();
         this.encounterHandler = new EncounterHandler();
         this.observerList = new ArrayList<>();
-        player.setPosition(Map.getGlobalMap().getStartPosX(), Map.getGlobalMap().getStartPosY());
+        this.mapManager = new MapManager();
+        player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
     }
     public void addObserver(IObserver observer){
         observerList.add(observer);
@@ -34,30 +37,26 @@ public class OverworldModel {
     }
 
     public void movePlayer() {
-        Point deltaPos = movementHandler.calculateMovement(player.getCoordinates(), Map.getGlobalMap());
+        Point deltaPos = movementHandler.calculateMovement(player.getCoordinates(), mapManager);
         player.move(deltaPos.x, deltaPos.y);
         if (reachedTransporter()) {
-            Map.getGlobalMap().useTransporter(player.getCoordinates());
-            player.setPosition(Map.getGlobalMap().getStartPosX(), Map.getGlobalMap().getStartPosY());
+//            mapManager.useTransporter(player.getCoordinates());
+            player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
         } else if (isInEncounter()) {
             movementHandler.resetMovement();
-            encounterHandler.createEncounter(Map.getGlobalMap().getTerrainType());
+            encounterHandler.createEncounter(mapManager.getTerrainType());
             notifyObservers();
         }
     }
 
     public boolean reachedTransporter() {
-        return Map.getGlobalMap().hasTransporter(player.getCoordinates());
+        return mapManager.hasTransporter(player.getCoordinates());
     }
     public boolean isInEncounter(){
-        return Map.getGlobalMap().tryEncounter(player.getCoordinates());
+        return mapManager.tryEncounter(player.getCoordinates());
     }
     public void removeEncounterFromPlayerTile(){
-        Map.getGlobalMap().removeEncounterFromTile(player.getCoordinates());
-    }
-
-    public void subscribeToMap(IMapObserver observer) {
-        Map.subscribe(observer);
+        mapManager.removeEncounterFromTile(player.getCoordinates());
     }
 
     public MovementHandler getMovementHandler() {
