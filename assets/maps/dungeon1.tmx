@@ -3,9 +3,10 @@
  <properties>
   <property name="startx" type="int" value="24"/>
   <property name="starty" type="int" value="5"/>
+  <property name="transporter1" value="assets/maps/plains1.tmx,11,1,6,15"/>
  </properties>
  <tileset firstgid="1" name="dungeon" tilewidth="16" tileheight="16" tilecount="280" columns="14">
-  <image source="../../tilesets/dungeon/dungeon.png" width="224" height="320"/>
+  <image source="../tilesets/dungeon/dungeon.png" width="224" height="320"/>
   <tile id="23">
    <properties>
     <property name="Collision" type="bool" value="true"/>
@@ -447,6 +448,89 @@
    </properties>
   </tile>
  </tileset>
+ <tileset firstgid="281" name="dungeonDecoration2" tilewidth="16" tileheight="16" tilecount="448" columns="32">
+  <image source="../tilesets/dungeon/dungeonDecoration2.png" width="512" height="224"/>
+  <tile id="97">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="99">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="100">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="102">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="103">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="105">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="106">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="107">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="108">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="109">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="193">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="195">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="196">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="198">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="199">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="201">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
  <layer id="1" name="Base" width="30" height="20">
   <data encoding="csv">
 230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,230,
@@ -489,9 +573,9 @@
 0,72,170,64,0,63,170,103,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,47,0,
 0,47,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,47,0,
 0,47,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,47,0,
-0,44,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,47,0,
-0,86,59,59,59,59,17,59,59,59,59,59,59,59,17,17,59,59,59,59,59,17,59,59,59,59,17,59,89,0,
-0,100,73,73,73,73,31,73,73,73,73,73,73,73,31,31,73,73,73,73,73,31,73,73,73,73,31,73,103,0,
+0,44,0,0,0,0,0,0,0,0,410,411,412,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,47,0,
+0,86,59,59,59,59,17,59,59,59,442,443,444,59,17,17,59,59,59,59,59,17,59,59,59,59,17,59,89,0,
+0,100,73,73,73,73,31,73,73,73,474,475,476,73,31,31,73,73,73,73,73,31,73,73,73,73,31,73,103,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>

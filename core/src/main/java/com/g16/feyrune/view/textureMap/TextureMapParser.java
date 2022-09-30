@@ -161,6 +161,6 @@ public class TextureMapParser {
      * @return The absolute path.
      */
     private static String relativeToAbsoluteAssets(String relativePath) {
-        return "assets" + relativePath.substring(5);
+        return "assets" + relativePath.substring(2);
     }
 }
