@@ -10,6 +10,7 @@ import org.w3c.dom.NodeList;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -197,46 +198,58 @@ public class MapParser {
         return collisionList;
     }
 
-
-
     /**
      * This method parses all the tile IDs that have collision.
      *
      * @param doc The XML document containing the map data.
      * @return The list of tile IDs that have collision.
      */
-    private static ArrayList<Integer> parseCollisionIds(Document doc) {
+    private static List<Integer> parseCollisionIds(Document doc) {
         // All the for loops are required because of "ghost" child nodes.
         // Should be investigated in case of slow performance or similar.
         // Should also be refactored for better readability.
-
-        NodeList tileNodes = doc.getElementsByTagName("tile");
-
         ArrayList<Integer> collisionIds = new ArrayList<>();
-        for (int i = 0; i < tileNodes.getLength(); i++) {
-            Node tileNode = tileNodes.item(i);
+        NodeList tilesetNodes = doc.getElementsByTagName("tileset");
+        for (int i = 0; i < tilesetNodes.getLength(); i++) {
+            Node currentTilesetNode = tilesetNodes.item(i);
+            int baseGId = Integer.parseInt(currentTilesetNode.getAttributes().getNamedItem("firstgid").getNodeValue());
+            NodeList tilesetChildrenNodes = currentTilesetNode.getChildNodes();
+            collisionIds.addAll(getTilesetTileIds(tilesetChildrenNodes, baseGId));
+        }
+        return collisionIds;
+    }
+
+    private static Collection<Integer> getTilesetTileIds(NodeList tilesetChildrenNodes, int baseGId) {
+        ArrayList<Integer> collisionIds = new ArrayList<>();
+
+        for (int i = 1; i < tilesetChildrenNodes.getLength(); i++) {
+            Node tileNode = tilesetChildrenNodes.item(i);
 
             // Get the id of the tile node.
-            int id = Integer.parseInt(tileNode.getAttributes().getNamedItem("id").getNodeValue());
+            if (tileNode.getNodeName().equals("tile")) {
+                int id = Integer.parseInt(tileNode.getAttributes().getNamedItem("id").getNodeValue());
 
-            NodeList tileNodeProperties = tileNode.getChildNodes();
-            for (int j = 0; j < tileNodeProperties.getLength(); j++) {
-                Node properties = tileNodeProperties.item(j);
+                NodeList tileNodeProperties = tileNode.getChildNodes();
+                for (int j = 0; j < tileNodeProperties.getLength(); j++) {
+                    Node properties = tileNodeProperties.item(j);
 
-                NodeList propertiesChildNodes = properties.getChildNodes();
-                for (int k = 0; k < propertiesChildNodes.getLength(); k++) {
-                    Node property = propertiesChildNodes.item(k);
+                    NodeList propertiesChildNodes = properties.getChildNodes();
+                    for (int k = 0; k < propertiesChildNodes.getLength(); k++) {
+                        Node property = propertiesChildNodes.item(k);
 
-                    if (property.getAttributes() != null) {
-                        if (property.getAttributes().getNamedItem("name").getNodeValue().equals("Collision")) {
-                            // Must be +1 because the Tiled adds 1 to the id when mapping the tiles.
-                            collisionIds.add(id + 1);
+                        if (property.getAttributes() != null) {
+                            Node nameNode = property.getAttributes().getNamedItem("name");
+                            if (nameNode != null) {
+                                if (property.getAttributes().getNamedItem("name").getNodeValue().equals("collision")) {
+                                    // Must be +1 because the Tiled adds 1 to the id when mapping the tiles.
+                                    collisionIds.add(id + baseGId);
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-
         return collisionIds;
     }
 
