@@ -40,7 +40,7 @@ public class OverworldModel {
         Point deltaPos = movementHandler.calculateMovement(player.getCoordinates(), mapManager);
         player.move(deltaPos.x, deltaPos.y);
         if (reachedTransporter()) {
-//            mapManager.useTransporter(player.getCoordinates());
+            mapManager.useTransporter(player.getCoordinates());
             player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
         } else if (isInEncounter()) {
             movementHandler.resetMovement();
