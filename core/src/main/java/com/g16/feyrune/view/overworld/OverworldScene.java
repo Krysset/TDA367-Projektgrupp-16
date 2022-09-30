@@ -12,16 +12,19 @@ import com.g16.feyrune.model.overworld.encounter.EncounterHandler;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.view.player.PlayerRenderer;
 import com.g16.feyrune.view.textureMap.TextureMap;
+import com.g16.feyrune.view.textureMap.TextureMapManager;
 import com.g16.feyrune.view.textureMap.TextureMapParser;
 
 public class OverworldScene implements IScene {
     private PlayerRenderer pr;
     private SpriteBatch batch;
     private Camera camera;
+    private TextureMapManager map;
 
 
     public OverworldScene(Player player, SpriteBatch batch){
         this.batch = batch;
+        this.map = new TextureMapManager();
         this.camera = new OrthographicCamera(180 ,90);
         pr = new PlayerRenderer(player);
     }
@@ -32,15 +35,15 @@ public class OverworldScene implements IScene {
     @Override
     public void render(){
         camera.position.set(
-                pr.getRenderPos().x * TextureMap.getTileSize() + TextureMap.getTileSize() / 2,
-                pr.getRenderPos().y * TextureMap.getTileSize() + TextureMap.getTileSize() / 2,
+                pr.getRenderPos().x * map.getTileSize() + map.getTileSize() / 2,
+                pr.getRenderPos().y * map.getTileSize() + map.getTileSize() / 2,
                 0);
         // Tells camera to recalculate what it sees
         camera.update();
         batch.setProjectionMatrix(camera.combined);
-        ScreenUtils.clear(TextureMap.getBgColor());
+        ScreenUtils.clear(map.getBgColor());
         batch.begin();
-        TextureMap.render(batch);
+        map.render(batch);
         pr.draw(batch);
         batch.end();
     }
