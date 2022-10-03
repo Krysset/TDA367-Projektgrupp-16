@@ -2,31 +2,34 @@ package com.g16.feyrune.controller.combat;
 
 import com.g16.feyrune.controller.enums.Direction;
 import com.g16.feyrune.controller.enums.Selection;
+import com.g16.feyrune.model.combat.actions.AttackAction;
+import com.g16.feyrune.model.combat.actions.FleeAction;
+import com.g16.feyrune.model.combat.creatures.PlayerCreature;
 
 import java.awt.*;
 
 public class CombatInputHandler {
     private Selection currentSelection;
     private final Selection[][] selectionArray = new Selection[2][2];
-    private Point selectionPoint;
-    private boolean hasSelectedAction = false;
-    private Selection selectedAction;
+    private final Point selectionPoint;
+    private final PlayerCreature playerCreature;
 
-    public CombatInputHandler(){
+    public CombatInputHandler(PlayerCreature playerCreature) {
         currentSelection = Selection.FIRST;
         initSelectionArray();
-        selectionPoint = new Point(0,0);
+        selectionPoint = new Point(0, 0);
+        this.playerCreature = playerCreature;
     }
 
-    private void initSelectionArray(){
+    private void initSelectionArray() {
         selectionArray[0][0] = Selection.FIRST;
         selectionArray[0][1] = Selection.SECOND;
         selectionArray[1][0] = Selection.THIRD;
         selectionArray[1][1] = Selection.FOURTH;
     }
 
-    public void changeSelection(Direction direction){
-        switch (direction){
+    public void changeSelection(Direction direction) {
+        switch (direction) {
             case LEFT:
                 selectionPoint.x = selectionPoint.x == 0 ? 1 : 0;
                 break;
@@ -43,22 +46,23 @@ public class CombatInputHandler {
         }
         currentSelection = selectionArray[selectionPoint.y][selectionPoint.x];
     }
-    public Selection getCurrentSelection(){
+
+    public Selection getCurrentSelection() {
         return currentSelection;
     }
 
-    public void excecuteSelection(){
-        //TODO: notify correct observer with currentSelection
-        hasSelectedAction = true;
-        selectedAction = currentSelection;
+    public void excecuteSelection() {
+        switch (currentSelection) {
+            case FIRST:
+                playerCreature.setSelectedAction(new AttackAction());
+                break;
+            case FOURTH:
+                playerCreature.setSelectedAction(new FleeAction());
+                break;
+            default:
+                break;
+        }
     }
 
-    public boolean hasSelectedAction(){
-        return hasSelectedAction;
-    }
 
-    public Selection getChosenAction(){
-        hasSelectedAction = false;
-        return selectedAction;
-    }
 }
