@@ -1,6 +1,7 @@
 package com.g16.feyrune.view;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.g16.feyrune.controller.Controller;
 import com.g16.feyrune.enums.ModelState;
 import com.g16.feyrune.interfaces.IObserver;
@@ -20,6 +21,7 @@ public class View implements IObserver {
     public View(Model model){
         this.model = model;
         this.model.registerNewObserver(this);
+
 
         batch = new SpriteBatch();
         overworldScene = new OverworldScene(model.getPlayer(), model.getMapManager(), batch);
@@ -50,6 +52,7 @@ public class View implements IObserver {
                 break;
             case COMBAT:
                 currentScene = combatScene;
+                combatScene.renderNewCombat(model.getCombatModel(), model.getPlayer());
                 break;
         }
     }

@@ -2,62 +2,33 @@ package com.g16.feyrune.view.overworld.textureMap;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
-import java.awt.*;
-import java.util.HashMap;
-import java.util.List;
 
 public class TextureMap {
-    private final int mapWidth, mapHeight, tileWidth, tileHeight;
-    private final Color bgColor;
-    private final TextureTile[][] textureTiles;
-    private final HashMap<Integer, TextureRegion> gIdToTextureMap;
+    private final Iterable<TextureLayer> layers;
+    private final Color backgroundColor;
+    private final int tileWidth, tileHeight;
+    private final int mapWidth, mapHeight;
 
-    public TextureMap(int mapWidth, int mapHeight, int tileWidth, int tileHeight, Color backgroundColor,
-                      List<Tileset> tilesets, int[][][] tileGIdMap) {
-        this.bgColor = backgroundColor;
-        this.mapWidth = mapWidth;
-        this.mapHeight = mapHeight;
+    protected TextureMap(int mapWidth, int mapHeight, int tileWidth, int tileHeight, Color backgroundColor, Iterable<TextureLayer> layers) {
+        this.layers = layers;
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
-        this.gIdToTextureMap = generateGIdToTextureMap(tilesets);
-        this.textureTiles = generateTextureTilesFromGIdMap(tileGIdMap);
-
+        this.mapWidth = mapWidth;
+        this.mapHeight = mapHeight;
+        this.backgroundColor = backgroundColor;
     }
 
-    protected void render(SpriteBatch batch) {
-        for(int i = 0; i < textureTiles[0].length; i++) {
-            for(int j = 0; j < textureTiles.length; j++) {
-                textureTiles[j][i].draw(batch, new Point(i * tileWidth, j * tileHeight), gIdToTextureMap);
-            }
+    public void render(SpriteBatch batch) {
+        for (TextureLayer layer : layers) {
+            layer.render(batch, tileWidth);
         }
     }
 
-    protected Color getBgColor() {
-        return new Color(bgColor);
+    public Color getBgColor() {
+        return new Color(backgroundColor);
     }
 
-    protected int getTileSize() {
+    public int getTileSize() {
         return tileWidth;
-    }
-    private TextureTile[][] generateTextureTilesFromGIdMap(int[][][] tileGIdMap) {
-            TextureTile[][] texTiles = new TextureTile[mapHeight][mapWidth];
-            for (int i = 0; i < mapHeight; i++) {
-                for (int j = 0; j < mapWidth; j++) {
-                    texTiles[i][j] = new TextureTile(tileGIdMap[i][j]);
-                }
-            }
-            return texTiles;
-    }
-
-    private HashMap<Integer, TextureRegion> generateGIdToTextureMap(List<Tileset> tilesets) {
-        HashMap<Integer, TextureRegion> gIdToTextureMap = new HashMap<>();
-        for (Tileset tileset : tilesets) {
-            for (int i = tileset.getFirstgid(); i < tileset.getFirstgid() + tileset.getTileCount(); i++) {
-                gIdToTextureMap.put(i, tileset.getTextureRegion(i));
-            }
-        }
-        return gIdToTextureMap;
     }
 }

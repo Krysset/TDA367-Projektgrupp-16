@@ -19,14 +19,14 @@ public class ChoiceDialog {
     private String spritePath = "assets/ui/choiceDialog.png";
     private Texture texture;
     private float width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight()/4;
-    private Point pos = new Point(0-(int)width/2,0-(int)height*3/2);
+    private Point pos = new Point(0-(int)width/2,0-(int)height*2);
     private Camera camera;
     private CombatInputHandler inputHandler;
     private BitmapFont font;
 
     public ChoiceDialog(CombatInputHandler inputHandler){ //TODO: Everything from here is coded to work, not look good :)
         this.inputHandler = inputHandler;
-        this.camera = new OrthographicCamera(width,height*3);
+        this.camera = new OrthographicCamera(width,height*4);
 
 
         font = new BitmapFont(Gdx.files.internal("assets/fonts/superAwesomeFont.fnt"),
