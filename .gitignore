@@ -125,3 +125,4 @@ Thumbs.db
 *.toc
 *.xdv
 *.bcf
+*.synctex.gz
