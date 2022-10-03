@@ -20,7 +20,7 @@ public class OverworldScene implements IScene {
     public OverworldScene(Player player, MapManager mapManager, SpriteBatch batch){
         this.batch = batch;
         this.map = new TextureMapManager(mapManager);
-        this.camera = new OrthographicCamera(180 ,90);
+        this.camera = new OrthographicCamera(270 ,135);
         pr = new PlayerRenderer(player);
     }
 
