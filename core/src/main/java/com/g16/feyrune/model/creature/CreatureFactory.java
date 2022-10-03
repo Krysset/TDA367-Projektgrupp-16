@@ -1,13 +1,11 @@
 package com.g16.feyrune.model.creature;
 
 import com.g16.feyrune.Util.Random;
-import com.g16.feyrune.interfaces.IAbility;
+import com.g16.feyrune.interfaces.IAbilitable;
 import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.model.combat.actions.AbilityFactory;
-import com.g16.feyrune.model.combat.actions.abilities.BaseAbility;
 import com.g16.feyrune.Util.Pair;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CreatureFactory {
@@ -16,7 +14,7 @@ public class CreatureFactory {
      * @return a new Object of type ICreature
      */
     public static ICreature createCreature(String[] abilities, double health, int power, int speed, int defense) {
-        List<IAbility> baseAbilityList = AbilityFactory.createAbilityList(abilities);
+        List<IAbilitable> baseAbilityList = AbilityFactory.createAbilityList(abilities);
         return new BaseCreature(health,power, speed, defense, baseAbilityList);
     }
     public static ICreature createCreature(){

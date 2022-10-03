@@ -1,6 +1,6 @@
 package com.g16.feyrune.model.combat.actions;
 
-import com.g16.feyrune.interfaces.IAbility;
+import com.g16.feyrune.interfaces.IAbilitable;
 import com.g16.feyrune.model.combat.actions.abilities.BaseAbility;
 
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ public class AbilityFactory {
         return new BaseAbility(accuracy, power, name);
     }
 
-    public static List<IAbility> createAbilityList(String[] names) {
-        List<IAbility> attacks = new ArrayList<>();
+    public static List<IAbilitable> createAbilityList(String[] names) {
+        List<IAbilitable> attacks = new ArrayList<>();
         for (int i = 0; i < names.length; i++) {
             
             attacks.add(createAbilityByName(names[i]));

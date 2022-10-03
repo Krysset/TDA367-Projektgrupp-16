@@ -1,11 +1,11 @@
 package com.g16.feyrune.view.combat;
 
-import com.g16.feyrune.interfaces.ICreature;
+import com.g16.feyrune.model.creature.BaseCreature;
 
 public class CreatureRenderer {
-    private ICreature creature;
+    private BaseCreature creature;
 
-    public CreatureRenderer(ICreature creature){
+    public CreatureRenderer(BaseCreature creature){
         this.creature = creature;
     }
 

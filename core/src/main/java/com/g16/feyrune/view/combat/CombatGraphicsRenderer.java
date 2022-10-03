@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.model.combat.creatures.EnemyCreature;
+import com.g16.feyrune.model.creature.BaseCreature;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 
@@ -18,12 +19,12 @@ public class CombatGraphicsRenderer {
     private float width = Gdx.graphics.getWidth() /8, height = Gdx.graphics.getHeight()/24;
 
 
-    public CombatGraphicsRenderer(ICreature enemyCreature, Player player){
+    public CombatGraphicsRenderer(BaseCreature enemyCreature, Player player){
 
         this.player = player;
         this.enemyCreature = enemyCreature;
         enemyHealthBar = new HealthBar(enemyCreature.getHP(), Gdx.graphics.getWidth()/2-width, posY,width,height);
-        playerHealthBar = new HealthBar(player.getCreature().getHP(), -Gdx.graphics.getWidth()/2, posY,width,height);
+        playerHealthBar = new HealthBar((BaseCreature)(player.getCreature()).getHP(), -Gdx.graphics.getWidth()/2, posY,width,height);
     }
 
     public void render(Batch batch){

@@ -4,7 +4,7 @@ import com.g16.feyrune.interfaces.ICombatAction;
 import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.model.combat.actions.abilities.BaseAbility;
-import com.g16.feyrune.interfaces.IAbility;
+import com.g16.feyrune.interfaces.IAbilitable;
 import com.g16.feyrune.model.combat.actions.AttackAction;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class EnemyCreature implements ICombatCreature {
         return new AttackAction();
     }
 
-    public IAbility getMove() {
+    public IAbilitable getMove() {
         return creature.getMoves().get(0); // Should be random
     }
 
@@ -29,13 +29,9 @@ public class EnemyCreature implements ICombatCreature {
         creature.takeDamage(damage);
     }
 
-    // Should be renamed to something more appropriate
-    private IAbility createNewMoveUsingPower(IAbility move) {
-        return new BaseAbility(move.getAttackAccuracy(), move.getAttackPower() + creature.getPower(), move.getAttackName());
-    }
 
     @Override
-    public List<IAbility> getMoves() {
+    public List<IAbilitable> getMoves() {
         return creature.getMoves();
     }
 
@@ -50,11 +46,8 @@ public class EnemyCreature implements ICombatCreature {
     }
 
     @Override
-    public int getPower() {
-        return creature.getPower();
-    }
-    public int getDefense() {
-        return creature.getDefense();
+    public int attack(IAbilitable attack) {
+        return creature.attack(attack);
     }
 
     @Override

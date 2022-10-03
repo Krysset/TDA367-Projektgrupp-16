@@ -50,8 +50,6 @@ public class CombatModel {
         if (action == null) return;
         turnOrder.remove(0); //TODO: model has referance to controller
         System.out.println(getCurrentActorName(actor) + " attacked" + getCurrentActorName(target));
-        System.out.println(getCurrentActorName(actor) + " has " + actor.getHP() + " health left");
-        System.out.println(getCurrentActorName(target) + " has " + target.getHP() + " health left");
         boolean actionEndedCombat = action.executeMove(actor, target);
         generateAttackOrder();
         if (actionEndedCombat) {

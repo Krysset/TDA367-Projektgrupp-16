@@ -1,7 +1,7 @@
 package com.g16.feyrune.model.creature;
 
 import com.g16.feyrune.interfaces.ICreature;
-import com.g16.feyrune.interfaces.IAbility;
+import com.g16.feyrune.interfaces.IAbilitable;
 
 import java.util.List;
 
@@ -14,10 +14,10 @@ public class BaseCreature implements ICreature {
     private int power;
     private int speed;
     private int defense;
-    private List<IAbility> baseAbilities;
+    private List<IAbilitable> baseAbilities;
     private boolean isFriend;
 
-    public BaseCreature(double health, int power, int speed, int defense, List<IAbility> baseAbilities){
+    public BaseCreature(double health, int power, int speed, int defense, List<IAbilitable> baseAbilities){
         this.maxHealth = health;
         this.power = power;
         this.defense = defense;
@@ -46,8 +46,12 @@ public class BaseCreature implements ICreature {
     }
 
     @Override
-    public List<IAbility> getMoves() {
+    public List<IAbilitable> getMoves() {
         return baseAbilities;
+    }
+
+    public int attack(IAbilitable attack){
+        return (int) ((power * ((double) attack.getAttackPower() / 100)));
     }
 
     @Override
@@ -55,17 +59,10 @@ public class BaseCreature implements ICreature {
         return health;
     }
 
-    @Override
-    public int getPower() {
-        return power;
-    }
-    public int getDefense() {
-        return defense;
-    }
 
     @Override
     public void takeDamage(int damage) {
-        health = Math.max(0, health - damage);
+        health = Math.max(0, health - ((double)damage/defense));
     }
 
     @Override
