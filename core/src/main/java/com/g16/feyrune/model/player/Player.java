@@ -28,6 +28,11 @@ public class Player {
         notifyObservers();
     }
 
+    public void setPosition(int newPosX, int newPosY) {
+        coordinates.x = newPosX;
+        coordinates.y = newPosY;
+    }
+
     public Point getCoordinates() {
         return new Point(coordinates);
     }
@@ -51,7 +56,7 @@ public class Player {
 
     private void notifyObservers() {
         for (IObserver observer : observers) {
-            observer.update();
+            observer.observerUpdate();
         }
     }
 }

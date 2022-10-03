@@ -1,4 +1,4 @@
-package com.g16.feyrune.enums;
+package com.g16.feyrune.controller.enums;
 
 public enum Direction {
     UP,

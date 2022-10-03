@@ -5,12 +5,12 @@ import com.g16.feyrune.interfaces.ICombatAction;
 import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.model.combat.AttackHandler;
 
-public class attackAction implements ICombatAction {
+public class AttackAction implements ICombatAction {
 
     @Override
-    public boolean execute(ICombatCreature actor, ICombatCreature target) {
-        int moveSelection = Random.random.nextInt(actor.getMoves().size());
+    public boolean executeMove(ICombatCreature actor, ICombatCreature target) {
+        int moveSelection = Random.randomInt(actor.getMoves().size());
         AttackHandler.handleAttack(actor,target,actor.getMoves().get(moveSelection));
-        return false;
+        return target.getHP() <= 0;
     }
 }

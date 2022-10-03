@@ -1,11 +1,8 @@
 package com.g16.feyrune.model.creature;
 
 import com.g16.feyrune.interfaces.ICreature;
-import com.g16.feyrune.interfaces.IMove;
-import com.g16.feyrune.model.action.BaseAttack;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import com.g16.feyrune.interfaces.IAbility;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.min;
@@ -16,17 +13,17 @@ public class BaseCreature implements ICreature {
     private double health;
     private int power;
     private int speed;
-    private int evasion;
-    private BaseAttack[] baseAttacks;
+    private int defense;
+    private List<IAbility> baseAbilities;
     private boolean isFriend;
 
-    public BaseCreature(double health, int power, int speed, int evasion, BaseAttack[] baseAttacks){
+    public BaseCreature(double health, int power, int speed, int defense, List<IAbility> baseAbilities){
         this.maxHealth = health;
         this.power = power;
-        this.evasion = evasion;
+        this.defense = defense;
         this.speed = speed;
         this.health = this.maxHealth;
-        this.baseAttacks = baseAttacks;
+        this.baseAbilities = baseAbilities;
         this.isFriend = false;
     }
 
@@ -49,11 +46,8 @@ public class BaseCreature implements ICreature {
     }
 
     @Override
-    public List<IMove> getMoves() {
-        ArrayList<IMove> moves = new ArrayList<>();
-        IMove baseAttack = new BaseAttack(speed, power,"TEMP"); //TODO: THIS IS TEMPORARY, PLZ FIX LATER :)
-        moves.add(baseAttack);
-        return moves;
+    public List<IAbility> getMoves() {
+        return baseAbilities;
     }
 
     @Override
@@ -64,6 +58,9 @@ public class BaseCreature implements ICreature {
     @Override
     public int getPower() {
         return power;
+    }
+    public int getDefense() {
+        return defense;
     }
 
     @Override
