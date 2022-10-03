@@ -7,8 +7,8 @@ import com.badlogic.gdx.utils.Array;
 
 public class AnimatedTextureTile implements ITextureTile {
 
-    float elapsedTime;
-    Animation<TextureRegion> animation;
+    private float elapsedTime;
+    private Animation<TextureRegion> animation;
 
     public AnimatedTextureTile(Array<TextureRegion> frames, float animationSpeed) {
         elapsedTime = 0;
