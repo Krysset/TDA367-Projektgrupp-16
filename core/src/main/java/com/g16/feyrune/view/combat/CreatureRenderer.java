@@ -27,8 +27,10 @@ public class CreatureRenderer {
         for (int i = 0; i < animationRegion.length; i++){
             animationRegion[i].flip(flip,false);
         }
-        width = texture.getWidth()/2 + texture.getWidth() * creature.getPower()/100;
-        height = texture.getHeight()/2 + texture.getHeight() * creature.getPower()/100;
+        float screenWidth = (Gdx.graphics.getWidth()/8)*texture.getHeight()/texture.getWidth();
+        float screenHeight = Gdx.graphics.getHeight()/8*texture.getWidth()/texture.getHeight();
+        width = screenWidth + texture.getWidth() * creature.getPower()/100;
+        height = screenHeight + texture.getHeight() * creature.getPower()/100;
     }
 
 
