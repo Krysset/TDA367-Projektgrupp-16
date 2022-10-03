@@ -16,9 +16,10 @@ public class CombatGraphicsRenderer {
     private HealthBar enemyHealthBar, playerHealthBar;
     private CreatureRenderer enemyRenderer, playerRenderer;
     private float posY = Gdx.graphics.getHeight()/2 - (Gdx.graphics.getHeight()/8);
-    private float width = Gdx.graphics.getWidth() /8, height = Gdx.graphics.getHeight()/24;
+    private float width = Gdx.graphics.getWidth() /6, height = Gdx.graphics.getHeight()/24;
+    private float tolerance = Gdx.graphics.getWidth()/32;
 
-    private float creaturePosY = Gdx.graphics.getHeight()/2 - (Gdx.graphics.getHeight()/8);
+    private float creaturePosY = Gdx.graphics.getHeight()/2 - (Gdx.graphics.getHeight()/3);
 
 
 
@@ -26,11 +27,11 @@ public class CombatGraphicsRenderer {
 
         this.player = player;
         this.enemyCreature = enemyCreature;
-        enemyHealthBar = new HealthBar(enemyCreature.getHP(), Gdx.graphics.getWidth()/2-width, posY,width,height);
-        playerHealthBar = new HealthBar(player.getCreature().getHP(), -Gdx.graphics.getWidth()/2, posY,width,height);
-        playerRenderer = new CreatureRenderer(player.getCreature(),-Gdx.graphics.getWidth()/2 + 10, creaturePosY, false);
+        enemyHealthBar = new HealthBar(enemyCreature.getHP(), Gdx.graphics.getWidth()/2-width - tolerance, posY,width,height);
+        playerHealthBar = new HealthBar(player.getCreature().getHP(), -Gdx.graphics.getWidth()/2 + tolerance, posY,width,height);
+        playerRenderer = new CreatureRenderer(player.getCreature(),-Gdx.graphics.getWidth()/2 + tolerance, creaturePosY, false);
 
-        enemyRenderer = new CreatureRenderer(enemyCreature,Gdx.graphics.getWidth()/4, creaturePosY, true);
+        enemyRenderer = new CreatureRenderer(enemyCreature,Gdx.graphics.getWidth()/2 - tolerance, creaturePosY, true);
     }
 
     public void render(Batch batch){

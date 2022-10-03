@@ -22,26 +22,24 @@ public class CreatureRenderer {
         this.posX = posX;
         this.posY = posY;
         this.flip = flip;
+
         texture = new Texture(Gdx.files.internal(spritePath));
-        animationRegion = AnimationUtils.getAnimationFrames(texture,8,6,4,0);
-        for (int i = 0; i < animationRegion.length; i++){
-            animationRegion[i].flip(flip,false);
-        }
-        float screenWidth = (Gdx.graphics.getWidth()/8)*texture.getHeight()/texture.getWidth();
-        float screenHeight = Gdx.graphics.getHeight()/8*texture.getWidth()/texture.getHeight();
-        width = screenWidth + texture.getWidth() * creature.getPower()/100;
-        height = screenHeight + texture.getHeight() * creature.getPower()/100;
+        animationRegion = AnimationUtils.getAnimationFrames(texture,8,6,4,flip? 4: 0);
+
+        width = (texture.getWidth() + texture.getWidth() * creature.getPower()/100);
+        height = (texture.getHeight() + texture.getHeight() * creature.getPower()/100);
     }
 
 
 
     public void render(Batch batch){
+
         stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
         Animation<TextureRegion> animation = animate(animationRegion);
         animation.setPlayMode(Animation.PlayMode.LOOP);
         TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
 
-        batch.draw(currentFrame, posX, posY - height, width , height);
+        batch.draw(currentFrame, posX - (flip? width : 0), posY, width , height);
 
 
         //TODO: NOT IMPLEMENTED
