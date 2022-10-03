@@ -10,20 +10,17 @@ import com.g16.feyrune.model.Model;
 import com.g16.feyrune.model.combat.actions.AttackAction;
 import com.g16.feyrune.model.combat.actions.FleeAction;
 
-public class CombatController implements ICombatController, IInput {
-    private CombatInputHandler combatInputHandler;
-    private CombatInputProcessor inputProcessor;
-    private ChoiceDialog choiceDialog;
+public class CombatController implements IInput {
+    private final CombatInputHandler combatInputHandler;
+    private final CombatInputProcessor inputProcessor;
+    private final ChoiceDialog choiceDialog;
     // Takes whole model so that logic can be written to get new player creature each time
     // the player's creature changes. Could be streamlined later.
-    private Model model;
 
     public CombatController(Model model){
-        this.model = model;
-        combatInputHandler = new CombatInputHandler();
+        combatInputHandler = new CombatInputHandler(model.getPlayerCreature());
         inputProcessor = new CombatInputProcessor(combatInputHandler);
         choiceDialog = new ChoiceDialog(combatInputHandler); //TODO: Add connection for the batch to controller
-        model.getPlayerCreature().registerCombatController(this);
     }
 
     // This is patchwork code to make it work.
@@ -34,27 +31,5 @@ public class CombatController implements ICombatController, IInput {
     @Override
     public void setAsInputProcessor() {
         inputProcessor.setAsInputProcessor();
-    }
-
-    @Override
-    public ICombatAction getPlayerActionFromController(ICombatCreature actingCreature) {
-        Selection selection = combatInputHandler.getChosenAction();
-        switch (selection) {
-            case FIRST:
-                return new AttackAction();
-            case FOURTH:
-                return new FleeAction();
-            default:
-                return null;
-        }
-    }
-
-    @Override
-    public boolean hasSelectedAction(){
-        return combatInputHandler.hasSelectedAction();
-    }
-
-    private void setListenToCurrentPlayerCreature() {
-        model.getPlayerCreature().registerCombatController(this);
     }
 }

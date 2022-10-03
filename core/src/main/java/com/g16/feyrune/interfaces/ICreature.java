@@ -2,7 +2,7 @@ package com.g16.feyrune.interfaces;
 
 import java.util.List;
 
-public interface ICreature {
+public interface ICreature {//TODO: separate to a smaller interface, interface segregation principle
     List<IAbility> getMoves();
     double getHP();
     int getSpeed();
