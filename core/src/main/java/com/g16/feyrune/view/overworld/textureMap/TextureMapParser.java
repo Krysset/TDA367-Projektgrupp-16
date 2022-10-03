@@ -29,7 +29,7 @@ public class TextureMapParser {
 
         TilesetManager tsManager = createTilesetManager(doc);
 
-        List<TextureLayer> layers = generateGIdList(doc, mapSize, tsManager);
+        List<TextureLayer> layers = generateLayerList(doc, mapSize, tsManager);
 
         return new TextureMap(mapSize.fst, mapSize.snd, tileSize.fst, tileSize.snd, bgColor, layers);
     }
@@ -75,7 +75,7 @@ public class TextureMapParser {
      * @param mapSize The size of the map.
      * @return A list of lists of gIds.
      */
-    private static List<TextureLayer> generateGIdList(Document doc, Pair<Integer, Integer> mapSize, TilesetManager tsManager) {
+    private static List<TextureLayer> generateLayerList(Document doc, Pair<Integer, Integer> mapSize, TilesetManager tsManager) {
         // Get all the layer nodes
         NodeList layerNodes = doc.getElementsByTagName("layer");
 

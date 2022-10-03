@@ -12,11 +12,11 @@ public class TextureLayer {
     protected TextureLayer() {
         layer = new HashMap<>();
     }
-    public void render(SpriteBatch spriteBatch) {
+    public void render(SpriteBatch spriteBatch, int tileSize) {
         for (HashMap.Entry<Point, ITextureGettable> entry : layer.entrySet()) {
             Point coordinate = entry.getKey();
             ITextureGettable tile = entry.getValue();
-            spriteBatch.draw(tile.getTexture(), coordinate.x * 16, coordinate.y * 16);
+            spriteBatch.draw(tile.getTexture(), coordinate.x * tileSize, coordinate.y * tileSize);
         }
     }
 

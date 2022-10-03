@@ -20,7 +20,7 @@ public class TextureMap {
 
     public void render(SpriteBatch batch) {
         for (TextureLayer layer : layers) {
-            layer.render(batch);
+            layer.render(batch, tileWidth);
         }
     }
 
