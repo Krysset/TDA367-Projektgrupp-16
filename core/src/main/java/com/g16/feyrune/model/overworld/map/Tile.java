@@ -31,7 +31,9 @@ public class Tile {
     protected void setTransporter(Transporter transporter) {
         this.transporter = transporter;
     }
-
+    protected void setCanEncounter(boolean canEncounter) {
+        this.canEncounter = canEncounter;
+    }
     protected Point getTransportCoordinates(){
         return transporter.getTransitionTo();
     }
