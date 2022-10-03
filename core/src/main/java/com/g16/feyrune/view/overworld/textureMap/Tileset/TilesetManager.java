@@ -7,7 +7,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class TilesetManager {
-    SortedMap<Integer, Tileset> sortedTilesets;
+    private SortedMap<Integer, Tileset> sortedTilesets;
     public TilesetManager() {
         sortedTilesets = new TreeMap<>(new Comparator<Integer>() {
             @Override
@@ -25,7 +25,7 @@ public class TilesetManager {
             throw new RuntimeException("No tilesets have been added");
         }
         for (int firstGId : sortedTilesets.keySet()) {
-            if (firstGId < gid) {
+            if (firstGId <= gid) {
                 Tileset tileset = sortedTilesets.get(firstGId);
                 ITextureGettable tile = tileset.getTextureTile(gid);
                 return tile;
