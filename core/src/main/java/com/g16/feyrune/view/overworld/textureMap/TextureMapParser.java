@@ -84,22 +84,26 @@ public class TextureMapParser {
         // and they are not always in the same order.
         for (int i = 0; i < layerNodes.getLength(); i++) {
             TextureLayer layer = new TextureLayer();
-            NodeList childNodes = layerNodes.item(i).getChildNodes();
-            for (int j = 0; j < childNodes.getLength(); j++) {
-                Node dataNode = childNodes.item(j);
+            Node layerNode = layerNodes.item(i);
+            String layerName = layerNode.getAttributes().getNamedItem("name").getNodeValue().toLowerCase();
+            if (!layerName.equals("encounter")) {
+                NodeList childNodes = layerNode.getChildNodes();
+                for (int j = 0; j < childNodes.getLength(); j++) {
+                    Node dataNode = childNodes.item(j);
 
-                // This checks that it is not a shadow node for the last one,
-                // if any previously were a shadow node it would not get here even
-                if (dataNode.getNodeName().equals("data")) {
-                    // Parse the CSV data.
-                    String[] tileIds = dataNode.getTextContent().split(",");
-                    for (int k = 0; k < tileIds.length; k++) {
-                        // Prevents crashing because of whitespace or newlines when parsing integer.
-                        tileIds[k] = tileIds[k].replaceAll("\\s+", "");
-                        int tileId = Integer.parseInt(tileIds[k]);
-                        if (tileId != 0) {
-                            layer.addTile(new Point(k % mapSize.fst, mapSize.snd - (k / mapSize.fst)),
-                                    tsManager.getITextureTileFromGId(tileId));
+                    // This checks that it is not a shadow node for the last one,
+                    // if any previously were a shadow node it would not get here even
+                    if (dataNode.getNodeName().equals("data")) {
+                        // Parse the CSV data.
+                        String[] tileIds = dataNode.getTextContent().split(",");
+                        for (int k = 0; k < tileIds.length; k++) {
+                            // Prevents crashing because of whitespace or newlines when parsing integer.
+                            tileIds[k] = tileIds[k].replaceAll("\\s+", "");
+                            int tileId = Integer.parseInt(tileIds[k]);
+                            if (tileId != 0) {
+                                layer.addTile(new Point(k % mapSize.fst, mapSize.snd - (k / mapSize.fst)),
+                                        tsManager.getITextureTileFromGId(tileId));
+                            }
                         }
                     }
                 }
