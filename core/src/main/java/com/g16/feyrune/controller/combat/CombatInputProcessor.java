@@ -7,7 +7,7 @@ import com.g16.feyrune.controller.enums.Direction;
 import com.g16.feyrune.controller.IInput;
 
 public class CombatInputProcessor implements IInput, InputProcessor {
-    private CombatInputHandler inputHandler;
+    private final CombatInputHandler inputHandler;
 
     public CombatInputProcessor(CombatInputHandler inputHandler){
         this.inputHandler = inputHandler;
