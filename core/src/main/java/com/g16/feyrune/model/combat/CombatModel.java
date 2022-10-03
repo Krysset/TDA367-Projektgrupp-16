@@ -29,7 +29,7 @@ public class CombatModel {
     }
 
     public void fillCombatCreatureList(Player player, Encounter encounter) {
-        combatCreatures.add(new PlayerCreature(CreatureFactory.createCreature())); // FIX: Should be player.getMonster()
+        combatCreatures.add(new PlayerCreature(player.getCreature())); // FIX: Should be player.getMonster()
         combatCreatures.add(new EnemyCreature(encounter.getEnemyCreature()[0])); //TODO: SHOUD NOT BE INDEXED LIKE THIS
         for (ICombatCreature combatCreature : combatCreatures) {
             savedCombatCreatureSpeed.add(combatCreature.getSpeed());
@@ -48,7 +48,7 @@ public class CombatModel {
         // The player has not selected an action this render pass,
         // therefore stop doing the loop this current iteration.
         if (action == null) return;
-        turnOrder.remove(0);
+        turnOrder.remove(0); //TODO: model has referance to controller
         System.out.println(getCurrentActorName(actor) + " attacked" + getCurrentActorName(target));
         System.out.println(getCurrentActorName(actor) + " has " + actor.getHP() + " health left");
         System.out.println(getCurrentActorName(target) + " has " + target.getHP() + " health left");
@@ -75,6 +75,15 @@ public class CombatModel {
         return combatIsOver;
     }
 
+    public ICreature getEnemyCreature(){
+        for (ICombatCreature combatCreature : combatCreatures) {
+            if (combatCreature instanceof EnemyCreature) {
+                return (EnemyCreature) combatCreature;
+            }
+        }
+        // If the player monster is not found, something is wrong
+        throw new RuntimeException("Missing EnemyCreature in list of combat creatures");
+    }
 
     // Does not currently work if player has > 1 creature in combat
     public PlayerCreature getPlayerCreature() {
