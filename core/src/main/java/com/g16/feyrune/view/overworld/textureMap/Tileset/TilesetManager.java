@@ -25,7 +25,7 @@ public class TilesetManager {
             throw new RuntimeException("No tilesets have been added");
         }
         for (int firstGId : sortedTilesets.keySet()) {
-            if (firstGId < gid) {
+            if (firstGId <= gid) {
                 Tileset tileset = sortedTilesets.get(firstGId);
                 ITextureGettable tile = tileset.getTextureTile(gid);
                 return tile;
