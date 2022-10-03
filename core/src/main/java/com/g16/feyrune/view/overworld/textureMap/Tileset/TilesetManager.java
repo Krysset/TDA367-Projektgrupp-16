@@ -7,7 +7,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class TilesetManager {
-    SortedMap<Integer, Tileset> sortedTilesets;
+    private SortedMap<Integer, Tileset> sortedTilesets;
     public TilesetManager() {
         sortedTilesets = new TreeMap<>(new Comparator<Integer>() {
             @Override
