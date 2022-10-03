@@ -5,16 +5,13 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
-public class AnimatedTextureTile implements ITextureTile {
-
+public class AnimatedTextureTile implements ITextureGettable {
     private float elapsedTime;
     private Animation<TextureRegion> animation;
-
     public AnimatedTextureTile(Array<TextureRegion> frames, float animationSpeed) {
         elapsedTime = 0;
         animation = new Animation<TextureRegion>(animationSpeed, frames, Animation.PlayMode.LOOP);
     }
-
     @Override
     public TextureRegion getTexture() {
         elapsedTime += Gdx.graphics.getDeltaTime();
