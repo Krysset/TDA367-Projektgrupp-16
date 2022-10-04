@@ -48,7 +48,7 @@ public class MapParser {
 
     private static Iterable<Point> parseEncounterTiles(Document doc, Pair<Integer, Integer> mapSize) {
 
-        int encounterTileId = -1;
+        int encounterTileGId = -1;
         List<Point> encounterTilePositions = new ArrayList<>();
 
         NodeList tilesetNodes = doc.getElementsByTagName("tileset");
@@ -57,11 +57,11 @@ public class MapParser {
             if (tilesetName.equals("encounter")) {
                 Node encounterTilesetNode = tilesetNodes.item(i);
                 String idAsString = encounterTilesetNode.getAttributes().getNamedItem("firstgid").getNodeValue();
-                encounterTileId = Integer.parseInt(idAsString);
+                encounterTileGId = Integer.parseInt(idAsString);
             }
         }
 
-        if (encounterTileId == -1) {
+        if (encounterTileGId == -1) {
             return encounterTilePositions;
         }
 
@@ -81,7 +81,7 @@ public class MapParser {
                             // Prevents crashing because of whitespace or newlines when parsing integer.
                             tileIds[k] = tileIds[k].replaceAll("\\s+", "");
                             int tileId = Integer.parseInt(tileIds[k]);
-                            if (tileId == encounterTileId) {
+                            if (tileId == encounterTileGId) {
                                 encounterTilePositions.add(
                                         new Point(k % mapSize.fst, mapSize.snd - (k / mapSize.fst)-1)
                                 );
