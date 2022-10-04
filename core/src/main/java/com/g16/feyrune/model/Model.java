@@ -92,7 +92,6 @@ public class Model implements IObserver{
         if (overworldModel.isInEncounter()){
             combatModel = new CombatModel(player, overworldModel.getEncounter());
             changeState(ModelState.COMBAT);
-            overworldModel.removeEncounterFromPlayerTile();
         }
     }
 }
