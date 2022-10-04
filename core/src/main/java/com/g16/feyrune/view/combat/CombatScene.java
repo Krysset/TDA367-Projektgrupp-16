@@ -35,10 +35,8 @@ public class CombatScene implements IScene { //TODO: the relation for this objec
 
     @Override
     public void render() {//TODO: NOT IMPLEMENTED
-        //batch.setProjectionMatrix(camera.projection);
         ScreenUtils.clear(Color.CYAN);
         batch.begin();
-        batch.draw(new Texture(Gdx.files.internal("assets/ui/choiceDialog.png")),0 - Gdx.graphics.getWidth()/2,0 - Gdx.graphics.getHeight()/2,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         combatRenderer.render(batch);
         batch.end();
     }

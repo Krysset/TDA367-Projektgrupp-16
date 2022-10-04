@@ -7,9 +7,9 @@ public class Tile {
     private boolean canEncounter;
     private Transporter transporter;
 
-    public Tile(boolean collision, boolean canEncounter) {
+    public Tile(boolean collision) {
         this.collision = collision;
-        this.canEncounter = canEncounter;
+        this.canEncounter = false;
     }
 
     public boolean isCollision() {
@@ -31,7 +31,9 @@ public class Tile {
     protected void setTransporter(Transporter transporter) {
         this.transporter = transporter;
     }
-
+    protected void setCanEncounter(boolean canEncounter) {
+        this.canEncounter = canEncounter;
+    }
     protected Point getTransportCoordinates(){
         return transporter.getTransitionTo();
     }

@@ -25,7 +25,7 @@ public class Model implements IObserver{
     private CombatModel combatModel;
 
     public Model() {
-        player = new Player("Player", new Point(20, 5)); //TODO: Should probably have a method to get the initial player position from the map
+        player = new Player("Player", new Point(0, 0));
         this.overworldModel = new OverworldModel(player);
         this.overworldModel.addObserver(this);
         this.observers = new ArrayList<>();
