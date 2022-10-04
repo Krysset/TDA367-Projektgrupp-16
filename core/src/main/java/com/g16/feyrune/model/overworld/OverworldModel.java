@@ -1,5 +1,6 @@
 package com.g16.feyrune.model.overworld;
 
+import com.g16.feyrune.Util.Random;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 import com.g16.feyrune.model.overworld.encounter.EncounterHandler;
@@ -53,7 +54,11 @@ public class OverworldModel {
         return mapManager.hasTransporter(player.getCoordinates());
     }
     public boolean isInEncounter(){
-        return mapManager.tryEncounter(player.getCoordinates());
+        if(mapManager.tryEncounter(player.getCoordinates())) {
+            // about every tenth tile is an encounter
+            return Random.randomInt(100) > 90;
+        }
+        return false;
     }
     public void removeEncounterFromPlayerTile(){
         mapManager.removeEncounterFromTile(player.getCoordinates());
