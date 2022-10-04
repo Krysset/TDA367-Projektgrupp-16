@@ -39,14 +39,16 @@ public class OverworldModel {
 
     public void movePlayer() {
         Point deltaPos = movementHandler.calculateMovement(player.getCoordinates(), mapManager);
-        player.move(deltaPos.x, deltaPos.y);
-        if (reachedTransporter()) {
-            mapManager.useTransporter(player.getCoordinates());
-            player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
-        } else if (isInEncounter()) {
-            movementHandler.resetMovement();
-            encounterHandler.createEncounter(mapManager.getTerrainType());
-            notifyObservers();
+        if (deltaPos.x != 0 || deltaPos.y != 0) {
+            player.move(deltaPos.x, deltaPos.y);
+            if (reachedTransporter()) {
+                mapManager.useTransporter(player.getCoordinates());
+                player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
+            } else if (isInEncounter()) {
+                movementHandler.resetMovement();
+                encounterHandler.createEncounter(mapManager.getTerrainType());
+                notifyObservers();
+            }
         }
     }
 
