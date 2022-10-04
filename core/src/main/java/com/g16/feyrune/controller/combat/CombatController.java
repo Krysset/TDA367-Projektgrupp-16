@@ -3,12 +3,7 @@ package com.g16.feyrune.controller.combat;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.g16.feyrune.controller.combat.ui.ChoiceDialog;
 import com.g16.feyrune.controller.IInput;
-import com.g16.feyrune.controller.enums.Selection;
-import com.g16.feyrune.interfaces.ICombatAction;
-import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.model.Model;
-import com.g16.feyrune.model.combat.actions.AttackAction;
-import com.g16.feyrune.model.combat.actions.FleeAction;
 
 public class CombatController implements IInput {
     private final CombatInputHandler combatInputHandler;

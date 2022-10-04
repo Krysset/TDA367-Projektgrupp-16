@@ -1,6 +1,5 @@
 package com.g16.feyrune.model.combat;
 
-import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.interfaces.IAbilitable;
 
 import com.g16.feyrune.Util.Random;
