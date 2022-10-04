@@ -25,10 +25,6 @@ public class MapManager {
         return map.tryEncounter(playerPos);
     }
 
-    public void removeEncounterFromTile(Point tilePos) {
-        map.removeEncounterFromTile(tilePos);
-    }
-
     public String getTerrainType() {
         return map.getTerrainType();
     }

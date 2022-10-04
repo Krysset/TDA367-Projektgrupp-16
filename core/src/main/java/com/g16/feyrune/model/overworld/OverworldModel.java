@@ -60,9 +60,6 @@ public class OverworldModel {
         }
         return false;
     }
-    public void removeEncounterFromPlayerTile(){
-        mapManager.removeEncounterFromTile(player.getCoordinates());
-    }
 
     public MovementHandler getMovementHandler() {
         return movementHandler;

@@ -19,9 +19,6 @@ public class Tile {
     public boolean canEncounter() {
         return canEncounter;
     }
-    public void removeEncounter(){
-        canEncounter = false;
-    }
     public boolean hasTransporter(){
         return transporter != null;
     }
