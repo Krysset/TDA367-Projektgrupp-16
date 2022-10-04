@@ -55,8 +55,8 @@ public class OverworldModel {
     }
     public boolean isInEncounter(){
         if(mapManager.tryEncounter(player.getCoordinates())) {
-            // about every seventh tile is an encounter
-            return Random.randomInt(99) > 69;
+            // about every tenth tile is an encounter
+            return Random.randomInt(100) > 90;
         }
         return false;
     }
