@@ -101,7 +101,7 @@ public class TextureMapParser {
                             tileIds[k] = tileIds[k].replaceAll("\\s+", "");
                             int tileId = Integer.parseInt(tileIds[k]);
                             if (tileId != 0) {
-                                layer.addTile(new Point(k % mapSize.fst, mapSize.snd - (k / mapSize.fst)),
+                                layer.addTile(new Point(k % mapSize.fst, mapSize.snd - (k / mapSize.fst) - 1),
                                         tsManager.getITextureTileFromGId(tileId));
                             }
                         }
