@@ -70,7 +70,6 @@ public class MapManager {
 
     public void changeMap(String path) {
         map = MapParser.parseMapFile(path);
-        // Notify observers
         notifyMapObservers(path);
     }
 }
