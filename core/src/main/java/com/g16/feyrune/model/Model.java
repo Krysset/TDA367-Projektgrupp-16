@@ -9,10 +9,8 @@ import com.g16.feyrune.model.creature.CreatureFactory;
 import com.g16.feyrune.model.overworld.MovementHandler;
 import com.g16.feyrune.model.overworld.OverworldModel;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
-import com.g16.feyrune.model.overworld.map.IMapObserver;
 import com.g16.feyrune.model.overworld.map.MapManager;
 import com.g16.feyrune.model.player.Player;
-import com.g16.feyrune.view.overworld.textureMap.TextureMapManager;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -33,7 +31,7 @@ public class Model implements IObserver{
         this.combatModel = new CombatModel(player, new Encounter(new ICreature[]{CreatureFactory.createCreature()}));
     }
 
-    public void update() { //TODO: use stare pattern
+    public void update() { //TODO: use state pattern
         switch (stateHandler.getModelState()){
             case WORLD:
                 overworldModel.update();
@@ -42,10 +40,18 @@ public class Model implements IObserver{
                 combatModel.update();
                 if (combatModel.getCombatIsOver()) {
                     stateHandler.changeModelState(ModelState.WORLD);
+                    if(hasPlayerBlackedOut()) {
+                        overworldModel.playerBlackout();
+                        player.healTeam();
+                    }
                     notifyObservers();
                 }
                 break;
         }
+    }
+
+    private boolean hasPlayerBlackedOut() {
+        return player.getCreature().isDead();
     }
 
     public CombatModel getCombatModel(){return combatModel;}

@@ -67,4 +67,10 @@ public class MapManager {
             observer.updateMap(mapAssetPath);
         }
     }
+
+    public void changeMap(String path) {
+        map = MapParser.parseMapFile(path);
+        // Notify observers
+        notifyMapObservers(path);
+    }
 }

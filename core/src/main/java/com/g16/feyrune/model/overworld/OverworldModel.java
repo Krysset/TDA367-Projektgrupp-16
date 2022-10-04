@@ -78,4 +78,8 @@ public class OverworldModel {
         return mapManager;
     }
 
+    public void playerBlackout() {
+        mapManager.changeMap("assets/maps/villagehouse.tmx");
+        player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
+    }
 }
