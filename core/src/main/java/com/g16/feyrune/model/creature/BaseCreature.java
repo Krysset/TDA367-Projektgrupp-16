@@ -41,6 +41,9 @@ public class BaseCreature implements ICreature {
         return health;
     }
 
+    public int getPower() {
+        return power;
+    }
 
     @Override
     public void takeDamage(int damage) {

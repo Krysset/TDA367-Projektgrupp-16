@@ -40,6 +40,10 @@ public abstract class CombatCreature {
         return creature.getHP();
     }
 
+    public int getPower(){
+        return creature.getPower();
+    }
+
     public abstract ICombatAction selectAction(CombatCreature target);
 
 }
