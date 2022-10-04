@@ -10,13 +10,12 @@ import com.g16.feyrune.view.utils.AnimationUtils;
 
 public class CreatureRenderer {
     private ICreature creature;
-    private double maxHealth;
     private String spritePath = "assets/entities/bandit/bandit.png"; //TODO: temp
     private float width,height,posX,posY;
     private Texture texture;
     private TextureRegion[] animationRegion;
     private float stateTime = 0;
-    boolean flip;
+    private boolean flip;
     public CreatureRenderer(ICreature creature, float posX, float posY, boolean flip){
         this.creature = creature;
         this.posX = posX;
