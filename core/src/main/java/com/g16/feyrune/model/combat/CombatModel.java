@@ -1,8 +1,9 @@
 package com.g16.feyrune.model.combat;
 
 import com.g16.feyrune.interfaces.ICombatAction;
-import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.interfaces.ICreature;
+import com.g16.feyrune.model.combat.creatures.CombatCreature;
+import com.g16.feyrune.model.creature.BaseCreature;
 import com.g16.feyrune.model.creature.CreatureFactory;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.combat.creatures.EnemyCreature;
@@ -13,9 +14,9 @@ import java.util.ArrayList;
 
 public class CombatModel {
     private final Player player;
-    private final ArrayList<ICombatCreature> combatCreatures;
+    private final ArrayList<CombatCreature> combatCreatures;
     private ArrayList<Integer> savedCombatCreatureSpeed;
-    private ArrayList<ICombatCreature> turnOrder;
+    private ArrayList<CombatCreature> turnOrder;
     private final int speedThreshold = 250;
     private boolean combatIsOver = false;
 
@@ -29,9 +30,9 @@ public class CombatModel {
     }
 
     public void fillCombatCreatureList(Player player, Encounter encounter) {
-        combatCreatures.add(new PlayerCreature(player.getCreature())); // FIX: Should be player.getMonster()
-        combatCreatures.add(new EnemyCreature(encounter.getEnemyCreature()[0])); //TODO: SHOUD NOT BE INDEXED LIKE THIS
-        for (ICombatCreature combatCreature : combatCreatures) {
+        combatCreatures.add(player.getCreature()); // FIX: Should be player.getMonster()
+        combatCreatures.add(new EnemyCreature((BaseCreature) encounter.getEnemyCreature()[0])); //TODO: SHOUD NOT BE INDEXED LIKE THIS
+        for (CombatCreature combatCreature : combatCreatures) {
             savedCombatCreatureSpeed.add(combatCreature.getSpeed());
         }
     }
@@ -41,8 +42,8 @@ public class CombatModel {
     }
 
     public void combatLoop(){
-        ICombatCreature actor = turnOrder.get(0);
-        ICombatCreature target = choiceTarget(actor); // TODO: Replace with choose actor.chooseTarget
+        CombatCreature actor = turnOrder.get(0);
+        CombatCreature target = choiceTarget(actor); // TODO: Replace with choose actor.chooseTarget
         ICombatAction action = actor.selectAction(target);
 
         // The player has not selected an action this render pass,
@@ -57,7 +58,7 @@ public class CombatModel {
         }
     }
 
-    private String getCurrentActorName(ICombatCreature actor) {
+    private String getCurrentActorName(CombatCreature actor) {
         if (actor instanceof PlayerCreature) {
             return "Player";
         } else {
@@ -73,8 +74,8 @@ public class CombatModel {
         return combatIsOver;
     }
 
-    public ICreature getEnemyCreature(){
-        for (ICombatCreature combatCreature : combatCreatures) {
+    public EnemyCreature getEnemyCreature(){
+        for (CombatCreature combatCreature : combatCreatures) {
             if (combatCreature instanceof EnemyCreature) {
                 return (EnemyCreature) combatCreature;
             }
@@ -85,7 +86,7 @@ public class CombatModel {
 
     // Does not currently work if player has > 1 creature in combat
     public PlayerCreature getPlayerCreature() {
-        for (ICombatCreature combatCreature : combatCreatures) {
+        for (CombatCreature combatCreature : combatCreatures) {
             if (combatCreature instanceof PlayerCreature) {
                 return (PlayerCreature) combatCreature;
             }
@@ -95,9 +96,9 @@ public class CombatModel {
     }
 
     //TODO: THIS IS BAD CODE NEED TO FIX AT LATER DATE
-    private ICombatCreature choiceTarget(ICombatCreature actor){
+    private CombatCreature choiceTarget(CombatCreature actor){
         int i = combatCreatures.indexOf(actor);
-        ICombatCreature target;
+        CombatCreature target;
         if (i == combatCreatures.size() - 1) {
             target = combatCreatures.get(0);
         } else {
@@ -119,7 +120,7 @@ public class CombatModel {
      * Generates a new turn order for the battle
      */
     private void generateNewAttackOrder() {
-        turnOrder = new ArrayList<ICombatCreature>();
+        turnOrder = new ArrayList<CombatCreature>();
         generateAttackOrder();
     }
 

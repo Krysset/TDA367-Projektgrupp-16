@@ -13,18 +13,18 @@ import java.util.ArrayList;
 
 public class CombatGraphicsRenderer {
     private Player player;
-    private ICreature enemyCreature;
+    private EnemyCreature enemyCreature;
     private HealthBar enemyHealthBar, playerHealthBar;
     private float posY = Gdx.graphics.getHeight()/2 - (Gdx.graphics.getHeight()/8);
     private float width = Gdx.graphics.getWidth() /8, height = Gdx.graphics.getHeight()/24;
 
 
-    public CombatGraphicsRenderer(BaseCreature enemyCreature, Player player){
+    public CombatGraphicsRenderer(EnemyCreature enemyCreature, Player player){
 
         this.player = player;
         this.enemyCreature = enemyCreature;
-        enemyHealthBar = new HealthBar(enemyCreature.getHP(), Gdx.graphics.getWidth()/2-width, posY,width,height);
-        playerHealthBar = new HealthBar((BaseCreature)(player.getCreature()).getHP(), -Gdx.graphics.getWidth()/2, posY,width,height);
+        enemyHealthBar = new HealthBar(this.enemyCreature.getHP(), Gdx.graphics.getWidth()/2-width, posY,width,height);
+        playerHealthBar = new HealthBar(player.getCreature().getHP(), -Gdx.graphics.getWidth()/2, posY,width,height);
     }
 
     public void render(Batch batch){

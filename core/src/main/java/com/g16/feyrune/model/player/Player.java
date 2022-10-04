@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.combat.creatures.PlayerCreature;
+import com.g16.feyrune.model.creature.BaseCreature;
 import com.g16.feyrune.model.creature.CreatureFactory;
 
 import java.awt.*;
@@ -53,8 +54,8 @@ public class Player {
     }
 
     //TODO: This is wrong and temp
-    public ICreature getCreature(){
-        return creature;
+    public PlayerCreature getCreature(){
+        return new PlayerCreature((BaseCreature) this.creature);
     }
 
     private void notifyObservers() {

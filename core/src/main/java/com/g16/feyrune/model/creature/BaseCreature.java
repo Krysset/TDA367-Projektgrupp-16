@@ -27,23 +27,6 @@ public class BaseCreature implements ICreature {
         this.isFriend = false;
     }
 
-    private void die(){
-
-    }
-
-    private void setHealth(double newHealth){
-        if (newHealth <= 0.0d){
-            die();
-        }
-        health = min(newHealth, maxHealth);
-    }
-
-    public void damageMonster(double damage){
-        setHealth(health-damage);
-    }
-    public void healMonster(double heal){
-        setHealth(heal+health);
-    }
 
     @Override
     public List<IAbilitable> getMoves() {
@@ -54,7 +37,6 @@ public class BaseCreature implements ICreature {
         return (int) ((power * ((double) attack.getAttackPower() / 100)));
     }
 
-    @Override
     public double getHP() {
         return health;
     }
