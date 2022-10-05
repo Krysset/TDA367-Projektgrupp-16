@@ -1,6 +1,12 @@
 {
 	"cSpell.words": [
 		"Feyrune",
-		"speedrunner"
-	]
+		"overworld",
+		"speedrunner",
+		"WASD"
+	],
+	"editor.defaultFormatter": "James-Yu.latex-workshop",
+	"[latex]": {
+		"editor.defaultFormatter": "James-Yu.latex-workshop"
+	}
 }
