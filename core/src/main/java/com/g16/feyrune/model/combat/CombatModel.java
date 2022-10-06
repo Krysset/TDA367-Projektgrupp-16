@@ -9,12 +9,13 @@ import com.g16.feyrune.model.combat.creatures.PlayerCreature;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CombatModel {
     private final Player player;
-    private final ArrayList<CombatCreature> combatCreatures;
-    private ArrayList<Integer> savedCombatCreatureSpeed;
-    private ArrayList<CombatCreature> turnOrder;
+    private final List<CombatCreature> combatCreatures;
+    private List<Integer> savedCombatCreatureSpeed;
+    private List<CombatCreature> turnOrder;
     private final int speedThreshold = 250;
     private boolean combatIsOver = false;
 
