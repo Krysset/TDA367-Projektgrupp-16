@@ -25,10 +25,6 @@ public class MapManager {
         return map.tryEncounter(playerPos);
     }
 
-    public void removeEncounterFromTile(Point tilePos) {
-        map.removeEncounterFromTile(tilePos);
-    }
-
     public String getTerrainType() {
         return map.getTerrainType();
     }
@@ -70,5 +66,10 @@ public class MapManager {
         for (IMapObserver observer : observers) {
             observer.updateMap(mapAssetPath);
         }
+    }
+
+    public void changeMap(String path) {
+        map = MapParser.parseMapFile(path);
+        notifyMapObservers(path);
     }
 }

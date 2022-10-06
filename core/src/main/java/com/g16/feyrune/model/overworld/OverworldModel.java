@@ -39,14 +39,16 @@ public class OverworldModel {
 
     public void movePlayer() {
         Point deltaPos = movementHandler.calculateMovement(player.getCoordinates(), mapManager);
-        player.move(deltaPos.x, deltaPos.y);
-        if (reachedTransporter()) {
-            mapManager.useTransporter(player.getCoordinates());
-            player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
-        } else if (isInEncounter()) {
-            movementHandler.resetMovement();
-            encounterHandler.createEncounter(mapManager.getTerrainType());
-            notifyObservers();
+        if (deltaPos.x != 0 || deltaPos.y != 0) {
+            player.move(deltaPos.x, deltaPos.y);
+            if (reachedTransporter()) {
+                mapManager.useTransporter(player.getCoordinates());
+                player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
+            } else if (isInEncounter()) {
+                movementHandler.resetMovement();
+                encounterHandler.createEncounter(mapManager.getTerrainType());
+                notifyObservers();
+            }
         }
     }
 
@@ -59,9 +61,6 @@ public class OverworldModel {
             return Random.randomInt(100) > 90;
         }
         return false;
-    }
-    public void removeEncounterFromPlayerTile(){
-        mapManager.removeEncounterFromTile(player.getCoordinates());
     }
 
     public MovementHandler getMovementHandler() {
@@ -81,4 +80,8 @@ public class OverworldModel {
         return mapManager;
     }
 
+    public void playerBlackout() {
+        mapManager.changeMap("assets/maps/villagehouse.tmx");
+        player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
+    }
 }
