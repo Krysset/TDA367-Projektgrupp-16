@@ -4,14 +4,10 @@ import com.g16.feyrune.Util.Random;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 import com.g16.feyrune.model.overworld.encounter.EncounterHandler;
-import com.g16.feyrune.model.overworld.map.IMapObserver;
 import com.g16.feyrune.model.overworld.map.MapManager;
 import com.g16.feyrune.model.player.Player;
-import com.g16.feyrune.model.overworld.map.Map;
-import com.g16.feyrune.view.overworld.textureMap.TextureMapManager;
 
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class OverworldModel {
@@ -39,14 +35,16 @@ public class OverworldModel {
 
     public void movePlayer() {
         Point deltaPos = movementHandler.calculateMovement(player.getCoordinates(), mapManager);
-        player.move(deltaPos.x, deltaPos.y);
-        if (reachedTransporter()) {
-            mapManager.useTransporter(player.getCoordinates());
-            player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
-        } else if (isInEncounter()) {
-            movementHandler.resetMovement();
-            encounterHandler.createEncounter(mapManager.getTerrainType());
-            notifyObservers();
+        if (deltaPos.x != 0 || deltaPos.y != 0) {
+            player.move(deltaPos.x, deltaPos.y);
+            if (reachedTransporter()) {
+                mapManager.useTransporter(player.getCoordinates());
+                player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
+            } else if (isInEncounter()) {
+                movementHandler.resetMovement();
+                encounterHandler.createEncounter(mapManager.getTerrainType());
+                notifyObservers();
+            }
         }
     }
 
@@ -59,9 +57,6 @@ public class OverworldModel {
             return Random.randomInt(100) > 90;
         }
         return false;
-    }
-    public void removeEncounterFromPlayerTile(){
-        mapManager.removeEncounterFromTile(player.getCoordinates());
     }
 
     public MovementHandler getMovementHandler() {
@@ -81,4 +76,8 @@ public class OverworldModel {
         return mapManager;
     }
 
+    public void playerBlackout() {
+        mapManager.changeMap("assets/maps/villagehouse.tmx");
+        player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
+    }
 }

@@ -1,5 +1,6 @@
 package com.g16.feyrune.model.creature;
 
+
 import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.interfaces.IAbilitable;
 

@@ -5,6 +5,7 @@ import com.g16.feyrune.model.combat.actions.abilities.BaseAbility;
 import com.g16.feyrune.model.combat.actions.AttackAction;
 import com.g16.feyrune.model.creature.BaseCreature;
 
+
 import java.util.List;
 
 public class EnemyCreature extends CombatCreature {

@@ -5,6 +5,7 @@ import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.combat.creatures.PlayerCreature;
 import com.g16.feyrune.model.creature.BaseCreature;
+
 import com.g16.feyrune.model.creature.CreatureFactory;
 
 import java.awt.*;
@@ -62,5 +63,9 @@ public class Player {
         for (IObserver observer : observers) {
             observer.observerUpdate();
         }
+    }
+
+    public void healTeam() {
+        //throw new NotImplementedException();
     }
 }
