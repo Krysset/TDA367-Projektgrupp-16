@@ -2,13 +2,9 @@ package com.g16.feyrune.view.combat;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Vector2;
 import com.g16.feyrune.interfaces.ICreature;
-import com.g16.feyrune.model.combat.creatures.EnemyCreature;
 import com.g16.feyrune.model.player.Player;
-import com.g16.feyrune.model.overworld.encounter.Encounter;
 
-import java.util.ArrayList;
 
 public class CombatGraphicsRenderer {
     private Player player;

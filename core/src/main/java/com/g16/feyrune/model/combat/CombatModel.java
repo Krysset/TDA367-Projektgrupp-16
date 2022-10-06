@@ -3,11 +3,10 @@ package com.g16.feyrune.model.combat;
 import com.g16.feyrune.interfaces.ICombatAction;
 import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.interfaces.ICreature;
-import com.g16.feyrune.model.creature.CreatureFactory;
-import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.combat.creatures.EnemyCreature;
 import com.g16.feyrune.model.combat.creatures.PlayerCreature;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
+import com.g16.feyrune.model.player.Player;
 
 import java.util.ArrayList;
 

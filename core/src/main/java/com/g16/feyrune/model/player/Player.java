@@ -3,9 +3,7 @@ package com.g16.feyrune.model.player;
 import com.badlogic.gdx.graphics.Texture;
 import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.interfaces.IObserver;
-import com.g16.feyrune.model.combat.creatures.PlayerCreature;
 import com.g16.feyrune.model.creature.CreatureFactory;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;
 import java.util.ArrayList;

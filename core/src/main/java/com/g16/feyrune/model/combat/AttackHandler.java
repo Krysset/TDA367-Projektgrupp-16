@@ -1,9 +1,8 @@
 package com.g16.feyrune.model.combat;
 
-import com.g16.feyrune.interfaces.ICombatCreature;
-import com.g16.feyrune.interfaces.IAbility;
-
 import com.g16.feyrune.Util.Random;
+import com.g16.feyrune.interfaces.IAbility;
+import com.g16.feyrune.interfaces.ICombatCreature;
 
 public class AttackHandler {
 

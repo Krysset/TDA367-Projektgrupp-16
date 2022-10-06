@@ -7,8 +7,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.g16.feyrune.interfaces.IScene;
 import com.g16.feyrune.model.overworld.map.MapManager;
 import com.g16.feyrune.model.player.Player;
-import com.g16.feyrune.view.player.PlayerRenderer;
 import com.g16.feyrune.view.overworld.textureMap.TextureMapManager;
+import com.g16.feyrune.view.player.PlayerRenderer;
 
 public class OverworldScene implements IScene {
     private PlayerRenderer pr;
