@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.model.combat.creatures.CombatCreature;
 import com.g16.feyrune.view.utils.AnimationUtils;
 

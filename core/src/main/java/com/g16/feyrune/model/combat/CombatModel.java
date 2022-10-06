@@ -2,6 +2,7 @@ package com.g16.feyrune.model.combat;
 
 import com.g16.feyrune.interfaces.ICombatAction;
 
+import com.g16.feyrune.interfaces.ICombatable;
 import com.g16.feyrune.model.combat.creatures.CombatCreature;
 import com.g16.feyrune.model.creature.BaseCreature;
 import com.g16.feyrune.model.player.Player;
@@ -30,6 +31,11 @@ public class CombatModel {
         generateNewAttackOrder();
     }
 
+    /**
+     * Fills the combatCreature list with the player and the enemies
+     * @param player
+     * @param encounter
+     */
     public void fillCombatCreatureList(Player player, Encounter encounter) {
         combatCreatures.add(player.getPlayerCreature());
         combatCreatures.add(new EnemyCreature((BaseCreature) encounter.getEnemyCreature()[0])); //TODO: SHOUD NOT BE INDEXED LIKE THIS
@@ -42,6 +48,11 @@ public class CombatModel {
         combatLoop();
     }
 
+    /**
+     * This method is the main loop of the combat system.
+     * It will loop through the turn order and execute the moves of each creature.
+     * It will also check if the combat is over.
+     */
     public void combatLoop(){
         CombatCreature actor = turnOrder.get(0);
         CombatCreature target = choiceTarget(actor); // TODO: Replace with choose actor.chooseTarget
@@ -52,13 +63,18 @@ public class CombatModel {
         if (action == null) return;
         turnOrder.remove(0); //TODO: model has referance to controller
         System.out.println(getCurrentActorName(actor) + " attacked" + getCurrentActorName(target));
-        boolean actionEndedCombat = action.executeMove(actor, target);
+        boolean actionEndedCombat = action.executeMove((ICombatable) actor, (ICombatable) target);
         generateAttackOrder();
         if (actionEndedCombat) {
             endCombat();
         }
     }
 
+    /**
+     * Returns the name of the current actor.
+     * @param actor The actor to get the name of.
+     * @return The name of the actor.(Player for player creature and enemy for enemy creature)
+     */
     private String getCurrentActorName(CombatCreature actor) {
         if (actor instanceof PlayerCreature) {
             return "Player";
@@ -67,14 +83,25 @@ public class CombatModel {
         }
     }
 
+    /**
+     * Sets endCombat to true, which will end the combat loop in the controller.
+     */
     private void endCombat(){
         combatIsOver = true;
     }
 
+    /**
+     * Returns true if the combat is over.
+     * @return true if combat is over, otherwise returns false
+     */
     public boolean getCombatIsOver(){
         return combatIsOver;
     }
 
+    /**
+     * Returns the enemy creature in combat
+     * @return the enemy creature in combat
+     */
     public EnemyCreature getEnemyCreature(){
         for (CombatCreature combatCreature : combatCreatures) {
             if (combatCreature instanceof EnemyCreature) {
@@ -86,6 +113,10 @@ public class CombatModel {
     }
 
     // Does not currently work if player has > 1 creature in combat
+    /**
+     * Returns the player creature in the combat
+     * @return the player creature in the combat
+     */
     public PlayerCreature getPlayerCreature() {
         for (CombatCreature combatCreature : combatCreatures) {
             if (combatCreature instanceof PlayerCreature) {
@@ -97,6 +128,12 @@ public class CombatModel {
     }
 
     //TODO: THIS IS BAD CODE NEED TO FIX AT LATER DATE
+
+    /**
+     * Chooses a target for the actor to attack.
+     * @param actor the actor that is choosing a target
+     * @return the target that the actor will attack
+     */
     private CombatCreature choiceTarget(CombatCreature actor){
         int i = combatCreatures.indexOf(actor);
         CombatCreature target;
@@ -108,6 +145,9 @@ public class CombatModel {
         return target;
     }
 
+    /**
+     * Disposes of creatures that died during combat
+     */
     private void removeDeadCreatures() {
         for (int i = 0; i < combatCreatures.size(); i++) {
             if (combatCreatures.get(i).isDead()) {
@@ -125,9 +165,9 @@ public class CombatModel {
         generateAttackOrder();
     }
 
-    /**
-     *
-     */
+ /**
+      * Generates a continuation for the turn order of the battle
+      */
     private void generateAttackOrder() {
         while (turnOrder.size() < 10) {
             for (int i = 0; i < combatCreatures.size(); i++) {

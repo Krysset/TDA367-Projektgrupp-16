@@ -9,5 +9,5 @@ public interface ICombatAction {
      * @param target The target of the action.
      * @return True if the action ends the combat, false otherwise.
      */
-    boolean executeMove(CombatCreature actor, CombatCreature target); //TODO: Might need to return Pair<bool,bool> with one of them indicating if the attack order should be rerolled.
+    boolean executeMove(ICombatable actor, ICombatable target); //TODO: Might need to return Pair<bool,bool> with one of them indicating if the attack order should be rerolled.
 }

@@ -1,14 +1,14 @@
 package com.g16.feyrune.model.creature;
 
 
-import com.g16.feyrune.interfaces.ICreature;
+import com.g16.feyrune.interfaces.ICombatable;
 import com.g16.feyrune.interfaces.IAbilitable;
 
 import java.util.List;
 
 import static java.lang.Math.min;
 
-public class BaseCreature implements ICreature {
+public class BaseCreature implements ICombatable {
     //Stats variables
     private final double maxHealth;
     private double health;
