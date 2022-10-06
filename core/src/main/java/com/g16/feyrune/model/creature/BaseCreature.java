@@ -33,7 +33,7 @@ public class BaseCreature implements ICreature {
         return baseAbilities;
     }
 
-    public int attack(IAbilitable attack){
+    public int calculateAttack(IAbilitable attack){
         return (int) ((power * ((double) attack.getAttackPower() / 100)));
     }
 

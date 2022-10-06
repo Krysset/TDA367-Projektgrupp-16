@@ -16,7 +16,7 @@ public class AttackHandler {
      */
     public static void handleAttack(CombatCreature attacker, CombatCreature defender, IAbilitable attack) {
         if (evasiveManoeuvre(defender, attack)) {
-            int damage = attacker.attack(attack);
+            int damage = attacker.calculateAttack(attack);
             defender.takeDamage(damage);
         }
     }

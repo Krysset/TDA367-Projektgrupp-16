@@ -23,8 +23,8 @@ public abstract class CombatCreature {
         return creature.getSpeed();
     }
 
-    public int attack(IAbilitable attack) {
-        return creature.attack(attack);
+    public int calculateAttack(IAbilitable attack) {
+        return creature.calculateAttack(attack);
     }
 
 

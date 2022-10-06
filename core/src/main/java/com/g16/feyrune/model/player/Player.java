@@ -54,7 +54,7 @@ public class Player {
     }
 
     //TODO: This is wrong and temp
-    public PlayerCreature getCreature(){
+    public PlayerCreature getPlayerCreature(){
         return new PlayerCreature((BaseCreature) this.creature);
     }
 

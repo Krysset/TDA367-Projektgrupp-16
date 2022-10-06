@@ -1,10 +1,8 @@
 package com.g16.feyrune.model.combat;
 
 import com.g16.feyrune.interfaces.ICombatAction;
-import com.g16.feyrune.interfaces.ICreature;
 import com.g16.feyrune.model.combat.creatures.CombatCreature;
 import com.g16.feyrune.model.creature.BaseCreature;
-import com.g16.feyrune.model.creature.CreatureFactory;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.combat.creatures.EnemyCreature;
 import com.g16.feyrune.model.combat.creatures.PlayerCreature;
@@ -30,7 +28,7 @@ public class CombatModel {
     }
 
     public void fillCombatCreatureList(Player player, Encounter encounter) {
-        combatCreatures.add(player.getCreature()); // FIX: Should be player.getMonster()
+        combatCreatures.add(player.getPlayerCreature());
         combatCreatures.add(new EnemyCreature((BaseCreature) encounter.getEnemyCreature()[0])); //TODO: SHOUD NOT BE INDEXED LIKE THIS
         for (CombatCreature combatCreature : combatCreatures) {
             savedCombatCreatureSpeed.add(combatCreature.getSpeed());
