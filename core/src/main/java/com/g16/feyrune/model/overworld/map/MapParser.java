@@ -2,7 +2,6 @@ package com.g16.feyrune.model.overworld.map;
 
 import com.g16.feyrune.Util.Pair;
 import com.g16.feyrune.Util.Parser;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;

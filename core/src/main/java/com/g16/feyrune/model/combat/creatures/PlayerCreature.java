@@ -1,9 +1,9 @@
 package com.g16.feyrune.model.combat.creatures;
 
+import com.g16.feyrune.interfaces.IAbility;
 import com.g16.feyrune.interfaces.ICombatAction;
 import com.g16.feyrune.interfaces.ICombatCreature;
 import com.g16.feyrune.interfaces.ICreature;
-import com.g16.feyrune.interfaces.IAbility;
 
 import java.util.List;
 

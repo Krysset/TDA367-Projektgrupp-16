@@ -1,7 +1,6 @@
 package com.g16.feyrune.model.overworld;
 
 import com.g16.feyrune.model.TimeService;
-import com.g16.feyrune.model.overworld.map.Map;
 import com.g16.feyrune.model.overworld.map.MapManager;
 
 import java.awt.*;

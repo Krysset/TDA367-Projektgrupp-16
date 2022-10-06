@@ -4,15 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-//import com.g16.feyrune.controller.combat.CombatRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.g16.feyrune.interfaces.IScene;
 import com.g16.feyrune.model.combat.CombatModel;
 import com.g16.feyrune.model.player.Player;
-import com.g16.feyrune.model.overworld.encounter.Encounter;
 
 public class CombatScene implements IScene { //TODO: the relation for this object to the controller.
 

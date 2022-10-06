@@ -1,10 +1,6 @@
 package com.g16.feyrune.model.overworld.map;
 
-import com.g16.feyrune.model.player.Player;
-
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Map {
     private final Tile[][] tiles;
