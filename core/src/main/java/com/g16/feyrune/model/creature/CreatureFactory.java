@@ -2,9 +2,10 @@ package com.g16.feyrune.model.creature;
 
 import com.g16.feyrune.Util.Pair;
 import com.g16.feyrune.Util.Random;
-import com.g16.feyrune.interfaces.IAbility;
-import com.g16.feyrune.interfaces.ICreature;
+import com.g16.feyrune.interfaces.IAbilitable;
+import com.g16.feyrune.interfaces.ICombatable;
 import com.g16.feyrune.model.combat.actions.AbilityFactory;
+
 
 import java.util.List;
 
@@ -13,15 +14,15 @@ public class CreatureFactory {
      *
      * @return a new Object of type ICreature
      */
-    public static ICreature createCreature(String[] abilities, double health, int power, int speed, int defense) {
-        List<IAbility> baseAbilityList = AbilityFactory.createAbilityList(abilities);
+    public static ICombatable createCreature(String[] abilities, double health, int power, int speed, int defense) {
+        List<IAbilitable> baseAbilityList = AbilityFactory.createAbilityList(abilities);
         return new BaseCreature(health,power, speed, defense, baseAbilityList);
     }
-    public static ICreature createCreature(){
+    public static ICombatable createCreature(){
         return createCreature(new String[]{"Attack"}, 100, 10, 10, 10);
     }
-    public static ICreature[] createCreatureList(Pair<String, Integer>[] monsterList, int wantedAmount){
-        ICreature[] iCreatures = new ICreature[wantedAmount];
+    public static ICombatable[] createCreatureList(Pair<String, Integer>[] monsterList, int wantedAmount){
+        ICombatable[] iCreatures = new ICombatable[wantedAmount];
         for(int i = 0; i < wantedAmount; i++){
             String name = creatureToUse(monsterList);
             iCreatures[i] = createCreatureByName(name);
@@ -44,7 +45,7 @@ public class CreatureFactory {
         }
         return monsterList[0].getFst();
     }
-    private static ICreature createCreatureByName(String name){
+    private static ICombatable createCreatureByName(String name){
         switch (name){
             case "SuperAwesomeBaseMonster":
                 return createCreature(new String[]{"SuperAwesomeBaseAbility"}, 250, 90, 10, 4);

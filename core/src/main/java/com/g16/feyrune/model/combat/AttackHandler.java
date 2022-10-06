@@ -1,8 +1,11 @@
 package com.g16.feyrune.model.combat;
 
+
+import com.g16.feyrune.interfaces.IAbilitable;
+
 import com.g16.feyrune.Util.Random;
-import com.g16.feyrune.interfaces.IAbility;
-import com.g16.feyrune.interfaces.ICombatCreature;
+import com.g16.feyrune.interfaces.ICombatable;
+import com.g16.feyrune.model.combat.creatures.CombatCreature;
 
 public class AttackHandler {
 
@@ -13,23 +16,11 @@ public class AttackHandler {
      * @param defender The monster trying to evade the attack
      * @param attack   The specific attack being used
      */
-    public static void handleAttack(ICombatCreature attacker, ICombatCreature defender, IAbility attack) {
+    public static void handleAttack(ICombatable attacker, ICombatable defender, IAbilitable attack) {
         if (evasiveManoeuvre(defender, attack)) {
-            int damage = calculateDamage(attacker, defender, attack);
+            int damage = attacker.calculateAttack(attack);
             defender.takeDamage(damage);
         }
-    }
-
-    /**
-     * Calculates the damage done by an attack
-     *
-     * @param attacker: creature containing the attack used in the action
-     * @param attack:   the attack action used against the defender
-     * @return damage dealt to the defender (only calculates, doesn't deal it)
-     */
-    private static int calculateDamage(ICombatCreature attacker, ICombatCreature defender, IAbility attack) {
-        int damage = (int) ((attacker.getPower() * ((double) attack.getAttackPower() / 100)) / defender.getDefense());
-        return damage;
     }
 
     /**
@@ -40,7 +31,7 @@ public class AttackHandler {
      * @param baseAbility: attack to check accuracy on.
      * @return if attack is successful: true, if it misses false
      */
-    private static boolean evasiveManoeuvre(ICombatCreature defender, IAbility baseAbility) {
+    private static boolean evasiveManoeuvre(ICombatable defender, IAbilitable baseAbility) {
         boolean evasion = defender.getSpeed() < Random.randomInt(100);
         boolean accuracy = baseAbility.getAttackAccuracy() > Random.randomInt(100);
         boolean hit = evasion && accuracy;

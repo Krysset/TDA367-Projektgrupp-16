@@ -1,7 +1,7 @@
 package com.g16.feyrune.model.overworld.encounter;
 
 import com.g16.feyrune.Util.Pair;
-import com.g16.feyrune.interfaces.ICreature;
+import com.g16.feyrune.interfaces.ICombatable;
 import com.g16.feyrune.model.creature.CreatureFactory;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -24,7 +24,7 @@ public class EncounterHandler {
     public Encounter createEncounter(String terrainType) {
         Pair<String, Integer>[] monsterList = getMonsterList(terrainType);
 
-       ICreature[] iCreatureList = CreatureFactory.createCreatureList(monsterList,1);
+       ICombatable[] iCreatureList = CreatureFactory.createCreatureList(monsterList,1);
         Encounter newEncounter = new Encounter(iCreatureList);
         return newEncounter;
     } //TODO: Implemented statically
