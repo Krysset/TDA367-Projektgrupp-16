@@ -1,7 +1,7 @@
 package com.g16.feyrune.model;
 
 import com.g16.feyrune.enums.ModelState;
-import com.g16.feyrune.interfaces.ICreature;
+import com.g16.feyrune.interfaces.ICombatable;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.combat.CombatModel;
 import com.g16.feyrune.model.combat.creatures.PlayerCreature;
@@ -28,7 +28,7 @@ public class Model implements IObserver{
         this.overworldModel.addObserver(this);
         this.observers = new ArrayList<>();
         stateHandler = new StateHandler(ModelState.WORLD);
-        this.combatModel = new CombatModel(player, new Encounter(new ICreature[]{CreatureFactory.createCreature()}));
+        this.combatModel = new CombatModel(player, new Encounter(new ICombatable[]{CreatureFactory.createCreature()}));
     }
 
     public void update() { //TODO: use state pattern
@@ -51,7 +51,7 @@ public class Model implements IObserver{
     }
 
     private boolean hasPlayerBlackedOut() {
-        return player.getCreature().isDead();
+        return player.creatureIsDead();
     }
 
     public CombatModel getCombatModel(){return combatModel;}

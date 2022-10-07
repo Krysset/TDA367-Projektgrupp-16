@@ -1,10 +1,10 @@
 package com.g16.feyrune.model.combat.actions.abilities;
 
-import com.g16.feyrune.interfaces.IAbility;
+import com.g16.feyrune.interfaces.IAbilitable;
 
 import static java.lang.Math.max;
 
-public class BaseAbility implements IAbility {
+public class BaseAbility implements IAbilitable {
     private int accuracy;
     private int power;
     private String name;

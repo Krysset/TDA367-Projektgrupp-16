@@ -5,18 +5,19 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.g16.feyrune.interfaces.ICreature;
+import com.g16.feyrune.model.combat.creatures.CombatCreature;
 import com.g16.feyrune.view.utils.AnimationUtils;
 
 public class CreatureRenderer {
-    private ICreature creature;
+    private CombatCreature creature;
     private String spritePath = "assets/entities/bandit/bandit.png"; //TODO: temp
     private float width,height,posX,posY;
     private Texture texture;
     private TextureRegion[] animationRegion;
     private float stateTime = 0;
     private boolean flip;
-    public CreatureRenderer(ICreature creature, float posX, float posY, boolean flip){
+    
+    public CreatureRenderer(CombatCreature creature, float posX, float posY, boolean flip){
         this.creature = creature;
         this.posX = posX;
         this.posY = posY;
