@@ -18,3 +18,51 @@
 	can use an UML \emph{sequence diagram} to show the different parts of your
 	application communicate an in what order.
 \end{comment}
+\subsection{Packages}
+\begin{itemize}
+	\item controller
+	      \begin{itemize}
+		      \item controller.combat
+		            \subitem controller.combat.ui
+		      \item controller.enums
+	      \end{itemize}
+	\item interfaces
+	\item model
+	      \begin{itemize}
+		      \item model.combat
+		            \subitem model.combat.actions
+		            \subitem model.combat.actions.abilities
+		            \subitem model.combat.creatures
+		      \item model.creature
+		      \item model.overworld
+		            \subitem model.overworld.encounter
+		            \subitem model.overworld.map
+		      \item model.player
+	      \end{itemize}
+	\item Util
+	\item view
+	      \begin{itemize}
+		      \item view.combat
+		      \item view.components
+		      \item view.overworld
+		            \subitem view.overworld.textureMap
+		      \item vew.player
+		      \item view.scenes
+		      \item view.utils
+	      \end{itemize}
+\end{itemize}
+
+\subsection{Controller}
+\includesvg[width=\textwidth]{images/com.g16.feyrune.controller.svg}
+\subsection{Model}
+\includesvg[width=\textwidth]{images/com.g16.feyrune.model.svg}
+\subsection{CombatModel}
+\includesvg[width=\textwidth]{images/com.g16.feyrune.CombatModel.svg}
+\subsection{OverworldModel}
+\includesvg[width=\textwidth]{images/com.g16.feyrune.OverworldModel.svg}
+\subsection{View}
+\includesvg[width=\textwidth]{images/com.g16.feyrune.view.svg}
+\subsection{CombatScene}
+\includesvg[width=\textwidth]{images/com.g16.feyrune.view.combatScene.svg}
+\subsection{OverworldScene}
+\includesvg[width=\textwidth]{images/com.g16.feyrune.view.overworldScene.svg}
