@@ -14,12 +14,13 @@ import com.g16.feyrune.model.player.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Model implements IObserver{
-    private StateHandler stateHandler;
-    private ArrayList<IObserver> observers;
-    private Player player;
-    private OverworldModel overworldModel;
+    private final StateHandler stateHandler;
+    private final Collection<IObserver> observers;
+    private final Player player;
+    private final OverworldModel overworldModel;
     private CombatModel combatModel;
 
     public Model() {
@@ -56,7 +57,6 @@ public class Model implements IObserver{
     }
 
     public CombatModel getCombatModel(){return combatModel;}
-    public  Encounter getEncounter() {return overworldModel.getEncounter();}
     public StateHandler getStateHandler() {
         return stateHandler;
     }

@@ -9,13 +9,14 @@ import com.g16.feyrune.model.player.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class OverworldModel {
-    private Player player;
-    private MovementHandler movementHandler;
-    private EncounterHandler encounterHandler;
-    private ArrayList<IObserver> observerList;
-    private MapManager mapManager;
+    private final Player player;
+    private final MovementHandler movementHandler;
+    private final EncounterHandler encounterHandler;
+    private final Collection<IObserver> observerList;
+    private final MapManager mapManager;
     private boolean activeEncounter;
 
     public OverworldModel(Player player) {
