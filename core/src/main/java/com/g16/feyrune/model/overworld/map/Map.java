@@ -1,10 +1,6 @@
 package com.g16.feyrune.model.overworld.map;
 
-import com.g16.feyrune.model.player.Player;
-
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Map {
     private final Tile[][] tiles;
@@ -63,7 +59,7 @@ public class Map {
         return getTile(transportCoordinates).getTransportMapAssetPath();
     }
     protected boolean isCollision(int x, int y) {
-        return getTile(x, y).isCollision();
+        return getTile(x, y).hasCollision();
     }
     protected void setStartPos(Point newStartPos) {
         startPosX = newStartPos.x;
