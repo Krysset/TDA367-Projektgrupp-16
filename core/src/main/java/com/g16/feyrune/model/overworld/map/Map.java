@@ -58,7 +58,7 @@ public class Map {
     protected String getTransportMapAssetPath(Point transportCoordinates) {
         return getTile(transportCoordinates).getTransportMapAssetPath();
     }
-    protected boolean isCollision(int x, int y) {
+    protected boolean hasCollision(int x, int y) {
         return getTile(x, y).hasCollision();
     }
     protected void setStartPos(Point newStartPos) {

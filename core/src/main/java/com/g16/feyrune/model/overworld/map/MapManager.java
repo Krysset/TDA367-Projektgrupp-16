@@ -58,8 +58,8 @@ public class MapManager {
         notifyMapObservers(mapAssetPath);
     }
 
-    public boolean isCollision(int x, int y) {
-        return map.isCollision(x, y);
+    public boolean hasCollision(int x, int y) {
+        return map.hasCollision(x, y);
     }
 
     public void subscribeMapObserver(IMapObserver observer) {

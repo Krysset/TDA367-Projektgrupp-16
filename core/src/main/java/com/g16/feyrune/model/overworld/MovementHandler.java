@@ -1,7 +1,6 @@
 package com.g16.feyrune.model.overworld;
 
 import com.g16.feyrune.model.TimeService;
-import com.g16.feyrune.model.overworld.map.Map;
 import com.g16.feyrune.model.overworld.map.MapManager;
 
 import java.awt.*;
@@ -80,6 +79,6 @@ public class MovementHandler {
     }
 
     private boolean isNewPositionCollision(int x, int y, MapManager map) {
-        return map.isCollision(x, y);
+        return map.hasCollision(x, y);
     }
 }

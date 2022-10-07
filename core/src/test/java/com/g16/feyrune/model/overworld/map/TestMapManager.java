@@ -84,9 +84,9 @@ public class TestMapManager {
     }
 
     @Test
-    public void testIsCollision() {
+    public void testHasCollision() {
         MapManager mm = new MapManager("assets/maps/plains1.tmx");
-        assertTrue(mm.isCollision(0, 0));
-        assertFalse(mm.isCollision(11, 5));
+        assertTrue(mm.hasCollision(0, 0));
+        assertFalse(mm.hasCollision(11, 5));
     }
 }
