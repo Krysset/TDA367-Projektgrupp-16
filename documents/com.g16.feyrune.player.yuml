@@ -1,5 +1,7 @@
 // {type:class}
 // {generate:true}
 
+// {direction:leftToRight}
+
 [Player|-coordinates:Pair<int,int>;|+getCoordinates():Pair<int,int>;+move(pair<int,int>):void]++->[CreatureParty]
 [CreatureParty]<>->[BaseCreature]
