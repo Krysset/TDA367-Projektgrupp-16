@@ -9,7 +9,6 @@ import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.model.combat.creatures.EnemyCreature;
 import com.g16.feyrune.model.combat.creatures.PlayerCreature;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
-import com.g16.feyrune.model.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;

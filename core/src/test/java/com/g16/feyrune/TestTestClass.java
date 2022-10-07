@@ -14,4 +14,5 @@ public class TestTestClass {
         assertEquals(1, (int)testPair.getFst());
         assertEquals(2, (int)testPair.getSnd());
     }
+
 }
