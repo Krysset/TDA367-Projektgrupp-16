@@ -3,11 +3,13 @@ package com.g16.feyrune.view.overworld.textureMap;
 import com.badlogic.gdx.graphics.Color;
 import com.g16.feyrune.Util.Pair;
 import com.g16.feyrune.Util.Parser;
+import com.g16.feyrune.view.overworld.textureMap.Tileset.TilesetManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,14 +25,13 @@ public class TextureMapParser {
         Pair<Integer, Integer> mapSize = parseMapSize(doc);
         Pair<Integer, Integer> tileSize = parseTileSize(doc);
 
-        List<Tileset> tilesets = generateTilesetList(doc);
-
-        int[][] gIdList = generateGIdList(doc, mapSize);
-        int[][][] gIdMap = createIdMapFromList(gIdList, mapSize);
-
         Color bgColor = parseMapBackgroundColor(doc);
 
-        return new TextureMap(mapSize.fst, mapSize.snd, tileSize.fst, tileSize.snd, bgColor, tilesets, gIdMap);
+        TilesetManager tsManager = createTilesetManager(doc);
+
+        List<TextureLayer> layers = generateLayerList(doc, mapSize, tsManager);
+
+        return new TextureMap(mapSize.fst, mapSize.snd, tileSize.fst, tileSize.snd, bgColor, layers);
     }
 
     private static Pair<Integer, Integer> parseMapSize(Document doc) {
@@ -74,57 +75,44 @@ public class TextureMapParser {
      * @param mapSize The size of the map.
      * @return A list of lists of gIds.
      */
-    private static int[][] generateGIdList(Document doc, Pair<Integer, Integer> mapSize) {
+    private static List<TextureLayer> generateLayerList(Document doc, Pair<Integer, Integer> mapSize, TilesetManager tsManager) {
         // Get all the layer nodes
         NodeList layerNodes = doc.getElementsByTagName("layer");
 
-        int[][] gIdList = new int[mapSize.fst * mapSize.snd][layerNodes.getLength()];
+        List<TextureLayer> layers = new ArrayList<>(5);
         // For loops are required for each child node, because shadow nodes do *apparently* exist
         // and they are not always in the same order.
         for (int i = 0; i < layerNodes.getLength(); i++) {
+            TextureLayer layer = new TextureLayer();
+            Node layerNode = layerNodes.item(i);
+            String layerName = layerNode.getAttributes().getNamedItem("name").getNodeValue().toLowerCase();
+            if (!layerName.equals("encounter")) {
+                NodeList childNodes = layerNode.getChildNodes();
+                for (int j = 0; j < childNodes.getLength(); j++) {
+                    Node dataNode = childNodes.item(j);
 
-            NodeList childNodes = layerNodes.item(i).getChildNodes();
-            for (int j = 0; j < childNodes.getLength(); j++) {
-                Node dataNode = childNodes.item(j);
-
-                // This checks that it is not a shadow node for the last one,
-                // if any previously were a shadow node it would not get here even
-                if (dataNode.getNodeName().equals("data")) {
-                    // Parse the CSV data.
-                    String[] tileIds = dataNode.getTextContent().split(",");
-                    for (int k = 0; k < tileIds.length; k++) {
-                        // Prevents crashing because of whitespace or newlines when parsing integer.
-                        tileIds[k] = tileIds[k].replaceAll("\\s+", "");
-                        int tileId = Integer.parseInt(tileIds[k]);
-                        gIdList[k][i] = tileId;
+                    // This checks that it is not a shadow node for the last one,
+                    // if any previously were a shadow node it would not get here even
+                    if (dataNode.getNodeName().equals("data")) {
+                        // Parse the CSV data.
+                        String[] tileIds = dataNode.getTextContent().split(",");
+                        for (int k = 0; k < tileIds.length; k++) {
+                            // Prevents crashing because of whitespace or newlines when parsing integer.
+                            tileIds[k] = tileIds[k].replaceAll("\\s+", "");
+                            int tileId = Integer.parseInt(tileIds[k]);
+                            if (tileId != 0) {
+                                layer.addTile(new Point(k % mapSize.fst, mapSize.snd - (k / mapSize.fst) - 1),
+                                        tsManager.getITextureTileFromGId(tileId));
+                            }
+                        }
                     }
                 }
             }
+            layers.add(layer);
         }
-
-        return gIdList;
+        return layers;
     }
 
-    /**
-     * This method converts a list of lists of gIds into a 3D array of gIds.
-     *
-     * @param gIdList A list of lists of gIds for every tile.
-     * @param mapSize The size of the map.
-     * @return A 3D array of gIds.
-     */
-    private static int[][][] createIdMapFromList(int[][] gIdList, Pair<Integer, Integer> mapSize) {
-        int[][][] gIdMap = new int[mapSize.snd][mapSize.fst][gIdList[0].length];
-
-        int c = 0;
-        for (int i = mapSize.snd - 1; i >= 0; i--) {
-            for (int j = 0; j < mapSize.fst; j++) {
-                gIdMap[i][j] = gIdList[c];
-                c++;
-            }
-        }
-
-        return gIdMap;
-    }
 
     /**
      * Generates a list of tilesets from the given document.
@@ -132,8 +120,8 @@ public class TextureMapParser {
      * @param doc The document to generate the tilesets from.
      * @return A list of tilesets.
      */
-    private static List<Tileset> generateTilesetList(Document doc) {
-        ArrayList<Tileset> tilesets = new ArrayList<>();
+    private static TilesetManager createTilesetManager(Document doc) {
+        TilesetManager tsManager = new TilesetManager();
 
         NodeList tilesetNodeList = doc.getElementsByTagName("tileset");
         for (int i = 0; i < tilesetNodeList.getLength(); i++) {
@@ -150,9 +138,9 @@ public class TextureMapParser {
             String imgSource = imageNode.getAttributes().getNamedItem("source").getNodeValue();
             imgSource = relativeToAbsoluteAssets(imgSource);
 
-            tilesets.add(new Tileset(imgSource, name, firstGid, tileWidth, tileHeight, tileCount, columns));
+            tsManager.addTileset(imgSource, name, firstGid, tileWidth, tileHeight, tileCount, columns);
         }
-        return tilesets;
+        return tsManager;
     }
 
     /**

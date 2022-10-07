@@ -2,7 +2,6 @@ package com.g16.feyrune.model.overworld.map;
 
 import com.g16.feyrune.Util.Pair;
 import com.g16.feyrune.Util.Parser;
-import com.g16.feyrune.Util.Random;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -36,7 +35,62 @@ public class MapParser {
 
         int[][][] collisionMap = createCollisionMap(collisionList, mapSize);
 
-        return generateTileMap(collisionMap, mapStartPosAndTransporters.getFst(), mapStartPosAndTransporters.getSnd());
+        Iterable<Point> encounterTilePositions = parseEncounterTiles(doc, mapSize);
+
+        return generateTileMap(
+                collisionMap,
+                mapStartPosAndTransporters.getFst(),
+                mapStartPosAndTransporters.getSnd(),
+                encounterTilePositions
+        );
+    }
+
+    private static Iterable<Point> parseEncounterTiles(Document doc, Pair<Integer, Integer> mapSize) {
+
+        int encounterTileGId = -1;
+        List<Point> encounterTilePositions = new ArrayList<>();
+
+        NodeList tilesetNodes = doc.getElementsByTagName("tileset");
+        for(int i = 0; i < tilesetNodes.getLength(); i++) {
+            String tilesetName = tilesetNodes.item(i).getAttributes().getNamedItem("name").getNodeValue().toLowerCase();
+            if (tilesetName.equals("encounter")) {
+                Node encounterTilesetNode = tilesetNodes.item(i);
+                String idAsString = encounterTilesetNode.getAttributes().getNamedItem("firstgid").getNodeValue();
+                encounterTileGId = Integer.parseInt(idAsString);
+            }
+        }
+
+        if (encounterTileGId == -1) {
+            return encounterTilePositions;
+        }
+
+        // Iterates through "encounter" layer and adds tiles with encounter positions to list
+        NodeList layerNodes = doc.getElementsByTagName("layer");
+        for(int i = 0; i < layerNodes.getLength(); i++) {
+            String layerName = layerNodes.item(i).getAttributes().getNamedItem("name").getNodeValue().toLowerCase();
+            if(layerName.equals("encounter")) {
+                NodeList childNodes = layerNodes.item(i).getChildNodes();
+                for (int j = 0; j < childNodes.getLength(); j++) {
+                    Node dataNode = childNodes.item(j);
+
+                    if (dataNode.getNodeName().equals("data")) {
+                        // Parse the CSV data.
+                        String[] tileIds = dataNode.getTextContent().split(",");
+                        for (int k = 0; k < tileIds.length; k++) {
+                            // Prevents crashing because of whitespace or newlines when parsing integer.
+                            tileIds[k] = tileIds[k].replaceAll("\\s+", "");
+                            int tileId = Integer.parseInt(tileIds[k]);
+                            if (tileId == encounterTileGId) {
+                                encounterTilePositions.add(
+                                        new Point(k % mapSize.fst, mapSize.snd - (k / mapSize.fst)-1)
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return encounterTilePositions;
     }
 
     /**
@@ -105,7 +159,7 @@ public class MapParser {
      * @param collisionMap The collision map.
      * @return A {@link Map} based on the collision map.
      */
-    private static Map generateTileMap(int[][][] collisionMap, Point startPos, Iterable<Transporter> transporters) {
+    private static Map generateTileMap(int[][][] collisionMap, Point startPos, Iterable<Transporter> transporters, Iterable<Point> encounterTiles) {
         Tile[][] tiles = new Tile[collisionMap[0].length][collisionMap.length];
 
         for (int i = 0; i < collisionMap.length; i++) {
@@ -117,14 +171,20 @@ public class MapParser {
                         break;
                     }
                 }
-                boolean encounter = Random.randomInt(100) > 10;
-                tiles[j][i] = new Tile(collision, encounter);
+                tiles[j][i] = new Tile(collision);
             }
         }
 
         addTransportersToTiles(tiles, transporters);
+        addEncountersToTiles(tiles, encounterTiles);
 
         return new Map(tiles, startPos.x, startPos.y);
+    }
+
+    private static void addEncountersToTiles(Tile[][] tiles, Iterable<Point> encounterTiles) {
+        for(Point point : encounterTiles) {
+            tiles[point.x][point.y].setCanEncounter(true);
+        }
     }
 
     /**

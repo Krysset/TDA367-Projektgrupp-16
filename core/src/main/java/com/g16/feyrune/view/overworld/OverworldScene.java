@@ -7,8 +7,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.g16.feyrune.interfaces.IScene;
 import com.g16.feyrune.model.overworld.map.MapManager;
 import com.g16.feyrune.model.player.Player;
-import com.g16.feyrune.view.player.PlayerRenderer;
 import com.g16.feyrune.view.overworld.textureMap.TextureMapManager;
+import com.g16.feyrune.view.player.PlayerRenderer;
 
 public class OverworldScene implements IScene {
     private PlayerRenderer pr;
@@ -20,7 +20,7 @@ public class OverworldScene implements IScene {
     public OverworldScene(Player player, MapManager mapManager, SpriteBatch batch){
         this.batch = batch;
         this.map = new TextureMapManager(mapManager);
-        this.camera = new OrthographicCamera(180 ,90);
+        this.camera = new OrthographicCamera(270 ,135);
         pr = new PlayerRenderer(player);
     }
 

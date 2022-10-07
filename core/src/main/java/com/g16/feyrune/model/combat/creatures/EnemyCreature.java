@@ -1,64 +1,25 @@
 package com.g16.feyrune.model.combat.creatures;
 
-import com.g16.feyrune.interfaces.ICombatAction;
-import com.g16.feyrune.interfaces.ICombatCreature;
-import com.g16.feyrune.interfaces.ICreature;
+import com.g16.feyrune.interfaces.*;
 import com.g16.feyrune.model.combat.actions.abilities.BaseAbility;
-import com.g16.feyrune.interfaces.IAbility;
 import com.g16.feyrune.model.combat.actions.AttackAction;
+import com.g16.feyrune.model.creature.BaseCreature;
+
 
 import java.util.List;
 
-public class EnemyCreature implements ICombatCreature {
-    private ICreature creature;
+public class EnemyCreature extends CombatCreature {
+    private BaseCreature creature;
 
-    public EnemyCreature(ICreature creature) {
-        this.creature = creature;
+    public EnemyCreature(BaseCreature creature) {
+        super(creature);
     }
 
     @Override
-    public ICombatAction selectAction(ICombatCreature target) {
+    public ICombatAction selectAction(CombatCreature target) {
         return new AttackAction();
     }
 
-    public IAbility getMove() {
-        return creature.getMoves().get(0); // Should be random
-    }
 
-    public void takeDamage(int damage) {
-        creature.takeDamage(damage);
-    }
 
-    // Should be renamed to something more appropriate
-    private IAbility createNewMoveUsingPower(IAbility move) {
-        return new BaseAbility(move.getAttackAccuracy(), move.getAttackPower() + creature.getPower(), move.getAttackName());
-    }
-
-    @Override
-    public List<IAbility> getMoves() {
-        return creature.getMoves();
-    }
-
-    @Override
-    public double getHP() {
-        return creature.getHP();
-    }
-
-    @Override
-    public int getSpeed() {
-        return creature.getSpeed();
-    }
-
-    @Override
-    public int getPower() {
-        return creature.getPower();
-    }
-    public int getDefense() {
-        return creature.getDefense();
-    }
-
-    @Override
-    public boolean isDead() {
-        return creature.isDead();
-    }
 }

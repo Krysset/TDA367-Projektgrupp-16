@@ -2,7 +2,8 @@ package com.g16.feyrune;
 
 import com.g16.feyrune.Util.Pair;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 public class TestTestClass {
 
@@ -13,4 +14,5 @@ public class TestTestClass {
         assertEquals(1, (int)testPair.getFst());
         assertEquals(2, (int)testPair.getSnd());
     }
+
 }

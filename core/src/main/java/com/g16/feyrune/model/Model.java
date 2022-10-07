@@ -1,7 +1,7 @@
 package com.g16.feyrune.model;
 
 import com.g16.feyrune.enums.ModelState;
-import com.g16.feyrune.interfaces.ICreature;
+import com.g16.feyrune.interfaces.ICombatable;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.combat.CombatModel;
 import com.g16.feyrune.model.combat.creatures.PlayerCreature;
@@ -9,10 +9,8 @@ import com.g16.feyrune.model.creature.CreatureFactory;
 import com.g16.feyrune.model.overworld.MovementHandler;
 import com.g16.feyrune.model.overworld.OverworldModel;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
-import com.g16.feyrune.model.overworld.map.IMapObserver;
 import com.g16.feyrune.model.overworld.map.MapManager;
 import com.g16.feyrune.model.player.Player;
-import com.g16.feyrune.view.overworld.textureMap.TextureMapManager;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -25,15 +23,15 @@ public class Model implements IObserver{
     private CombatModel combatModel;
 
     public Model() {
-        player = new Player("Player", new Point(20, 5)); //TODO: Should probably have a method to get the initial player position from the map
+        player = new Player("Player", new Point(0, 0));
         this.overworldModel = new OverworldModel(player);
         this.overworldModel.addObserver(this);
         this.observers = new ArrayList<>();
         stateHandler = new StateHandler(ModelState.WORLD);
-        this.combatModel = new CombatModel(player, new Encounter(new ICreature[]{CreatureFactory.createCreature()}));
+        this.combatModel = new CombatModel(player, new Encounter(new ICombatable[]{CreatureFactory.createCreature()}));
     }
 
-    public void update() { //TODO: use stare pattern
+    public void update() { //TODO: use state pattern
         switch (stateHandler.getModelState()){
             case WORLD:
                 overworldModel.update();
@@ -42,10 +40,18 @@ public class Model implements IObserver{
                 combatModel.update();
                 if (combatModel.getCombatIsOver()) {
                     stateHandler.changeModelState(ModelState.WORLD);
+                    if(hasPlayerBlackedOut()) {
+                        overworldModel.playerBlackout();
+                        player.healTeam();
+                    }
                     notifyObservers();
                 }
                 break;
         }
+    }
+
+    private boolean hasPlayerBlackedOut() {
+        return player.creatureIsDead();
     }
 
     public CombatModel getCombatModel(){return combatModel;}
@@ -92,7 +98,6 @@ public class Model implements IObserver{
         if (overworldModel.isInEncounter()){
             combatModel = new CombatModel(player, overworldModel.getEncounter());
             changeState(ModelState.COMBAT);
-            overworldModel.removeEncounterFromPlayerTile();
         }
     }
 }
