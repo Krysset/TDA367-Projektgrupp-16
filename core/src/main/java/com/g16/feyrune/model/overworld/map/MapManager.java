@@ -6,11 +6,15 @@ import java.util.List;
 
 public class MapManager {
     private Map map;
-    private List<IMapObserver> observers;
+    private final List<IMapObserver> observers;
+
+    public MapManager(String mapFilePath) {
+        this.map = MapParser.parseMapFile(mapFilePath);
+        this.observers = new ArrayList<>();
+    }
 
     public MapManager() {
-        this.map = MapParser.parseMapFile("assets/maps/plains1.tmx");
-        this.observers = new ArrayList<>();
+        this("assets/maps/plains1.tmx");
     }
 
     public int getWidth() {
