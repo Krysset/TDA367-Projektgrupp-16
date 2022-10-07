@@ -37,12 +37,35 @@ public class MapParser {
 
         Iterable<Point> encounterTilePositions = parseEncounterTiles(doc, mapSize);
 
+        String terrainType = parseTerrainType(doc);
+
         return generateTileMap(
                 collisionMap,
                 mapStartPosAndTransporters.getFst(),
                 mapStartPosAndTransporters.getSnd(),
-                encounterTilePositions
+                encounterTilePositions,
+                terrainType
         );
+    }
+
+    private static String parseTerrainType(Document doc) {
+        Node mapNode = doc.getElementsByTagName("map").item(0);
+        NodeList mapChildren = mapNode.getChildNodes();
+        for(int i = 0; i < mapChildren.getLength(); i++) {
+            if (mapChildren.item(i).getNodeName().equals("properties")) {
+                NodeList propertyList = mapChildren.item(i).getChildNodes();
+                for (int j = 0; j < propertyList.getLength(); j++) {
+                    Node currentPropertyNode = propertyList.item(j);
+                    if (currentPropertyNode.getNodeName().equals("property")) {
+                        Node nameAttribute = currentPropertyNode.getAttributes().getNamedItem("name");
+                        if (nameAttribute.getNodeValue().equals("terraintype")) {
+                            return currentPropertyNode.getAttributes().getNamedItem("value").getNodeValue();
+                        }
+                    }
+                }
+            }
+        }
+        throw new RuntimeException("Terrain type was not found for map");
     }
 
     private static Iterable<Point> parseEncounterTiles(Document doc, Pair<Integer, Integer> mapSize) {
@@ -159,7 +182,7 @@ public class MapParser {
      * @param collisionMap The collision map.
      * @return A {@link Map} based on the collision map.
      */
-    private static Map generateTileMap(int[][][] collisionMap, Point startPos, Iterable<Transporter> transporters, Iterable<Point> encounterTiles) {
+    private static Map generateTileMap(int[][][] collisionMap, Point startPos, Iterable<Transporter> transporters, Iterable<Point> encounterTiles, String terrainType) {
         Tile[][] tiles = new Tile[collisionMap[0].length][collisionMap.length];
 
         for (int i = 0; i < collisionMap.length; i++) {
@@ -178,7 +201,7 @@ public class MapParser {
         addTransportersToTiles(tiles, transporters);
         addEncountersToTiles(tiles, encounterTiles);
 
-        return new Map(tiles, startPos.x, startPos.y);
+        return new Map(terrainType, tiles, startPos.x, startPos.y);
     }
 
     private static void addEncountersToTiles(Tile[][] tiles, Iterable<Point> encounterTiles) {
