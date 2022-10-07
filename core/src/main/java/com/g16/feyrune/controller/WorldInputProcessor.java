@@ -38,16 +38,16 @@ public class WorldInputProcessor implements IInput, InputProcessor {
     @Override
     public boolean keyUp(int keycode) {
         if (keycode == Input.Keys.A){
-            movementHandler.increaseXDirection();
+            movementHandler.resetXDirection();
         }
         if (keycode == Input.Keys.D){
-            movementHandler.decreaseXDirection();
+            movementHandler.resetXDirection();
         }
         if (keycode == Input.Keys.W){
-            movementHandler.decreaseYDirection();
+            movementHandler.resetYDirection();
         }
         if (keycode == Input.Keys.S){
-            movementHandler.increaseYDirection();
+            movementHandler.resetYDirection();
         }
         return true;    }
 

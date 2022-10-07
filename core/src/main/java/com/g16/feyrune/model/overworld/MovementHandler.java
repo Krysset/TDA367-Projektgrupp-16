@@ -31,6 +31,12 @@ public class MovementHandler {
         dirY = Math.min(1,dirY);
 
     }
+    public void resetXDirection(){
+        dirX = 0;
+    }
+    public void resetYDirection(){
+        dirY = 0;
+    }
 
     /**
      * Executes a movement update, based on the current direction.
@@ -42,8 +48,8 @@ public class MovementHandler {
         return dir;
     }
     public void resetMovement(){
-        dirX = 0;
-        dirY = 0;
+        resetXDirection();
+        resetYDirection();
     }
 
     /**
