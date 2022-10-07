@@ -48,8 +48,8 @@ public class MovementHandler {
         return dir;
     }
     public void resetMovement(){
-        dirX = 0;
-        dirY = 0;
+        resetXDirection();
+        resetYDirection();
     }
 
     /**
