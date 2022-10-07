@@ -39,6 +39,7 @@ public class Model implements IObserver{
             case COMBAT:
                 combatModel.update();
                 if (combatModel.getCombatIsOver()) {
+                    overworldModel.resetIsInEncounter();
                     stateHandler.changeModelState(ModelState.WORLD);
                     if(hasPlayerBlackedOut()) {
                         overworldModel.playerBlackout();
