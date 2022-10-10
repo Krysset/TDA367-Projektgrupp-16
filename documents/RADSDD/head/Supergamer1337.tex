@@ -1,0 +1,41 @@
+\DefineBibliographyStrings{english}{
+  url         = [Online]\adddot\addspace Available,
+  urlseen     = Fetched:
+}
+\DeclareFieldFormat[online]{urldate}{\mkbibparens{\bibstring{urlseen}\space#1}}
+\DeclareBibliographyDriver{online}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/translator+others}%
+  \setunit{\adddot\addspace}%
+  \usebibmacro{title}%
+  \setunit{\adddot\addspace}%
+  \printlist{language}%
+  \setunit{\adddot\addspace}%
+  \usebibmacro{byauthor}%
+  \setunit{\adddot\addspace}%
+  \usebibmacro{byeditor+others}%
+  \setunit{\adddot\addspace}%
+  \printfield{version}%
+  \setunit{\adddot\addspace}%
+  \printfield{note}%
+  \newunit\newblock
+  \printlist{organization}%
+  \setunit{\adddot\addspace}%
+  \iftoggle{bbx:eprint}
+    {\usebibmacro{eprint}}
+    {}%
+  \setunit{\adddot\addspace}%
+  \usebibmacro{date}%
+  \setunit{\addperiod\addspace}\newblock
+  \usebibmacro{url+urldate}%
+  \setunit{\adddot\addspace}%
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}

@@ -77,8 +77,11 @@
 \subsection{Design Patterns}
 Throughout the code, Group 16 has tried to implement design patterns wherever feasible. Examples of design patterns used are:
 \paragraph{Model-View-Controller\\}
+The entire project is structured as a classic MVC pattern. The model exists in its own vacuum without any references to ether the view or the controller. The view has a reference to the model and so does the controller. The controller also has a referance to to the view, this is to implement the sprite Batch thet is used to draw thing on the screen. This is so the controller can render its own buttons.
 \paragraph{Factory pattern\\}
+We use a factory to create monsters...
 \paragraph{State pattern (hopefully)\\}
 \paragraph{Observer pattern\\}
+Even if the code is running continuously and is polling, an observer is implemented in most places where we dont expect a change every frame.
 \paragraph{Singleton\\}
 \paragraph{Façade pattern\\}
