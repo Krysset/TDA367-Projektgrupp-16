@@ -1,9 +1,11 @@
 // {type:class}
 
-[CombatModel|+CombatModel(Player,Encounter);+combatLoop():void] ++-> [EnemyCreature|+chooseMove():Move;+takeDamage():void;+isDead():bool;-createNewMoveUsingPower(Move):Move]
+[CombatModel|+CombatModel(Player);+startNewCombatInstance(Encounter):void] -> [<<IEncounter>>|+getCreature():ICreature] 
+[CombatModel] ++-> [CombatInstance|+combatLoop():void]
+[CombatInstance] <>-> [EnemyCreature|+chooseMove():Move;+takeDamage():void;+isDead():bool;-createNewMoveUsingPower(Move):Move]
 [EnemyCreature] <-.- [note: This handles AI {bg:white}]
 [EnemyCreature] <>-> [<<ICreature>>| +getMoves():List<Move>; +getHp():int; +getSpeed():int; +getPower():int;+takeDamage(int):void]
-[CombatModel] ++-> [PlayerCreature]
+[CombatInstance] ++-> [PlayerCreature]
 [PlayerCreature] <>-> [<<ICreature>>]
 [<<ICreature>>] <>-> [<<IMove>>]
 [<<ICombatCreature>>] -.-^ [<<ICreature>>]
@@ -14,3 +16,6 @@
 [PlayerCreature] -.-^ [<<ICombatCreature>>]
 [EnemyCreature] -.-^ [<<ICombatCreature>>]
 [<<ICombatCreature>>] -.-> [<<ICombatAction>>]
+[CombatInstance] <>-> [IObserver]
+[Controller {bg:blue}] -> [CombatInstance]
+[IObserver]^-.-[Controller]

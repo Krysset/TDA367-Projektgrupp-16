@@ -1,0 +1,13 @@
+// {type:class}
+
+[Controller] ++-> [CombatController]
+[CombatController] -.-^ [<<ICombatController>> | +IsWaitingForAction():bool; +PreformAction(Player):void] 
+[CombatController] -.-^ [<<IInput>>]
+[CombatController] ++-> [CombatInputProcessor]
+[CombatController] ++-> [CombatInputHandler]
+[CombatController] ++-> [ChoiceRenderer|-currentSelection:Selection|+changeSelection(Direction):void;+getCurrentSelection:Selection; +render():void]
+
+[ChoiceRenderer] -> [<<Enumeration>>;Selection| FIRST;SECOND;THIRD;FOURTH]
+
+[ChoiceRenderer] -> [<<Enumeration>>;Direction| UP;DOWN;LEFT;RIGHT;BACK]
+[ChoiceRenderer] ++1-4> [ChoiceButton|+render(boolean):void]
