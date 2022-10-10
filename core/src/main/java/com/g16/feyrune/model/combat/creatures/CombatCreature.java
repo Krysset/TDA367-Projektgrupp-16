@@ -3,11 +3,12 @@ package com.g16.feyrune.model.combat.creatures;
 
 import com.g16.feyrune.interfaces.IAbilitable;
 import com.g16.feyrune.interfaces.ICombatAction;
+import com.g16.feyrune.interfaces.ICombatable;
 import com.g16.feyrune.model.creature.BaseCreature;
 
 import java.util.List;
 
-public abstract class CombatCreature {
+public abstract class CombatCreature implements ICombatable {
     protected final BaseCreature creature;
     protected ICombatAction selectedAction;
 
