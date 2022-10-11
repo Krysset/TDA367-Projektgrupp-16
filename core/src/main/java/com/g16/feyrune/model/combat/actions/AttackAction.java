@@ -4,7 +4,7 @@ import com.g16.feyrune.Util.Random;
 import com.g16.feyrune.interfaces.ICombatAction;
 import com.g16.feyrune.interfaces.ICombatable;
 import com.g16.feyrune.model.combat.AttackHandler;
-import com.g16.feyrune.model.combat.creatures.CombatCreature;
+
 
 public class AttackAction implements ICombatAction {
 

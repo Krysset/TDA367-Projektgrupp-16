@@ -9,15 +9,18 @@ import com.g16.feyrune.model.player.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class OverworldModel {
-    private Player player;
-    private MovementHandler movementHandler;
-    private EncounterHandler encounterHandler;
-    private ArrayList<IObserver> observerList;
-    private MapManager mapManager;
+    private final Player player;
+    private final MovementHandler movementHandler;
+    private final EncounterHandler encounterHandler;
+    private final Collection<IObserver> observerList;
+    private final MapManager mapManager;
+    private boolean activeEncounter;
 
     public OverworldModel(Player player) {
+        activeEncounter = false;
         this.player = player;
         this.movementHandler = new MovementHandler();
         this.encounterHandler = new EncounterHandler();
@@ -40,9 +43,10 @@ public class OverworldModel {
             if (reachedTransporter()) {
                 mapManager.useTransporter(player.getCoordinates());
                 player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
-            } else if (isInEncounter()) {
+            } else if (doesEncounterStart()) {
                 movementHandler.resetMovement();
                 encounterHandler.createEncounter(mapManager.getTerrainType());
+                activeEncounter = true;
                 notifyObservers();
             }
         }
@@ -51,7 +55,7 @@ public class OverworldModel {
     public boolean reachedTransporter() {
         return mapManager.hasTransporter(player.getCoordinates());
     }
-    public boolean isInEncounter(){
+    private boolean doesEncounterStart(){
         if(mapManager.tryEncounter(player.getCoordinates())) {
             // about every tenth tile is an encounter
             return Random.randomInt(100) > 90;
@@ -79,5 +83,13 @@ public class OverworldModel {
     public void playerBlackout() {
         mapManager.changeMap("assets/maps/villagehouse.tmx");
         player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
+    }
+
+    public boolean isInEncounter() {
+        return activeEncounter;
+    }
+
+    public void resetIsInEncounter() {
+        activeEncounter = false;
     }
 }

@@ -2,7 +2,6 @@ package com.g16.feyrune.model.combat.actions;
 
 import com.g16.feyrune.interfaces.IAbilitable;
 import com.g16.feyrune.model.combat.actions.abilities.BaseAbility;
-
 import java.util.ArrayList;
 import java.util.List;
 

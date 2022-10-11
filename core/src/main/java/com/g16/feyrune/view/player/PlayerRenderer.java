@@ -50,7 +50,7 @@ public class PlayerRenderer {
 
         calculateContinuousPosition(); //Calculate the viewed position (playerPos) using Vector2.larp
         pickAnimation();
-        batch.draw(animation.getKeyFrame(stateTime), playerPos.x * 16, playerPos.y * 16);
+        batch.draw(animation.getKeyFrame(stateTime), playerPos.x * 16-5, playerPos.y * 16);
     }
 
     private void calculateContinuousPosition(){

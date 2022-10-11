@@ -1,0 +1,15 @@
+// {type:class}
+// {generate:true}
+
+[Feyrune] 1-1> [Map]
+[Map] 1-*> [Tile]
+[Tile] 0.1-1> [Encounter Tile]
+[Encounter Tile] 0.1-1> [Monster]
+[Feyrune] 1-1> [Player]
+[Player] 1-*> [Monster]
+[Combat] 1-1> [Player]
+[Combat] 1-1> [Monster]
+[Combat] 1-1> [Action]
+[Action] 1-4> [Attack]
+[Action] 1-1> [Flee]
+[Action] 1-*> [Item]
