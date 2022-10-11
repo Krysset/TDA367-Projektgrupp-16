@@ -19,6 +19,7 @@ public class EncounterHandler {
         };
     }
     public EncounterHandler() {
+        // TODO: Use dependency injection
     }
 
     /**
