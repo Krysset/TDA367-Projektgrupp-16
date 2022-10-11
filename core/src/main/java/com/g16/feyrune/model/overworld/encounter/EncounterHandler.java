@@ -34,6 +34,7 @@ public class EncounterHandler {
     private ICombatable[] getMonsterList(String TerrainType, int wantedAmount){
         switch (TerrainType){
             case "dungeon":
+            case "plains":
                 return CreatureFactory.createCreatureList(dungeonTerrainMonstersList, wantedAmount);
             case "test":
                 return CreatureFactory.createCreatureList(testTerrainMonstersList, wantedAmount);
