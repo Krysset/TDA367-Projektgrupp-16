@@ -21,10 +21,6 @@ public class Transporter {
         return from.y;
     }
 
-    public Point getTransitionFrom() {
-        return new Point(from);
-    }
-
     public Point getTransitionTo() {
         return new Point(to);
     }
