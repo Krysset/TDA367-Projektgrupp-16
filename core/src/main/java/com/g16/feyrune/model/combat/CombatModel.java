@@ -35,7 +35,7 @@ public class CombatModel {
      * @param player
      * @param encounter
      */
-    public void fillCombatCreatureList(Player player, Encounter encounter) {
+    private void fillCombatCreatureList(Player player, Encounter encounter) {
         combatCreatures.add(player.getPlayerCreature());
         combatCreatures.add(new EnemyCreature((BaseCreature) encounter.getEnemyCreature()[0])); //TODO: SHOUD NOT BE INDEXED LIKE THIS
         for (CombatCreature combatCreature : combatCreatures) {

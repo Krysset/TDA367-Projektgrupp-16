@@ -1,0 +1,84 @@
+\section{System design}
+\begin{comment}
+	Draw an UML package diagram for the top level for all components that you have
+	identified above (which can be just one if you develop a standalone application).
+	Describe the interfaces and dependencies between the packages. Describe how you
+	have implemented the MVC design pattern.
+
+	Create an UML class diagram for every package. One of the packages will contain
+	the model of your application. This will be the design model of your
+	application, describe in detail the relation between your domain model and your
+	design model. There should be a clear and logical relation between the two. Make
+	sure that these models stay in `sync' during the development of your application.
+
+	Describe which (if any) design patterns you have used.
+
+	The above describes the static design of your application. It may sometimes be
+	necessary to describe the \emph{dynamic} design of your application as well. You
+	can use an UML \emph{sequence diagram} to show the different parts of your
+	application communicate an in what order.
+\end{comment}
+\subsection{Packages}
+\begin{itemize}
+	\item controller
+	      \begin{itemize}
+		      \item controller.combat
+		            \subitem controller.combat.ui
+		      \item controller.enums
+	      \end{itemize}
+	\item interfaces
+	\item model
+	      \begin{itemize}
+		      \item model.combat
+		            \subitem model.combat.actions
+		            \subitem model.combat.actions.abilities
+		            \subitem model.combat.creatures
+		      \item model.creature
+		      \item model.overworld
+		            \subitem model.overworld.encounter
+		            \subitem model.overworld.map
+		      \item model.player
+	      \end{itemize}
+	\item Util
+	\item view
+	      \begin{itemize}
+		      \item view.combat
+		      \item view.components
+		      \item view.overworld
+		            \subitem view.overworld.textureMap
+		      \item vew.player
+		      \item view.scenes
+		      \item view.utils
+	      \end{itemize}
+\end{itemize}
+
+\subsection{Controller}
+\label{controller}
+\includesvg[scale=0.5]{images/com.g16.feyrune.controller.svg}
+\subsection{Model}
+\label{model}
+\includesvg[scale=0.5]{images/com.g16.feyrune.model.svg}
+\subsection{CombatModel}
+\label{combatmodel}
+\includesvg[scale=0.5]{images/com.g16.feyrune.CombatModel.svg}
+\subsection{OverworldModel}
+\label{overworldmodel}
+\includesvg[scale=0.5]{images/com.g16.feyrune.OverworldModel.svg}
+\subsection{View}
+\label{view}
+\includesvg[scale=0.5]{images/com.g16.feyrune.view.svg}
+\subsection{CombatScene}
+\label{combatscene}
+\includesvg[scale=0.5]{images/com.g16.feyrune.view.combatScene.svg}
+\subsection{OverworldScene}
+\label{overworldscene}
+\includesvg[scale=0.5]{images/com.g16.feyrune.view.overworldScene.svg}
+
+\subsection{Design Patterns}
+Throughout the code, Group 16 has tried to implement design patterns wherever feasible. Examples of design patterns used are:
+\paragraph{Model-View-Controller\\}
+\paragraph{Factory pattern\\}
+\paragraph{State pattern (hopefully)\\}
+\paragraph{Observer pattern\\}
+\paragraph{Singleton\\}
+\paragraph{Façade pattern\\}

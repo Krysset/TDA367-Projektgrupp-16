@@ -7,11 +7,15 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class EncounterHandler {
     private static Pair<String, Integer>[] dungeonTerrainMonstersList;
+    private static Pair<String, Integer>[] testTerrainMonstersList;
 
     {
         dungeonTerrainMonstersList = new Pair[]{
                 new Pair<>("SuperAwesomeBaseMonster", 10),
                 new Pair<>("SuperBadBaseMonster", 90)
+        };
+        testTerrainMonstersList = new Pair[]{
+                new Pair<>("SuperAwesomeBaseMonster", 10)
         };
     }
     public EncounterHandler() {
@@ -22,17 +26,17 @@ public class EncounterHandler {
      * @return
      */
     public Encounter createEncounter(String terrainType) {
-        Pair<String, Integer>[] monsterList = getMonsterList(terrainType);
-
-       ICombatable[] iCreatureList = CreatureFactory.createCreatureList(monsterList,1);
+        ICombatable[] iCreatureList = getMonsterList(terrainType, 1);
         Encounter newEncounter = new Encounter(iCreatureList);
         return newEncounter;
     } //TODO: Implemented statically
 
-    private Pair<String, Integer>[] getMonsterList(String TerrainType){
+    private ICombatable[] getMonsterList(String TerrainType, int wantedAmount){
         switch (TerrainType){
             case "dungeon":
-                return dungeonTerrainMonstersList;
+                return CreatureFactory.createCreatureList(dungeonTerrainMonstersList, wantedAmount);
+            case "test":
+                return CreatureFactory.createCreatureList(testTerrainMonstersList, wantedAmount);
             default:
                 throw new NotImplementedException();
         }
