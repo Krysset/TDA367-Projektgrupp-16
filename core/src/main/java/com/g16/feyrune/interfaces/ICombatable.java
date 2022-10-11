@@ -25,4 +25,7 @@ public interface ICombatable {//TODO: separate to a smaller interface, interface
      * @return if the creature is dead or not
      */
     boolean isDead();
+
+    double getHP();
+
 }

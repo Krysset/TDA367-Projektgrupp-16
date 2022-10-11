@@ -1,11 +1,10 @@
 package com.g16.feyrune.model.creature;
 
-import com.g16.feyrune.Util.Pair;
 import com.g16.feyrune.Util.Random;
 import com.g16.feyrune.interfaces.IAbilitable;
 import com.g16.feyrune.interfaces.ICombatable;
 import com.g16.feyrune.model.combat.actions.AbilityFactory;
-
+import com.g16.feyrune.Util.Pair;
 
 import java.util.List;
 
