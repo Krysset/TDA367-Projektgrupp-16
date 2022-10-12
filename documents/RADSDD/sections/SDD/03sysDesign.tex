@@ -55,24 +55,37 @@
 \subsection{Controller}
 \label{controller}
 \includesvg[scale=0.5]{images/com.g16.feyrune.controller.svg}
+\\The controller is a little bit diffent from the view as how it mirrors the model in its separation of combat and overworld. It uses an iterface Iinput that extends the libgdx intrface InputProcessor. An input processor has overrides for all button events and you can only have one active at a time. so as the model changes state the corresponding inputprocessor is set as the current inoutprocessor. And then sends some processed information fron inputs to the model.
+The MapInputProcessor can take movement from WASD and then has a timer that controlles if it can take a new input at this moment. And if that is tru it sends a movment direction to the model. The CombatInputProcessor has four buttons that is renderd in the controller. And the events that it listens for is movment of with button is selected from WASD and if a button is actrivated from ENTER. And it is only of a button is activated that that secection is sent to the model. 
+The controller also has a dependency on the view as it uses the same batch for rendering as the view.
 \subsection{Model}
 \label{model}
 \includesvg[scale=0.5]{images/com.g16.feyrune.model.svg}
+\\The model is separated in to two separate models, one witch models the overworld and one wich models the combat. And the main model really just controlles witch one of thees that is active and thir relation to each other. in witch both want to have information about the same player. As can be seen in the domain model there are two starting pont seen from the left, one named feyrune with has a direct relation to map and another one named combat. This is the separation we have created wit hthe two different models ans thier relation is practicly just the player and some monster, but as the monster is not constant if it isnt owned by the player the connection there is not as strong.
 \subsection{CombatModel}
 \label{combatmodel}
 \includesvg[scale=0.5]{images/com.g16.feyrune.CombatModel.svg}
+\\When the combat model is created it only takes the player as a referance and then instanciates new encounters or combats as the main model dictates. 
+
 \subsection{OverworldModel}
 \label{overworldmodel}
 \includesvg[scale=0.5]{images/com.g16.feyrune.OverworldModel.svg}
+The overworld hadles the relation between the player and the map. It knows where the player is and what attributes a tile can have, if you can move there or if it can create an encounter. As a new encounter is created it is sent to the combatmodel and handled there.
+
 \subsection{View}
 \label{view}
 \includesvg[scale=0.5]{images/com.g16.feyrune.view.svg}
+\\The view morrors the model in that it is separated into two different parts, overworld and combat. And mirrors the model in what tees two are responsible for. It also has a dependencie to the mnodel as it reads most of its data from there.
+
 \subsection{CombatScene}
 \label{combatscene}
 \includesvg[scale=0.5]{images/com.g16.feyrune.view.combatScene.svg}
+\\As the model state is changed from overworld to combat it the combat scene reads the same information about the encounter from the model. It then draws all relevant information that is needed in the combat, health and witch monsters are in combat. It does not draw any interactable UI elelemnts. for that is the controllers responsibility.
 \subsection{OverworldScene}
 \label{overworldscene}
 \includesvg[scale=0.5]{images/com.g16.feyrune.view.overworldScene.svg}
+\\The overworld scene is responlisble for drawing the map, it does not take the data for this from the model directly but reads from the same file that the model reads the map but extract only the graphic component. It is responsible for drawing and animating the player at the correct position and also moving the camera accordingly.
+
 
 \subsection{Design Patterns}
 Throughout the code, Group 16 has tried to implement design patterns wherever feasible. Examples of design patterns used are:
