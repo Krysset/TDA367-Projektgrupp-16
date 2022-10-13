@@ -6,7 +6,24 @@
 }
 \addbibresource{references/references.bib}
 
+\definecolor{main}{HTML}{5989cf}    % setting main color to be used
+\definecolor{sub}{HTML}{64cefb}     % setting sub color to be used
+
+\tcbset{
+	sharp corners,
+	colback = white,
+	before skip = 0.2cm,    % add extra space before the box
+	after skip = 0.5cm      % add extra space after the box
+}                           % setting global options for tcolorbox
+\newtcolorbox{boxC}{
+	rounded corners,
+	colback = sub, % background color
+	boxrule = 2pt,  % no borders
+	enhanced,
+	fuzzy shadow = {3pt}{-5pt}{-0.5pt}{0.5pt}{black!35} % {xshift}{yshift}{offset}{step}{options}
+}
+
 %\include{head/Supergamer1337.tex}
 
 \newcommand{\D}{\textbf{DONE} }
-\newcommand{\UserStory}[4]{\begin{figure}[H]\textbf{\LARGE User story:}~\\\textbf{Story Identifier:} #1\\\textbf{Story Name:} #2\\\textbf{Description}~\\#3\\\textbf{Functional}#4\end{figure}~\\}
+\newcommand{\UserStory}[4]{\begin{boxC}\begin{figure}[H]\parbox{\textwidth}{\textbf{\Large User story:}~\\\textbf{Story Identifier:} #1\\\textbf{Story Name:} #2\\\textbf{Description:}~\\#3\\\textbf{Functional:}#4}\end{figure}\end{boxC}}

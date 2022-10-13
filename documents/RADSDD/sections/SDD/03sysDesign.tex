@@ -54,7 +54,7 @@
 
 \subsection{Controller}
 \label{controller}
-\includesvg[scale=0.5]{images/com.g16.feyrune.controller.svg}
+\includesvg[width=\textwidth]{images/com.g16.feyrune.controller.svg}
 \\The controller is a little bit diffent from the view as how it mirrors the model in its separation of combat and overworld. It uses an iterface Iinput that extends the libgdx intrface InputProcessor. An input processor has overrides for all button events and you can only have one active at a time. so as the model changes state the corresponding inputprocessor is set as the current inoutprocessor. And then sends some processed information fron inputs to the model.
 The MapInputProcessor can take movement from WASD and then has a timer that controlles if it can take a new input at this moment. And if that is tru it sends a movment direction to the model. The CombatInputProcessor has four buttons that is renderd in the controller. And the events that it listens for is movment of with button is selected from WASD and if a button is actrivated from ENTER. And it is only of a button is activated that that secection is sent to the model.
 The controller also has a dependency on the view as it uses the same batch for rendering as the view.
@@ -92,9 +92,10 @@ Throughout the code, Group 16 has tried to implement design patterns wherever fe
 \paragraph{Model-View-Controller\\}
 The entire project is structured as a classic MVC pattern. The model exists in its own vacuum without any references to ether the view or the controller. The view has a reference to the model and so does the controller. The controller also has a referance to to the view, this is to implement the sprite Batch thet is used to draw thing on the screen. This is so the controller can render its own buttons.
 \paragraph{Factory pattern\\}
-We use a factory to create monsters...
+We use a factory to create monsters, their abilities, and encounters, this is to make it easier to exchange e.g. our monster class, BaseCreature with a new one, if someone wants to extend the code with specialized monsters that maybe are able to have special abilities or different types.
 \paragraph{State pattern (hopefully)\\}
 \paragraph{Observer pattern\\}
-Even if the code is running continuously and is polling, an observer is implemented in most places where we dont expect a change every frame.
+Even if the code is running continuously and is polling, an observer is implemented in most places where we don't expect a change every frame.
 \paragraph{Singleton\\}
+
 \paragraph{Façade pattern\\}
