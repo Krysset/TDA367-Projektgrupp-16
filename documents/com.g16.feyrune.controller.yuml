@@ -1,11 +1,41 @@
 // {type:class}
 // {generate:true}
-[Controller | +Controller(Model);+update():void;-changeInput(ModelState):void;] -.-^ [<<IObserver>>]
-[Controller] -.-> [<<enumeration>> ModelState | COMBAT; WORLD]
+[Controller | +Controller(Model);+observerUpdate():void;+changeInput(ModelState):void;+render(Batch):void]
+[CombatController | +CombatController(Model);+render(Batch):void;+setAsInputProcessor():void;]
+[WorldInputProcessor | +WorldInputProcessor(MovementHandler);+setAsInputProcessor():void;+keyDown(int):boolean;+keyUp(int):boolean;+keyTyped(char):boolean;+touchDown(int,int,int,int):boolean;+touchUp(int,int,int,int):boolean;+touchDragged(int,int,int):boolean;+mouseMoved(int,int):boolean;+scrolled(float,float):boolean;]
+[IObserver | +observerUpdate():void;]
+[<<enumeration>> ModelState | COMBAT; WORLD]
+[<<IInput>> | +setAsInputProcessor():void;]
+[CombatInputHandler | +CombatInputHandler(PlayerCreature);+changeSelection(Direction):void;+getCurrentSelection():Selection;+executeSelection():void;]
+[<<IInput>><<InputProcessor>>CombatInputProcessor | +CombatInputProcessor(CombatInputHandler);+setAsInputProcessor():void;+keyUp(int):boolean;+keyDown(int):boolean;+keyTyped(char):boolean;+touchDown(int,int,int,int):boolean;+touchUp(int,int,int,int):boolean;+touchDragged(int,int,int):boolean;+mouseMoved(int,int):boolean;+scrolled(float,float):boolean;]
+[ChoiceDialog | +ChoiceDialog(CombatInputHandler);+render(Batch):void;]
+[ChoiceButton | +ChoiceButton(String,Selection,Vector2,float,float,BitmapFont);render(bool,Batch):void;getButtonSelection():void;]
+
+
+[Controller] -.-^ [<<IObserver>>]
+[Controller] -.->  [<<enumeration>> ModelState]
 [Controller] <>-> [Model]
-[Controller] -> [MapPlayerInputProcessor]
-[Controller] -> [CombatInputProcessor]
-[MapPlayerInputProcessor] -.-^ [<<IInput>> | +setInputProcessor():void]
-[CombatInputProcessor] -.-^ [<<IInput>>]
-[MapPlayerInputProcessor] -.-^ [<<InputProcessor>>]
-[CombatInputProcessor] -.-^ [<<InputProcessor>>]
+[Controller] -> [View]
+[Controller] -> [WorldInputProcessor]
+[Controller] -> [CombatController]
+[Controller] -> [stateHandler]
+
+[WorldInputProcessor] -.-^ [MovementHandler]
+
+
+[WorldInputProcessor] -.-^ [<<InputProcessor>>]
+[CombatController] -.-^ [<<InputProcessor>>]
+
+[CombatController] -.-^ [<<IInput>>]
+[CombatController] -> [CombatInputHandler]
+[CombatController] -> [<<IInput>><<InputProcessor>>CombatInputProcessor]
+[CombatController] -> [ChoiceDialog]
+[CombatController] -> [Model]
+
+[ChoiceDialog] -> [ChoiceButton]
+[ChoiceDialog] -> [CombatInputHandler]
+
+[CombatInputHandler] -> [Selection]
+[CombatInputHandler] -> [PlayerCreature]
+
+[ChoiceButton] -> [Selection]
