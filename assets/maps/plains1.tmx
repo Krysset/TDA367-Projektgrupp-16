@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-up" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#557d55" nextlayerid="9" nextobjectid="2">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-up" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#557d55" nextlayerid="9" nextobjectid="2">
  <properties>
   <property name="startx" type="int" value="13"/>
   <property name="starty" type="int" value="10"/>
+  <property name="terraintype" value="plains"/>
   <property name="transporter1" value="assets/maps/dungeon1.tmx,6,16,11,2"/>
   <property name="transporter2" value="assets/maps/shop.tmx,4,22,6,1"/>
   <property name="transporter3" value="assets/maps/villagehouse.tmx,16,23,9,1"/>

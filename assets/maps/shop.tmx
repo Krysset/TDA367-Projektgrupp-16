@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#353540" nextlayerid="5" nextobjectid="1">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="13" height="13" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#353540" nextlayerid="5" nextobjectid="1">
  <properties>
   <property name="startx" type="int" value="6"/>
   <property name="starty" type="int" value="1"/>
+  <property name="terraintype" value="none"/>
   <property name="transporter1" value="assets/maps/plains1.tmx,6,0,4,21"/>
  </properties>
  <tileset firstgid="1" name="interior" tilewidth="16" tileheight="16" tilecount="285" columns="19">

@@ -4,12 +4,15 @@ import java.awt.*;
 
 public class Map {
     private final Tile[][] tiles;
+    private final String terrainType;
     private final int width;
     private final int height;
     private int startPosX;
     private int startPosY;
 
-    protected Map(Tile[][] tiles, int startPosX, int startPosY) {
+
+    protected Map(String name, Tile[][] tiles, int startPosX, int startPosY) {
+        this.terrainType = name;
         this.tiles = tiles;
         this.width = tiles.length;
         this.height = tiles[0].length;
@@ -32,13 +35,10 @@ public class Map {
         return getTile(point.x, point.y);
     }
     protected boolean tryEncounter(Point playerPos){
-        if (getTile(playerPos).canEncounter()){
-            return true;
-        }
-        return false;
+        return getTile(playerPos).canEncounter();
     }
     protected String getTerrainType(){
-        return "dungeon";
+        return terrainType;
     }
 
     protected int getStartPosX() {
