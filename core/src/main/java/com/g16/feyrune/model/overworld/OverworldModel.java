@@ -4,6 +4,7 @@ import com.g16.feyrune.Util.Random;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 import com.g16.feyrune.model.overworld.encounter.EncounterHandler;
+import com.g16.feyrune.model.overworld.map.Map;
 import com.g16.feyrune.model.overworld.map.MapManager;
 import com.g16.feyrune.model.player.Player;
 
@@ -11,6 +12,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * This is the part of the model responsible for the over world
+ */
 public class OverworldModel {
     private final Player player;
     private final MovementHandler movementHandler;
@@ -36,6 +40,10 @@ public class OverworldModel {
         movePlayer();
     }
 
+    /**
+     * This method is a hand between the player and the movement handler
+     * deciding witch type of movement that chold be clalled and if a movent is supposed to be called at all
+     */
     public void movePlayer() {
         Point deltaPos = movementHandler.calculateMovement(player.getCoordinates(), mapManager);
         if (deltaPos.x != 0 || deltaPos.y != 0) {
@@ -52,7 +60,7 @@ public class OverworldModel {
         }
     }
 
-    public boolean reachedTransporter() {
+    private boolean reachedTransporter() {
         return mapManager.hasTransporter(player.getCoordinates());
     }
     private boolean doesEncounterStart(){

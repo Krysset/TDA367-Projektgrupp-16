@@ -5,6 +5,9 @@ import com.g16.feyrune.model.overworld.map.MapManager;
 
 import java.awt.*;
 
+/**
+ * This class is responsible for transelateing an inpout direction from the controller to a new position for the player
+ */
 public class MovementHandler {
     private long moveFrequency = 500;
     private long lastMoved = 0;
@@ -40,6 +43,9 @@ public class MovementHandler {
 
     /**
      * Executes a movement update, based on the current direction.
+     * @param coordinates the coodinates you want to base calcutations from
+     * @param map the mapManager
+     * @return the new direction adjusted for time and colliton.
      */
     public Point calculateMovement(Point coordinates, MapManager map) {
         if (dirX == 0 && dirY == 0) return new Point(0,0);
@@ -75,6 +81,10 @@ public class MovementHandler {
         return dir;
     }
 
+
+    /**
+     * Chekes if player is allowed to move accoring to time passed
+     */
     private boolean hasTimeSinceLastMovedPassed(){
         long elapsedTime = TimeService.getElapsedTime();
         if(lastMoved + moveFrequency <= elapsedTime || lastMoved == 0){
