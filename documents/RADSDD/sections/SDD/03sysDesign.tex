@@ -56,7 +56,7 @@
 \label{controller}
 \includesvg[scale=0.5]{images/com.g16.feyrune.controller.svg}
 \\The controller is a little bit diffent from the view as how it mirrors the model in its separation of combat and overworld. It uses an iterface Iinput that extends the libgdx intrface InputProcessor. An input processor has overrides for all button events and you can only have one active at a time. so as the model changes state the corresponding inputprocessor is set as the current inoutprocessor. And then sends some processed information fron inputs to the model.
-The MapInputProcessor can take movement from WASD and then has a timer that controlles if it can take a new input at this moment. And if that is tru it sends a movment direction to the model. The CombatInputProcessor has four buttons that is renderd in the controller. And the events that it listens for is movment of with button is selected from WASD and if a button is actrivated from ENTER. And it is only of a button is activated that that secection is sent to the model. 
+The MapInputProcessor can take movement from WASD and then has a timer that controlles if it can take a new input at this moment. And if that is tru it sends a movment direction to the model. The CombatInputProcessor has four buttons that is renderd in the controller. And the events that it listens for is movment of with button is selected from WASD and if a button is actrivated from ENTER. And it is only of a button is activated that that secection is sent to the model.
 The controller also has a dependency on the view as it uses the same batch for rendering as the view.
 \subsection{Model}
 \label{model}
@@ -65,7 +65,7 @@ The controller also has a dependency on the view as it uses the same batch for r
 \subsection{CombatModel}
 \label{combatmodel}
 \includesvg[scale=0.5]{images/com.g16.feyrune.CombatModel.svg}
-\\When the combat model is created it only takes the player as a referance and then instanciates new encounters or combats as the main model dictates. 
+\\When the combat model is created it only takes the player as a referance and then instanciates new encounters or combats as the main model dictates.
 
 \subsection{OverworldModel}
 \label{overworldmodel}
