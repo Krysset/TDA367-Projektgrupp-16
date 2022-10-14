@@ -1,11 +1,13 @@
 // {type:class}
 // {generate:true}
+// {direction:leftToRight}
+
 
 [CombatScene|+CombatScene(Encounter, Player)] ++-> [UIRenderer|+UIRenderer(Encounter, Player);+render():void]
 [CombatScene] ++-> [GraphicsRenderer|+GraphicsRenderer(Encounter, Player);+render():void]
 
-[UIRenderer] ++-> [ChoiceRenderer|-currentSelection:Selection|+changeSelection(Direction):void;+getCurrentSelection:Selection; +render():void]
 [UIRenderer] ++1-2> [HealthBox|-maxHealth:int;-currentHealth:int|+HealthBox(int);+setCurrentHealth(int):void;+render():void]
+[UIRenderer] ++-> [ChoiceRenderer|-currentSelection:Selection|+changeSelection(Direction):void;+getCurrentSelection:Selection; +render():void]
 [ChoiceRenderer] -> [<<Enumeration>>;Selection| FIRST;SECOND;THIRD;FOURTH]
 
 [ChoiceRenderer] -> [<<Enumeration>>;Direction| UP;DOWN;LEFT;RIGHT;BACK]
