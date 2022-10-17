@@ -89,12 +89,13 @@ The view mirrors the model in that it is separated into two different parts, ove
 
 \subsection{CombatScene}
 \label{combatscene}
-\includesvg[width=\textwidth]{images/com.g16.feyrune.view.combatScene.svg}
-\\As the model state is changed from overworld to combat it the combat scene reads the same information about the encounter from the model. It then draws all relevant information that is needed in the combat, health and witch monsters are in combat. It does not draw any interactive UI elements. for that is the controllers responsibility.
+\includesvg[width=\textwidth]{images/com.g16.feyrune.view.combatScene.svg}\\
+As the model state changes from overworld to combat, CombatScene reads all the information that graphically needs to be represented about the encounter from the model. It then renders all that information, such as health and which monsters are active in combat. It does not render any of the interactive UI elements as that is the controller's responsibility.
+
 \subsection{OverworldScene}
 \label{overworldscene}
-\includesvg[width=\textwidth]{images/com.g16.feyrune.view.overworldScene.svg}
-\\The overworld scene is responsible for drawing the map, it does not take the data for this from the model directly but reads from the same file that the model reads the map but extract only the graphic component. It is responsible for drawing and animating the player at the correct position and also moving the camera accordingly.
+\includesvg[width=\textwidth]{images/com.g16.feyrune.view.overworldScene.svg}\\
+The overworld scene is responsible for rendering the map. The data it needs to render this is taken from the same data file as the model uses, but crucially it is parsed and stored separately from the model's information. OverworldScene is responsible for drawing and animating the player at the correct position, as well as moving the camera accordingly.
 
 
 \subsection{Design Patterns}
