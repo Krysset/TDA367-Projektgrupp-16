@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.g16.feyrune.interfaces.IScene;
-import com.g16.feyrune.model.overworld.map.MapManager;
+import com.g16.feyrune.model.overworld.OverworldModel;
 import com.g16.feyrune.model.player.Player;
 import com.g16.feyrune.view.overworld.textureMap.TextureMapManager;
 import com.g16.feyrune.view.player.PlayerRenderer;
@@ -16,28 +16,17 @@ public class OverworldScene implements IScene {
     private Camera camera;
     private TextureMapManager map;
 
-    /**
-     * Constructor for the OverworldScene
-     * @param player the player to render
-     * @param mapManager the map manager to get the map from
-     * @param batch the sprite batch to draw with
-     */
-    public OverworldScene(Player player, MapManager mapManager, SpriteBatch batch){
+
+    public OverworldScene(Player player, OverworldModel overworldModel, SpriteBatch batch){
         this.batch = batch;
-        this.map = new TextureMapManager(mapManager);
+        this.map = new TextureMapManager(overworldModel);
         this.camera = new OrthographicCamera(270 ,135);
         pr = new PlayerRenderer(player);
     }
 
-    /**
-     * Update function to comply with IScene
-     */
     @Override
     public void update(){}
 
-    /**
-     * Renders the scene using the stored sprite batch
-     */
     @Override
     public void render(){
         camera.position.set(

@@ -9,7 +9,6 @@ import com.g16.feyrune.model.creature.CreatureFactory;
 import com.g16.feyrune.model.overworld.MovementHandler;
 import com.g16.feyrune.model.overworld.OverworldModel;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
-import com.g16.feyrune.model.overworld.map.MapManager;
 import com.g16.feyrune.model.player.Player;
 
 import java.awt.*;
@@ -57,16 +56,13 @@ public class Model implements IObserver{
     }
 
     public CombatModel getCombatModel(){return combatModel;}
+    public OverworldModel getOverworldModel(){return overworldModel;}
     public StateHandler getStateHandler() {
         return stateHandler;
     }
 
     public Player getPlayer(){
         return player;
-    }
-
-    public MapManager getMapManager() {
-        return overworldModel.getMapManager();
     }
 
     public PlayerCreature getPlayerCreature() {

@@ -2,6 +2,7 @@ package com.g16.feyrune.view.overworld.textureMap;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.g16.feyrune.model.overworld.OverworldModel;
 import com.g16.feyrune.model.overworld.map.IMapObserver;
 import com.g16.feyrune.model.overworld.map.MapManager;
 
@@ -12,9 +13,9 @@ public class TextureMapManager implements IMapObserver {
      * Constructor for the TextureMapManager
      * @param mapManager the map manager to get the map from
      */
-    public TextureMapManager(MapManager mapManager) {
+    public TextureMapManager(OverworldModel overworldModel) {
         textureMap = TextureMapParser.parseMapFile("assets/maps/plains1.tmx");
-        mapManager.subscribeMapObserver(this);
+        overworldModel.subscribeMapObserver(this);
     }
 
     /**
