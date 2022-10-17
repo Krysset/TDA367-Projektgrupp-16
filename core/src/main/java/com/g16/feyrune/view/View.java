@@ -46,6 +46,7 @@ public class View implements IObserver {
         currentScene.render();
     }
 
+
     /**
      * Returns the sprite batch
      * @return the sprite batch
@@ -54,10 +55,6 @@ public class View implements IObserver {
         return batch;
     }
 
-    /**
-     * Changes the scene to the one corresponding to the model state
-     * @param state the model state to change according to
-     */
     private void changeScene(ModelState state) {
         switch (state){
             case WORLD:
@@ -70,25 +67,5 @@ public class View implements IObserver {
         }
     }
 
-    /**
-     * Returns the combatScene
-     * @return the combatScene
-     */
-    public CombatScene getCombatScene(){
-        return combatScene;
-    }
-
-    /**
-     * Sets the overWorld as active scene
-     */
-    private void setOverWorldAsScene(){
-    }
-
-    /**
-     * Sets the combatScene as active scene
-     */
-    private void setCombatAsScene(){
-        //combatScene.renderNewCombat(); //TODO: THIS IS WHERE WE START A NEW COMBAT
-    }
 }
 
