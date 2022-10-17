@@ -6,22 +6,24 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.g16.feyrune.interfaces.IScene;
 import com.g16.feyrune.model.overworld.OverworldModel;
+import com.g16.feyrune.model.overworld.map.IMapObserver;
 import com.g16.feyrune.model.player.Player;
-import com.g16.feyrune.view.overworld.textureMap.TextureMapManager;
+import com.g16.feyrune.view.overworld.textureMap.TextureMap;
+import com.g16.feyrune.view.overworld.textureMap.TextureMapParser;
 import com.g16.feyrune.view.player.PlayerRenderer;
 
-public class OverworldScene implements IScene {
+public class OverworldScene implements IScene, IMapObserver {
     private PlayerRenderer pr;
     private SpriteBatch batch;
     private Camera camera;
-    private TextureMapManager map;
-
+    private TextureMap map;
 
     public OverworldScene(Player player, OverworldModel overworldModel, SpriteBatch batch){
         this.batch = batch;
-        this.map = new TextureMapManager(overworldModel);
+        this.map = TextureMapParser.parseMapFile("assets/maps/plains1.tmx");
         this.camera = new OrthographicCamera(270 ,135);
         pr = new PlayerRenderer(player);
+        overworldModel.subscribeMapObserver(this);
     }
 
     @Override
@@ -43,5 +45,8 @@ public class OverworldScene implements IScene {
         batch.end();
     }
 
-
+    @Override
+    public void updateMap(String mapAssetPath) {
+        map = TextureMapParser.parseMapFile(mapAssetPath);
+    }
 }
