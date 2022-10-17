@@ -69,7 +69,7 @@ public class WorldInputProcessor implements IInput, InputProcessor {
         return true;    }
 
     /**
-     * Does nothing
+     * Checks if the key is typed
      * @param character The character to check if typed
      * @return false
      */
@@ -79,7 +79,7 @@ public class WorldInputProcessor implements IInput, InputProcessor {
     }
 
     /**
-     * Does nothing
+     * Checks if the mouse is pressed
      * @param screenX The x coordinate, origin is in the upper left corner
      * @param screenY The y coordinate, origin is in the upper left corner
      * @param pointer the pointer for the event.
@@ -92,7 +92,7 @@ public class WorldInputProcessor implements IInput, InputProcessor {
     }
 
     /**
-     * Does nothing
+     * Checks if the mouse is released
      * @param screenX
      * @param screenY
      * @param pointer the pointer for the event.
@@ -105,7 +105,7 @@ public class WorldInputProcessor implements IInput, InputProcessor {
     }
 
     /**
-     * Does nothing
+     * Checks if the mouse is dragged
      * @param screenX
      * @param screenY
      * @param pointer the pointer for the event.
@@ -117,7 +117,7 @@ public class WorldInputProcessor implements IInput, InputProcessor {
     }
 
     /**
-     * Does nothing
+     * Checks if the mouse is moved
      * @param screenX
      * @param screenY
      * @return false
@@ -128,7 +128,7 @@ public class WorldInputProcessor implements IInput, InputProcessor {
     }
 
     /**
-     * Does nothing
+     * Checks if the mouse is scrolled
      * @param amountX the horizontal scroll amount, negative or positive depending on the direction the wheel was scrolled.
      * @param amountY the vertical scroll amount, negative or positive depending on the direction the wheel was scrolled.
      * @return false
