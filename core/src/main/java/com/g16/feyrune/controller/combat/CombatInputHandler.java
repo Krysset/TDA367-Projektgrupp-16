@@ -14,6 +14,10 @@ public class CombatInputHandler {
     private final Point selectionPoint;
     private final PlayerCreature playerCreature;
 
+    /**
+     * Constructor for CombatInputHandler
+     * @param playerCreature the playerCreature
+     */
     public CombatInputHandler(PlayerCreature playerCreature) {
         currentSelection = Selection.FIRST;
         initSelectionArray();
@@ -21,6 +25,9 @@ public class CombatInputHandler {
         this.playerCreature = playerCreature;
     }
 
+    /**
+     * Initializes the selectionArray
+     */
     private void initSelectionArray() {
         selectionArray[0][0] = Selection.FIRST;
         selectionArray[0][1] = Selection.SECOND;
@@ -28,6 +35,10 @@ public class CombatInputHandler {
         selectionArray[1][1] = Selection.FOURTH;
     }
 
+    /**
+     * Changes the currentSelection
+     * @param direction in which direction the selection should be changed
+     */
     public void changeSelection(Direction direction) {
         switch (direction) {
             case LEFT:
@@ -47,10 +58,17 @@ public class CombatInputHandler {
         currentSelection = selectionArray[selectionPoint.y][selectionPoint.x];
     }
 
+    /**
+     * Returns the currentSelection
+     * @return the currentSelection
+     */
     public Selection getCurrentSelection() {
         return currentSelection;
     }
 
+    /**
+     * Initializes which action should be performed by which selection
+     */
     public void excecuteSelection() {
         switch (currentSelection) {
             case FIRST:

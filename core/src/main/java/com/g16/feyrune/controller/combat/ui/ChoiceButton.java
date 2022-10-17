@@ -17,6 +17,15 @@ public class ChoiceButton {
     private float width,height;
     private BitmapFont font;
 
+    /**
+     *
+     * @param name What text the button should display
+     * @param selection What selection the button should return
+     * @param pos Where the button should be placed
+     * @param width How wide the button should be
+     * @param height How tall the button should be
+     * @param font What font the button name should be displayed using
+     */
     public ChoiceButton(String name, Selection selection, Vector2 pos, float width, float height, BitmapFont font){
         this.name = name;
         this.buttonSelection = selection;
@@ -27,6 +36,12 @@ public class ChoiceButton {
         texture = new Texture(Gdx.files.internal(spritePath));
 
     }
+
+    /**
+     * Draws the button
+     * @param isSelected Whether the button is selected or not
+     * @param batch The batch to draw the button on
+     */
     public void render(boolean isSelected, Batch batch){
         if(isSelected) batch.setColor(1,0,0,1);
         batch.draw(texture,pos.x,pos.y,width,height);
@@ -34,6 +49,10 @@ public class ChoiceButton {
         batch.setColor(1,1,1,1);
     }
 
+    /**
+     * Returns the selection of the button
+     * @return The selection of the button
+     */
     public Selection getButtonSelection(){
         return buttonSelection;
     }
