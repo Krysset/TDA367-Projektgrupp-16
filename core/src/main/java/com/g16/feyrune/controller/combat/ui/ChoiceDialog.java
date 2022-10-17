@@ -24,6 +24,10 @@ public class ChoiceDialog {
     private CombatInputHandler inputHandler;
     private BitmapFont font;
 
+    /**
+     * Constructor for the ChoiceDialog class
+     * @param inputHandler the inputHandler of the combatController
+     */
     public ChoiceDialog(CombatInputHandler inputHandler){ //TODO: Everything from here is coded to work, not look good :)
         this.inputHandler = inputHandler;
         this.camera = new OrthographicCamera(width,height*4);
@@ -45,6 +49,10 @@ public class ChoiceDialog {
         buttons.add(new ChoiceButton("Flee",    Selection.FOURTH,   new Vector2(midWidth,   pos.y),     bWidth,bHeight, font));
     }
 
+    /**
+     * Draws the ChoiceDialog
+     * @param batch the batch to draw on
+     */
     public void render(Batch batch){
         batch.setProjectionMatrix(camera.projection);
         batch.draw(texture,pos.x,pos.y,width,height);
