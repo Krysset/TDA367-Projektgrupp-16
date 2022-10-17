@@ -1,7 +1,7 @@
 package com.g16.feyrune.model.overworld;
 
 import com.g16.feyrune.model.TimeService;
-import com.g16.feyrune.model.overworld.map.MapManager;
+import com.g16.feyrune.model.overworld.map.Map;
 
 import java.awt.*;
 
@@ -41,7 +41,7 @@ public class MovementHandler {
     /**
      * Executes a movement update, based on the current direction.
      */
-    public Point calculateMovement(Point coordinates, MapManager map) {
+    public Point calculateMovement(Point coordinates, Map map) {
         if (dirX == 0 && dirY == 0) return new Point(0,0);
         if(!hasTimeSinceLastMovedPassed()) return new Point(0,0);
         Point dir = adjustDirectionForCollision(coordinates, map);
@@ -55,7 +55,7 @@ public class MovementHandler {
     /**
      * Adjust the x and y direction values to avoid collision.
      */
-    private Point adjustDirectionForCollision(Point coordinates, MapManager map) {
+    private Point adjustDirectionForCollision(Point coordinates, Map map) {
         int playerX = coordinates.x;
         int playerY = coordinates.y;
         Point dir = new Point(dirX,dirY);
@@ -84,7 +84,7 @@ public class MovementHandler {
         return false;
     }
 
-    private boolean isNewPositionCollision(int x, int y, MapManager map) {
+    private boolean isNewPositionCollision(int x, int y, Map map) {
         return map.isCollision(x, y);
     }
 }
