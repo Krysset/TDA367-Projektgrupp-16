@@ -16,7 +16,14 @@ public class CreatureRenderer {
     private TextureRegion[] animationRegion;
     private float stateTime = 0;
     private boolean flip;
-    
+
+    /**
+     * Constructor for the CreatureRenderer
+     * @param creature the creature to render
+     * @param posX the x position of said creature
+     * @param posY the y position of said creature
+     * @param flip whether the creature should be flipped or not (for the enemy)
+     */
     public CreatureRenderer(CombatCreature creature, float posX, float posY, boolean flip){
         this.creature = creature;
         this.posX = posX;
@@ -31,7 +38,10 @@ public class CreatureRenderer {
     }
 
 
-
+    /**
+     * Renders the creature
+     * @param batch the batch to render on
+     */
     public void render(Batch batch){
 
         stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
@@ -45,6 +55,11 @@ public class CreatureRenderer {
         //TODO: NOT IMPLEMENTED
     }
 
+    /**
+     * Animates the creature
+     * @param animation The texture region to use for animation
+     * @return the animation
+     */
     private Animation<TextureRegion> animate(TextureRegion[] animation){
         return new Animation<>(0.15f, animation);
     }

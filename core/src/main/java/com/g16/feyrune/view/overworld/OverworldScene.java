@@ -16,7 +16,12 @@ public class OverworldScene implements IScene {
     private Camera camera;
     private TextureMapManager map;
 
-
+    /**
+     * Constructor for the OverworldScene
+     * @param player the player to render
+     * @param mapManager the map manager to get the map from
+     * @param batch the sprite batch to draw with
+     */
     public OverworldScene(Player player, MapManager mapManager, SpriteBatch batch){
         this.batch = batch;
         this.map = new TextureMapManager(mapManager);
@@ -24,9 +29,15 @@ public class OverworldScene implements IScene {
         pr = new PlayerRenderer(player);
     }
 
+    /**
+     * Update function to comply with IScene
+     */
     @Override
     public void update(){}
 
+    /**
+     * Renders the scene using the stored sprite batch
+     */
     @Override
     public void render(){
         camera.position.set(

@@ -15,20 +15,36 @@ public class CombatScene implements IScene { //TODO: the relation for this objec
     SpriteBatch batch;
     CombatGraphicsRenderer combatRenderer;
     private Camera camera;
+
+    /**
+     * Constructor for the CombatScene
+     * @param batch the batch to render on
+     */
     public CombatScene(SpriteBatch batch) {
         this.batch = batch;
         this.camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
     }
 
+    /**
+     *  Renders the scene
+     * @param combatModel the combat model to render data from
+     * @param player the player to render data from
+     */
     public void renderNewCombat(CombatModel combatModel, Player player){
         combatRenderer = new CombatGraphicsRenderer(combatModel.getEnemyCreature(), player);
     }
 
+    /**
+     * Empty method needed for interface
+     */
     @Override
     public void update() {
     }
 
+    /**
+     * Renders the scene
+     */
     @Override
     public void render() {//TODO: NOT IMPLEMENTED
         ScreenUtils.clear(Color.CYAN);

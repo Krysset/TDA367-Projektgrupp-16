@@ -15,6 +15,10 @@ public class View implements IObserver {
     private CombatScene combatScene;
     private SpriteBatch batch;
 
+    /**
+     * Constructor for the View
+     * @param model the model to get data from
+     */
     public View(Model model){
         this.model = model;
         this.model.registerNewObserver(this);
@@ -27,21 +31,34 @@ public class View implements IObserver {
         observerUpdate(); //TODO: this is also wrong and bad :)
     }
 
+    /**
+     * Fetches new information from the model and updates the scene
+     */
     public void observerUpdate(){
         ModelState currentModelState = model.getCurrentModelState();
         changeScene(currentModelState);
         currentScene.update();
     }
 
+    /**
+     * Renders the information of the current scene
+     */
     public void render(){
         currentScene.render();
     }
 
-
+    /**
+     * Returns the sprite batch
+     * @return the sprite batch
+     */
     public SpriteBatch getBatch(){
         return batch;
     }
 
+    /**
+     * Changes the scene to the one corresponding to the model state
+     * @param state the model state to change according to
+     */
     private void changeScene(ModelState state) {
         switch (state){
             case WORLD:
@@ -54,12 +71,23 @@ public class View implements IObserver {
         }
     }
 
+    /**
+     * Returns the combatScene
+     * @return the combatScene
+     */
     public CombatScene getCombatScene(){
         return combatScene;
     }
 
+    /**
+     * Sets the overWorld as active scene
+     */
     private void setOverWorldAsScene(){
     }
+
+    /**
+     * Sets the combatScene as active scene
+     */
     private void setCombatAsScene(){
         //combatScene.renderNewCombat(); //TODO: THIS IS WHERE WE START A NEW COMBAT
     }

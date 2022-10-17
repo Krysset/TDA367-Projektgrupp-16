@@ -18,7 +18,11 @@ public class CombatGraphicsRenderer {
     private float creaturePosY = Gdx.graphics.getHeight()/2 - (Gdx.graphics.getHeight()/3);
 
 
-
+    /**
+     * Constructor for the CombatGraphicsRenderer
+     * @param enemyCreature the enemy creature
+     * @param player the player
+     */
     public CombatGraphicsRenderer(CombatCreature enemyCreature, Player player){
 
         this.player = player;
@@ -30,6 +34,10 @@ public class CombatGraphicsRenderer {
         enemyRenderer = new CreatureRenderer(enemyCreature,Gdx.graphics.getWidth()/2 - tolerance, creaturePosY, true);
     }
 
+    /**
+     * Renders the graphics
+     * @param batch the batch to render on
+     */
     public void render(Batch batch){
         //TODO: NOT IMPLEMENTED
         enemyHealthBar.setCurrentHealth(enemyCreature.getHP());
