@@ -27,7 +27,7 @@ public class View implements IObserver {
         overworldScene = new OverworldScene(model.getPlayer(), model.getOverworldModel(), batch);
         combatScene = new CombatScene(batch);
 
-        observerUpdate(); //TODO: this is also wrong and bad :)
+        observerUpdate();
     }
 
     /**
@@ -66,6 +66,5 @@ public class View implements IObserver {
                 break;
         }
     }
-
 }
 
