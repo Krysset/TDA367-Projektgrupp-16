@@ -4,8 +4,8 @@ import com.g16.feyrune.enums.ModelState;
 
 /**
  * This class handles the model state
- * the model state is what decides witch controller and view that should be active,
- * and witch part of the model that should get polled
+ * the model state is what decides which controller and view that should be active,
+ * and which part of the model that should get polled
  */
 public class StateHandler {
     private ModelState currentModelState;
