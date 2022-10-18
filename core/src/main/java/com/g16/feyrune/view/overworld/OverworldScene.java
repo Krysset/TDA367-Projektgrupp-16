@@ -6,22 +6,22 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.g16.feyrune.interfaces.IScene;
 import com.g16.feyrune.model.overworld.OverworldModel;
-import com.g16.feyrune.model.overworld.map.MapManager;
+import com.g16.feyrune.model.overworld.map.IMapObserver;
 import com.g16.feyrune.model.player.Player;
-import com.g16.feyrune.view.overworld.textureMap.TextureMapManager;
+import com.g16.feyrune.view.overworld.textureMap.TextureMap;
 import com.g16.feyrune.view.overworld.textureMap.TextureMapParser;
 import com.g16.feyrune.view.player.PlayerRenderer;
 
-public class OverworldScene implements IScene {
+public class OverworldScene implements IScene, IMapObserver {
     private PlayerRenderer pr;
     private SpriteBatch batch;
     private Camera camera;
-    private TextureMapManager map;
+    private TextureMap map;
 
     /**
      * Constructor for the OverworldScene
-     * @param player the player to render
-     * @param mapManager the map manager to get the map from
+     * @param player the player
+     * @param overworldModel the overworld model
      * @param batch the sprite batch to draw with
      */
     public OverworldScene(Player player, OverworldModel overworldModel, SpriteBatch batch){
@@ -31,14 +31,15 @@ public class OverworldScene implements IScene {
         pr = new PlayerRenderer(player);
         overworldModel.subscribeMapObserver(this);
     }
+
     /**
-     * Update function to comply with IScene
+     * Updates the scene
      */
     @Override
     public void update(){}
 
     /**
-     * Renders the scene using the stored sprite batch
+     * Renders the scene
      */
     @Override
     public void render(){
@@ -56,6 +57,10 @@ public class OverworldScene implements IScene {
         batch.end();
     }
 
+    /**
+     * Called when the map should be replaced
+     * @param mapAssetPath the path to the new map
+     */
     @Override
     public void updateMap(String mapAssetPath) {
         map = TextureMapParser.parseMapFile(mapAssetPath);
