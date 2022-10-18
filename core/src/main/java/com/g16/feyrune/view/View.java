@@ -15,6 +15,10 @@ public class View implements IObserver {
     private CombatScene combatScene;
     private SpriteBatch batch;
 
+    /**
+     * Constructor for the View
+     * @param model the model to get data from
+     */
     public View(Model model){
         this.model = model;
         this.model.registerNewObserver(this);
@@ -26,16 +30,27 @@ public class View implements IObserver {
         observerUpdate();
     }
 
+    /**
+     * Fetches new information from the model and updates the scene
+     */
     public void observerUpdate(){
         ModelState currentModelState = model.getCurrentModelState();
         changeScene(currentModelState);
         currentScene.update();
     }
 
+    /**
+     * Renders the information of the current scene
+     */
     public void render(){
         currentScene.render();
     }
 
+
+    /**
+     * Returns the sprite batch
+     * @return the sprite batch
+     */
     public SpriteBatch getBatch(){
         return batch;
     }

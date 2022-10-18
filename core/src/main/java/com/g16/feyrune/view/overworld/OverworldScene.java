@@ -18,6 +18,12 @@ public class OverworldScene implements IScene, IMapObserver {
     private Camera camera;
     private TextureMap map;
 
+    /**
+     * Constructor for the OverworldScene
+     * @param player the player
+     * @param overworldModel the overworld model
+     * @param batch the sprite batch to draw with
+     */
     public OverworldScene(Player player, OverworldModel overworldModel, SpriteBatch batch){
         this.batch = batch;
         this.map = TextureMapParser.parseMapFile("assets/maps/plains1.tmx");
@@ -26,9 +32,15 @@ public class OverworldScene implements IScene, IMapObserver {
         overworldModel.subscribeMapObserver(this);
     }
 
+    /**
+     * Updates the scene
+     */
     @Override
     public void update(){}
 
+    /**
+     * Renders the scene
+     */
     @Override
     public void render(){
         camera.position.set(
@@ -45,6 +57,10 @@ public class OverworldScene implements IScene, IMapObserver {
         batch.end();
     }
 
+    /**
+     * Called when the map should be replaced
+     * @param mapAssetPath the path to the new map
+     */
     @Override
     public void updateMap(String mapAssetPath) {
         map = TextureMapParser.parseMapFile(mapAssetPath);

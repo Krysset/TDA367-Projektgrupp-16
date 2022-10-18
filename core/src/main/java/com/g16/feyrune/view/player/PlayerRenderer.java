@@ -31,6 +31,10 @@ public class PlayerRenderer {
 
     float stateTime = 0;
 
+    /**
+     * Constructor for the PlayerRenderer
+     * @param player the player to be rendered
+     */
     public PlayerRenderer(Player player) {
         this.texture = new Texture(humanMalePath);
         walkRightAnimation = AnimationUtils.getAnimationFrames(texture, 8, 6, 4, 16);
@@ -43,6 +47,10 @@ public class PlayerRenderer {
         newPlayerPos = playerPos;
     }
 
+    /**
+     * Draws the player using the sprite batch
+     * @param batch the sprite batch to draw with
+     */
     public void draw(SpriteBatch batch) {
         stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
         Animation<TextureRegion> animation = animate(currentAnimation);
@@ -53,6 +61,9 @@ public class PlayerRenderer {
         batch.draw(animation.getKeyFrame(stateTime), playerPos.x * 16-5, playerPos.y * 16);
     }
 
+    /**
+     * Calculates the position of the player using Vector2.lerp
+     */
     private void calculateContinuousPosition(){
         if ((playerPos.x != player.getCoordinates().x || playerPos.y != player.getCoordinates().y) || alpha >= 1){
             newPlayerPos = new Vector2(player.getCoordinates().x,player.getCoordinates().y);
@@ -62,6 +73,9 @@ public class PlayerRenderer {
         else {alpha = 0; currentTime = 0;}
     }
 
+    /**
+     * Chooses which animation to use based on the player's movement
+     */
     private void pickAnimation(){
         if (newPlayerPos.x - playerPos.x == 0 && newPlayerPos.y - playerPos.y == 0){
             if (counting){
@@ -85,25 +99,42 @@ public class PlayerRenderer {
 
     }
 
+    /**
+     * Starts the idle timer
+     */
     private void startIdleTimer(){
         idleTimer = 0.1f;
         counting = true;
     }
 
+    /**
+     * Calculates the alpha value for the lerp function
+     */
     private float calculateAlpha() {
         currentTime += Gdx.graphics.getDeltaTime();
         return currentTime / moveSpeed;
     }
 
-
+    /**
+     * Animates the player
+     * @param animation the tecture region containing the animation frames
+     * @return the animation
+     */
     private Animation<TextureRegion> animate(TextureRegion[] animation){
         return new Animation<>(0.15f, animation);
     }
 
+    /**
+     * Disposes the texture
+     */
     public void dispose() {
         texture.dispose();
     }
 
+    /**
+     * Gets the player position in the world
+     * @return the player position
+     */
     public Vector2 getRenderPos(){
         return playerPos;
     }

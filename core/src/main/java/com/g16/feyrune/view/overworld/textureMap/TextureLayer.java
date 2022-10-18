@@ -9,9 +9,18 @@ import java.util.HashMap;
 public class TextureLayer {
     private final HashMap<Point, ITextureGettable> layer;
 
+    /**
+     * Constructor for the TextureLayer
+     */
     protected TextureLayer() {
         layer = new HashMap<>();
     }
+
+    /**
+     * Adds a tile to the layer
+     * @param spriteBatch the sprite batch
+     * @param tileSize the size of the tile
+     */
     public void render(SpriteBatch spriteBatch, int tileSize) {
         for (HashMap.Entry<Point, ITextureGettable> entry : layer.entrySet()) {
             Point coordinate = entry.getKey();
@@ -20,6 +29,11 @@ public class TextureLayer {
         }
     }
 
+    /**
+     * Adds a tile to the layer
+     * @param coordinate the coordinate of the tile
+     * @param tile the tile to add
+     */
     protected void addTile(Point coordinate, ITextureGettable tile) {
         layer.put(coordinate, tile);
     }
