@@ -4,7 +4,6 @@ import com.g16.feyrune.Util.Random;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 import com.g16.feyrune.model.overworld.encounter.EncounterHandler;
-import com.g16.feyrune.model.overworld.map.Map;
 import com.g16.feyrune.model.overworld.map.MapManager;
 import com.g16.feyrune.model.player.Player;
 
