@@ -44,7 +44,7 @@ public class MovementHandler {
     /**
      * Executes a movement update, based on the current direction.
      * @param coordinates the coodinates you want to base calcutations from
-     * @param map the mapManager
+     * @param map the map of the world in which the player is moving
      * @return the new direction adjusted for time and colliton.
      */
     public Point calculateMovement(Point coordinates, Map map) {
