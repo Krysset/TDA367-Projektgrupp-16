@@ -3,7 +3,6 @@ package com.g16.feyrune.model.overworld.encounter;
 import com.g16.feyrune.Util.Pair;
 import com.g16.feyrune.interfaces.ICombatable;
 import com.g16.feyrune.model.creature.CreatureFactory;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class EncounterHandler {
     private static Pair<String, Integer>[] dungeonTerrainMonstersList;
@@ -38,7 +37,7 @@ public class EncounterHandler {
             case "test":
                 return CreatureFactory.createCreatureList(testTerrainMonstersList, wantedAmount);
             default:
-                throw new NotImplementedException();
+                return CreatureFactory.createCreatureList(testTerrainMonstersList, wantedAmount);
         }
     }
 
