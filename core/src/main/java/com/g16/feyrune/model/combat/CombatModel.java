@@ -51,6 +51,8 @@ public class CombatModel {
      * This method is the main loop of the combat system.
      * It will loop through the turn order and execute the moves of each creature.
      * It will also check if the combat is over.
+     * It waits for action to not be null to continue.
+     * The action is preferbly chosen in the controller
      */
     public void combatLoop(){
         CombatCreature actor = turnOrder.get(0);

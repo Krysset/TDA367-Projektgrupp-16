@@ -26,8 +26,9 @@ public class EncounterHandler {
     }
 
     /**
-     *
-     * @return
+     * Creates a new encounter
+     * @param terrainType a string containing the terrain type of the encounter
+     * @return A Encounter
      */
     public Encounter createEncounter(String terrainType) {
         ICombatable[] iCreatureList = getMonsterList(terrainType, 1);
