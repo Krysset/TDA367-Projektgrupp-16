@@ -14,29 +14,49 @@ public class MovementHandler {
     private int dirX = 0;
     private int dirY = 0;
 
+    /**
+     * Decreases the movement speed in the x-direction
+     */
     public void decreaseXDirection(){
         dirX -= 1;
         dirX = Math.max(-1, dirX);
     }
 
+    /**
+     * Increases the movement speed in the x-direction
+     */
     public void increaseXDirection(){
         dirX += 1;
         dirX = Math.min(1,dirX);
     }
 
+    /**
+     * Decreases the movement speed in the y-direction
+     */
     public void decreaseYDirection(){
         dirY -= 1;
         dirY = Math.max(-1, dirY);
     }
 
+    /**
+     * Increases the movement speed in the y-direction
+     */
     public void increaseYDirection(){
         dirY += 1;
         dirY = Math.min(1,dirY);
 
     }
+
+    /**
+     * Resets the movement speed in the x-direction
+     */
     public void resetXDirection(){
         dirX = 0;
     }
+
+    /**
+     * Resets the movement speed in the y-direction
+     */
     public void resetYDirection(){
         dirY = 0;
     }
@@ -53,6 +73,10 @@ public class MovementHandler {
         Point dir = adjustDirectionForCollision(coordinates, map);
         return dir;
     }
+
+    /**
+     * Resets the movement in both the x- and the y-direction
+     */
     public void resetMovement(){
         resetXDirection();
         resetYDirection();
@@ -94,6 +118,13 @@ public class MovementHandler {
         return false;
     }
 
+    /**
+     * Checks if the new position is a collision
+     * @param x the x-coordinate of the new position
+     * @param y the y-coordinate of the new position
+     * @param map the map of the world in which the player is moving
+     * @return true if the new position is a collision, false otherwise
+     */
     private boolean isNewPositionCollision(int x, int y, Map map) {
         return map.isCollision(x, y);
     }

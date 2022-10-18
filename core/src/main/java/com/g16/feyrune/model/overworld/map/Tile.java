@@ -49,19 +49,33 @@ public class Tile {
     }
 
     /**
-     * 
-     * @param transporter
+     * Sets the transporter connected to the tile to transporter
+     * @param transporter the transporter to add to the tile
      */
     protected void setTransporter(Transporter transporter) {
         this.transporter = transporter;
     }
+
+    /**
+     * Changes the value of canEncounter
+     * @param canEncounter the value to change to
+     */
     protected void setCanEncounter(boolean canEncounter) {
         this.canEncounter = canEncounter;
     }
+
+    /**
+     * Returns the coordinates the transporter should transport the player to
+     * @return the coordinates the transporter should transport the player to
+     */
     protected Point getTransportCoordinates(){
         return transporter.getTransitionTo();
     }
 
+    /**
+     * Returns the MapAssetPath of the current transporter
+     * @return the MapAssetPath of the current transporter
+     */
     protected String getTransportMapAssetPath(){
         return transporter.getMapAssetPath();
     }

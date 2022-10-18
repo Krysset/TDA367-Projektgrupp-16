@@ -22,6 +22,9 @@ public class Model implements IObserver{
     private final OverworldModel overworldModel;
     private CombatModel combatModel;
 
+    /**
+     * Constructor for the Model class
+     */
     public Model() {
         player = new Player("Player", new Point(0, 0));
         this.overworldModel = new OverworldModel(player);
@@ -31,6 +34,9 @@ public class Model implements IObserver{
         this.combatModel = new CombatModel(player, new Encounter(new ICombatable[]{CreatureFactory.createCreature()}));
     }
 
+    /**
+     * Advances the model one execution cycle
+     */
     public void update() { //TODO: use state pattern
         switch (stateHandler.getModelState()){
             case WORLD:
@@ -51,45 +57,90 @@ public class Model implements IObserver{
         }
     }
 
+    /**
+     * Checks if the player has died
+     * @return true if the player has died, false otherwise
+     */
     private boolean hasPlayerBlackedOut() {
         return player.creatureIsDead();
     }
 
+    /**
+     * Gets a reference to the combatModel
+     * @return the combatModel
+     */
     public CombatModel getCombatModel(){return combatModel;}
+
+    /**
+     * Gets a reference to the overworldModel
+     * @return the overworldModel
+     */
     public OverworldModel getOverworldModel(){return overworldModel;}
     public StateHandler getStateHandler() {
         return stateHandler;
     }
 
+    /**
+     * Gets a reference to the player
+     * @return the player
+     */
     public Player getPlayer(){
         return player;
     }
 
+    /**
+     * Gets a reference to the player's PlayerCreature
+     * @return the player's PlayerCreature
+     */
     public PlayerCreature getPlayerCreature() {
         return combatModel.getPlayerCreature();
     }
 
+    /**
+     * Adds an observer to the model
+     * @param observer the observer to be added
+     */
     public void registerNewObserver(IObserver observer) {
         observers.add(observer);
     }
 
+    /**
+     * Calls observerUpdate on all connected observers
+     */
     private void notifyObservers() {
         for (IObserver observer : observers) {
             observer.observerUpdate();
         }
     }
 
+    /**
+     * Gets a reference to the overworldModel's MovementHandler
+     * @return the overworldModel's MovementHandler
+     */
     public MovementHandler getMovementHandler() {
         return overworldModel.getMovementHandler();
     }
 
+    /**
+     * Changes the current state to the given state
+     * @param newState the new state
+     */
     public void changeState(ModelState newState){
         stateHandler.changeModelState(newState);
         notifyObservers();
     }
+
+    /**
+     * Gets the current state
+     * @return the current state
+     */
     public ModelState getCurrentModelState(){
         return stateHandler.getModelState();
     }
+
+    /**
+     * Starts a new combat encounter if the player has reached an encounter
+     */
     @Override
     public void observerUpdate() {
         if (overworldModel.isInEncounter()){

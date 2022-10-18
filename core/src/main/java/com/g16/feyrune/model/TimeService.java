@@ -8,10 +8,17 @@ public class TimeService {
      */
     private static long startTime;
 
+    /**
+     * Starts the timer
+     */
     public static void initialize(){
         startTime = TimeUtils.millis();
     }
 
+    /**
+     * Gets the elapsed time since start of program
+     * @return the elapsed time since start of program
+     */
     public static long getElapsedTime(){
         return TimeUtils.timeSinceMillis(startTime);
     }
