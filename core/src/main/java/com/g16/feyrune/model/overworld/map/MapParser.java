@@ -48,6 +48,11 @@ public class MapParser {
         );
     }
 
+    /**
+     * This method parses the terrain type of a given  map.
+     * @param doc The document containing the map.
+     * @return The terrain type of the map.
+     */
     private static String parseTerrainType(Document doc) {
         Node mapNode = doc.getElementsByTagName("map").item(0);
         NodeList mapChildren = mapNode.getChildNodes();
@@ -68,6 +73,12 @@ public class MapParser {
         throw new RuntimeException("Terrain type was not found for map");
     }
 
+    /**
+     * This method parses the encounter tiles of a given map.
+     * @param doc The document containing the map.
+     * @param mapSize The size of the map.
+     * @return A collection of points containing the positions of the encounter tiles.
+     */
     private static Iterable<Point> parseEncounterTiles(Document doc, Pair<Integer, Integer> mapSize) {
 
         int encounterTileGId = -1;
@@ -204,6 +215,11 @@ public class MapParser {
         return new Map(terrainType, tiles, startPos.x, startPos.y);
     }
 
+    /**
+     * Changes the encounter status of the encounterTiles in tiles to true
+     * @param tiles The matrix of tiles to change encounter status in
+     * @param encounterTiles The positions of the encounter tiles
+     */
     private static void addEncountersToTiles(Tile[][] tiles, Iterable<Point> encounterTiles) {
         for(Point point : encounterTiles) {
             tiles[point.x][point.y].setCanEncounter(true);
@@ -301,6 +317,12 @@ public class MapParser {
         return collisionIds;
     }
 
+    /**
+     * Calculates where the collisions are in the tileset
+     * @param tilesetChildrenNodes The nodes of the tileset
+     * @param baseGId The base GID of the tileset
+     * @return A list of the GIDs of the tiles that have collisions
+     */
     private static Collection<Integer> getTilesetTileIds(NodeList tilesetChildrenNodes, int baseGId) {
         ArrayList<Integer> collisionIds = new ArrayList<>();
 

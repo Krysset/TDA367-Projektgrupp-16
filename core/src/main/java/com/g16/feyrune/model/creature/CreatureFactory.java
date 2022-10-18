@@ -8,17 +8,37 @@ import com.g16.feyrune.model.combat.actions.AbilityFactory;
 import java.util.List;
 
 public class CreatureFactory {
+
     /**
-     *
-     * @return a new Object of type ICreature
+     * Creates a creature given the input parameters
+     * @param name Name of the creature
+     * @param abilities List of abilities of the creature
+     * @param health Health of the creature
+     * @param power Power of the creature
+     * @param speed Speed of the creature
+     * @param defense Defense of the creature
+     * @return The created creature
      */
-    public static ICombatable createCreature(String name, String[] abilities, double health, int power, int speed, int defense) {
+    protected static ICombatable createCreature(String name, String[] abilities, double health, int power, int speed, int defense) {
         List<IAbilitable> baseAbilityList = AbilityFactory.createAbilityList(abilities);
         return new BaseCreature(name, health,power, speed, defense, baseAbilityList);
     }
+
+    /**
+     * Creates a default creature
+     * @return The created creature
+     */
     public static ICombatable createCreature(){
         return createCreature("gnome", new String[]{"Attack"}, 100, 10, 10, 10);
     }
+
+    /**
+     * Creates a list of creatures
+     * @param monsters List of names of the creatures to choose from
+     * @param monsterCommonness List to choose the commonness of the creatures
+     * @param wantedAmount Amount of creatures to create
+     * @return The created list of creatures
+     */
     public static ICombatable[] createCreatureList(String[] monsters,int[] monsterCommonness, int wantedAmount){
         ICombatable[] iCreatures = new ICombatable[wantedAmount];
         for(int i = 0; i < wantedAmount; i++){
@@ -28,6 +48,12 @@ public class CreatureFactory {
         return iCreatures;
     }
 
+    /**
+     * Chooses sudo-randomly which creature to create
+     * @param monsters List of names of the creatures to choose from
+     * @param monsterCommonness List to choose the commonness of the creatures
+     * @return The name of the creature to create
+     */
     private static String creatureToUse(String[] monsters, int[] monsterCommonness) {
         int total = 0;
         for(int i = 0; i < monsters.length; i++){
@@ -43,6 +69,12 @@ public class CreatureFactory {
         }
         return monsters[0];
     }
+
+    /**
+     * Creates a creature by entering its name
+     * @param name Name of the creature
+     * @return The created creature
+     */
     private static ICombatable createCreatureByName(String name){
         switch (name){
             case "SuperAwesomeBaseMonster":

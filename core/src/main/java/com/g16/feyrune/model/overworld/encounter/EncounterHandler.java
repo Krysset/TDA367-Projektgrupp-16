@@ -9,6 +9,9 @@ public class EncounterHandler {
     private static String[][] testTerrainMonstersList;
     private static String[][] plainsTerrainMonstersList;
 
+    /**
+     * Static constructor for the EncounterHandler
+     */
     {
         dungeonTerrainMonstersList = new String[][]{
                 {"ghost", "goblinking", "ogre"},
@@ -22,6 +25,10 @@ public class EncounterHandler {
                 {"10","90"}
         };
     }
+
+    /**
+     * Constructor for the EncounterHandler
+     */
     public EncounterHandler() {
     }
 
@@ -36,6 +43,11 @@ public class EncounterHandler {
         return newEncounter;
     } //TODO: Implemented statically
 
+    /**
+     * Converts the commonness of the monsters to ints from strings
+     * @param strings The list of commonness of the monsters
+     * @return The list of commonness of the monsters as an int
+     */
     private int[] convertToInts(String[] strings){
         int[] ints = new int[strings.length];
         for(int i = 0; i < strings.length; i++){
@@ -44,6 +56,12 @@ public class EncounterHandler {
         return ints;
     }
 
+    /**
+     * Returns a list of monsters to be used in the encounter
+     * @param TerrainType The terrain type of the encounter
+     * @param wantedAmount The amount of monsters to be used in the encounter
+     * @return A list of which monsters could be created in the current terrain type
+     */
     private ICombatable[] getMonsterList(String TerrainType, int wantedAmount){
         try{
             switch (TerrainType){
@@ -59,9 +77,5 @@ public class EncounterHandler {
         } catch (Exception e){
             return new ICombatable[]{CreatureFactory.createCreature()};
         }
-
     }
-
-
-
 }
