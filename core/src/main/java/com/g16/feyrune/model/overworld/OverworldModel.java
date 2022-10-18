@@ -4,23 +4,25 @@ import com.g16.feyrune.Util.Random;
 import com.g16.feyrune.interfaces.IObserver;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 import com.g16.feyrune.model.overworld.encounter.EncounterHandler;
-import com.g16.feyrune.model.overworld.map.MapManager;
+import com.g16.feyrune.model.overworld.map.IMapObserver;
+import com.g16.feyrune.model.overworld.map.Map;
+import com.g16.feyrune.model.overworld.map.MapParser;
+import com.g16.feyrune.model.overworld.map.Transporter;
 import com.g16.feyrune.model.player.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-/**
- * This is the part of the model responsible for the over world
- */
 public class OverworldModel {
     private final Player player;
     private final MovementHandler movementHandler;
     private final EncounterHandler encounterHandler;
     private final Collection<IObserver> observerList;
-    private final MapManager mapManager;
+    private Map map;
     private boolean activeEncounter;
+    private List<IMapObserver> mapObservers;
 
     public OverworldModel(Player player) {
         activeEncounter = false;
@@ -28,8 +30,8 @@ public class OverworldModel {
         this.movementHandler = new MovementHandler();
         this.encounterHandler = new EncounterHandler();
         this.observerList = new ArrayList<>();
-        this.mapManager = new MapManager();
-        player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
+        mapObservers = new ArrayList<>();
+        changeMap("assets/maps/plains1.tmx");
     }
     public void addObserver(IObserver observer){
         observerList.add(observer);
@@ -39,31 +41,26 @@ public class OverworldModel {
         movePlayer();
     }
 
-    /**
-     * This method is a hand between the player and the movement handler
-     * deciding witch type of movement that chold be clalled and if a movent is supposed to be called at all
-     */
     public void movePlayer() {
-        Point deltaPos = movementHandler.calculateMovement(player.getCoordinates(), mapManager);
+        Point deltaPos = movementHandler.calculateMovement(player.getCoordinates(), map);
         if (deltaPos.x != 0 || deltaPos.y != 0) {
             player.move(deltaPos.x, deltaPos.y);
             if (reachedTransporter()) {
-                mapManager.useTransporter(player.getCoordinates());
-                player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
+                activateTransporter();
             } else if (doesEncounterStart()) {
                 movementHandler.resetMovement();
-                encounterHandler.createEncounter(mapManager.getTerrainType());
+                encounterHandler.createEncounter(map.getTerrainType());
                 activeEncounter = true;
                 notifyObservers();
             }
         }
     }
 
-    private boolean reachedTransporter() {
-        return mapManager.hasTransporter(player.getCoordinates());
+    public boolean reachedTransporter() {
+        return map.hasTransporter(player.getCoordinates());
     }
     private boolean doesEncounterStart(){
-        if(mapManager.tryEncounter(player.getCoordinates())) {
+        if(map.tryEncounter(player.getCoordinates())) {
             // about every tenth tile is an encounter
             return Random.randomInt(100) > 90;
         }
@@ -83,13 +80,8 @@ public class OverworldModel {
         return encounterHandler.createEncounter("dungeon");
     }
 
-    public MapManager getMapManager(){
-        return mapManager;
-    }
-
     public void playerBlackout() {
-        mapManager.changeMap("assets/maps/villagehouse.tmx");
-        player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
+        changeMap("assets/maps/villagehouse.tmx");
     }
 
     public boolean isInEncounter() {
@@ -98,5 +90,30 @@ public class OverworldModel {
 
     public void resetIsInEncounter() {
         activeEncounter = false;
+    }
+
+    public void subscribeMapObserver(IMapObserver observer) {
+        mapObservers.add(observer);
+    }
+
+    private void activateTransporter() {
+        // Get transporter data for the given position
+        Transporter transporter = map.getTransporter(player.getCoordinates());
+
+        // Load the new map, and tell the player to transport
+        changeMap(transporter.getMapAssetPath());
+        player.useTransporter(transporter);
+    }
+
+    private void changeMap(String mapAssetPath) {
+        map = MapParser.parseMapFile(mapAssetPath);
+        player.setPosition(map.getStartPosX(), map.getStartPosY());
+        notifyMapObservers(mapAssetPath);
+    }
+
+    private void notifyMapObservers(String mapAssetPath) {
+        for (IMapObserver observer : mapObservers) {
+            observer.updateMap(mapAssetPath);
+        }
     }
 }

@@ -14,6 +14,11 @@ public class Controller implements IObserver {
     IInput combatController, worldInputProcessor;
     StateHandler stateHandler;
 
+    /**
+     * Constructor for the controller
+     * @param model the model to control
+     * @param view the view
+     */
     public Controller(Model model, View view){
         this.model = model;
         this.view = view;
@@ -26,12 +31,19 @@ public class Controller implements IObserver {
         observerUpdate();
     }
 
+    /**
+     * Updates the modelState and changes inputProcessor accordingly
+     */
     @Override
     public void observerUpdate() {
         ModelState newState = stateHandler.getModelState();
         changeInput(newState);
     }
 
+    /**
+     * Renders the controller
+     * @param batch the batch to render to
+     */
     public void render(Batch batch) {
         batch.begin();
         if (model.getCurrentModelState() == ModelState.COMBAT)
@@ -39,6 +51,10 @@ public class Controller implements IObserver {
         batch.end();
     }
 
+    /**
+     * Changes the inputProcessor depending on the modelState
+     * @param state the new modelState
+     */
     public void changeInput(ModelState state){
         switch (state){
             case WORLD:

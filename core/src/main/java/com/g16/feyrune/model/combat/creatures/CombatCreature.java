@@ -47,4 +47,8 @@ public abstract class CombatCreature implements ICombatable {
 
     public abstract ICombatAction selectAction(CombatCreature target);
 
+    public String getName(){
+        return creature.getName();
+    }
+
 }

@@ -15,29 +15,42 @@ public class View implements IObserver {
     private CombatScene combatScene;
     private SpriteBatch batch;
 
+    /**
+     * Constructor for the View
+     * @param model the model to get data from
+     */
     public View(Model model){
         this.model = model;
         this.model.registerNewObserver(this);
 
-
         batch = new SpriteBatch();
-        overworldScene = new OverworldScene(model.getPlayer(), model.getMapManager(), batch);
+        overworldScene = new OverworldScene(model.getPlayer(), model.getOverworldModel(), batch);
         combatScene = new CombatScene(batch);
 
-        observerUpdate(); //TODO: this is also wrong and bad :)
+        observerUpdate();
     }
 
+    /**
+     * Fetches new information from the model and updates the scene
+     */
     public void observerUpdate(){
         ModelState currentModelState = model.getCurrentModelState();
         changeScene(currentModelState);
         currentScene.update();
     }
 
+    /**
+     * Renders the information of the current scene
+     */
     public void render(){
         currentScene.render();
     }
 
 
+    /**
+     * Returns the sprite batch
+     * @return the sprite batch
+     */
     public SpriteBatch getBatch(){
         return batch;
     }
@@ -52,16 +65,6 @@ public class View implements IObserver {
                 combatScene.renderNewCombat(model.getCombatModel(), model.getPlayer());
                 break;
         }
-    }
-
-    public CombatScene getCombatScene(){
-        return combatScene;
-    }
-
-    private void setOverWorldAsScene(){
-    }
-    private void setCombatAsScene(){
-        //combatScene.renderNewCombat(); //TODO: THIS IS WHERE WE START A NEW COMBAT
     }
 }
 

@@ -20,49 +20,52 @@ public class Map {
         this.startPosY = startPosY;
     }
 
-    protected int getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    protected int getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    protected Tile getTile(int xPos, int yPos){
-        return tiles[xPos][yPos];
-    }
-    protected Tile getTile(Point point){
-        return getTile(point.x, point.y);
-    }
-    protected boolean tryEncounter(Point playerPos){
+    public boolean tryEncounter(Point playerPos){
         return getTile(playerPos).canEncounter();
     }
-    protected String getTerrainType(){
+
+    public String getTerrainType(){
         return terrainType;
     }
 
-    protected int getStartPosX() {
+    public int getStartPosX() {
         return startPosX;
     }
 
-    protected int getStartPosY() {
+    public int getStartPosY() {
         return startPosY;
     }
 
-    protected boolean hasTransporter(Point playerPos){
+    public boolean hasTransporter(Point playerPos){
         return getTile(playerPos).hasTransporter();
     }
-    protected Point getTransportCoordinates(Point transportCoordinates) {
-        return getTile(transportCoordinates).getTransportCoordinates();
+
+    public Transporter getTransporter(Point pos){
+        return getTile(pos).getTransporter();
     }
-    protected String getTransportMapAssetPath(Point transportCoordinates) {
-        return getTile(transportCoordinates).getTransportMapAssetPath();
-    }
-    protected boolean isCollision(int x, int y) {
+
+    public boolean isCollision(int x, int y) {
         return getTile(x, y).isCollision();
     }
+
     protected void setStartPos(Point newStartPos) {
         startPosX = newStartPos.x;
         startPosY = newStartPos.y;
+    }
+
+    private Tile getTile(int xPos, int yPos){
+        return tiles[xPos][yPos];
+    }
+
+    private Tile getTile(Point point){
+        return getTile(point.x, point.y);
     }
 }
