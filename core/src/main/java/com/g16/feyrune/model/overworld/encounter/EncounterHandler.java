@@ -5,17 +5,24 @@ import com.g16.feyrune.interfaces.ICombatable;
 import com.g16.feyrune.model.creature.CreatureFactory;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.Arrays;
+
 public class EncounterHandler {
-    private static Pair<String, Integer>[] dungeonTerrainMonstersList;
-    private static Pair<String, Integer>[] testTerrainMonstersList;
+    private static String[][] dungeonTerrainMonstersList;
+    private static String[][] testTerrainMonstersList;
+    private static String[][] plainsTerrainMonstersList;
 
     {
-        dungeonTerrainMonstersList = new Pair[]{
-                new Pair<>("SuperAwesomeBaseMonster", 10),
-                new Pair<>("SuperBadBaseMonster", 90)
+        dungeonTerrainMonstersList = new String[][]{
+                {"ghost", "goblinking", "ogre"},
+                {"10","1","89"}
         };
-        testTerrainMonstersList = new Pair[]{
-                new Pair<>("SuperAwesomeBaseMonster", 10)
+        testTerrainMonstersList = new String[][]{
+                {"SuperAwesomeBaseMonster"},{"10"}
+        };
+        plainsTerrainMonstersList = new String[][]{
+                {"boar","thief"},
+                {"10","90"}
         };
     }
     public EncounterHandler() {
@@ -31,15 +38,30 @@ public class EncounterHandler {
         return newEncounter;
     } //TODO: Implemented statically
 
-    private ICombatable[] getMonsterList(String TerrainType, int wantedAmount){
-        switch (TerrainType){
-            case "dungeon":
-                return CreatureFactory.createCreatureList(dungeonTerrainMonstersList, wantedAmount);
-            case "test":
-                return CreatureFactory.createCreatureList(testTerrainMonstersList, wantedAmount);
-            default:
-                throw new NotImplementedException();
+    private int[] convertToInts(String[] strings){
+        int[] ints = new int[strings.length];
+        for(int i = 0; i < strings.length; i++){
+            ints[i] = Integer.parseInt(strings[i]);
         }
+        return ints;
+    }
+
+    private ICombatable[] getMonsterList(String TerrainType, int wantedAmount){
+        try{
+            switch (TerrainType){
+                case "dungeon":
+                    return CreatureFactory.createCreatureList(dungeonTerrainMonstersList[0], convertToInts(dungeonTerrainMonstersList[1]), wantedAmount);
+                case "test":
+                    return CreatureFactory.createCreatureList(testTerrainMonstersList[0],convertToInts(testTerrainMonstersList[1]), wantedAmount);
+                case "plains":
+                    return CreatureFactory.createCreatureList(plainsTerrainMonstersList[0],convertToInts(plainsTerrainMonstersList[1]), wantedAmount);
+                default:
+                    throw new NotImplementedException();
+            }
+        } catch (Exception e){
+            return new ICombatable[]{CreatureFactory.createCreature()};
+        }
+
     }
 
 

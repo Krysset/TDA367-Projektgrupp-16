@@ -5,12 +5,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
-import com.g16.feyrune.controller.enums.Selection;
 
 
 public class ChoiceButton {
     private String name;
-    private Selection buttonSelection;
+    private int buttonSelection;
     private String spritePath = "assets/ui/choiceDialog.png"; //TODO: temp
     private Vector2 pos;
     private Texture texture;
@@ -26,7 +25,7 @@ public class ChoiceButton {
      * @param height How tall the button should be
      * @param font What font the button name should be displayed using
      */
-    public ChoiceButton(String name, Selection selection, Vector2 pos, float width, float height, BitmapFont font){
+    public ChoiceButton(String name, int selection, Vector2 pos, float width, float height, BitmapFont font){
         this.name = name;
         this.buttonSelection = selection;
         this.pos = pos;
@@ -53,7 +52,7 @@ public class ChoiceButton {
      * Returns the selection of the button
      * @return The selection of the button
      */
-    public Selection getButtonSelection(){
+    public int getButtonSelection(){
         return buttonSelection;
     }
 }

@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 import com.g16.feyrune.controller.combat.CombatInputHandler;
-import com.g16.feyrune.controller.enums.Selection;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -43,10 +42,10 @@ public class ChoiceDialog {
         int midWidth = pos.x+bWidth;
         int bHeight = (int)height/2;
         int midHeight = pos.y+bHeight;
-        buttons.add(new ChoiceButton("Attack",  Selection.FIRST,    new Vector2(pos.x,      midHeight), bWidth,bHeight, font));
-        buttons.add(new ChoiceButton("Monsters",Selection.SECOND,   new Vector2(midWidth,   midHeight), bWidth,bHeight, font));
-        buttons.add(new ChoiceButton("Items",   Selection.THIRD,    new Vector2(pos.x,      pos.y),     bWidth,bHeight, font));
-        buttons.add(new ChoiceButton("Flee",    Selection.FOURTH,   new Vector2(midWidth,   pos.y),     bWidth,bHeight, font));
+        buttons.add(new ChoiceButton("Attack",  0,    new Vector2(pos.x,      midHeight), bWidth,bHeight, font));
+        buttons.add(new ChoiceButton("Monsters",1,   new Vector2(midWidth,   midHeight), bWidth,bHeight, font));
+        buttons.add(new ChoiceButton("Items",   2,    new Vector2(pos.x,      pos.y),     bWidth,bHeight, font));
+        buttons.add(new ChoiceButton("Flee",    3,   new Vector2(midWidth,   pos.y),     bWidth,bHeight, font));
     }
 
     /**

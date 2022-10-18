@@ -17,8 +17,9 @@ public class BaseCreature implements ICombatable {
     private int defense;
     private List<IAbilitable> baseAbilities;
     private boolean isFriend;
+    private String name;
 
-    public BaseCreature(double health, int power, int speed, int defense, List<IAbilitable> baseAbilities){
+    public BaseCreature(String name, double health, int power, int speed, int defense, List<IAbilitable> baseAbilities){
         this.maxHealth = health;
         this.power = power;
         this.defense = defense;
@@ -26,6 +27,7 @@ public class BaseCreature implements ICombatable {
         this.health = this.maxHealth;
         this.baseAbilities = baseAbilities;
         this.isFriend = false;
+        this.name = name;
     }
 
 
@@ -59,5 +61,9 @@ public class BaseCreature implements ICombatable {
     @Override
     public int getSpeed() {
         return speed;
+    }
+
+    public String getName() {
+        return name;
     }
 }
