@@ -1,11 +1,8 @@
 package com.g16.feyrune.model.overworld.encounter;
 
-import com.g16.feyrune.Util.Pair;
 import com.g16.feyrune.interfaces.ICombatable;
 import com.g16.feyrune.model.creature.CreatureFactory;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.Arrays;
 
 public class EncounterHandler {
     private static String[][] dungeonTerrainMonstersList;
@@ -56,7 +53,7 @@ public class EncounterHandler {
                 case "plains":
                     return CreatureFactory.createCreatureList(plainsTerrainMonstersList[0],convertToInts(plainsTerrainMonstersList[1]), wantedAmount);
                 default:
-                    throw new NotImplementedException();
+                    throw new Exception("TerrainType not found");
             }
         } catch (Exception e){
             return new ICombatable[]{CreatureFactory.createCreature()};
