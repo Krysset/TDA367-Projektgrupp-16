@@ -19,12 +19,11 @@ public class View implements IObserver {
         this.model = model;
         this.model.registerNewObserver(this);
 
-
         batch = new SpriteBatch();
-        overworldScene = new OverworldScene(model.getPlayer(), model.getMapManager(), batch);
+        overworldScene = new OverworldScene(model.getPlayer(), model.getOverworldModel(), batch);
         combatScene = new CombatScene(batch);
 
-        observerUpdate(); //TODO: this is also wrong and bad :)
+        observerUpdate();
     }
 
     public void observerUpdate(){
@@ -36,7 +35,6 @@ public class View implements IObserver {
     public void render(){
         currentScene.render();
     }
-
 
     public SpriteBatch getBatch(){
         return batch;
@@ -52,16 +50,6 @@ public class View implements IObserver {
                 combatScene.renderNewCombat(model.getCombatModel(), model.getPlayer());
                 break;
         }
-    }
-
-    public CombatScene getCombatScene(){
-        return combatScene;
-    }
-
-    private void setOverWorldAsScene(){
-    }
-    private void setCombatAsScene(){
-        //combatScene.renderNewCombat(); //TODO: THIS IS WHERE WE START A NEW COMBAT
     }
 }
 
