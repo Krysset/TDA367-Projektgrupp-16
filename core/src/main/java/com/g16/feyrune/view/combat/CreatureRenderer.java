@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.g16.feyrune.interfaces.ICombatable;
 import com.g16.feyrune.model.combat.creatures.CombatCreature;
+import com.g16.feyrune.model.creature.BaseCreature;
 import com.g16.feyrune.view.utils.AnimationUtils;
 
 public class CreatureRenderer {
@@ -29,8 +31,15 @@ public class CreatureRenderer {
         this.posX = posX;
         this.posY = posY;
         this.flip = flip;
+        try {
+            String creatureName = creature.getName();
+            this.spritePath = "assets/entities/"+creatureName+"/"+creatureName+".png";
+            texture = new Texture(Gdx.files.internal(spritePath));
+        }catch (Exception e){
+            texture = new Texture(Gdx.files.internal("assets/entities/bandit/bandit.png"));
+        }
 
-        texture = new Texture(Gdx.files.internal(spritePath));
+
         animationRegion = AnimationUtils.getAnimationFrames(texture,8,6,4,flip? 4: 0);
 
         width = (texture.getWidth() + texture.getWidth() * creature.getPower()/100);
