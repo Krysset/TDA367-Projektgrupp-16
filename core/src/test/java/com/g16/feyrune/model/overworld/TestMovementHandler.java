@@ -1,6 +1,6 @@
 package com.g16.feyrune.model.overworld;
 
-import com.g16.feyrune.model.overworld.map.MapManager;
+import com.g16.feyrune.model.overworld.map.MapParser;
 import org.junit.Test;
 
 import java.awt.*;
@@ -13,7 +13,7 @@ public class TestMovementHandler {
         Point expected = new Point(1,0);
         MovementHandler mh = new MovementHandler();
         mh.increaseXDirection();
-        Point actual = mh.calculateMovement(new Point(20,20), new MapManager("../assets/maps/plains1.tmx"));
+        Point actual = mh.calculateMovement(new Point(20,20), MapParser.parseMapFile("../assets/maps/plains1.tmx"));
         assertEquals(expected.x, actual.x);
         assertEquals(expected.y, actual.y);
     }
@@ -22,7 +22,7 @@ public class TestMovementHandler {
         Point expected = new Point(-1,0);
         MovementHandler mh = new MovementHandler();
         mh.decreaseXDirection();
-        Point actual = mh.calculateMovement(new Point(20,20), new MapManager("../assets/maps/plains1.tmx"));
+        Point actual = mh.calculateMovement(new Point(20,20), MapParser.parseMapFile("../assets/maps/plains1.tmx"));
         assertEquals(expected.x, actual.x);
         assertEquals(expected.y, actual.y);
     }
@@ -31,7 +31,7 @@ public class TestMovementHandler {
         Point expected = new Point(0,1);
         MovementHandler mh = new MovementHandler();
         mh.increaseYDirection();
-        Point actual = mh.calculateMovement(new Point(20,20), new MapManager("../assets/maps/plains1.tmx"));
+        Point actual = mh.calculateMovement(new Point(20,20), MapParser.parseMapFile("../assets/maps/plains1.tmx"));
         assertEquals(expected.x, actual.x);
         assertEquals(expected.y, actual.y);
     }
@@ -40,7 +40,7 @@ public class TestMovementHandler {
         Point expected = new Point(0,-1);
         MovementHandler mh = new MovementHandler();
         mh.decreaseYDirection();
-        Point actual = mh.calculateMovement(new Point(20,20), new MapManager("../assets/maps/plains1.tmx"));
+        Point actual = mh.calculateMovement(new Point(20,20), MapParser.parseMapFile("../assets/maps/plains1.tmx"));
         assertEquals(expected.x, actual.x);
         assertEquals(expected.y, actual.y);
     }
@@ -50,7 +50,7 @@ public class TestMovementHandler {
         MovementHandler mh = new MovementHandler();
         mh.increaseXDirection();
         mh.resetXDirection();
-        Point actual = mh.calculateMovement(new Point(20,20), new MapManager("../assets/maps/plains1.tmx"));
+        Point actual = mh.calculateMovement(new Point(20,20), MapParser.parseMapFile("../assets/maps/plains1.tmx"));
         assertEquals(expected.x, actual.x);
         assertEquals(expected.y, actual.y);
     }
@@ -60,7 +60,7 @@ public class TestMovementHandler {
         MovementHandler mh = new MovementHandler();
         mh.increaseYDirection();
         mh.resetYDirection();
-        Point actual = mh.calculateMovement(new Point(20,20), new MapManager("../assets/maps/plains1.tmx"));
+        Point actual = mh.calculateMovement(new Point(20,20), MapParser.parseMapFile("../assets/maps/plains1.tmx"));
         assertEquals(expected.x, actual.x);
         assertEquals(expected.y, actual.y);
     }
@@ -71,7 +71,7 @@ public class TestMovementHandler {
         mh.increaseYDirection();
         mh.increaseXDirection();
         mh.resetMovement();
-        Point actual = mh.calculateMovement(new Point(20,20), new MapManager("../assets/maps/plains1.tmx"));
+        Point actual = mh.calculateMovement(new Point(20,20), MapParser.parseMapFile("../assets/maps/plains1.tmx"));
         assertEquals(expected.x, actual.x);
         assertEquals(expected.y, actual.y);
     }
@@ -80,7 +80,7 @@ public class TestMovementHandler {
         Point expected = new Point(0,0);
         MovementHandler mh = new MovementHandler();
         mh.resetMovement();
-        Point actual = mh.calculateMovement(new Point(20,20), new MapManager("../assets/maps/plains1.tmx"));
+        Point actual = mh.calculateMovement(new Point(20,20), MapParser.parseMapFile("../assets/maps/plains1.tmx"));
         assertEquals(expected.x, actual.x);
         assertEquals(expected.y, actual.y);
     }

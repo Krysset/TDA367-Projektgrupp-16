@@ -13,7 +13,7 @@ public class TestEncounter {
     @Test
     public void testGetEnemyCreature() {
         ICombatable[] expected = new ICombatable[1];
-        expected[0] = new BaseCreature(10, 5, 5, 5, new ArrayList<IAbilitable>());
+        expected[0] = new BaseCreature("test",10, 5, 5, 5, new ArrayList<IAbilitable>());
         Encounter e = new Encounter(expected);
         assertEquals(expected[0], e.getEnemyCreature()[0]);
     }

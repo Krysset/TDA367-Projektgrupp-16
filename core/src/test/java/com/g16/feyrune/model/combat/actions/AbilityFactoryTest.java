@@ -1,4 +1,4 @@
-package com.g16.feyrune;
+package com.g16.feyrune.model.combat.actions;
 
 import com.g16.feyrune.model.combat.actions.AbilityFactory;
 import org.junit.Test;
