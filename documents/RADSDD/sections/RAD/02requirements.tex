@@ -146,16 +146,19 @@ Describe the navigation between the different views.
 Feyrune's UI is split into two major parts, the combat view and the overworld view, where the combat view is used to represent and control encounters between the player and all of Feyrune's different creatures, and the overworld view manages how the player moves on the game map and the exploration aspect of the game.\\
 \\
 \subsubsection{Combat view}
-\includegraphics[width=\textwidth]{images/combat_figma.png}\\
+\image{Figma design mockup}{combat_figma.png}
 The combat view in Feyrune is inspired by the Pokémon video games, sharing many familiar characteristics. It has four buttons at the bottom of the screen, one for changing the currently used player monster, one for attacking, another for fleeing and a last one for deciding to use an item.\\
 \\
 When clicking any of these buttons the menu will change to show the options available for that action. The player monster button will show the player's monsters, and the player can choose which one to use. The attack button will show the attacks available for the currently selected player monster. The item button will show the items available for use. The flee button however, immediately executes the action to flee, as it cannot be done in multiple different ways. At which point the player would be sent back to the overworld.\\
 \\
 The combat view shows the player and enemy creatures in the middle of the screen using sprites, and their health using green bars at the top of the screen to help the player see the current status of the battle. If the player creature "dies" during combat, the player gets sent back to the bed in the beginning of the bed.\\
-\\
+\image{Combat view during development}{combat_irl.png}
 \subsubsection{Overworld view}
 The overworld view in Feyrune is highly inspired from Nintendo games such as "The Legend of Zelda" and "Pokémon Pearl". The view consists of two different layers; a background layer displaying the ground of the map, whether it's made of grass or stone or something completely different, and a foreground layer displaying the player character and any other items visible, such as trees or benches.\\
-%Insert image of one of the maps here
+\image{The outdoors map}{overworld_outside.png}
+\image{Map of the inside of a house}{overworld_in_house.png}
+{\noindent %this row is dumb, must do a separate noindent for it
+As you can see, the overworld view is split into several different maps, accessed through loading zones placed in doors or cave entrances.}\\
 \\
 The player character is represented by a sprite, and the player can move the character around the map by using the WASD control scheme. Feyrune includes no form of tooltips or other hints to which buttons to press to do what, as the game is meant to be played on a keyboard, and most player should be familiar with the WASD control scheme.\\
 \\

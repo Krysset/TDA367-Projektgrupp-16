@@ -19,6 +19,8 @@
 	application communicate an in what order.
 \end{comment}
 \subsection{Packages}
+\begin{comment}
+
 \begin{itemize}
 	\item controller
 	      \begin{itemize}
@@ -51,34 +53,64 @@
 		      \item view.utils
 	      \end{itemize}
 \end{itemize}
+\end{comment}
 
-\subsection{Controller}
+\subsubsection{Controller}
 \label{controller}
-\includesvg[scale=0.5]{images/com.g16.feyrune.controller.svg}
-\subsection{Model}
+\includesvg[width=\textwidth]{images/com.g16.feyrune.controller.svg}\\
+The controller is a bit different from the view seeing how it mirrors the model in its separation of combat and overworld. It also depends on the view, as it uses the view's batch to render its components.\\
+\\
+It uses the interface IInput, that extends the libgdx interface InputProcessor. An input processor overrides all button events and you can only have one active at a time, meaning that as the model changes state, the input processor also has to change. When input later is received, the input processor is the component responsible for processing this and sending the correct information to the model.\\
+\\
+The MapInputProcessor can take input from the WASD-keys and then has a timer that controls if it should send this along as movement or not. If it should, it sends the movement direction to the model.\\
+\\
+The CombatInputProcessor contains four buttons rendered in the controller. This input processor takes input from both the WASD-keys as well as the enter key; the WASD-keys to register which of the four buttons is currently active, and the enter key to know whether that button's connected functionality should be executed or not.
+
+\subsubsection{Model}
 \label{model}
-\includesvg[scale=0.5]{images/com.g16.feyrune.model.svg}
-\subsection{CombatModel}
+\includesvg[width=0.5\textwidth]{images/com.g16.feyrune.model.svg}\\
+The model is split into two separate models; one which models the overworld, and one which models the combat. The main model class is only used to control which one of those should be considered active and to oversee their relation and information sharing between themselves.\\
+\\ %TODO: really needs some kind of reference/link to domain model here
+As can be seen in the domain model, both the overworld- and combat-model share the same player, which is stored in the main model class.\\
+\\
+In the domain model, you also see that there are two entry points to the model; one named feyrune, which has a direct relation to map, and another one named combat. This is a separation we have created with our two separate models as their relation practically is just the player and some monsters, but seeing how the monsters aren't constant as long as they aren't owned by the player, the connection there is not as strong.
+
+\subsubsection{CombatModel}
 \label{combatmodel}
-\includesvg[scale=0.5]{images/com.g16.feyrune.CombatModel.svg}
-\subsection{OverworldModel}
+\includesvg[width=\textwidth]{images/com.g16.feyrune.CombatModel.svg}\\
+When the CombatModel is created it only holds the player as a reference and then instantiates new encounters or combats as the main model dictates.
+
+\subsubsection{OverworldModel}
 \label{overworldmodel}
-\includesvg[scale=0.5]{images/com.g16.feyrune.OverworldModel.svg}
-\subsection{View}
+\includesvg[width=\textwidth]{images/com.g16.feyrune.OverworldModel.svg}\\
+The OverworldModel handles the relation between player and map. It knows where the player is and what attributes a tile can have, if you can move there or if it can create an encounter. As a new encounter is created it is sent to CombatModel and handled there.
+
+\subsubsection{View}
 \label{view}
-\includesvg[scale=0.5]{images/com.g16.feyrune.view.svg}
-\subsection{CombatScene}
+\includesvg[width=0.3\textwidth]{images/com.g16.feyrune.view.svg}\\
+The view mirrors the model in that it is separated into two different parts, overworld and combat. And mirrors the model in what tees two are responsible for. It also has a dependencies to the model as it reads most of its data from there.
+
+\subsubsection{CombatScene}
 \label{combatscene}
-\includesvg[scale=0.5]{images/com.g16.feyrune.view.combatScene.svg}
-\subsection{OverworldScene}
+\includesvg[width=\textwidth]{images/com.g16.feyrune.view.combatScene.svg}\\
+As the model state changes from overworld to combat, CombatScene reads all the information that graphically needs to be represented about the encounter from the model. It then renders all that information, such as health and which monsters are active in combat. It does not render any of the interactive UI elements as that is the controller's responsibility.
+
+\subsubsection{OverworldScene}
 \label{overworldscene}
-\includesvg[scale=0.5]{images/com.g16.feyrune.view.overworldScene.svg}
+\includesvg[width=\textwidth]{images/com.g16.feyrune.view.overworldScene.svg}\\
+The overworld scene is responsible for rendering the map. The data it needs to render this is taken from the same data file as the model uses, but crucially it is parsed and stored separately from the model's information. OverworldScene is responsible for drawing and animating the player at the correct position, as well as moving the camera accordingly.
+
 
 \subsection{Design Patterns}
 Throughout the code, Group 16 has tried to implement design patterns wherever feasible. Examples of design patterns used are:
-\paragraph{Model-View-Controller\\}
-\paragraph{Factory pattern\\}
-\paragraph{State pattern (hopefully)\\}
-\paragraph{Observer pattern\\}
-\paragraph{Singleton\\}
-\paragraph{Façade pattern\\}
+\subsubsection{Model-View-Controller}
+The entire project is written with the MVC pattern in mind. The model exists in its own vacuum without any references to either the view or the controller while the view and controller contains references to the model. The controller also has a reference to to the view, this is to implement the sprite Batch that is used to draw things on the screen. This is to allow the controller to render its own buttons.
+\subsubsection{Factory pattern}
+We use a factory to create monsters, their abilities, and encounters, this is to make it easier to exchange e.g. our monster class, BaseCreature with a new one, if someone wants to extend the code with specialized monsters that maybe are able to have special abilities or different types.
+\subsubsection{State pattern (hopefully)}
+\subsubsection{Observer pattern}
+Even if the code is running continuously and is polling, an observer is implemented in most places where we don't expect a change every frame.
+\subsubsection{Singleton}
+wut?%TODO:
+\subsubsection{Façade pattern}
+wut?%TODO:
