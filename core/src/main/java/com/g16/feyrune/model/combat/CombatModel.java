@@ -2,7 +2,6 @@ package com.g16.feyrune.model.combat;
 
 import com.g16.feyrune.interfaces.ICombatAction;
 
-import com.g16.feyrune.interfaces.ICombatable;
 import com.g16.feyrune.model.combat.creatures.CombatCreature;
 import com.g16.feyrune.model.creature.BaseCreature;
 import com.g16.feyrune.model.player.Player;
@@ -21,12 +20,16 @@ public class CombatModel {
     private final int speedThreshold = 250;
     private boolean combatIsOver = false;
 
-
+    /**
+     * Constructor for CombatModel
+     * @param player The player to be used in combat
+     * @param encounter The encounter to be used in combat
+     */
     public CombatModel(Player player, Encounter encounter) {
         this.player = player;
         combatCreatures = new ArrayList<>();
         savedCombatCreatureSpeed = new ArrayList<>();
-        fillCombatCreatureList(player, encounter);
+        fillCombatCreatureList(this.player, encounter);
         generateNewAttackOrder();
     }
 
@@ -157,7 +160,6 @@ public class CombatModel {
         }
     }
 
-
     /**
      * Generates a new turn order for the battle
      */
@@ -180,7 +182,6 @@ public class CombatModel {
                     newSavedCreatureSpeed -= speedThreshold;
                     turnOrder.add(combatCreatures.get(i));
                 }
-
                 savedCombatCreatureSpeed.set(i, newSavedCreatureSpeed);
             }
         }

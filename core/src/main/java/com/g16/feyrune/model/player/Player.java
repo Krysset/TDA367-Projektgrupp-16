@@ -120,6 +120,10 @@ public class Player {
         //throw new NotImplementedException();
     }
 
+    /**
+     * Uses the transporter given to transport the player
+     * @param transporter the transporter to use
+     */
     public void useTransporter(Transporter transporter) {
         Point transportCoordinates = transporter.getTransitionTo();
         coordinates.x = transportCoordinates.x;

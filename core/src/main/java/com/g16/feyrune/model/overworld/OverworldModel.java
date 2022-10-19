@@ -24,6 +24,10 @@ public class OverworldModel {
     private boolean activeEncounter;
     private List<IMapObserver> mapObservers;
 
+    /**
+     * Constructor for the OverworldModel class
+     * @param player the player
+     */
     public OverworldModel(Player player) {
         activeEncounter = false;
         this.player = player;
@@ -33,15 +37,26 @@ public class OverworldModel {
         mapObservers = new ArrayList<>();
         changeMap("assets/maps/plains1.tmx");
     }
+
+    /**
+     * Adds another observer to the overworldModel
+     * @param observer the observer to be added
+     */
     public void addObserver(IObserver observer){
         observerList.add(observer);
     }
 
+    /**
+     * Starts the next execution cycle in the overworld
+     */
     public void update(){
         movePlayer();
     }
 
-    public void movePlayer() {
+    /**
+     * Checks if the player can move and if it should, and in that case moves it.
+     */
+    protected void movePlayer() {
         Point deltaPos = movementHandler.calculateMovement(player.getCoordinates(), map);
         if (deltaPos.x != 0 || deltaPos.y != 0) {
             player.move(deltaPos.x, deltaPos.y);
@@ -56,9 +71,18 @@ public class OverworldModel {
         }
     }
 
+    /**
+     * Checks if the player has reached a transporter
+     * @return true if the player has reached a transporter, false otherwise
+     */
     public boolean reachedTransporter() {
         return map.hasTransporter(player.getCoordinates());
     }
+
+    /**
+     * Tries to start an encounter
+     * @return true if an encounter should be started, false otherwise
+     */
     private boolean doesEncounterStart(){
         if(map.tryEncounter(player.getCoordinates())) {
             // about every tenth tile is an encounter
@@ -67,35 +91,64 @@ public class OverworldModel {
         return false;
     }
 
+    /**
+     * Returns the movementHandler
+     * @return the movementHandler
+     */
     public MovementHandler getMovementHandler() {
         return movementHandler;
     }
 
+    /**
+     * Calls observerUpdate() on all observers in observerList
+     */
     private void notifyObservers(){
         for (IObserver observer : observerList) {
             observer.observerUpdate();
         }
     }
+
+    /**
+     * Returns the encounter
+     * @return the encounter
+     */
     public Encounter getEncounter(){
         return encounterHandler.createEncounter("dungeon");
     }
 
+    /**
+     * Respawns the player
+     */
     public void playerBlackout() {
         changeMap("assets/maps/villagehouse.tmx");
     }
 
+    /**
+     * Checks if the player is in an active encounter
+     * @return true if the player is in an active encounter, false otherwise
+     */
     public boolean isInEncounter() {
         return activeEncounter;
     }
 
+    /**
+     * Ends the encounter
+     */
     public void resetIsInEncounter() {
         activeEncounter = false;
     }
 
+    /**
+     * Adds a mapobserver to the mapObservers list
+     * @param observer the mapobserver to be added
+     */
     public void subscribeMapObserver(IMapObserver observer) {
         mapObservers.add(observer);
     }
 
+    /**
+     * Uses the transporter on the current tile
+     */
     private void activateTransporter() {
         // Get transporter data for the given position
         Transporter transporter = map.getTransporter(player.getCoordinates());
@@ -105,12 +158,20 @@ public class OverworldModel {
         player.useTransporter(transporter);
     }
 
+    /**
+     * Changes the map to the map with the given path
+     * @param mapAssetPath the path to the map
+     */
     private void changeMap(String mapAssetPath) {
         map = MapParser.parseMapFile(mapAssetPath);
         player.setPosition(map.getStartPosX(), map.getStartPosY());
         notifyMapObservers(mapAssetPath);
     }
 
+    /**
+     * Calls mapObserverUpdate() on all mapObservers in mapObservers
+     * @param mapAssetPath the path to the map
+     */
     private void notifyMapObservers(String mapAssetPath) {
         for (IMapObserver observer : mapObservers) {
             observer.updateMap(mapAssetPath);
