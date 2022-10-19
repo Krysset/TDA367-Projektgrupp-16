@@ -20,12 +20,16 @@ public class OverworldModel {
     private boolean activeEncounter;
 
     public OverworldModel(Player player) {
+        this(player, "assets/maps/plains1.tmx");
+    }
+
+    public OverworldModel(Player player, String path){
         activeEncounter = false;
         this.player = player;
         this.movementHandler = new MovementHandler();
         this.encounterHandler = new EncounterHandler();
         this.observerList = new ArrayList<>();
-        this.mapManager = new MapManager();
+        this.mapManager = new MapManager(path);
         player.setPosition(mapManager.getStartPosX(), mapManager.getStartPosY());
     }
     public void addObserver(IObserver observer){

@@ -63,8 +63,7 @@ public class TestMapManager {
     public void testStartPosX() {
         MapManager mm = new MapManager("../assets/maps/plains1.tmx");
         int startX1 = mm.getStartPosX();
-        mm.changeMap("../../assets/maps/dungeon1.tmx");
-        mm.useTransporter(new Point(11,1));
+        mm.changeMap("../assets/maps/dungeon1.tmx");
         int startX2 = mm.getStartPosX();
         // Starting position should be the same if you're using a
         // transporter instead of loading immediately into the map
@@ -76,7 +75,6 @@ public class TestMapManager {
         MapManager mm = new MapManager("../assets/maps/plains1.tmx");
         int startY1 = mm.getStartPosY();
         mm.changeMap("../assets/maps/dungeon1.tmx");
-        mm.useTransporter(new Point(11,1));
         int startY2 = mm.getStartPosY();
         // Starting position should be the same if you're using a
         // transporter instead of loading immediately into the map
@@ -89,4 +87,5 @@ public class TestMapManager {
         assertTrue(mm.hasCollision(0, 0));
         assertFalse(mm.hasCollision(11, 5));
     }
+
 }
