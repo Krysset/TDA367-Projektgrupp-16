@@ -105,7 +105,7 @@ public class Player {
      * Heals all of the player's creatures
      */
     public void healTeam() {
-        //throw new NotImplementedException();
+        creature = CreatureFactory.createCreature(); // TODO: Replace with an actual healing mechanic
     }
 
     /**
