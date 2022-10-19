@@ -15,20 +15,10 @@ public class TestModel {
     }
 
     @Test
-    public void testRegisterNewObserver() {
-
-    }
-
-    @Test
     public void testChangeState() {
         Model model = new Model("../assets/maps/plains1.tmx");
         model.changeState(ModelState.COMBAT);
         ModelState test = ModelState.COMBAT;
         assertEquals(test, model.getCurrentModelState());
-    }
-
-    @Test
-    public void testObserverUpdate() {
-
     }
 }
