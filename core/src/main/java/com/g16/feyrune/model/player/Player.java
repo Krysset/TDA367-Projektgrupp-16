@@ -16,8 +16,7 @@ import java.util.List;
 public class Player {
     private String name;
     private Point coordinates;
-    private Texture texture;
-    private ICombatable creature; //TODO: this is wrong and temp
+    private ICombatable creature; //TODO: this is temp
     private List<IObserver> observers;
 
     /**
@@ -28,7 +27,6 @@ public class Player {
     public Player(String name, Point coordinates) {
         this.name = name;
         this.coordinates = coordinates;
-        texture = new Texture("assets/hero/humanmale/humanMale.png");
         this.observers = new ArrayList<>();
         creature = CreatureFactory.createCreature();
     }
@@ -77,16 +75,6 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
-
-    /**
-     * Returns the player's texture
-     * @return the player's texture
-     */
-    public Texture getTexture() {
-        return texture;
-    }
-
-    //TODO: This is wrong and temp
 
     /**
      * Returns the player's creature

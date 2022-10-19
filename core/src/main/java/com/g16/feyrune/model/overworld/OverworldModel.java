@@ -29,13 +29,16 @@ public class OverworldModel {
      * @param player the player
      */
     public OverworldModel(Player player) {
+       this(player,"assets/maps/plains1.tmx");
+    }
+    public OverworldModel(Player player, String path) {
         activeEncounter = false;
         this.player = player;
         this.movementHandler = new MovementHandler();
         this.encounterHandler = new EncounterHandler();
         this.observerList = new ArrayList<>();
         mapObservers = new ArrayList<>();
-        changeMap("assets/maps/plains1.tmx");
+        changeMap(path);
     }
 
     /**

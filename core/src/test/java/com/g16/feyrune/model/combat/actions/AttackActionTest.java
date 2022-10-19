@@ -1,4 +1,4 @@
-package com.g16.feyrune;
+package com.g16.feyrune.model.combat.actions;
 
 import com.g16.feyrune.interfaces.IAbilitable;
 import com.g16.feyrune.model.combat.actions.AbilityFactory;
@@ -16,7 +16,7 @@ public class AttackActionTest {
         AttackAction attackAction = new AttackAction();
         List<IAbilitable> abilities = new ArrayList<>();
         abilities.add(AbilityFactory.createAbility("test", 90, 100));
-        BaseCreature enemyBase=new BaseCreature(100,100,100,100,abilities);
+        BaseCreature enemyBase=new BaseCreature("test", 100,100,100,100,abilities);
         attackAction.executeMove(new EnemyCreature(enemyBase), new EnemyCreature(enemyBase));
     }
 }

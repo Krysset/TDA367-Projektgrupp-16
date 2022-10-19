@@ -10,6 +10,7 @@ import com.g16.feyrune.model.overworld.MovementHandler;
 import com.g16.feyrune.model.overworld.OverworldModel;
 import com.g16.feyrune.model.overworld.encounter.Encounter;
 import com.g16.feyrune.model.player.Player;
+import jdk.internal.icu.text.NormalizerBase;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -26,8 +27,12 @@ public class Model implements IObserver{
      * Constructor for the Model class
      */
     public Model() {
+        this("assets/maps/plains1.tmx");
+    }
+
+    public Model(String path){
         player = new Player("Player", new Point(0, 0));
-        this.overworldModel = new OverworldModel(player);
+        this.overworldModel = new OverworldModel(player, path);
         this.overworldModel.addObserver(this);
         this.observers = new ArrayList<>();
         stateHandler = new StateHandler(ModelState.WORLD);
