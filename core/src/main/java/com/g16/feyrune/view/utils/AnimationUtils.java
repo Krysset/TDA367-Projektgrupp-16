@@ -4,6 +4,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AnimationUtils {
+    /**
+     * Splits a texture into a 2D array of TextureRegions
+     * @param texture the texture to split
+     * @param sizeX the size in the x-direction of each texture
+     * @param sizeY the size in the y-direction of each texture
+     * @param numOfFrames the number of frames in the texture
+     * @param animationPosition the position of the animation in the texture
+     * @return the 2D array of TextureRegions
+     */
     public static TextureRegion[] getAnimationFrames(Texture texture, int sizeX, int sizeY, int numOfFrames, int animationPosition){
 
         // Use the split utility method to create a 2D array of TextureRegions. This is

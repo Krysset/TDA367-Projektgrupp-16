@@ -7,6 +7,7 @@ import com.g16.feyrune.model.combat.creatures.PlayerCreature;
 import com.g16.feyrune.model.creature.BaseCreature;
 
 import com.g16.feyrune.model.creature.CreatureFactory;
+import com.g16.feyrune.model.overworld.map.Transporter;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -100,7 +101,21 @@ public class Player {
         }
     }
 
+    /**
+     * Heals all of the player's creatures
+     */
     public void healTeam() {
         //throw new NotImplementedException();
+    }
+
+    /**
+     * Uses the transporter given to transport the player
+     * @param transporter the transporter to use
+     */
+    public void useTransporter(Transporter transporter) {
+        Point transportCoordinates = transporter.getTransitionTo();
+        coordinates.x = transportCoordinates.x;
+        coordinates.y = transportCoordinates.y;
+        notifyObservers();
     }
 }

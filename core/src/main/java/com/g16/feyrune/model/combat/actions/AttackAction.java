@@ -8,6 +8,12 @@ import com.g16.feyrune.model.combat.AttackHandler;
 
 public class AttackAction implements ICombatAction {
 
+    /**
+     * Executes the attack action
+     * @param actor The actor of the action.
+     * @param target The target of the action.
+     * @return If the attacked creature died.
+     */
     @Override
     public boolean executeMove(ICombatable actor, ICombatable target) {
         int moveSelection = Random.randomInt(actor.getMoves().size());

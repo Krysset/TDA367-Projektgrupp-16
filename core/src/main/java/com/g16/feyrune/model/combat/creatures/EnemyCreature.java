@@ -9,12 +9,19 @@ import com.g16.feyrune.model.creature.BaseCreature;
 import java.util.List;
 
 public class EnemyCreature extends CombatCreature {
-    private BaseCreature creature;
-
+    /**
+     * Constructor for EnemyCreature
+     * @param creature The creature to be used in combat
+     */
     public EnemyCreature(BaseCreature creature) {
         super(creature);
     }
 
+    /**
+     * Returns the action of the creature
+     * @param target The target of the action
+     * @return A randomly chosen action.
+     */
     @Override
     public ICombatAction selectAction(CombatCreature target) {
         return new AttackAction();

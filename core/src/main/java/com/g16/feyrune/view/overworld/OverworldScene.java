@@ -5,28 +5,42 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.g16.feyrune.interfaces.IScene;
-import com.g16.feyrune.model.overworld.map.MapManager;
+import com.g16.feyrune.model.overworld.OverworldModel;
+import com.g16.feyrune.model.overworld.map.IMapObserver;
 import com.g16.feyrune.model.player.Player;
-import com.g16.feyrune.view.overworld.textureMap.TextureMapManager;
+import com.g16.feyrune.view.overworld.textureMap.TextureMap;
+import com.g16.feyrune.view.overworld.textureMap.TextureMapParser;
 import com.g16.feyrune.view.player.PlayerRenderer;
 
-public class OverworldScene implements IScene {
+public class OverworldScene implements IScene, IMapObserver {
     private PlayerRenderer pr;
     private SpriteBatch batch;
     private Camera camera;
-    private TextureMapManager map;
+    private TextureMap map;
 
-
-    public OverworldScene(Player player, MapManager mapManager, SpriteBatch batch){
+    /**
+     * Constructor for the OverworldScene
+     * @param player the player
+     * @param overworldModel the overworld model
+     * @param batch the sprite batch to draw with
+     */
+    public OverworldScene(Player player, OverworldModel overworldModel, SpriteBatch batch){
         this.batch = batch;
-        this.map = new TextureMapManager(mapManager);
+        this.map = TextureMapParser.parseMapFile("assets/maps/plains1.tmx");
         this.camera = new OrthographicCamera(270 ,135);
         pr = new PlayerRenderer(player);
+        overworldModel.subscribeMapObserver(this);
     }
 
+    /**
+     * Updates the scene
+     */
     @Override
     public void update(){}
 
+    /**
+     * Renders the scene
+     */
     @Override
     public void render(){
         camera.position.set(
@@ -43,5 +57,12 @@ public class OverworldScene implements IScene {
         batch.end();
     }
 
-
+    /**
+     * Called when the map should be replaced
+     * @param mapAssetPath the path to the new map
+     */
+    @Override
+    public void updateMap(String mapAssetPath) {
+        map = TextureMapParser.parseMapFile(mapAssetPath);
+    }
 }
