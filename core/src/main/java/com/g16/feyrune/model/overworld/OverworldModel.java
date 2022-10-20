@@ -11,6 +11,7 @@ import com.g16.feyrune.model.overworld.map.Transporter;
 import com.g16.feyrune.model.player.Player;
 
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -29,7 +30,7 @@ public class OverworldModel {
      * @param player the player
      */
     public OverworldModel(Player player) {
-       this(player,"assets/maps/plains1.tmx");
+       this(player,"/maps/plains1.tmx");
     }
     public OverworldModel(Player player, String path) {
         activeEncounter = false;
@@ -123,7 +124,7 @@ public class OverworldModel {
      * Respawns the player
      */
     public void playerBlackout() {
-        changeMap("assets/maps/villagehouse.tmx");
+        changeMap(new File("").getAbsolutePath()+"/maps/villagehouse.tmx");
     }
 
     /**

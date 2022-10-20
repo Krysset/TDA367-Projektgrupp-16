@@ -10,9 +10,11 @@ import com.g16.feyrune.model.combat.creatures.CombatCreature;
 import com.g16.feyrune.model.creature.BaseCreature;
 import com.g16.feyrune.view.utils.AnimationUtils;
 
+import java.io.File;
+
 public class CreatureRenderer {
     private CombatCreature creature;
-    private String spritePath = "assets/entities/bandit/bandit.png"; //TODO: temp
+    private String spritePath = "/entities/bandit/bandit.png"; //TODO: temp
     private float width,height,posX,posY;
     private Texture texture;
     private TextureRegion[] animationRegion;
@@ -31,12 +33,13 @@ public class CreatureRenderer {
         this.posX = posX;
         this.posY = posY;
         this.flip = flip;
+        String absPath= new File("").getAbsolutePath();
         try {
             String creatureName = creature.getName();
-            this.spritePath = "assets/entities/"+creatureName+"/"+creatureName+".png";
-            texture = new Texture(Gdx.files.internal(spritePath));
+            this.spritePath = "/entities/"+creatureName+"/"+creatureName+".png";
+            texture = new Texture(Gdx.files.internal(absPath+spritePath));
         }catch (Exception e){
-            texture = new Texture(Gdx.files.internal("assets/entities/bandit/bandit.png"));
+            texture = new Texture(Gdx.files.internal(absPath+"/entities/bandit/bandit.png"));
         }
 
 

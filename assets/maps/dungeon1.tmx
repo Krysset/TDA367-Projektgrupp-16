@@ -4,7 +4,7 @@
   <property name="startx" type="int" value="24"/>
   <property name="starty" type="int" value="5"/>
   <property name="terraintype" value="dungeon"/>
-  <property name="transporter1" value="assets/maps/plains1.tmx,11,1,6,15"/>
+  <property name="transporter1" value="maps/plains1.tmx,11,1,6,15"/>
  </properties>
  <tileset firstgid="1" name="dungeon" tilewidth="16" tileheight="16" tilecount="280" columns="14">
   <image source="../tilesets/dungeon/dungeon.png" width="224" height="320"/>
