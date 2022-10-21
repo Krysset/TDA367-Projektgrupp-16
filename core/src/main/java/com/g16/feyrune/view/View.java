@@ -36,7 +36,6 @@ public class View implements IObserver {
     public void observerUpdate(){
         ModelState currentModelState = model.getCurrentModelState();
         changeScene(currentModelState);
-        currentScene.update();
     }
 
     /**
