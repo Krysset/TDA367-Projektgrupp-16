@@ -1,13 +1,13 @@
 // {type:class}
 // {generate:true}
 
-[Feyrune] -> [View{bg:blue}]
-[Feyrune] -> [Model{bg:blue}]
-[Feyrune] -> [Controller{bg:blue}]
+[Feyrune] -> [View{bg:lightblue}]
+[Feyrune] -> [Model{bg:lightblue}]
+[Feyrune] -> [Controller{bg:lightblue}]
 [Controller] -> [Model]
 [View] -> [Model]
 
-[note: package is indicated with colour blue {bg:blue}]
+[note: package is indicated with colour blue {bg:lightblue}]
 
 
 // Exempel
