@@ -1,4 +1,9 @@
 # TDA367-Projektgrupp-16
+## Starta Programmet
+ - Installera java 8 JRE och java 8-16 JDK
+ - Installera gradle för ditt operativ system
+ - Starta en konsol i root av projektet
+ - skriv i konsolen följande ```gradle build```
 ## Om Projektet
 Projektet är ett spel som har tagit mycket inspiration ifrån Pokémon och Undertale.
 Vi kallar det *Feyrune*. 
