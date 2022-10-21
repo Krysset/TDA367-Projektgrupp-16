@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
+import java.io.File;
+
 public class HealthBar {
     private double maxHealth;
-    private String spritePath = "assets/ui/choiceDialog.png"; //TODO: temp
+    private String spritePath = "/ui/choiceDialog.png"; //TODO: temp
     private float originalWidth,width,height,posX,posY;
     private Texture texture;
 
@@ -25,7 +27,8 @@ public class HealthBar {
         originalWidth = width;
         this.posX = posX;
         this.posY = posY;
-        texture = new Texture(Gdx.files.internal(spritePath));
+        String absPath= new File("").getAbsolutePath();
+        texture = new Texture(Gdx.files.internal(absPath+spritePath));
     }
 
     /**

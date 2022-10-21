@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 
+import java.io.File;
+
 
 public class ChoiceButton {
     private String name;
     private int buttonSelection;
-    private String spritePath = "assets/ui/choiceDialog.png"; //TODO: temp
+    private String spritePath = "/ui/choiceDialog.png"; //TODO: temp
     private Vector2 pos;
     private Texture texture;
     private float width,height;
@@ -32,7 +34,8 @@ public class ChoiceButton {
         this.width = width;
         this.height = height;
         this.font = font;
-        texture = new Texture(Gdx.files.internal(spritePath));
+        String absPath= new File("").getAbsolutePath();
+        texture = new Texture(Gdx.files.internal(absPath+spritePath));
 
     }
 

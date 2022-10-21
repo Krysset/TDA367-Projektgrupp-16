@@ -25,11 +25,11 @@ public class CreatureFactory {
     }
 
     /**
-     * Creates a default creature
+     * Creates a default creature, used mainly to create the player's creature
      * @return The created creature
      */
     public static ICombatable createCreature(){
-        return createCreature("gnome", new String[]{"Attack"}, 100, 10, 10, 10);
+        return createCreature("gnome", new String[]{"Attack"}, 70, 100, 20, 3);
     }
 
     /**
@@ -78,15 +78,17 @@ public class CreatureFactory {
     private static ICombatable createCreatureByName(String name){
         switch (name){
             case "SuperAwesomeBaseMonster":
-                return createCreature(name, new String[]{"SuperAwesomeBaseAbility"}, 250, 90, 10, 4);
+                return createCreature(name, new String[]{"SuperAwesomeBaseAbility"}, 75, 90, 10, 4);
             case "SuperBadBaseMonster":
-                return createCreature(name, new String[]{"SuperBadBaseAbility"}, 50, 25, 25, 1);
+                return createCreature(name, new String[]{"SuperBadBaseAbility"}, 50, 55, 25, 1);
             case "ogre":
-                return createCreature(name, new String[]{"TankyTankAbility"}, 500, 10, 10, 4);
+                return createCreature(name, new String[]{"TankyTankAbility"}, 100, 25, 10, 4);
             case "dragon":
-                return createCreature(name, new String[]{"StrongBoyAbility"}, 100, 90, 10, 4);
+                return createCreature(name, new String[]{"StrongBoyAbility"}, 25, 90, 10, 4);
+            case "slime":
+                return createCreature(name, new String[]{"StrongBoyAbility"}, 25, 80, 15, 5);
             default:
-                return createCreature(name, new String[]{"SuperBasicBaseAbility"}, 100, 50, 1, 1);
+                return createCreature(name, new String[]{"SuperBasicBaseAbility"}, 25, 50, 1, 1);
         }
     }
 }

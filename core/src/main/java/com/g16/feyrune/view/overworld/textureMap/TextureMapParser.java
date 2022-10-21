@@ -10,6 +10,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -149,6 +150,8 @@ public class TextureMapParser {
      * @return The absolute path.
      */
     private static String relativeToAbsoluteAssets(String relativePath) {
-        return "assets" + relativePath.substring(2);
+        System.out.println(relativePath.substring(2));
+        return new File("").getAbsolutePath() + relativePath.substring(2);
+        //return /*"assets" +*/ relativePath.substring(2);
     }
 }
