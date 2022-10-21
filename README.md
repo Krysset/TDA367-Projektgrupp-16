@@ -16,6 +16,8 @@ Vektyg vi har använt oss av är:
 
 Alla texturer vi använder oss av hittade vi gratis på hemsidan itch.io
 
-## UML Diagram
-UML diagram hittas i documents i formen av yuml filer.
+## Dokumentation
+Du kan hitta javaDoc på sidan https://krysset.github.io/TDA367-Projektgrupp-16/
+
+UML diagram hittas i documents i formen av yuml och svg filer.
 Klasser med blå bakgrund är paket.
