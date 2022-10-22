@@ -38,16 +38,16 @@ public class CombatInputHandler {
     public void changeSelection(Direction direction) {
         switch (direction) {
             case LEFT:
-                selectionPoint.x = (selectionPoint.x-1)% selectionArray.length;
+                selectionPoint.x = Math.abs(selectionPoint.x-1)% selectionArray.length;
                 break;
             case UP:
-                selectionPoint.y = (selectionPoint.y-1)% selectionArray[0].length;
+                selectionPoint.y = Math.abs(selectionPoint.y-1)% selectionArray[0].length;
                 break;
             case DOWN:
-                selectionPoint.y = (selectionPoint.y+1)% selectionArray[0].length;
+                selectionPoint.y = Math.abs(selectionPoint.y+1)% selectionArray[0].length;
                 break;
             case RIGHT:
-                selectionPoint.x = (selectionPoint.x+1)% selectionArray.length;
+                selectionPoint.x = Math.abs(selectionPoint.x+1)% selectionArray.length;
                 break;
             case BACK:
         }

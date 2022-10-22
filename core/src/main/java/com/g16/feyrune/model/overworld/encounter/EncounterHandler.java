@@ -14,8 +14,8 @@ public class EncounterHandler {
      */
     {
         dungeonTerrainMonstersList = new String[][]{
-                {"ghost", "goblinking", "ogre"},
-                {"10","1","89"}
+                {"ghost", "goblinking", "ogre","slime"},
+                {"25","1","89","25"}
         };
         testTerrainMonstersList = new String[][]{
                 {"SuperAwesomeBaseMonster"},{"10"}

@@ -4,9 +4,9 @@
   <property name="startx" type="int" value="13"/>
   <property name="starty" type="int" value="10"/>
   <property name="terraintype" value="plains"/>
-  <property name="transporter1" value="assets/maps/dungeon1.tmx,6,16,11,2"/>
-  <property name="transporter2" value="assets/maps/shop.tmx,4,22,6,1"/>
-  <property name="transporter3" value="assets/maps/villagehouse.tmx,16,23,9,1"/>
+  <property name="transporter1" value="maps/dungeon1.tmx,6,16,11,2"/>
+  <property name="transporter2" value="maps/shop.tmx,4,22,6,1"/>
+  <property name="transporter3" value="maps/villagehouse.tmx,16,23,9,1"/>
  </properties>
  <tileset firstgid="1" name="forest_" tilewidth="16" tileheight="16" tilecount="540" columns="15">
   <image source="../tilesets/forest/forest_.png" width="240" height="576"/>
@@ -1240,9 +1240,9 @@
  </layer>
  <layer id="4" name="Details" width="30" height="30" locked="1">
   <properties>
-   <property name="transporter1" value="assets/maps/dungeon1.tmx,6,16,11,2"/>
-   <property name="transporter2" value="assets/maps/shop.tmx,4,22,6,1"/>
-   <property name="transporter3" value="assets/maps/villagehouse.tmx,16,23,9,1"/>
+   <property name="transporter1" value="maps/dungeon1.tmx,6,16,11,2"/>
+   <property name="transporter2" value="maps/shop.tmx,4,22,6,1"/>
+   <property name="transporter3" value="maps/villagehouse.tmx,16,23,9,1"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

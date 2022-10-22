@@ -26,7 +26,7 @@ public class OverworldScene implements IScene, IMapObserver {
      */
     public OverworldScene(Player player, OverworldModel overworldModel, SpriteBatch batch){
         this.batch = batch;
-        this.map = TextureMapParser.parseMapFile("assets/maps/plains1.tmx");
+        this.map = TextureMapParser.parseMapFile("maps/plains1.tmx");
         this.camera = new OrthographicCamera(270 ,135);
         pr = new PlayerRenderer(player);
         overworldModel.subscribeMapObserver(this);
