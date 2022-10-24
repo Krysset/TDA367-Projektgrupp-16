@@ -14,7 +14,7 @@ import java.io.File;
 
 public class CreatureRenderer {
     private CombatCreature creature;
-    private String spritePath = "/entities/bandit/bandit.png"; //TODO: temp
+    private String spritePath;
     private float width,height,posX,posY;
     private Texture texture;
     private TextureRegion[] animationRegion;

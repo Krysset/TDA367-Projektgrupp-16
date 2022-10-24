@@ -32,11 +32,6 @@ public class OverworldScene implements IScene, IMapObserver {
         overworldModel.subscribeMapObserver(this);
     }
 
-    /**
-     * Updates the scene
-     */
-    @Override
-    public void update(){}
 
     /**
      * Renders the scene
