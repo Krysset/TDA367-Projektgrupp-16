@@ -21,7 +21,7 @@ Vektyg vi har använt oss av är:
 Alla texturer vi använder oss av hittade vi gratis på hemsidan itch.io
 
 ## Struktur
-Projektet är strukturerat enligt MVC, det är därför inte förvånande att man inte ett paket för vardera.
+Projektet är strukturerat enligt MVC, det är därför föga förvånande att man hittar ett paket för vardera.
 
 ### Controller
 Vi använder oss av vad LibGdx kallar "Input Processor", 
