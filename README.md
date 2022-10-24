@@ -1,9 +1,11 @@
 # TDA367-Projektgrupp-16
 ## Starta Programmet
- - Installera java 8 JRE och java 8-16 JDK
+ - Installera java 8 JRE och java 8-16 JDK 
+ - För windows kör ```.\gradlew run``` i root av projektet och hoppa över resterande steg
  - Installera gradle för ditt operativ system
  - Starta en konsol i root av projektet
- - skriv i konsolen följande ```gradle build```
+ - skriv i konsolen följande ```gradle run``` 
+
 ## Dokumentation
 Du kan hitta javaDoc på sidan https://krysset.github.io/TDA367-Projektgrupp-16/
 
