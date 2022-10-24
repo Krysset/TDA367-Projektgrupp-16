@@ -1,24 +1,27 @@
 \section{System design}
+
+
 \begin{comment}
-	Draw an UML package diagram for the top level for all components that you have
-	identified above (which can be just one if you develop a standalone application).
-	Describe the interfaces and dependencies between the packages. Describe how you
-	have implemented the MVC design pattern.
+Draw an UML package diagram for the top level for all components that you have
+identified above (which can be just one if you develop a standalone application).
+Describe the interfaces and dependencies between the packages. Describe how you
+have implemented the MVC design pattern.
 
-	Create an UML class diagram for every package. One of the packages will contain
-	the model of your application. This will be the design model of your
-	application, describe in detail the relation between your domain model and your
-	design model. There should be a clear and logical relation between the two. Make
-	sure that these models stay in `sync' during the development of your application.
+Create an UML class diagram for every package. One of the packages will contain
+the model of your application. This will be the design model of your
+application, describe in detail the relation between your domain model and your
+design model. There should be a clear and logical relation between the two. Make
+sure that these models stay in `sync' during the development of your application.
 
-	Describe which (if any) design patterns you have used.
+Describe which (if any) design patterns you have used.
 
-	The above describes the static design of your application. It may sometimes be
-	necessary to describe the \emph{dynamic} design of your application as well. You
-	can use an UML \emph{sequence diagram} to show the different parts of your
-	application communicate an in what order.
+The above describes the static design of your application. It may sometimes be
+necessary to describe the \emph{dynamic} design of your application as well. You
+can use an UML \emph{sequence diagram} to show the different parts of your
+application communicate an in what order.
 \end{comment}
 \subsection{Packages}
+\includesvg[width=0.5\textwidth]{images/com.g16.feyrune.svg}
 \begin{comment}
 
 \begin{itemize}
@@ -72,7 +75,7 @@ The CombatInputProcessor contains four buttons rendered in the controller. This 
 The model is split into two separate models; one which models the overworld, and one which models the combat. The main model class is only used to control which one of those should be considered active and to oversee their relation and information sharing between themselves.\\
 \\ %TODO: really needs some kind of reference/link to domain model here
 As can be seen in the domain model, both the overworld- and combat-model share the same player, which is stored in the main model class.\\
-\\
+\image{The domain model of the application}{domain_model.png}
 In the domain model, you also see that there are two entry points to the model; one named feyrune, which has a direct relation to map, and another one named combat. This is a separation we have created with our two separate models as their relation practically is just the player and some monsters, but seeing how the monsters aren't constant as long as they aren't owned by the player, the connection there is not as strong.
 
 \subsubsection{CombatModel}
@@ -107,10 +110,9 @@ Throughout the code, Group 16 has tried to implement design patterns wherever fe
 The entire project is written with the MVC pattern in mind. The model exists in its own vacuum without any references to either the view or the controller while the view and controller contains references to the model. The controller also has a reference to to the view, this is to implement the sprite Batch that is used to draw things on the screen. This is to allow the controller to render its own buttons.
 \subsubsection{Factory pattern}
 We use a factory to create monsters, their abilities, and encounters, this is to make it easier to exchange e.g. our monster class, BaseCreature with a new one, if someone wants to extend the code with specialized monsters that maybe are able to have special abilities or different types.
-\subsubsection{State pattern (hopefully)}
+\subsubsection{State pattern}
+State pattern is used in maps to hide complexity so that other classes don't know which exact map is used. We chose to use the state pattern to easily change between maps, without having to use observers everywhere and update references throughout our codebase. There is also a potential to add one more state pattern which would handle the world state. This is not implemented but would be a good replacement that we have now that is quite hard to extend.
 \subsubsection{Observer pattern}
-Even if the code is running continuously and is polling, an observer is implemented in most places where we don't expect a change every frame.
-\subsubsection{Singleton}
-wut?%TODO:
+Even if the code is running continuously and is polling, an observer is implemented in most places where we don't expect a change every frame. We have created several different versions of observers, depending on where they are used, this is because in some cases we only need to ping a class when it's updated to let it know what it should do, while in some cases we might have to send through some data, like a button press. We chose to separate this because without sending data we would have to include references to all objects the update could come from, and if we always sent all data that could be required we would run in to problems like the map having to send keyboard presses when it's getting changed.
 \subsubsection{Façade pattern}
-wut?%TODO:
+The Façade is implement in the parsing of the map. The facade is there to hide all functions about parsing and only one static function exists in class called map handler that returns a map from a relevant path. This is good because as a user of this functionality that is by all means what you want to do. You do not want to manually sap parse this and apply it to these objects and so on. The only thing a user could do wrong now is sending a faulty path and we catch that error. This reduces the potential error by quite a bit.

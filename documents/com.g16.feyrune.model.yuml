@@ -1,9 +1,9 @@
 // {type:class}
 // {generate:true}
 
-[Model |-currentModelState:ModelState| +initialize():void;+registerNewObserver(IObserver):void;+getCurrentModelState():ModelState;-update():void;] ++-> [OverworldModel | +isEncounter():bool; +getEncounter():Encounter{bg:blue}]
+[Model |-currentModelState:ModelState| +initialize():void;+registerNewObserver(IObserver):void;+getCurrentModelState():ModelState;-update():void;] ++-> [OverworldModel | +isEncounter():bool; +getEncounter():Encounter{bg:lightblue}]
 [Model] -.-> [Player | +getCoordinates():Pair<int,int>; +move(int,int):void]
-[Model] ++-> [CombatModel | -startCombatLoop(Encounter):void {bg:blue}]
+[Model] ++-> [CombatModel | -startCombatLoop(Encounter):void {bg:lightblue}]
 [Model] -.-> [<<enumeration>> ModelState | COMBAT; WORLD]
 
 [CombatModel] -.-> [Player]

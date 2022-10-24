@@ -36,13 +36,6 @@ public class CombatScene implements IScene { //TODO: the relation for this objec
     }
 
     /**
-     * Empty method needed for interface
-     */
-    @Override
-    public void update() {
-    }
-
-    /**
      * Renders the scene
      */
     @Override
