@@ -2,13 +2,13 @@
 // {generate:true}
 // {direction:leftToRight}
 
-[OverworldScene|+OverworldScene(Player, OverworldModel, SpriteBatch);+render()] 
-[PlayerRenderer|+PlayerRenderer(Player)]
-[TextureMap|#TextureMap(int, int, int, int, Color, Iterable<TextureLayer>);+render(SpriteBatch);+getBgColor();+getTileSize()]
-[TextureLayer|#TextureLayer();+render(SpriteBatch, int)]
-[TextureTile|+TextureTile(TextureRegion);+getTexture()]
+[OverworldScene|+render()] 
+[PlayerRenderer|+draw(SpriteBatch)]
+[TextureMap|+render(SpriteBatch);+getBgColor();+getTileSize()]
+[TextureLayer|+render(SpriteBatch, int)]
+[TextureTile|+getTexture()]
 [TilesetManager|+addTileset(String, String, int, int, int, int, int);+getTextureTileFromGId(int)]
-[Tileset|#Tileset(String, String, int, int, int, int, int)]
+[Tileset]
 [TextureMapParser|+parseMapFile(String);]
 
 [OverworldScene] -> [TextureMap]
@@ -16,6 +16,6 @@
 [TextureMap] ->  [TextureMapParser]
 [TextureMapParser] -.-> [TextureMap]
 [TextureMapParser] -.-> [TilesetManager]
-[TilesetManager] ++-> [Tileset]
+[TilesetManager] ++1-n> [Tileset]
 [TextureMap] ++1-n> [TextureLayer]
 [TextureLayer] ++1-n> [TextureTile]

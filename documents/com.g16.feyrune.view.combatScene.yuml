@@ -2,10 +2,10 @@
 // {generate:true}
 // {direction:topDown}
 
-[CombatScene|+CombatScene(SpriteBatch);+renderNewCombat(CombatModel, Player);+render()]
-[CombatGraphicsRenderer|+CombatGraphicsRenderer(CombatCreature, Player);+render(Batch)]
-[CreatureRenderer|+CombatCreature(float, float, boolean);+render(Batch)]
-[HealthBar|+HealthBar(double, float, float, float, float);+setCurrentHealth(double);+render(Batch)]
+[CombatScene|+renderNewCombat(CombatModel, Player);+render()]
+[CombatGraphicsRenderer|+render(Batch)]
+[CreatureRenderer|+render(Batch)]
+[HealthBar|+setCurrentHealth(double);+render(Batch)]
 
 [CombatScene] ++-> [CombatGraphicsRenderer]
 [CombatGraphicsRenderer]++1-2>[HealthBar]
