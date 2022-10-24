@@ -24,7 +24,7 @@ public class CombatableTest {
         Encounter testEncounter = encounterHandler.createEncounter("test");
         IAbilitable attack = AbilityFactory.createAbility("test", 90, 100);
         testEncounter.getEnemyCreature()[0].takeDamage(attack.getAttackPower());
-        assertEquals((testEncounter.getEnemyCreature()[0]).getHP(), 225, 0.1);
+        assertEquals((testEncounter.getEnemyCreature()[0]).getHP(), 50, 0.1);
 
     }
 
@@ -61,6 +61,6 @@ public class CombatableTest {
     public void testGetHP() {
         EncounterHandler encounterHandler = new EncounterHandler();
         Encounter testEncounter = encounterHandler.createEncounter("test");
-        assertEquals(testEncounter.getEnemyCreature()[0].getHP(), 250.0, 0);
+        assertEquals(testEncounter.getEnemyCreature()[0].getHP(), 75.0, 0);
     }
 }
