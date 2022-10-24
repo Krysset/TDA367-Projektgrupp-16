@@ -7,6 +7,7 @@ import com.g16.feyrune.model.overworld.encounter.EncounterHandler;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class CombatableTest {
     @Test
@@ -22,10 +23,10 @@ public class CombatableTest {
     public void testTakeDamage() {
         EncounterHandler encounterHandler = new EncounterHandler();
         Encounter testEncounter = encounterHandler.createEncounter("test");
+        double startHP = testEncounter.getEnemyCreature()[0].getHP();
         IAbilitable attack = AbilityFactory.createAbility("test", 90, 100);
         testEncounter.getEnemyCreature()[0].takeDamage(attack.getAttackPower());
-        assertEquals((testEncounter.getEnemyCreature()[0]).getHP(), 50, 0.1);
-
+        assertNotEquals(startHP, testEncounter.getEnemyCreature()[0].getHP(), 0.1);
     }
 
     @Test
