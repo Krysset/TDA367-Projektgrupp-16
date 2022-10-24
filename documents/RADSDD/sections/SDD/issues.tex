@@ -1,8 +1,38 @@
-Following is a list of all known issues:
+\textbf{Following is a list of all known issues:}
 \begin{itemize}[$\circ$]
-	\item The different creatures aren't shown during combat.
 	\item What ability to use in combat is chosen for you.
-	\item Creatures regain full health after every encounter.
-	\item All UI elements are the same sprite called choiceDialog.png, this might get confusing while reading the code and is also pretty ugly.
-	\item There is an issue with the function resizeImage in class Image. The issue is that it scrambles the image path so you cant use risizeImage on the same image more then once. This could possibly be sovled by applying the path onto the new image.
+\begin{itemize}[$-$]
+	\item This would have been solved by creating another version of the ChoiceDialog where the button texts are exchanged for action names and used instead to choose an action.
+\end{itemize}
+\item The classes aren't documented, only their methods.
+\begin{itemize}[$-$]
+	\item This is because the classes are not meant to be used by the user, but only by the game engine.
+\end{itemize}
+\item There are unused methods and imports.
+\item Overuse of package hierarchy leads to a bit too many public methods.
+\begin{itemize}[$-$]
+	\item e.g. createCreatureList().
+	\item We could include a facade in each package to control access, but it probably would require extensive restructuring of our packages.
+\end{itemize}
+\item Encounterhandler isn't really a handler, it should be called EncounterFactory, as that is what it is.
+\begin{itemize}[$-$]
+	\item We could rename the class to EncounterHandler.
+\end{itemize}
+\item AttackHandler is an unnecessary class.
+\begin{itemize}[$-$]
+	\item The method evasiveManoeuvre() should be placed either inside the creature class (intertwined with takeDamage and dealDamage) or inside the CombatModel.
+	\item The method handleAttack() should be placed inside the CombatModel instead.
+\end{itemize}
+\item We have two packages: creature and creatures, which should be merged into one.
+\begin{itemize}[$-$]
+	\item Move all classes in the creature-package into the creatures-package.
+\end{itemize}
+\item When using a transporter, you can see how the player flies across the map.
+\begin{itemize}[$-$]
+	\item We should separate the player movement based on transportation and regular movement, and only use the animation for the regular movement.
+\end{itemize}
+\item The health bar changes to use the current hp as maximum hp when entering combat.
+\begin{itemize}[$-$]
+	\item Create methods in the creature classes to fetch max hp separate from current hp.
+\end{itemize}
 \end{itemize}
