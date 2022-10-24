@@ -1,16 +1,12 @@
 // {type:class}
 // {generate:true}
-// {direction:leftToRight}
+// {direction:topDown}
 
+[CombatScene|+renderNewCombat(CombatModel, Player);+render()]
+[CombatGraphicsRenderer|+render(Batch)]
+[CreatureRenderer|+render(Batch)]
+[HealthBar|+setCurrentHealth(double);+render(Batch)]
 
-[CombatScene|+CombatScene(Encounter, Player)] ++-> [UIRenderer|+UIRenderer(Encounter, Player);+render():void]
-[CombatScene] ++-> [GraphicsRenderer|+GraphicsRenderer(Encounter, Player);+render():void]
-
-[UIRenderer] ++1-2> [HealthBox|-maxHealth:int;-currentHealth:int|+HealthBox(int);+setCurrentHealth(int):void;+render():void]
-[UIRenderer] ++-> [ChoiceRenderer|-currentSelection:Selection|+changeSelection(Direction):void;+getCurrentSelection:Selection; +render():void]
-[ChoiceRenderer] -> [<<Enumeration>>;Selection| FIRST;SECOND;THIRD;FOURTH]
-
-[ChoiceRenderer] -> [<<Enumeration>>;Direction| UP;DOWN;LEFT;RIGHT;BACK]
-[ChoiceRenderer] ++1-4> [ChoiceButton|+render(boolean):void]
-
-[GraphicsRenderer] ++1-n> [CreatureRenderer|+CreatureRenderer(ICreature);+render():void]
+[CombatScene] ++-> [CombatGraphicsRenderer]
+[CombatGraphicsRenderer]++1-2>[HealthBar]
+[CombatGraphicsRenderer]++1-2>[CreatureRenderer]

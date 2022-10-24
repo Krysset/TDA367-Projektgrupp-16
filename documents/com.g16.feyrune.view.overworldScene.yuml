@@ -1,11 +1,21 @@
 // {type:class}
 // {generate:true}
-
 // {direction:leftToRight}
 
-[OverworldScene|+OverworldScene(Player)] -> [TextureMap]
-[OverworldScene] -> [PlayerRenderer|+PlayerRenderer(Player)]
-[TextureMap] -.->  [TextureMapParser]
+[OverworldScene|+render()] 
+[PlayerRenderer|+draw(SpriteBatch)]
+[TextureMap|+render(SpriteBatch);+getBgColor();+getTileSize()]
+[TextureLayer|+render(SpriteBatch, int)]
+[TextureTile|+getTexture()]
+[TilesetManager|+addTileset(String, String, int, int, int, int, int);+getTextureTileFromGId(int)]
+[Tileset]
+[TextureMapParser|+parseMapFile(String);]
+
+[OverworldScene] -> [TextureMap]
+[OverworldScene] -> [PlayerRenderer]
+[TextureMap] ->  [TextureMapParser]
 [TextureMapParser] -.-> [TextureMap]
-[TextureMap] -.-> [Tileset]
-[TextureMap] ++1-n> [TextureTile]
+[TextureMapParser] -.-> [TilesetManager]
+[TilesetManager] ++1-n> [Tileset]
+[TextureMap] ++1-n> [TextureLayer]
+[TextureLayer] ++1-n> [TextureTile]
