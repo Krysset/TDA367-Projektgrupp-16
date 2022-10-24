@@ -1,11 +1,12 @@
 // {type:class}
 // {generate:true}
-
 // {direction:leftToRight}
 
 [OverworldScene|+OverworldScene(Player)] -> [TextureMap]
 [OverworldScene] -> [PlayerRenderer|+PlayerRenderer(Player)]
-[TextureMap] -.->  [TextureMapParser]
+[TextureMap] ->  [TextureMapParser]
 [TextureMapParser] -.-> [TextureMap]
-[TextureMap] -.-> [Tileset]
-[TextureMap] ++1-n> [TextureTile]
+[TextureMapParser] -.-> [TilesetManager]
+[TilesetManager] ++-> [Tileset]
+[TextureMap] ++1-n> [TextureLayer]
+[TextureLayer] ++1-n> [TextureTile]
